@@ -12,16 +12,13 @@ public class FlashlightOverlay : MonoBehaviour
     {
         GameEventsManager.instance.anomalyEvents.onTriggerLightAnomaly += TriggerLightAnomaly;
         GameEventsManager.instance.anomalyEvents.onTriggerHeavyAnomaly += TriggerHeavyAnomaly;
-        GameEventsManager.instance.anomalyEvents.onTriggerAttackAnomaly += TriggerAttackAnomaly;
-        GameEventsManager.instance.anomalyEvents.onTriggerChasedAnomaly += TriggerChasedAnomaly;
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.anomalyEvents.onTriggerLightAnomaly -= TriggerLightAnomaly;
         GameEventsManager.instance.anomalyEvents.onTriggerHeavyAnomaly -= TriggerHeavyAnomaly;
-        GameEventsManager.instance.anomalyEvents.onTriggerAttackAnomaly -= TriggerAttackAnomaly;
-        GameEventsManager.instance.anomalyEvents.onTriggerChasedAnomaly -= TriggerChasedAnomaly;
+
     }
 
     private void Update()
@@ -50,13 +47,4 @@ public class FlashlightOverlay : MonoBehaviour
         StartCoroutine(WaitForFlickering());
     }
 
-    private void TriggerAttackAnomaly()
-    {
-        animator.SetTrigger("LightDown");
-    }
-
-    private void TriggerChasedAnomaly() 
-    {
-        animator.SetTrigger("Default");
-    }
 }

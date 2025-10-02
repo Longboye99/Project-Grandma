@@ -52,7 +52,6 @@ public class AttackAnomaly : Anomaly
             isInTransition = false;
             Destroy(spawnedGhost);
             GameEventsManager.instance.anomalyEvents.UndoAnomaly(this);
-            GameEventsManager.instance.anomalyEvents.TriggerChasedAnomaly();
         }
     }
 

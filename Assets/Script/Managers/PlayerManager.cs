@@ -90,7 +90,7 @@ public class PlayerManager : MonoBehaviour
 
     private void CheckRayCastForInteractable()
     {
-        Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * rayMaxDistance, Color.red);
+        Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * rayMaxDistance, Color.cyan);
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, rayMaxDistance, layerMask))
         {
             Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * hit.distance, Color.green);

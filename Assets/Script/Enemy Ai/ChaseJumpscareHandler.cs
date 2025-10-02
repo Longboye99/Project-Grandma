@@ -12,6 +12,8 @@ public class ChaseJumpscareHandler : MonoBehaviour
     [SerializeField] Animator ghostAnimator;
     [SerializeField] Animator UiAnimator;
     bool isChasing = false;
+    bool jumpscare = false;
+    bool isInTransition = false;
 
     private void OnEnable()
     {
@@ -42,12 +44,25 @@ public class ChaseJumpscareHandler : MonoBehaviour
         {
             ChasePlayer();
         }
+
+        if (jumpscare)
+        {
+            if (!CheckPlayerIsNotLooking())
+            {
+                if (!isInTransition)
+                {
+                    isInTransition = true;
+                    Invoke("BeginTurning", 0.1f);
+                }
+            }
+        }
+
     }
 
     public void StartJumpscare()
     {
+        jumpscare = true;
         GameEventsManager.instance.anomalyEvents.TriggerAttackAnomaly();
-        Invoke("BeginTurning", 2);
     }
 
     private void BeginTurning()
@@ -86,6 +101,34 @@ public class ChaseJumpscareHandler : MonoBehaviour
                 UiAnimator.SetTrigger("TriggerJumpscare");
             }
             
+        }
+    }
+
+    public bool CheckPlayerIsNotLooking() //Calculate if the player is looking at the node or not
+    {
+        Vector3 dir = Vector3.Normalize(this.transform.position - playerCam.transform.position);
+        float dot = Vector3.Dot(dir, playerCam.transform.forward);
+        float dist = Vector3.Distance(transform.position, playerCam.transform.position);
+
+        if (dot >= 0.5)
+        {
+            /*if (Physics.Raycast(playerCam.transform.position, transform.position - playerCam.transform.position, out RaycastHit hit, dist, (1 << 7)))
+            {
+                Debug.DrawLine(playerCam.transform.position, hit.point, Color.yellow);
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }*/
+            return false;
+        }
+        else
+        {
+            Debug.DrawLine(playerCam.transform.position, transform.position, Color.red);
+
+            return true;
         }
     }
 }
