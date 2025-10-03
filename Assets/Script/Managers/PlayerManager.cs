@@ -60,8 +60,6 @@ public class PlayerManager : MonoBehaviour
 
     private void UpdateInteractValue()
     {
-        
-
         if (interactProgression >= maxProgression) //If timer is complete and is still active (this is to stop the slider from reactivating again without letting go of the mouse)
         {
             if (isLighting)

@@ -5,6 +5,7 @@ public abstract class Anomaly: MonoBehaviour
 {
     [Header("Anomaly Config")]
     public AnomalyEnum anomalyEnum;
+    public AreaEnum areaEnum;
     public int anomalyPointValue;
     public int cooldownTimer = 10;
 
@@ -76,7 +77,7 @@ public abstract class Anomaly: MonoBehaviour
         {
             if (Physics.Raycast(playerCam.transform.position, transform.position - playerCam.transform.position, out RaycastHit hit, dist, (1 << 7)))
             {
-                Debug.DrawLine(playerCam.transform.position, hit.point, Color.yellow);
+                //Debug.DrawLine(playerCam.transform.position, hit.point, Color.yellow);
                 return true;
             }
             else
@@ -87,7 +88,7 @@ public abstract class Anomaly: MonoBehaviour
         }
         else
         {
-            Debug.DrawLine(playerCam.transform.position, transform.position, Color.red);
+            //Debug.DrawLine(playerCam.transform.position, transform.position, Color.red);
 
             return true;
         }
