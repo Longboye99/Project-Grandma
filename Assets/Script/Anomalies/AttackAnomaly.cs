@@ -17,7 +17,7 @@ public class AttackAnomaly : Anomaly
     {
         if (isActive)
         {
-            if (!CheckPlayerIsNotLooking())
+            if (CheckPlayerIsLooking(true))
             {
                 if (!isInTransition)
                 {

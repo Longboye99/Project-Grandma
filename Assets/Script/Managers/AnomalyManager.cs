@@ -180,9 +180,9 @@ public class AnomalyManager : MonoBehaviour
             dict[anomaly.areaEnum].attackAnomalies.Add(anomaly);
             Debug.Log("Added light anomaly: " + anomaly.name + ", in area: " + anomaly.areaEnum);
         }
-        else if (anomaly.anomalyEnum == AnomalyEnum.PartOfSequence)
+        else if (anomaly.anomalyEnum == AnomalyEnum.NotRandomSpawn)
         {
-
+            
         }
         else
         {

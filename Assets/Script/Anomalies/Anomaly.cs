@@ -13,7 +13,7 @@ public abstract class Anomaly: MonoBehaviour
     public bool isActive;
     public int currentAnomalyPoint;
 
-    protected float cooldown;
+    public float cooldown;
 
     protected Material originalMaterial;
     protected Material currentMaterial;
@@ -27,16 +27,13 @@ public abstract class Anomaly: MonoBehaviour
     private void OnEnable()
     {
         playerCam = GameObject.FindGameObjectWithTag("Player");
-
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly += UndoAnomaly;
-
         GameEventsManager.instance.debugEvents.onPressHighlight += PressHighlight;
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly -= UndoAnomaly;
-
         GameEventsManager.instance.debugEvents.onPressHighlight -= PressHighlight;
     }
 
@@ -46,12 +43,11 @@ public abstract class Anomaly: MonoBehaviour
         {
             cooldown -= Time.deltaTime;
         }
-        CheckPlayerIsNotLooking();
     }
 
     public bool SpawnAnomaly()
     {
-        if (cooldown <= 0 && !isActive && CheckPlayerIsNotLooking()) //Check if not in cooldown and not already actived
+        if (cooldown <= 0 && !isActive && CheckPlayerIsLooking(false)) //Check if not in cooldown and not already actived
         {
             TriggerAnomaly();
             return true;
@@ -67,8 +63,10 @@ public abstract class Anomaly: MonoBehaviour
     public abstract void UndoAnomaly(Anomaly anomaly);
 
 
-    public bool CheckPlayerIsNotLooking() //Calculate if the player is looking at the node or not
+    public bool CheckPlayerIsLooking(bool checkisLooking) //Calculate if the player is looking at the node or not
     {
+        bool isLooking;
+
         Vector3 dir = Vector3.Normalize(this.transform.position - playerCam.transform.position);
         float dot = Vector3.Dot(dir, playerCam.transform.forward);
         float dist = Vector3.Distance(transform.position, playerCam.transform.position);
@@ -78,19 +76,28 @@ public abstract class Anomaly: MonoBehaviour
             if (Physics.Raycast(playerCam.transform.position, transform.position - playerCam.transform.position, out RaycastHit hit, dist, (1 << 7)))
             {
                 //Debug.DrawLine(playerCam.transform.position, hit.point, Color.yellow);
-                return true;
+                isLooking = true;
             }
             else
             {
                 
-                return false;
+                isLooking = false;
             }
         }
         else
         {
             //Debug.DrawLine(playerCam.transform.position, transform.position, Color.red);
 
-            return true;
+            isLooking = true;
+        }
+
+        if (checkisLooking)
+        {
+            return !isLooking;
+        }
+        else
+        {
+            return isLooking;
         }
     }
     
