@@ -5,9 +5,11 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] GameObject playerCamera;
+    [SerializeField] PlayerMovementController movementController;
     [SerializeField] float rayMaxDistance;
     private int layerMask = (1 << 6);
 
+    public float baseMoveSpeed;
     public float interactProgression;
     public float maxProgression = 2;
 
@@ -32,6 +34,8 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
+        movementController = GameObject.FindAnyObjectByType<PlayerMovementController>();
+        movementController.moveSpeed = baseMoveSpeed;
         GameManager.instance.uiManager.silderMaxValue = maxProgression;
     }
 
@@ -56,6 +60,7 @@ public class PlayerManager : MonoBehaviour
         interactProgression = 0; //Reset slider timer
         isHoldingFixAnomaly = true; //Keep track when mosue is already been held
         isLighting = isLookingAtIncense;
+        movementController.moveSpeed = baseMoveSpeed / 2;
     }
 
     private void UpdateInteractValue()
@@ -73,6 +78,7 @@ public class PlayerManager : MonoBehaviour
             GameEventsManager.instance.playerEvents.CompleteInteract();
             isHoldingFixAnomaly = false;
             isLighting = false;
+            movementController.moveSpeed = baseMoveSpeed;
         }
         else
         {
@@ -84,6 +90,7 @@ public class PlayerManager : MonoBehaviour
     {
         isHoldingFixAnomaly = false;
         isLighting = false;
+        movementController.moveSpeed = baseMoveSpeed;
     }
 
     private void CheckRayCastForInteractable()
@@ -112,11 +119,11 @@ public class PlayerManager : MonoBehaviour
         
     }
   
-    /*private void OnDrawGizmos() //Funny green line in inspect
+    private void OnDrawGizmos() //Funny green line in inspect
     {
         Vector3 endPos = playerCamera.transform.position + playerCamera.transform.forward * rayMaxDistance;
         Gizmos.color = Color.green;
         Gizmos.DrawLine(playerCamera.transform.position, endPos);
 
-    }   */
+    }   
 }

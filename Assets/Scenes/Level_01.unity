@@ -4752,7 +4752,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1479350430}
-  rayMaxDistance: 10
+  movementController: {fileID: 0}
+  rayMaxDistance: 5
+  baseMoveSpeed: 20
   interactProgression: 0
   maxProgression: 2
   currentAnomaly: {fileID: 0}
