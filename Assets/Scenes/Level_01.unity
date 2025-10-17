@@ -654,7 +654,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 1, g: 0.8031916, b: 0.6627451, a: 1}
-  m_Intensity: 0.01
+  m_Intensity: 0.03
   m_Range: 2.46
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2511,8 +2511,8 @@ MonoBehaviour:
   midnightTime: 120
   finishTime: 360
   timeSpeed: 1
-  incenseSpeed: 1
-  incenseCurrentTime: 50
+  incenseSpeed: 3.31
+  incenseCurrentTime: 100
   incense: {fileID: 1185812445}
   incenseMaxTime: 100
   incenseSection: 2
@@ -2564,7 +2564,7 @@ RectTransform:
   m_LocalScale: {x: 7.50879, y: 7.50879, z: 7.50879}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1089054895}
+  m_Father: {fileID: 1313644092}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5785,8 +5785,6 @@ RectTransform:
   - {fileID: 625568795}
   - {fileID: 811140591}
   - {fileID: 1904550722}
-  - {fileID: 574601474}
-  - {fileID: 1779393744}
   - {fileID: 2025862043}
   - {fileID: 1312115664}
   m_Father: {fileID: 127657092}
@@ -6280,6 +6278,9 @@ MonoBehaviour:
   endObject: {fileID: 84840503}
   incenseStick: {fileID: 1318589437}
   incenseLight: {fileID: 84840504}
+  incenseMaterial: {fileID: 2100000, guid: 6b07d4ccbc0c4a04fafc8a6ff6b6e48d, type: 2}
+  emissionColorValue: {r: 0, g: 0, b: 0, a: 0}
+  intensity: 0
   incensePercentage: 1
 --- !u!4 &1185812446
 Transform:
@@ -6932,6 +6933,7 @@ GameObject:
   - component: {fileID: 1312115667}
   - component: {fileID: 1312115666}
   - component: {fileID: 1312115665}
+  - component: {fileID: 1312115668}
   m_Layer: 5
   m_Name: Jumpscare
   m_TagString: Jumpscare
@@ -7018,6 +7020,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1312115663}
   m_CullTransparentMesh: 1
+--- !u!114 &1312115668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312115663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c0cf5a092507b428d069656cef2edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: FinishJumpscare
 --- !u!1 &1313644091
 GameObject:
   m_ObjectHideFlags: 0
@@ -7050,6 +7065,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 774780182}
+  - {fileID: 574601474}
+  - {fileID: 1779393744}
   m_Father: {fileID: 1263498688}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7118,7 +7135,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!1 &1318589437
 GameObject:
@@ -10032,7 +10049,7 @@ RectTransform:
   m_LocalScale: {x: 7.50879, y: 7.50879, z: 7.50879}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1089054895}
+  m_Father: {fileID: 1313644092}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
