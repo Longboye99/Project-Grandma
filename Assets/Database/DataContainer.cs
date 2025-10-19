@@ -15,7 +15,6 @@ namespace Game.Database
         public List<LevelData> levelConfigs;
         [SpreadsheetPage("Night0 AnomalyConfig")]
         public List<LevelAnomalyData> AnomalyConfig;
-
     }
 
     [CreateAssetMenu(fileName = "SpreadsheetContainer", menuName = "SpreadsheetContainer")]

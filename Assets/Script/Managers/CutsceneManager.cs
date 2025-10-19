@@ -1,41 +1,27 @@
-using Unity.VisualScripting;
+﻿using Unity.VisualScripting;
 using UnityEngine;
 
 public class CutsceneManager : MonoBehaviour
 {
-    private GameObject playerCamera;
-    [SerializeField] GameObject ghost;
-    [SerializeField] Transform startPos;
 
-    private void OnEnable()
-    {
-        GameEventsManager.instance.anomalyEvents.onTriggerAttackAnomaly += PlayAttackCutscene;
-    }
 
-    private void OnDisable()
-    {
-        GameEventsManager.instance.anomalyEvents.onTriggerAttackAnomaly -= PlayAttackCutscene;
-    }
+    //start intro animation
+    //Active UI
+    //Wait til recieve refill incense event
+    //Activate anomaly and stuff
+    //Wait til recieve fix anomaly
+    //Jumpscare n cutscene
+    //Force camera look
+    //Wait til recieve refill incense event
+    //tutorial Ui
+    //start level manager
 
-    private void Start()
-    {
-        playerCamera = GameObject.FindGameObjectWithTag("Player");
-
-    }
-    private void Update()
-    {
-        
-    }
-
-    private void PlayAttackCutscene()
-    {
-        ghost.transform.position = startPos.position;
-
-    }
-
-    private void TurnPlayerCameraToward(Transform lookDir)
-    {
-        Vector3 direction = lookDir.transform.position - playerCamera.transform.position;
-        
-    }
 }
+
+/*1.เปิดมาหน้าธูปขึ้นuiไฮไลท์ธูปบอกให้กดเติม 
+ * 2.ของตกเดินไปแก้ 
+ * 3.ตอนกำลังใกล้จะแก้เสร็จมีเสียงจากขวามือ 
+ * 4. ผีพุ่งใส่จากทางขวา 
+ * 5.พุ่งเข้ามาเสร็จหายไป ขอบขึ้นออร่าแดงๆกระพริบหน่อยฟิวหัวใจเต้นแรง 
+ * 5.ผีหายไปล็อคกล้องหันไปหาธูป 
+ * 6.พอจุดอีกรอบเจอกระดาษข้อความบอกว่าให้แก้สิ่งผิดปกติ*/
