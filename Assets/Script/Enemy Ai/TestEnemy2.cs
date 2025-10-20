@@ -35,7 +35,7 @@ public class TestEnemy2 : MonoBehaviour
     {
         anomalyManager = GameManager.instance.anomalyManager;
     }
-
+    /*
     private void Update()
     {
         if(currentCooldown <= 0)
@@ -51,10 +51,10 @@ public class TestEnemy2 : MonoBehaviour
             }      
         }
     }
-
+    
     private void TrySpawningAnomaly()
     {
-        anomalyPoint = anomalyManager.TallyAnomalyPoint();
+        //anomalyPoint = anomalyManager.TallyAnomalyPoint();
 
         if (difficultyLevel >= Random.Range(0, 20) && currentGrace <= 0)
         { 
@@ -75,6 +75,7 @@ public class TestEnemy2 : MonoBehaviour
         }
         currentCooldown = cooldownDuration;
     }
+    */
 
     private void CheckFinishAttackAnomaly(Anomaly anomaly)
     {

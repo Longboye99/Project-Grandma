@@ -9,6 +9,12 @@ public class PlayerEvents
         onRefillIncense?.Invoke();
     }
 
+    public event Action onProgessLoop;
+    public void ProgressLoop()
+    {
+        onProgessLoop?.Invoke();
+    }
+
     public event Action onCompleteInteract;
     public void CompleteInteract()
     {

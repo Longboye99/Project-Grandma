@@ -15,7 +15,6 @@ public class AnomalySequence : Anomaly
         anomalyList[index].TriggerAnomaly();
         Debug.Log("Trigger Anomaly Sequence: " + this.name + index);
         isActive = true;
-        CurrentCooldown = cooldown;
         currentAnomalyPoint = anomalyPoint;
     }
 

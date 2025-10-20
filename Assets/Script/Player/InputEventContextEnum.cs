@@ -4,5 +4,6 @@ public enum InputEventContextEnum
 {
     Default,
     Anomaly,
-    Incense
+    Incense,
+    Bed
 }

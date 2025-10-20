@@ -12,7 +12,6 @@ public class AppearingAnomaly : Anomaly
     {
         Debug.Log("Triggered Appearing Anomaly: " + this.name);
         isActive = true;
-        CurrentCooldown = cooldown;
         currentAnomalyPoint = anomalyPoint;
 
         gameObject.GetComponent<MeshRenderer>().enabled = true; //Make the object appear

@@ -8,7 +8,6 @@ public class DisappearingAnomaly : Anomaly
     {
         Debug.Log("Triggered Disappearing Anomaly: " + this.name);
         isActive = true;
-        CurrentCooldown = cooldown;
         currentAnomalyPoint = anomalyPoint;
 
         gameObject.GetComponent<MeshRenderer>().enabled = false; //Make the object disappear      

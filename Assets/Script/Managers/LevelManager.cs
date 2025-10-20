@@ -8,11 +8,14 @@ using System;
 public class LevelManager : MonoBehaviour
 {
     [Header("Level Config")]
+    public int currentLoop = -1;
+    public int maxLoop = 6;
     public float currentTime;
-    public float midnightTime = 120;
-    public float finishTime = 360;
     public float timeSpeed = 1;
     public float incenseSpeed = 1;
+
+    [SerializeField] Transform respawnPoint;
+    [SerializeField] GameObject playerObject;
 
     [Header("Incense Config")]
     [SerializeField] float incenseCurrentTime;
@@ -31,59 +34,66 @@ public class LevelManager : MonoBehaviour
     private void OnEnable()
     {
         GameEventsManager.instance.playerEvents.onRefillIncense += RefillIncense;
+        GameEventsManager.instance.playerEvents.onProgessLoop += ProgessLoop;
         GameEventsManager.instance.anomalyEvents.onSnapIncense += SnapIncense;
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.playerEvents.onRefillIncense -= RefillIncense;
+        GameEventsManager.instance.playerEvents.onProgessLoop -= ProgessLoop;
         GameEventsManager.instance.anomalyEvents.onSnapIncense -= SnapIncense;
     }
     private void Start()
     {
         incenseSection = maxIncenseSection;
+        ProgessLoop();
         //incenseCurrentTime = incenseMaxTime;
     }
 
     private void Update()
     {
-        UpdateTime();
         SetIncenseSize();
-        CheckVictory();
-        CheckDefeat();
 
-        GameManager.instance.anomalyManager.CheckEnemyEvent(currentTime);
-        GameManager.instance.anomalyManager.TallyAnomalyPoint();
+
+        //GameManager.instance.anomalyManager.CheckEnemyEvent(currentTime);
     }
+
+    public void ProgessLoop() // call when go to sleep or die
+    {
+        //fade out anim, disable player movement
+
+        //Check if all anomaly is cleared
+        if (GameManager.instance.anomalyManager.ActiveAnomalies.Count == 0)
+        {
+            currentLoop++;
+            Debug.Log("Current Loop" + currentLoop);
+            if (currentLoop >= maxLoop)
+            {
+                VictoryMessage.SetActive(true);
+                Time.timeScale = 0;
+            }
+        }
+        else //yes > +1 loop,   no > something
+        {
+            currentLoop--;
+            if(currentLoop < 0)
+            {
+                currentLoop = 0;
+            }
+        }
+        GameManager.instance.anomalyManager.SpawnNextLoopAnomaly();
+        playerObject.transform.position = respawnPoint.transform.position;
+
+        //fade in, enable movement
+        //wake up
+    }
+
 
     private void UpdateTime()
     { 
         currentTime += Time.deltaTime * timeSpeed;
         incenseCurrentTime -=  Time.deltaTime * incenseSpeed;
-    }
-    private void CheckVictory()
-    {
-        if (currentTime >= finishTime)
-        {
-            VictoryMessage.SetActive(true);
-            Time.timeScale = 0;
-        }
-    }
-
-    private void CheckDefeat()
-    {
-        if (incenseCurrentTime <= 0 && !isDefeated)
-        {
-            isDefeated = true;
-            timeSpeed = 0;
-            GameEventsManager.instance.levelEvents.PlayerDefeated();
-        }
-    }
-
-    public void FinishedDefeatAnim()
-    {
-        DefeatMessage.SetActive(true);
-        Time.timeScale = 0;
     }
 
     //---------------------Incense functions----------------------------
@@ -108,7 +118,6 @@ public class LevelManager : MonoBehaviour
             incenseCurrentTime = incenseMaxTime;
         }
         Debug.Log(incenseCurrentTime + "-" + incenseMaxTime);
-        
     }
 
     private void RefillIncense()
@@ -117,9 +126,32 @@ public class LevelManager : MonoBehaviour
     }
 
     //----------------------------------------------------------------
-    
 
-    
+    /*private void CheckVictory()
+{
+    if (currentTime >= finishTime)
+    {
+        VictoryMessage.SetActive(true);
+        Time.timeScale = 0;
+    }
+}
+private void CheckDefeat()
+{
+    if (incenseCurrentTime <= 0 && !isDefeated)
+    {
+        isDefeated = true;
+        timeSpeed = 0;
+        GameEventsManager.instance.levelEvents.PlayerDefeated();
+    }
+}
+
+public void FinishedDefeatAnim()
+{
+    DefeatMessage.SetActive(true);
+    Time.timeScale = 0;
+}
+*/
+
 
 
 }

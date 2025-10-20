@@ -129,126 +129,126 @@ MonoBehaviour:
     - AnomalyId: Tall_water_pail
       Am0: TRUE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
       - TRUE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Water_pail
-      Am0: TRUE
+      Am0: FALSE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
+      - FALSE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Clothes3
       Am0: TRUE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
       - TRUE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Flat_Cylinder
-      Am0: TRUE
+      Am0: FALSE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
+      - FALSE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Bathroom_Cube
-      Am0: TRUE
+      Am0: FALSE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
+      - FALSE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Water_Bottle
-      Am0: TRUE
+      Am0: FALSE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
+      - FALSE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Table_Stuff (1)
-      Am0: TRUE
+      Am0: FALSE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
+      - FALSE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Table_Stuff (4)
-      Am0: TRUE
+      Am0: FALSE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
+      - FALSE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Orange_Cube
-      Am0: TRUE
+      Am0: FALSE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
+      - FALSE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
