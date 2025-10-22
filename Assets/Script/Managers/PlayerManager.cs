@@ -5,17 +5,19 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] GameObject playerCamera;
+    [SerializeField] PlayerMovementController movementController;
     [SerializeField] float rayMaxDistance;
-    private int layerMask = (1 << 6);
+    private int layerMask = (1 << 6) | (1 << 7);
 
+    public float baseMoveSpeed;
     public float interactProgression;
-    public float maxProgression = 2;
+    public float maxProgression = 1;
 
-    private bool isHoldingFixAnomaly = false;
+    private bool isHoldingInteract = false;
 
     public Anomaly currentAnomaly;
+    public bool isLookingAtBed;
     public bool isLookingAtIncense;
-    private bool isLighting;
 
 
     private void OnEnable()
@@ -32,12 +34,14 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
+        movementController = GameObject.FindAnyObjectByType<PlayerMovementController>();
+        movementController.moveSpeed = baseMoveSpeed;
         GameManager.instance.uiManager.silderMaxValue = maxProgression;
     }
 
     private void Update()
     {
-        if (isHoldingFixAnomaly)
+        if (isHoldingInteract)
         {
             UpdateInteractValue();
             GameManager.instance.uiManager.sliderValue = interactProgression;
@@ -54,25 +58,35 @@ public class PlayerManager : MonoBehaviour
     {
         GameEventsManager.instance.anomalyEvents.StartHoldingAnomaly();
         interactProgression = 0; //Reset slider timer
-        isHoldingFixAnomaly = true; //Keep track when mosue is already been held
-        isLighting = isLookingAtIncense;
+        isHoldingInteract = true; //Keep track when mosue is already been held
+
+        isLookingAtIncense = (inputContext == InputEventContextEnum.Incense);
+        isLookingAtBed = (inputContext == InputEventContextEnum.Bed);
+        movementController.moveSpeed = baseMoveSpeed / 2;
     }
 
     private void UpdateInteractValue()
     {
         if (interactProgression >= maxProgression) //If timer is complete and is still active (this is to stop the slider from reactivating again without letting go of the mouse)
         {
-            if (isLighting)
+            if (isLookingAtIncense)
             {
                 GameEventsManager.instance.playerEvents.RefilIncense();
+            }
+            else if (isLookingAtBed)
+            {
+                GameEventsManager.instance.playerEvents.ProgressLoop();
             }
             else if (currentAnomaly != null)
             {
                 GameEventsManager.instance.anomalyEvents.UndoAnomaly(currentAnomaly);
             }
+            
             GameEventsManager.instance.playerEvents.CompleteInteract();
-            isHoldingFixAnomaly = false;
-            isLighting = false;
+            isHoldingInteract = false;
+            isLookingAtIncense = false;
+            isLookingAtBed = false;
+            movementController.moveSpeed = baseMoveSpeed;
         }
         else
         {
@@ -82,8 +96,10 @@ public class PlayerManager : MonoBehaviour
 
     private void CancelInteract(InputEventContextEnum inputContext)
     {
-        isHoldingFixAnomaly = false;
-        isLighting = false;
+        isHoldingInteract = false;
+        isLookingAtIncense = false;
+        isLookingAtBed = false;
+        movementController.moveSpeed = baseMoveSpeed;
     }
 
     private void CheckRayCastForInteractable()
@@ -99,24 +115,27 @@ public class PlayerManager : MonoBehaviour
             }
             else if (hit.collider.gameObject.GetComponent<Incense>())
             {
-                isLookingAtIncense = true;
                 GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Incense);
             }
+            else if (hit.collider.gameObject.GetComponent<Bed>())
+            {
+                GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Bed);
+            }
+            
         }
         else
         {
             currentAnomaly = null;
-            isLookingAtIncense = false;
             GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Default);
         }
         
     }
   
-    /*private void OnDrawGizmos() //Funny green line in inspect
+    private void OnDrawGizmos() //Funny green line in inspect
     {
         Vector3 endPos = playerCamera.transform.position + playerCamera.transform.forward * rayMaxDistance;
         Gizmos.color = Color.green;
         Gizmos.DrawLine(playerCamera.transform.position, endPos);
 
-    }   */
+    }   
 }

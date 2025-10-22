@@ -2,9 +2,10 @@ using UnityEngine;
 
 public enum AreaEnum
 {
+    Default,
     Bathroom,
-    Bedroom,
+    Storage,
     Coffin,
-    Backyard,
+    Laundry,
     Kitchen
 }

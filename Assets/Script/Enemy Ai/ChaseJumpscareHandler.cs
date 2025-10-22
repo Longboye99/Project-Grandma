@@ -79,7 +79,7 @@ public class ChaseJumpscareHandler : MonoBehaviour
         }
         else if(name == "FinishJumpscare")
         {
-            GameManager.instance.levelManager.FinishedDefeatAnim();
+            //GameManager.instance.levelManager.FinishedDefeatAnim();
             /*UiAnimator.gameObject.SetActive(false);
             UiAnimator.SetTrigger("ExitJumpscare");
             Destroy(this.gameObject);*/

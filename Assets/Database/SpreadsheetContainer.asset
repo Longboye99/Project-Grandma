@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpreadsheetContainer
   m_EditorClassIdentifier: Assembly-CSharp:Game.Database:SpreadsheetContainer
   foldoutImportGUI: 1
-  documentId: 1dq28Rb85PaFYwtXRG8o-9N4GYTu2oppLsy4-MFvohHc
+  documentId: 1PqyO8TCiZNLqMfaZ7TNA_k50q7AIbVq75uVizDdvmhE
   selectedTogglesIds:
   - anomalies
   - AnomalyConfig
@@ -78,177 +78,189 @@ MonoBehaviour:
       Level: Level 1
     levelConfigs:
     - Hour: 12:00 AM
-      Time: 0
-      Difficulty: 15
-      ActiveInterval: 10
-      LightAnomalyThreshold: 50
-      HeavyAnomalyThreshold: 100
-      IncenseDrainSpeed: 1
-      TimeScale: 1
+      AreaChance2: 0.8
+      AreaChance3: 0.2
+      AreaChance4: 0
+      AreaChance5: 0
+      AttackChance: 0
+      HeavyChance0: 1
+      HeavyChance1: 0
+      HeavyChance2: 0
+      LightDoubleChance: 0
     - Hour: 1:00 AM
-      Time: 60
-      Difficulty: 15
-      ActiveInterval: 10
-      LightAnomalyThreshold: 50
-      HeavyAnomalyThreshold: 100
-      IncenseDrainSpeed: 1
-      TimeScale: 1
+      AreaChance2: 0.7
+      AreaChance3: 0.3
+      AreaChance4: 0
+      AreaChance5: 0
+      AttackChance: 0
+      HeavyChance0: 0
+      HeavyChance1: 1
+      HeavyChance2: 0
+      LightDoubleChance: 0
     - Hour: 2:00 AM
-      Time: 120
-      Difficulty: 15
-      ActiveInterval: 10
-      LightAnomalyThreshold: 50
-      HeavyAnomalyThreshold: 100
-      IncenseDrainSpeed: 1
-      TimeScale: 1
+      AreaChance2: 0.5
+      AreaChance3: 0.5
+      AreaChance4: 0
+      AreaChance5: 0
+      AttackChance: 0
+      HeavyChance0: 1
+      HeavyChance1: 0
+      HeavyChance2: 0
+      LightDoubleChance: 0
     - Hour: 3:00 AM
-      Time: 180
-      Difficulty: 15
-      ActiveInterval: 10
-      LightAnomalyThreshold: 50
-      HeavyAnomalyThreshold: 100
-      IncenseDrainSpeed: 1
-      TimeScale: 1
+      AreaChance2: 0.7
+      AreaChance3: 0.3
+      AreaChance4: 0
+      AreaChance5: 0
+      AttackChance: 1
+      HeavyChance0: 1
+      HeavyChance1: 0
+      HeavyChance2: 0
+      LightDoubleChance: 0
     - Hour: 4:00 AM
-      Time: 240
-      Difficulty: 15
-      ActiveInterval: 10
-      LightAnomalyThreshold: 50
-      HeavyAnomalyThreshold: 100
-      IncenseDrainSpeed: 1.1
-      TimeScale: 0.9
+      AreaChance2: 0.2
+      AreaChance3: 0.8
+      AreaChance4: 0
+      AreaChance5: 0
+      AttackChance: 0
+      HeavyChance0: 1
+      HeavyChance1: 0
+      HeavyChance2: 0
+      LightDoubleChance: 0.1
     - Hour: 5:00 AM
-      Time: 300
-      Difficulty: 15
-      ActiveInterval: 10
-      LightAnomalyThreshold: 50
-      HeavyAnomalyThreshold: 100
-      IncenseDrainSpeed: 1.1
-      TimeScale: 0.8
+      AreaChance2: 0.1
+      AreaChance3: 0.8
+      AreaChance4: 0.1
+      AreaChance5: 0
+      AttackChance: 0.1
+      HeavyChance0: 0.7
+      HeavyChance1: 0.3
+      HeavyChance2: 0
+      LightDoubleChance: 0.3
     AnomalyConfig:
     - AnomalyId: Tall_water_pail
       Am0: TRUE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
       - TRUE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Water_pail
-      Am0: TRUE
+      Am0: FALSE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
+      - FALSE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Clothes3
       Am0: TRUE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
       - TRUE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Flat_Cylinder
-      Am0: TRUE
+      Am0: FALSE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
+      - FALSE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Bathroom_Cube
-      Am0: TRUE
+      Am0: FALSE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
+      - FALSE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Water_Bottle
-      Am0: TRUE
+      Am0: FALSE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
+      - FALSE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Table_Stuff (1)
-      Am0: TRUE
+      Am0: FALSE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
+      - FALSE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Table_Stuff (4)
-      Am0: TRUE
+      Am0: FALSE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
+      - FALSE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: Orange_Cube
-      Am0: TRUE
+      Am0: FALSE
       Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
       activationTimes:
+      - FALSE
       - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
