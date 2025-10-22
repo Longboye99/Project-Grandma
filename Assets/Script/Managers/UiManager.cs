@@ -91,7 +91,7 @@ public class UiManager : MonoBehaviour
     private void DisplayTime()
     {
         currentLoop = GameManager.instance.levelManager.currentLoop;
-        timeDisplay.text = "0" + currentLoop.ToString() + "00";
+        timeDisplay.text = "0" + currentLoop.ToString() + ":"+"00";
     }
 }
 

@@ -11,7 +11,7 @@ public class PlayerManager : MonoBehaviour
 
     public float baseMoveSpeed;
     public float interactProgression;
-    public float maxProgression = 2;
+    public float maxProgression = 1;
 
     private bool isHoldingInteract = false;
 

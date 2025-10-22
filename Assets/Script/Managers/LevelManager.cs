@@ -61,6 +61,9 @@ public class LevelManager : MonoBehaviour
 
     public void ProgessLoop() // call when go to sleep or die
     {
+        //low incense
+        incenseCurrentTime = 40;
+        SetIncenseSize();
         //fade out anim, disable player movement
 
         //Check if all anomaly is cleared
