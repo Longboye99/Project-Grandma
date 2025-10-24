@@ -94,6 +94,8 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+
+
     private void CancelInteract(InputEventContextEnum inputContext)
     {
         isHoldingInteract = false;

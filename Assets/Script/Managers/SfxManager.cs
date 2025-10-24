@@ -3,7 +3,7 @@ using UnityEngine.Audio;
 using System.Collections;
 using System.Collections.Generic;
 
-public class SfxManager
+public class SfxManager : MonoBehaviour 
 {
     [SerializeField] AudioSource soundFXObject;
 

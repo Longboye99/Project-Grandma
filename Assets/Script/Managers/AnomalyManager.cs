@@ -12,6 +12,8 @@ public class AnomalyManager : MonoBehaviour
     [Header("State")]
     public int anomalyPoint;
     public AreaEnum currentArea;
+    bool hasJumpscared;
+    [SerializeField] AttackAnomaly jumpscare;
 
     [Header("Anomaly Spawning Chance")]
     [SerializeField] float AreaChance2;
@@ -150,6 +152,12 @@ public class AnomalyManager : MonoBehaviour
             targetArea.attackAnomalies.RemoveAt(rnd);
 
         }*/
+
+        if(GameManager.instance.levelManager.currentLoop == 3 && !hasJumpscared)
+        {
+            hasJumpscared = true;
+            jumpscare.TriggerAnomaly();
+        }
 
         //if heavy anomaly spawn
         int randomHeavyAnomalyCount = GetRandomValue(

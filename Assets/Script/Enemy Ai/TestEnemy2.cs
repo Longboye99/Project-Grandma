@@ -89,8 +89,8 @@ public class TestEnemy2 : MonoBehaviour
 
     private void StartJumpscare()
     {
-        GameObject ghost = Instantiate(ghostPrefab, transform.position, Quaternion.identity);
-        ghost.GetComponent<ChaseJumpscareHandler>().StartJumpscare();
+        /*GameObject ghost = Instantiate(ghostPrefab, transform.position, Quaternion.identity);
+        ghost.GetComponent<ChaseJumpscareHandler>().StartJumpscare();*/
     }
 
 }

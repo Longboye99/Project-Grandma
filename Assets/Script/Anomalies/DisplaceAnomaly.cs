@@ -15,7 +15,6 @@ public class DisplaceAnomaly : Anomaly
 
     public override void TriggerAnomaly()
     {
-        Debug.Log("Triggered Displace Anomaly: " + this.name);
         isActive = true;
         currentAnomalyPoint = anomalyPoint;
 
@@ -27,7 +26,6 @@ public class DisplaceAnomaly : Anomaly
     {
         if (anomaly == this && isActive)
         {
-            Debug.Log("Undid Displace Anomaly: " + this.name, this.gameObject);
             this.gameObject.transform.position = originalPosition;
             this.gameObject.transform.rotation = originalRotation;
 

@@ -1,44 +1,38 @@
 using System.Xml.Serialization;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
     AudioSource audioSource;
-    private void OnEnable()
-    {
-        GameEventsManager.instance.anomalyEvents.onTriggerAttackAnomaly += DisableAmbience;
-        GameEventsManager.instance.anomalyEvents.onUndoAnomaly += EnableAmbience;
-    }
-
-    private void OnDisable()
-    {
-        GameEventsManager.instance.anomalyEvents.onTriggerAttackAnomaly -= DisableAmbience;
-        GameEventsManager.instance.anomalyEvents.onUndoAnomaly -= EnableAmbience;
-    }
+    int anomalyCount; 
+    AreaEnum area;
+    List<Anomaly> activeAnomaly = new List<Anomaly>();
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
 
-    private void DisableAmbience()
+    private void Update()
     {
-        audioSource.volume = 0;
-    }
-
-    private void EnableAmbience(Anomaly anomaly)
-    {
-        if(anomaly.anomalyLevel == AnomalyEnum.AttackAnomaly)
+        anomalyCount = 0;
+        area = GameManager.instance.anomalyManager.currentArea;
+        activeAnomaly = GameManager.instance.anomalyManager.ActiveAnomalies;
+        foreach (var item in activeAnomaly)
         {
-            Invoke("SetVolumnOne", 3);
-            
+            if(item.area == area)
+            {
+                anomalyCount++;
+            }
         }
 
+        SetAmbienceVolumn(1 - (0.15f * anomalyCount));  
     }
 
-    private void SetVolumnOne()
+    public void SetAmbienceVolumn(float volumn)
     {
-        audioSource.volume = 1;
+        audioSource.volume = volumn;
     }
     
 }

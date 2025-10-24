@@ -78,13 +78,12 @@ public class LevelManager : MonoBehaviour
         }
         else //yes > +1 loop,   no > something
         {
-            currentLoop--;
             if(currentLoop < 0)
             {
                 currentLoop = 0;
             }
         }
-        GameManager.instance.anomalyManager.SpawnNextLoopAnomaly();
+        
         playerObject.transform.position = respawnPoint.transform.position;
         litIncense = false;
 
@@ -95,6 +94,7 @@ public class LevelManager : MonoBehaviour
 
     private void WakeUp()
     {
+        GameManager.instance.anomalyManager.SpawnNextLoopAnomaly();
         GameManager.instance.uiManager.TransitionIn();
         GameManager.instance.playerManager.EnablePlayerMovement();
     }

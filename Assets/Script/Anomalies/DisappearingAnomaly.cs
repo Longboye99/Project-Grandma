@@ -11,7 +11,7 @@ public class DisappearingAnomaly : Anomaly
 
     public override void TriggerAnomaly()
     {
-        Debug.Log("Triggered Disappearing Anomaly: " + this.name);
+
         isActive = true;
         currentAnomalyPoint = anomalyPoint;
 

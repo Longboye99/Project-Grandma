@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public AnomalyManager anomalyManager;
     public PlayerManager playerManager;
     public UiManager uiManager;
-    public CutsceneManager cutSceneManager;
+    public SfxManager sfxManager;
 
     private void Awake()
     {
