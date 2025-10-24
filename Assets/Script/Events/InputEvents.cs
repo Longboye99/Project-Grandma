@@ -26,4 +26,10 @@ public class InputEvents
     {
         onCancelInteract?.Invoke(this.inputEventContext);
     }
+
+    public event Action onPause;
+    public void Pause()
+    {
+        onPause?.Invoke();
+    }
 }

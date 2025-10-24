@@ -5,6 +5,7 @@ using System;
 
 public class UiManager : MonoBehaviour
 {
+    [SerializeField] Canvas pausedCanvas;
     [SerializeField] Animator transitionOverlay;
     public GameObject anomalySliderObject;
     private Slider anomalySlider;
@@ -16,6 +17,7 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI anomalyPointDisplay;
 
     float currentLoop;
+    bool isPaused;
 
 
     private HandEnum handEnum;
@@ -27,6 +29,7 @@ public class UiManager : MonoBehaviour
     {
         GameEventsManager.instance.inputEvents.onStartInteract += ActivateInteractSlider;
         GameEventsManager.instance.inputEvents.onCancelInteract += CancelInteract;
+        GameEventsManager.instance.inputEvents.onPause += Pause;
         GameEventsManager.instance.playerEvents.onCompleteInteract += CompleteInteract;
     }
 
@@ -34,6 +37,7 @@ public class UiManager : MonoBehaviour
     {
         GameEventsManager.instance.inputEvents.onStartInteract -= ActivateInteractSlider;
         GameEventsManager.instance.inputEvents.onCancelInteract -= CancelInteract;
+        GameEventsManager.instance.inputEvents.onPause -= Pause;
         GameEventsManager.instance.playerEvents.onCompleteInteract -= CompleteInteract;
 
     }
@@ -87,6 +91,24 @@ public class UiManager : MonoBehaviour
     private void CompleteInteract()
     {
         anomalySliderObject.SetActive(false);
+    }
+
+    public void Pause()
+    {
+        if (isPaused)
+        {
+            pausedCanvas.gameObject.SetActive(false);
+            Time.timeScale = 1.0f;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            isPaused = false;
+            return;
+        }
+        pausedCanvas.gameObject.SetActive(true);
+        Time.timeScale = 0;
+        isPaused = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void DisplayTime()
