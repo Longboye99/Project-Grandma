@@ -5,6 +5,7 @@ using System;
 
 public class UiManager : MonoBehaviour
 {
+    [SerializeField] Animator transitionOverlay;
     public GameObject anomalySliderObject;
     private Slider anomalySlider;
 
@@ -51,7 +52,7 @@ public class UiManager : MonoBehaviour
     private void Update()
     {
         anomalySlider.value = GameManager.instance.playerManager.interactProgression;
-        //anomalyPointDisplay.text = GameManager.instance.anomalyManager.TallyAnomalyPoint().ToString();
+        anomalyPointDisplay.text = GameManager.instance.anomalyManager.ActiveAnomalies.Count.ToString();
         DisplayTime();
     }
 
@@ -92,6 +93,16 @@ public class UiManager : MonoBehaviour
     {
         currentLoop = GameManager.instance.levelManager.currentLoop;
         timeDisplay.text = "0" + currentLoop.ToString() + ":"+"00";
+    }
+
+    public void TransitionIn()
+    {
+        transitionOverlay.SetTrigger("TransitionIn");
+    }
+
+    public void TransitionOut()
+    {
+        transitionOverlay.SetTrigger("TransitionOut");
     }
 }
 

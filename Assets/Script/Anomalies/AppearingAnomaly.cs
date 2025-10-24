@@ -4,6 +4,7 @@ public class AppearingAnomaly : Anomaly
 {
     private void Start()
     {
+        playerCam = GameObject.FindGameObjectWithTag("Player");
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<Collider>().enabled = false;
         originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material

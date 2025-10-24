@@ -137,5 +137,15 @@ public class PlayerManager : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawLine(playerCamera.transform.position, endPos);
 
-    }   
+    }
+    
+    public void DisablePlayerMovement()
+    {
+        movementController.moveSpeed = 0;
+    }
+
+    public void EnablePlayerMovement()
+    {
+        movementController.moveSpeed = baseMoveSpeed;
+    }
 }

@@ -5,6 +5,7 @@ public class DisappearingAnomaly : Anomaly
     //Anomaly class for anomalies that make objects disappear
     private void Start()
     {
+        playerCam = GameObject.FindGameObjectWithTag("Player");
         originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
     }
 

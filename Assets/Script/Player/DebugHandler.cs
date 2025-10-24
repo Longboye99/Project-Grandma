@@ -6,6 +6,8 @@ public class DebugHandler : MonoBehaviour
     {
         HandleDebugToggles();
         ActivateLookedAnomaly();
+        UndoAllAnomaly();
+        RefillIncense();
     }
 
     private void HandleDebugToggles()
@@ -21,6 +23,22 @@ public class DebugHandler : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.J))
         {
             GameManager.instance.playerManager.currentAnomaly.TriggerAnomaly();
+        }
+    }
+
+    private void UndoAllAnomaly()
+    {
+        if(Input.GetKeyDown(KeyCode.U))
+        {
+            GameManager.instance.anomalyManager.UndoAllAnomaly();
+        }
+    }
+
+    private void RefillIncense()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            GameManager.instance.levelManager.RefillIncense();
         }
     }
 }

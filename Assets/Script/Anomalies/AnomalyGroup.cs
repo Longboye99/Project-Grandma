@@ -19,7 +19,7 @@ public class AnomalyGroup : Anomaly
 
     public override void UndoAnomaly(Anomaly incomingAnomaly)
     {
-        if (anomalyList.Contains(incomingAnomaly))
+        if (anomalyList.Contains(incomingAnomaly) && isActive)
         {
             foreach (Anomaly anomaly in anomalyList)
             {
@@ -28,6 +28,7 @@ public class AnomalyGroup : Anomaly
                     GameEventsManager.instance.anomalyEvents.UndoAnomaly(anomaly);
                 }
             }
+            isActive = false;
         }      
     }
 }

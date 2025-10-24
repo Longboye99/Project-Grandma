@@ -7,6 +7,7 @@ public class DisplaceAnomaly : Anomaly
     Quaternion originalRotation;
     private void Start()
     {
+        playerCam = GameObject.FindGameObjectWithTag("Player");
         originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
         originalPosition = this.gameObject.transform.position;
         originalRotation = this.gameObject.transform.rotation;

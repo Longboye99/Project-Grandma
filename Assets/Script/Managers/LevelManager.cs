@@ -4,6 +4,7 @@ using TMPro;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 using System.Collections.Generic;
 using System;
+using Unity.VisualScripting;
 
 public class LevelManager : MonoBehaviour
 {
@@ -24,10 +25,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] int incenseSection;
     [SerializeField] int maxIncenseSection;
 
-    public GameObject VictoryMessage;
-    public GameObject DefeatMessage;
+    public Canvas VictoryMessage;
 
     bool isDefeated;
+    bool litIncense;
     float size;
 
 
@@ -47,34 +48,32 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         incenseSection = maxIncenseSection;
-        ProgessLoop();
+        currentLoop = 0;
+        incenseCurrentTime = 40;
+        SetIncenseSize();
         //incenseCurrentTime = incenseMaxTime;
     }
 
-    private void Update()
-    {
-        SetIncenseSize();
-
-
-        //GameManager.instance.anomalyManager.CheckEnemyEvent(currentTime);
-    }
 
     public void ProgessLoop() // call when go to sleep or die
     {
         //low incense
         incenseCurrentTime = 40;
         SetIncenseSize();
+
         //fade out anim, disable player movement
+        GameManager.instance.uiManager.TransitionOut();
+        GameManager.instance.playerManager.DisablePlayerMovement();
 
         //Check if all anomaly is cleared
-        if (GameManager.instance.anomalyManager.ActiveAnomalies.Count == 0)
+        if (GameManager.instance.anomalyManager.ActiveAnomalies.Count == 0 && litIncense == true)
         {
             currentLoop++;
             Debug.Log("Current Loop" + currentLoop);
             if (currentLoop >= maxLoop)
             {
-                VictoryMessage.SetActive(true);
-                Time.timeScale = 0;
+                Invoke("Victory", 2);
+                return;
             }
         }
         else //yes > +1 loop,   no > something
@@ -87,9 +86,25 @@ public class LevelManager : MonoBehaviour
         }
         GameManager.instance.anomalyManager.SpawnNextLoopAnomaly();
         playerObject.transform.position = respawnPoint.transform.position;
+        litIncense = false;
 
+        Invoke("WakeUp", 2);
         //fade in, enable movement
         //wake up
+    }
+
+    private void WakeUp()
+    {
+        GameManager.instance.uiManager.TransitionIn();
+        GameManager.instance.playerManager.EnablePlayerMovement();
+    }
+
+    private void Victory()
+    {
+        Time.timeScale = 0;
+        VictoryMessage.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
 
@@ -123,9 +138,11 @@ public class LevelManager : MonoBehaviour
         Debug.Log(incenseCurrentTime + "-" + incenseMaxTime);
     }
 
-    private void RefillIncense()
+    public void RefillIncense()
     {
         incenseCurrentTime = incenseMaxTime;
+        litIncense = true;
+        SetIncenseSize();
     }
 
     //----------------------------------------------------------------

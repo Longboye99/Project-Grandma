@@ -24,58 +24,178 @@ MonoBehaviour:
   serializationFormat: 0
   content:
     anomalies:
-    - Id: Tall_water_pail
-      AnomalyPoint: 20
-      Cooldown: 60
+    - Id: L_Coffin_MisplaceDate
+      AnomalyPoint: 0
+      Cooldown: 2
+      Level: Level 1
+    - Id: L_Coffin_Doll
+      AnomalyPoint: 0
+      Cooldown: 2
+      Level: Level 1
+    - Id: L_Coffin_ExtraGreen
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 1
+    - Id: L_Coffin_ExtraChair
+      AnomalyPoint: 0
+      Cooldown: 2
+      Level: Level 1
+    - Id: L_Coffin_MoreTrash
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 1
+    - Id: H_Coffin_Portrait
+      AnomalyPoint: 0
+      Cooldown: 1
       Level: Level 2
-    - Id: Water_pail
-      AnomalyPoint: 10
-      Cooldown: 30
-      Level: Level 1
-    - Id: Clothes3
-      AnomalyPoint: 10
-      Cooldown: 30
-      Level: Level 1
-    - Id: Tum_Lid
-      AnomalyPoint: 10
-      Cooldown: 30
-      Level: Level 1
-    - Id: Bathroom_Cube
-      AnomalyPoint: 10
-      Cooldown: 30
-      Level: Level 1
-    - Id: Tall_Cylinder
-      AnomalyPoint: 20
-      Cooldown: 60
+    - Id: H_Coffin_BloodyCoffin
+      AnomalyPoint: 0
+      Cooldown: 1
       Level: Level 2
-    - Id: Flat_Cylinder
-      AnomalyPoint: 10
-      Cooldown: 30
-      Level: Level 1
-    - Id: Flat_Cylinder (1)
-      AnomalyPoint: 10
-      Cooldown: 30
-      Level: Level 1
-    - Id: Orange_Cube
-      AnomalyPoint: 10
-      Cooldown: 30
-      Level: Level 1
-    - Id: Blue_Cube
-      AnomalyPoint: 20
-      Cooldown: 60
+    - Id: H_Coffin_TurningChair
+      AnomalyPoint: 0
+      Cooldown: 1
       Level: Level 2
-    - Id: Water_Bottle
-      AnomalyPoint: 10
-      Cooldown: 30
+    - Id: H_Coffin_SkullIncense
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 2
+    - Id: A_Coffin_Trampling
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 3
+    - Id: L_Kitchen_Knife
+      AnomalyPoint: 0
+      Cooldown: 2
       Level: Level 1
-    - Id: Table_Stuff (1)
-      AnomalyPoint: 10
-      Cooldown: 30
+    - Id: L_Kitchen_Doll
+      AnomalyPoint: 0
+      Cooldown: 2
       Level: Level 1
-    - Id: Table_Stuff (4)
-      AnomalyPoint: 10
-      Cooldown: 30
+    - Id: L_Kitchen_FallenDishes
+      AnomalyPoint: 0
+      Cooldown: 2
       Level: Level 1
+    - Id: L_Kitchen_MoreCondiment
+      AnomalyPoint: 0
+      Cooldown: 2
+      Level: Level 1
+    - Id: L_Kitchen_ExtraPots
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 1
+    - Id: H_Kitchen_MealPrep
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 2
+    - Id: H_Kitchen_LotsOfKnives
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 2
+    - Id: H_Kitchen_BloodyFridge
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 2
+    - Id: H_Kitchen_BloodyRoof
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 2
+    - Id: A_Kitchen_NextMeal
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 3
+    - Id: L_Storage_FallingToaster
+      AnomalyPoint: 0
+      Cooldown: 2
+      Level: Level 1
+    - Id: L_Storage_Doll
+      AnomalyPoint: 0
+      Cooldown: 2
+      Level: Level 1
+    - Id: L_Storage_Sprout
+      AnomalyPoint: 0
+      Cooldown: 2
+      Level: Level 1
+    - Id: L_Storage_ExtraSack
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 1
+    - Id: H_Storage_BloodyRoof
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 2
+    - Id: H_Storage_SackOfBodies
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 2
+    - Id: H_Storage_MoreDolls
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 2
+    - Id: A_Storage_DollGathering
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 3
+    - Id: L_Laundry_ExtraDetergent
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 1
+    - Id: L_Laundry_ExtraShirt
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 1
+    - Id: L_Laundry_DuplicatePail
+      AnomalyPoint: 0
+      Cooldown: 2
+      Level: Level 1
+    - Id: L_Laundry_SpilledWater
+      AnomalyPoint: 0
+      Cooldown: 2
+      Level: Level 1
+    - Id: H_Laundry_HangingBody
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 2
+    - Id: H_Laundry_BloodWater
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 2
+    - Id: H_Laundry_BloodyTrail
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 2
+    - Id: A_Laundry_GhostInTheWoods
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 3
+    - Id: L_Bathroom_Doll
+      AnomalyPoint: 0
+      Cooldown: 2
+      Level: Level 1
+    - Id: L_Bathroom_DiscolorPail
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 1
+    - Id: L_Bathroom_MissingLid
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 1
+    - Id: L_Bathroom_MisplaceCloth
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 1
+    - Id: H_Bathroom_Hands
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 2
+    - Id: H_Bathroom_HidingBehindWall
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 2
+    - Id: A_Bathroom_PulledIn
+      AnomalyPoint: 0
+      Cooldown: 1
+      Level: Level 3
     levelConfigs:
     - Hour: 12:00 AM
       AreaChance2: 0
@@ -138,129 +258,577 @@ MonoBehaviour:
       HeavyChance2: 0
       LightDoubleChance: 0.3
     AnomalyConfig:
-    - AnomalyId: Tall_water_pail
-      Am0: TRUE
+    - AnomalyId: L_Coffin_MisplaceDate
+      Am0: FALSE
       Am1: TRUE
-      Am2: FALSE
-      Am3: FALSE
-      Am4: FALSE
-      Am5: FALSE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
       activationTimes:
+      - FALSE
       - TRUE
       - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: L_Coffin_ExtraGreen
+      Am0: FALSE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: L_Coffin_Doll
+      Am0: FALSE
+      Am1: FALSE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
       - FALSE
       - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: L_Coffin_ExtraChair
+      Am0: FALSE
+      Am1: FALSE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
       - FALSE
       - FALSE
-    - AnomalyId: Water_pail
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: L_Coffin_MoreTrash
+      Am0: FALSE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: H_Coffin_BloodyCoffin
       Am0: FALSE
       Am1: TRUE
       Am2: FALSE
-      Am3: FALSE
+      Am3: TRUE
       Am4: FALSE
-      Am5: FALSE
+      Am5: TRUE
       activationTimes:
       - FALSE
       - TRUE
       - FALSE
-      - FALSE
-      - FALSE
-      - FALSE
-    - AnomalyId: Clothes3
-      Am0: TRUE
-      Am1: TRUE
-      Am2: FALSE
-      Am3: FALSE
-      Am4: FALSE
-      Am5: FALSE
-      activationTimes:
-      - TRUE
       - TRUE
       - FALSE
-      - FALSE
-      - FALSE
-      - FALSE
-    - AnomalyId: Flat_Cylinder
+      - TRUE
+    - AnomalyId: H_Coffin_TurningChair
       Am0: FALSE
       Am1: TRUE
       Am2: FALSE
-      Am3: FALSE
+      Am3: TRUE
       Am4: FALSE
-      Am5: FALSE
+      Am5: TRUE
       activationTimes:
       - FALSE
       - TRUE
       - FALSE
+      - TRUE
+      - FALSE
+      - TRUE
+    - AnomalyId: H_Coffin_Portrait
+      Am0: FALSE
+      Am1: FALSE
+      Am2: TRUE
+      Am3: FALSE
+      Am4: TRUE
+      Am5: FALSE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - TRUE
+      - FALSE
+      - TRUE
+      - FALSE
+    - AnomalyId: H_Coffin_SkullIncense
+      Am0: FALSE
+      Am1: FALSE
+      Am2: TRUE
+      Am3: FALSE
+      Am4: TRUE
+      Am5: FALSE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - TRUE
+      - FALSE
+      - TRUE
+      - FALSE
+    - AnomalyId: A_Coffin_Trampling
+      Am0: FALSE
+      Am1: FALSE
+      Am2: FALSE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: FALSE
+      activationTimes:
       - FALSE
       - FALSE
       - FALSE
-    - AnomalyId: Bathroom_Cube
+      - TRUE
+      - TRUE
+      - FALSE
+    - AnomalyId: L_Kitchen_Knife
+      Am0: FALSE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: L_Kitchen_Doll
+      Am0: FALSE
+      Am1: FALSE
+      Am2: TRUE
+      Am3: FALSE
+      Am4: TRUE
+      Am5: FALSE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - TRUE
+      - FALSE
+      - TRUE
+      - FALSE
+    - AnomalyId: L_Kitchen_FallenDishes
+      Am0: FALSE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: L_Kitchen_MoreCondiment
+      Am0: FALSE
+      Am1: FALSE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: L_Kitchen_ExtraPots
+      Am0: FALSE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: H_Kitchen_MealPrep
       Am0: FALSE
       Am1: TRUE
       Am2: FALSE
-      Am3: FALSE
+      Am3: TRUE
       Am4: FALSE
-      Am5: FALSE
+      Am5: TRUE
       activationTimes:
       - FALSE
       - TRUE
       - FALSE
+      - TRUE
       - FALSE
-      - FALSE
-      - FALSE
-    - AnomalyId: Water_Bottle
+      - TRUE
+    - AnomalyId: H_Kitchen_LotsOfKnives
       Am0: FALSE
       Am1: TRUE
       Am2: FALSE
-      Am3: FALSE
+      Am3: TRUE
       Am4: FALSE
-      Am5: FALSE
+      Am5: TRUE
       activationTimes:
       - FALSE
       - TRUE
       - FALSE
+      - TRUE
+      - FALSE
+      - TRUE
+    - AnomalyId: H_Kitchen_BloodyFridge
+      Am0: FALSE
+      Am1: FALSE
+      Am2: TRUE
+      Am3: FALSE
+      Am4: TRUE
+      Am5: FALSE
+      activationTimes:
       - FALSE
       - FALSE
+      - TRUE
       - FALSE
-    - AnomalyId: Table_Stuff (1)
+      - TRUE
+      - FALSE
+    - AnomalyId: H_Kitchen_BloodyRoof
+      Am0: FALSE
+      Am1: FALSE
+      Am2: TRUE
+      Am3: FALSE
+      Am4: TRUE
+      Am5: FALSE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - TRUE
+      - FALSE
+      - TRUE
+      - FALSE
+    - AnomalyId: L_Storage_FallingToaster
+      Am0: FALSE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: L_Storage_Doll
       Am0: FALSE
       Am1: TRUE
       Am2: FALSE
-      Am3: FALSE
+      Am3: TRUE
       Am4: FALSE
-      Am5: FALSE
+      Am5: TRUE
       activationTimes:
       - FALSE
       - TRUE
       - FALSE
+      - TRUE
+      - FALSE
+      - TRUE
+    - AnomalyId: L_Storage_Sprout
+      Am0: FALSE
+      Am1: FALSE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: L_Storage_ExtraSack
+      Am0: FALSE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: H_Storage_BloodyRoof
+      Am0: FALSE
+      Am1: FALSE
+      Am2: TRUE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - TRUE
+      - FALSE
+      - FALSE
+      - TRUE
+    - AnomalyId: H_Storage_SackOfBodies
+      Am0: FALSE
+      Am1: FALSE
+      Am2: TRUE
+      Am3: FALSE
+      Am4: TRUE
+      Am5: FALSE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - TRUE
+      - FALSE
+      - TRUE
+      - FALSE
+    - AnomalyId: H_Storage_MoreDolls
+      Am0: FALSE
+      Am1: FALSE
+      Am2: FALSE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: FALSE
+      activationTimes:
       - FALSE
       - FALSE
       - FALSE
-    - AnomalyId: Table_Stuff (4)
+      - TRUE
+      - TRUE
+      - FALSE
+    - AnomalyId: A_Storage_DollGathering
+      Am0: FALSE
+      Am1: FALSE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: FALSE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - TRUE
+      - TRUE
+      - FALSE
+      - TRUE
+    - AnomalyId: L_Laundry_ExtraDetergent
+      Am0: FALSE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: L_Laundry_ExtraShirt
+      Am0: FALSE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: L_Laundry_DuplicatePail
+      Am0: FALSE
+      Am1: FALSE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: L_Laundry_SpilledWater
+      Am0: FALSE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: H_Laundry_HangingBody
+      Am0: FALSE
+      Am1: FALSE
+      Am2: FALSE
+      Am3: TRUE
+      Am4: FALSE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - FALSE
+      - TRUE
+      - FALSE
+      - TRUE
+    - AnomalyId: H_Laundry_BloodWater
+      Am0: FALSE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: H_Laundry_BloodyTrail
+      Am0: FALSE
+      Am1: FALSE
+      Am2: TRUE
+      Am3: FALSE
+      Am4: TRUE
+      Am5: FALSE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - TRUE
+      - FALSE
+      - TRUE
+      - FALSE
+    - AnomalyId: L_Bathroom_Doll
+      Am0: FALSE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: L_Bathroom_DiscolorPail
+      Am0: FALSE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: L_Bathroom_MissingLid
+      Am0: FALSE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: L_Bathroom_MisplaceCloth
+      Am0: FALSE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: H_Bathroom_Hands
       Am0: FALSE
       Am1: TRUE
       Am2: FALSE
-      Am3: FALSE
+      Am3: TRUE
       Am4: FALSE
-      Am5: FALSE
+      Am5: TRUE
       activationTimes:
       - FALSE
       - TRUE
       - FALSE
+      - TRUE
       - FALSE
-      - FALSE
-      - FALSE
-    - AnomalyId: Orange_Cube
+      - TRUE
+    - AnomalyId: H_Bathroom_HidingBehindWall
       Am0: FALSE
       Am1: TRUE
+      Am2: TRUE
+      Am3: FALSE
+      Am4: TRUE
+      Am5: FALSE
+      activationTimes:
+      - FALSE
+      - TRUE
+      - TRUE
+      - FALSE
+      - TRUE
+      - FALSE
+    - AnomalyId: A_Bathroom_PulledIn
+      Am0: FALSE
+      Am1: FALSE
       Am2: FALSE
       Am3: FALSE
       Am4: FALSE
-      Am5: FALSE
+      Am5: TRUE
       activationTimes:
       - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
       - TRUE
-      - FALSE
-      - FALSE
-      - FALSE
-      - FALSE

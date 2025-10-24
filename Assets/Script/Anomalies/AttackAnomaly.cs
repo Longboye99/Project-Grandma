@@ -7,7 +7,6 @@ public class AttackAnomaly : Anomaly
 
     private GameObject spawnedGhost;
     private bool isInTransition;
-    GameObject playerCam;
 
     private void Start()
     {
@@ -60,43 +59,5 @@ public class AttackAnomaly : Anomaly
     public float CheckPlayerDist()
     {
         return Vector3.Distance(this.transform.position, playerCam.transform.position);
-    }
-
-    public bool CheckPlayerIsLooking(bool checkisLooking) //Calculate if the player is looking at the node or not
-    {
-        bool isLooking;
-
-        Vector3 dir = Vector3.Normalize(this.transform.position - playerCam.transform.position);
-        float dot = Vector3.Dot(dir, playerCam.transform.forward);
-        float dist = Vector3.Distance(transform.position, playerCam.transform.position);
-
-        if (dot >= 0.5)
-        {
-            if (Physics.Raycast(playerCam.transform.position, transform.position - playerCam.transform.position, out RaycastHit hit, dist, (1 << 7)))
-            {
-                Debug.DrawLine(playerCam.transform.position, hit.point, Color.yellow);
-                isLooking = true;
-            }
-            else
-            {
-
-                isLooking = false;
-            }
-        }
-        else
-        {
-            Debug.DrawLine(playerCam.transform.position, transform.position, Color.red);
-
-            isLooking = true;
-        }
-
-        if (checkisLooking)
-        {
-            return !isLooking;
-        }
-        else
-        {
-            return isLooking;
-        }
     }
 }

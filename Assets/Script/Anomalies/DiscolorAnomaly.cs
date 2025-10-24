@@ -6,6 +6,7 @@ public class DiscolorAnomaly : Anomaly
 
     private void Start()
     {
+        playerCam = GameObject.FindGameObjectWithTag("Player");
         originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
     }
 

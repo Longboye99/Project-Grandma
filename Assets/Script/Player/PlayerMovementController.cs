@@ -8,6 +8,7 @@ public class PlayerMovementController : MonoBehaviour
     public float groundDrag;
     public float maxSlopeAngle;
     public RaycastHit slopeHit;
+    public float curSpeed;
 
     public bool onSlope;
     public float angle;
@@ -52,7 +53,7 @@ public class PlayerMovementController : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
-        
+        curSpeed = rb.linearVelocity.magnitude;
     }
 
     private void MovePlayer()
