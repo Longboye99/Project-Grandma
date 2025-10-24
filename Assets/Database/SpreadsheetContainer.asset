@@ -78,8 +78,8 @@ MonoBehaviour:
       Level: Level 1
     levelConfigs:
     - Hour: 12:00 AM
-      AreaChance2: 0.8
-      AreaChance3: 0.2
+      AreaChance2: 0
+      AreaChance3: 0
       AreaChance4: 0
       AreaChance5: 0
       AttackChance: 0
@@ -88,8 +88,8 @@ MonoBehaviour:
       HeavyChance2: 0
       LightDoubleChance: 0
     - Hour: 1:00 AM
-      AreaChance2: 0.7
-      AreaChance3: 0.3
+      AreaChance2: 0.8
+      AreaChance3: 0.2
       AreaChance4: 0
       AreaChance5: 0
       AttackChance: 0

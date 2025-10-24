@@ -3,6 +3,10 @@ using UnityEngine;
 public class DisappearingAnomaly : Anomaly
 {
     //Anomaly class for anomalies that make objects disappear
+    private void Start()
+    {
+        originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
+    }
 
     public override void TriggerAnomaly()
     {

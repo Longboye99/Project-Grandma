@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class DiscolorAnomaly : Anomaly
 {
-    public Material originalMaterial;
     public Material discolorMaterial;
 
     private void Start()

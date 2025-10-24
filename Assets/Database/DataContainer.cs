@@ -9,7 +9,7 @@ namespace Game.Database
     [Serializable]
     public class SpreadsheetContent
     {
-        [SpreadsheetPage("Test Data")]
+        [SpreadsheetPage("Anomaly Data")]
         public List<AnomalyData> anomalies;
         [SpreadsheetPage("Night0 LevelConfig")]
         public List<LevelData> levelConfigs;

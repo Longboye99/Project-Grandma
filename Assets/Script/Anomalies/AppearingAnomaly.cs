@@ -6,6 +6,7 @@ public class AppearingAnomaly : Anomaly
     {
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<Collider>().enabled = false;
+        originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
     }
 
     public override void TriggerAnomaly()

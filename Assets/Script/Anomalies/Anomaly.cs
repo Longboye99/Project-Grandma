@@ -14,7 +14,14 @@ public abstract class Anomaly: MonoBehaviour
     public bool isEnabled = false;
     public bool isActive;
     public int currentAnomalyPoint;
-    
+
+    [Header("Debug")]
+    protected Material originalMaterial;
+    protected Material currentMaterial;
+    protected bool currentMeshActive;
+    public Material highlightMaterial;
+    protected bool isHighlighted = false;
+
 
     public void Initialize(AnomalyData data)
     {
@@ -57,11 +64,13 @@ public abstract class Anomaly: MonoBehaviour
     private void OnEnable()
     {
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly += UndoAnomaly;
+        GameEventsManager.instance.debugEvents.onPressHighlight += PressHighlight;
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly -= UndoAnomaly;
+        GameEventsManager.instance.debugEvents.onPressHighlight -= PressHighlight;
     }
 
     public abstract void TriggerAnomaly();
@@ -92,5 +101,28 @@ public abstract class Anomaly: MonoBehaviour
     public void ActivateAllAnomalies()
     {
         TriggerAnomaly();
+    }
+
+    public void PressHighlight()
+    {
+        if (!isHighlighted && isActive)
+        {
+            isHighlighted = true;
+            currentMeshActive = GetComponent<MeshRenderer>().enabled;
+            if (!currentMeshActive)
+            {
+                gameObject.GetComponent<MeshRenderer>().enabled = true;
+            }
+
+            currentMaterial = GetComponent<MeshRenderer>().material;
+            gameObject.GetComponent<MeshRenderer>().material = highlightMaterial;
+        }
+        else if (isHighlighted)
+        {
+            isHighlighted = false;
+            gameObject.GetComponent<MeshRenderer>().material = currentMaterial;
+            gameObject.GetComponent<MeshRenderer>().enabled = currentMeshActive;
+            Debug.Log(this.gameObject.name + "mesh state was : " + currentMeshActive);
+        }
     }
 }
