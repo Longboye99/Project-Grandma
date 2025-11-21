@@ -9,6 +9,7 @@ public class AnomalyGroup : Anomaly
 
     public override void TriggerAnomaly()
     {
+        Debug.Log("Trigger Anomaly Group: " + this.name);
         foreach (Anomaly anomaly in anomalyList)
         {
             anomaly.TriggerAnomaly();
@@ -29,6 +30,8 @@ public class AnomalyGroup : Anomaly
                 }
             }
             isActive = false;
+            currentAnomalyPoint = 0;
+            CurrentCooldown = cooldown;
         }      
     }
 }

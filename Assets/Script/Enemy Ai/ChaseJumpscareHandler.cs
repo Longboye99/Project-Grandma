@@ -69,7 +69,7 @@ public class ChaseJumpscareHandler : MonoBehaviour
     public void StartJumpscare(int sec)
     {
         Invoke("DoJumpscare", sec);
-        GameManager.instance.sfxManager.PlaySoundFXClip(noticeAudio, this.transform, 0.8f);
+        GameManager.instance.sfxManager.PlaySoundFXClip(noticeAudio, this.transform, 0.4f);
     }
 
     private void DoJumpscare()
@@ -92,7 +92,7 @@ public class ChaseJumpscareHandler : MonoBehaviour
         }
         else if(name == "FinishJumpscare")
         {
-            GameManager.instance.levelManager.ProgessLoop();
+            GameManager.instance.levelManager.FinishedDefeatAnim();
 
             Invoke("ExitJumpscare", 1.5f);
         }

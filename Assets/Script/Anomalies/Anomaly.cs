@@ -9,11 +9,13 @@ public abstract class Anomaly: MonoBehaviour
     public AnomalyEnum anomalyLevel;
     public AreaEnum area;
     public int anomalyPoint;
+    public int cooldown = 10;
 
     [Header("Anomaly State")]
     public bool isEnabled = false;
     public bool isActive;
     public int currentAnomalyPoint;
+    public float CurrentCooldown;
 
     [Header("Debug")]
     protected Material originalMaterial;
@@ -64,6 +66,7 @@ public abstract class Anomaly: MonoBehaviour
 
     private void OnEnable()
     {
+        playerCam = GameObject.FindGameObjectWithTag("Player");
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly += UndoAnomaly;
         GameEventsManager.instance.debugEvents.onPressHighlight += PressHighlight;
     }
@@ -72,6 +75,26 @@ public abstract class Anomaly: MonoBehaviour
     {
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly -= UndoAnomaly;
         GameEventsManager.instance.debugEvents.onPressHighlight -= PressHighlight;
+    }
+
+    protected void Update()
+    {
+        if (CurrentCooldown > 0 && isEnabled) //Counting down the cooldown
+        {
+            CurrentCooldown -= Time.deltaTime;
+        }
+    }
+    public bool SpawnAnomaly()
+    {
+        if (CurrentCooldown <= 0 && isEnabled && CheckPlayerIsLooking(false)) //Check if not in cooldown and not already actived
+        {
+            TriggerAnomaly();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public abstract void TriggerAnomaly();

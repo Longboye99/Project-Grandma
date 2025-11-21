@@ -25,13 +25,14 @@ public class AnomalySequence : Anomaly
             return;
         }
         if (anomaly == anomalyList[index] && isActive)
-        {               
-            currentAnomalyPoint = 0;
-            isActive = false;
+        {                        
             index++;
             if( index >= anomalyList.Count)
             {
                 index = 0;
+                CurrentCooldown = cooldown;
+                currentAnomalyPoint = 0;
+                isActive = false;
             }
             else
             {
@@ -46,7 +47,6 @@ public class AnomalySequence : Anomaly
         {
             anomalyList[index].TriggerAnomaly();
             isActive = true;
-            currentAnomalyPoint = anomalyPoint;
         }
     }
 }

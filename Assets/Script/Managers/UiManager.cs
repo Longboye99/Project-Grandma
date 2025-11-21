@@ -16,7 +16,11 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI timeDisplay;
     public TextMeshProUGUI anomalyPointDisplay;
 
-    float currentLoop;
+    int hour;
+    int minute;
+    float currentTime;
+    float midnightTime;
+
     bool isPaused;
 
 
@@ -113,8 +117,13 @@ public class UiManager : MonoBehaviour
 
     private void DisplayTime()
     {
-        currentLoop = GameManager.instance.levelManager.currentLoop;
-        timeDisplay.text = "0" + currentLoop.ToString() + ":"+"00";
+        currentTime = GameManager.instance.levelManager.currentTime;
+
+        hour = (int)Math.Floor(currentTime / 60);
+        minute = (int)Math.Floor(currentTime % 60 / 10);
+
+        timeDisplay.text = "0" + hour.ToString() + " : " + minute.ToString() + "0";
+
     }
 
     public void TransitionIn()

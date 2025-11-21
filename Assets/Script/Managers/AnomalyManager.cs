@@ -11,29 +11,21 @@ public class AnomalyManager : MonoBehaviour
 
     [Header("State")]
     public int anomalyPoint;
+    public float currentTime;
+    public float finishTime;
     public AreaEnum currentArea;
+
     bool hasJumpscared;
     [SerializeField] AttackAnomaly jumpscare;
 
-    [Header("Anomaly Spawning Chance")]
-    [SerializeField] float AreaChance2;
-    [SerializeField] float AreaChance3;
-    [SerializeField] float AreaChance4;
-    [SerializeField] float AreaChance5;
-
-    [SerializeField] float AttackChance;
-    [SerializeField] float HeavyChance0;
-    [SerializeField] float HeavyChance1;
-    [SerializeField] float HeavyChance2;
-    [SerializeField] float LightDoubleChance;
-
-
     [Header("Enemy Event")]
+    [SerializeField] TestEnemy2 enemy;
     public List<LevelData> timedLevelUpdate;
     public List<LevelAnomalyData> timedAnomalyUpdate;
+    int eventIndex = 0;
+    float nextEventTime;
 
-
-
+    int spawningTries = 4;
 
     Anomaly[] AllAnomalies;
     public Dictionary<AreaEnum, AreaAnomaly> dict = new Dictionary<AreaEnum, AreaAnomaly>();
@@ -60,40 +52,53 @@ public class AnomalyManager : MonoBehaviour
         foreach (LevelAnomalyData data in timedAnomalyUpdate)
         {
             data.CreateList();
-            Debug.Log("Created Data list:" + data.AnomalyId);
+            //Debug.Log("Created Data list:" + data.AnomalyId);
         }
     }
 
+    /*
     public void SpawnNextLoopAnomaly()
     {
         CheckEnemyEvent();
         ResetAvailableAnomalyLists();
         SpawnAnomaly();
+    }*/
+
+    public void CheckEnemyEvent(float currentTime)
+    {  
+        if (timedLevelUpdate[eventIndex] != null)
+        {
+            if (nextEventTime <= currentTime)
+            {
+                UpdateLevelData(timedLevelUpdate[eventIndex]);//Update enemy Ai 
+                UpdateAnomaliesData(eventIndex);
+                eventIndex++;
+                nextEventTime = timedLevelUpdate[eventIndex].Time;
+                Debug.Log("Change enemy AI at time: " + currentTime);
+                Debug.Log("Next enemy AI Update at: " + nextEventTime);
+            }
+        }
     }
 
-    private void CheckEnemyEvent()
-    {  
-        int currentLoop = GameManager.instance.levelManager.currentLoop;
-        if(timedLevelUpdate[currentLoop] != null)
+    public int TallyAnomalyPoint() //Loop through all anomalies connected to this node and sum up the anomaly point
+    {
+        anomalyPoint = 0;
+        foreach (Anomaly anomaly in ActiveAnomalies)
         {
-            UpdateLevelData(timedLevelUpdate[currentLoop]);
-            UpdateAnomaliesData(currentLoop);
-            Debug.Log("Change enemy AI at time: " + currentLoop);
+            anomalyPoint += anomaly.anomalyPoint;
         }
+        return anomalyPoint;
     }
 
     private void UpdateLevelData(LevelData data)
     {
-        AreaChance2 = data.AreaChance2;
-        AreaChance3 = data.AreaChance3;
-        AreaChance4 = data.AreaChance4;
-        AreaChance5 = data.AreaChance5;
+        enemy.difficultyLevel = data.Difficulty;
+        enemy.cooldownDuration = data.ActiveInterval;
+        enemy.lightAnomalyThreshold = data.LightAnomalyThreshold;
+        enemy.heavyAnomalyThreashold = data.HeavyAnomalyThreshold;
 
-        AttackChance = data.AttackChance;
-        HeavyChance0 = data.HeavyChance0;
-        HeavyChance1 = data.HeavyChance1;
-        HeavyChance2 = data.HeavyChance2;
-        LightDoubleChance = data.LightDoubleChance;
+        GameManager.instance.levelManager.incenseSpeed = data.IncenseDrainSpeed;
+        GameManager.instance.levelManager.timeSpeed = data.TimeScale;
     }
 
     private void UpdateAnomaliesData(int index)
@@ -105,11 +110,84 @@ public class AnomalyManager : MonoBehaviour
             {
                 string newAnomalyState = data.activationTimes[index];
                 anomaly.SetAnomalyEnabled(newAnomalyState);
-                Debug.Log("Update Anomaly Data of Loop: " + index + " | " + anomaly.name + " : " +  newAnomalyState);
+                //Debug.Log("Update Anomaly Data of Loop: " + index + " | " + anomaly.name + " : " +  newAnomalyState);
             }
         }
     }
 
+    public bool SpawnRandomLightAnomaly()//Randomly trigger a light anomaly
+    {
+        AreaAnomaly targetArea;
+        int random;
+
+        for (int i = 0; i < spawningTries; i++)
+        {
+            targetArea = RandomSpawnArea(1)[0];
+
+            if (targetArea.lightAnomalies.Count > 0)
+            {
+                random = Random.Range(0, targetArea.lightAnomalies.Count);
+                if (targetArea.lightAnomalies[random].SpawnAnomaly() == true)
+                {
+                    GameEventsManager.instance.anomalyEvents.TriggerLightAnomaly();
+                    ActiveAnomalies.Add(targetArea.lightAnomalies[random]);
+                    targetArea.lightAnomalies.RemoveAt(random);
+                    return true;
+                }
+            }
+        }
+
+        Debug.Log("Failed to Spawn Light Anomaly");
+        return false;
+    }
+
+    public bool SpawnRandomHeavyAnomaly()//Randomly trigger a Heavy anomaly
+    {
+        AreaAnomaly targetArea;
+        int random;
+
+        for (int i = 0; i < spawningTries; i++)
+        {
+            targetArea = RandomSpawnArea(1)[0];
+
+            if (targetArea.heavyAnomalies.Count > 0)
+            {
+                random = Random.Range(0, targetArea.heavyAnomalies.Count);
+                if (targetArea.heavyAnomalies[random].SpawnAnomaly() == true)
+                {
+                    GameEventsManager.instance.anomalyEvents.TriggerHeavyAnomaly();
+                    ActiveAnomalies.Add(targetArea.heavyAnomalies[random]);
+                    targetArea.heavyAnomalies.RemoveAt(random);
+                    return true;
+                }
+            }
+        }
+        Debug.Log("Failed to Spawn Heavy Anomaly");
+        return false;
+    }
+
+    public bool SpawnRandomAttackAnomaly()//Randomly trigger an attack anomaly
+    {
+        AreaAnomaly targetArea = dict[currentArea];
+
+        for (int i = 0; i < spawningTries; i++)
+        {
+            int random = Random.Range(0, targetArea.attackAnomalies.Count);
+            if (targetArea.attackAnomalies.Count > 0)
+            {
+                if (targetArea.attackAnomalies[random].SpawnAnomaly() == true)
+                {
+                    GameEventsManager.instance.anomalyEvents.TriggerAttackAnomaly();
+                    ActiveAnomalies.Add(targetArea.attackAnomalies[random]);
+                    targetArea.attackAnomalies.RemoveAt(random);
+                    return true;
+                }
+            }
+        }
+        Debug.Log("Failed to Spawn Attack Anomaly");
+        return false;
+    }
+    /*
     private void SpawnAnomaly()
     {
         if(AreaChance2 + AreaChance3 + AreaChance4 + AreaChance5 == 0)
@@ -131,7 +209,7 @@ public class AnomalyManager : MonoBehaviour
         //if attack anomaly spawn
         int rnd;
         int randomAttack = Random.Range(0, 100);
-        /*if(randomAttack <= AttackChance * 100 )
+        if(randomAttack <= AttackChance * 100 )
         {
             //where attack anomaly
 
@@ -151,7 +229,7 @@ public class AnomalyManager : MonoBehaviour
             ActiveAnomalies.Add(targetArea.attackAnomalies[rnd]);
             targetArea.attackAnomalies.RemoveAt(rnd);
 
-        }*/
+        }
 
         if(GameManager.instance.levelManager.currentLoop == 3 && !hasJumpscared)
         {
@@ -222,7 +300,7 @@ public class AnomalyManager : MonoBehaviour
         }
         
     }
-
+        */
     private void UndoAnomaly(Anomaly anomaly)
     {
         if (!ActiveAnomalies.Contains(anomaly))
@@ -326,7 +404,7 @@ public class AnomalyManager : MonoBehaviour
             if(area.Value.lightAnomalies.Count > 0 || area.Value.lightAnomalies.Count > 0 || area.Value.attackAnomalies.Count > 0 || area.Value.areaEnum != AreaEnum.Default)
             {
                 availableArea.Add(area.Value);
-                Debug.Log("Available Area :" + area.Value.areaEnum.ToString());
+                //Debug.Log("Available Area :" + area.Value.areaEnum.ToString());
 
             }
             /*availableArea.Add(area.Value);

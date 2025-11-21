@@ -7,11 +7,6 @@ public class TurningAnomaly : Anomaly
     [SerializeField] AreaEnum playerArea;
     [SerializeField] bool isInArea;
 
-    private void Start()
-    {
-        playerArea = GameManager.instance.anomalyManager.currentArea;
-    }
-
     private void FixedUpdate()
     {
         playerArea = GameManager.instance.anomalyManager.currentArea;
@@ -33,7 +28,6 @@ public class TurningAnomaly : Anomaly
                 transform.eulerAngles = transform.eulerAngles + new Vector3(0, turningOffset, 0);
             }
             //turning
-
         }
     }
 
@@ -41,6 +35,8 @@ public class TurningAnomaly : Anomaly
     {
         isActive = true;
         currentAnomalyPoint = anomalyPoint;
+        CurrentCooldown = cooldown;
+        Debug.Log("Trigger Turning Anomaly: " + this.name);
     }
 
     public override void UndoAnomaly(Anomaly targetAnomaly)
@@ -49,6 +45,7 @@ public class TurningAnomaly : Anomaly
         {
             isActive = false;
             currentAnomalyPoint = 0;
+            CurrentCooldown = 0;
         }
     }
 }

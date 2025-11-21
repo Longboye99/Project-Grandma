@@ -8,12 +8,6 @@ public class AttackAnomaly : Anomaly
     private ChaseJumpscareHandler spawnedGhost;
     private bool isInTransition;
 
-    private void Start()
-    {
-        playerCam = GameObject.FindGameObjectWithTag("Player");
-
-    }
-
     private void FixedUpdate()
     {
         if (isActive)
@@ -50,6 +44,7 @@ public class AttackAnomaly : Anomaly
         {
             isActive = false;
             isInTransition = false;
+            CurrentCooldown = cooldown;
             Destroy(spawnedGhost);
             GameEventsManager.instance.anomalyEvents.UndoAnomaly(this);
         }

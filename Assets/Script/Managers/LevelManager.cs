@@ -9,9 +9,9 @@ using Unity.VisualScripting;
 public class LevelManager : MonoBehaviour
 {
     [Header("Level Config")]
-    public int currentLoop = -1;
-    public int maxLoop = 6;
     public float currentTime;
+    public float midnightTime = 120;
+    public float finishTime = 360;
     public float timeSpeed = 1;
     public float incenseSpeed = 1;
 
@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] int maxIncenseSection;
 
     public Canvas VictoryMessage;
+    public Canvas DefeatMessage;
 
     bool isDefeated;
     bool litIncense;
@@ -35,27 +36,58 @@ public class LevelManager : MonoBehaviour
     private void OnEnable()
     {
         GameEventsManager.instance.playerEvents.onRefillIncense += RefillIncense;
-        GameEventsManager.instance.playerEvents.onProgessLoop += ProgessLoop;
         GameEventsManager.instance.anomalyEvents.onSnapIncense += SnapIncense;
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.playerEvents.onRefillIncense -= RefillIncense;
-        GameEventsManager.instance.playerEvents.onProgessLoop -= ProgessLoop;
         GameEventsManager.instance.anomalyEvents.onSnapIncense -= SnapIncense;
     }
     private void Start()
     {
         incenseSection = maxIncenseSection;
-        currentLoop = 0;
-        incenseCurrentTime = 40;
+
+    }
+    private void Update()
+    {
+        UpdateTime();
         SetIncenseSize();
-        //incenseCurrentTime = incenseMaxTime;
+        CheckVictory();
+        CheckDefeat();
+
+        GameManager.instance.anomalyManager.CheckEnemyEvent(currentTime);
+        GameManager.instance.anomalyManager.TallyAnomalyPoint();
     }
 
+    private void CheckVictory()
+    {
+        if (currentTime >= finishTime)
+        {
+            Time.timeScale = 0;
+            VictoryMessage.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
-    public void ProgessLoop() // call when go to sleep or die
+    }
+    private void CheckDefeat()
+    {
+        if (incenseCurrentTime <= 0 && !isDefeated)
+        {
+            isDefeated = true;
+            timeSpeed = 0;
+            GameEventsManager.instance.levelEvents.PlayerDefeated();
+        }
+    }
+
+    public void FinishedDefeatAnim()
+    {
+        DefeatMessage.gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    /*public void ProgessLoop() // call when go to sleep or die
     {
         //low incense
         incenseCurrentTime = 40;
@@ -91,23 +123,15 @@ public class LevelManager : MonoBehaviour
         //fade in, enable movement
         //wake up
     }
-
+    */
+    /*
     private void WakeUp()
     {
         GameManager.instance.anomalyManager.SpawnNextLoopAnomaly();
         GameManager.instance.uiManager.TransitionIn();
         GameManager.instance.playerManager.EnablePlayerMovement();
     }
-
-    private void Victory()
-    {
-        Time.timeScale = 0;
-        VictoryMessage.gameObject.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
-
-
+    */
     private void UpdateTime()
     { 
         currentTime += Time.deltaTime * timeSpeed;
@@ -147,30 +171,8 @@ public class LevelManager : MonoBehaviour
 
     //----------------------------------------------------------------
 
-    /*private void CheckVictory()
-{
-    if (currentTime >= finishTime)
-    {
-        VictoryMessage.SetActive(true);
-        Time.timeScale = 0;
-    }
-}
-private void CheckDefeat()
-{
-    if (incenseCurrentTime <= 0 && !isDefeated)
-    {
-        isDefeated = true;
-        timeSpeed = 0;
-        GameEventsManager.instance.levelEvents.PlayerDefeated();
-    }
-}
+    
 
-public void FinishedDefeatAnim()
-{
-    DefeatMessage.SetActive(true);
-    Time.timeScale = 0;
-}
-*/
 
 
 

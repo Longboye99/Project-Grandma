@@ -198,65 +198,53 @@ MonoBehaviour:
       Level: Level 3
     levelConfigs:
     - Hour: 12:00 AM
-      AreaChance2: 0
-      AreaChance3: 0
-      AreaChance4: 0
-      AreaChance5: 0
-      AttackChance: 0
-      HeavyChance0: 1
-      HeavyChance1: 0
-      HeavyChance2: 0
-      LightDoubleChance: 0
+      Time: 0
+      Difficulty: 15
+      ActiveInterval: 10
+      LightAnomalyThreshold: 50
+      HeavyAnomalyThreshold: 100
+      IncenseDrainSpeed: 1
+      TimeScale: 1
     - Hour: 1:00 AM
-      AreaChance2: 0.8
-      AreaChance3: 0.2
-      AreaChance4: 0
-      AreaChance5: 0
-      AttackChance: 0
-      HeavyChance0: 0
-      HeavyChance1: 1
-      HeavyChance2: 0
-      LightDoubleChance: 0
+      Time: 60
+      Difficulty: 15
+      ActiveInterval: 10
+      LightAnomalyThreshold: 50
+      HeavyAnomalyThreshold: 100
+      IncenseDrainSpeed: 1
+      TimeScale: 1
     - Hour: 2:00 AM
-      AreaChance2: 0.5
-      AreaChance3: 0.5
-      AreaChance4: 0
-      AreaChance5: 0
-      AttackChance: 0
-      HeavyChance0: 1
-      HeavyChance1: 0
-      HeavyChance2: 0
-      LightDoubleChance: 0
+      Time: 120
+      Difficulty: 15
+      ActiveInterval: 10
+      LightAnomalyThreshold: 50
+      HeavyAnomalyThreshold: 100
+      IncenseDrainSpeed: 1
+      TimeScale: 1
     - Hour: 3:00 AM
-      AreaChance2: 0.7
-      AreaChance3: 0.3
-      AreaChance4: 0
-      AreaChance5: 0
-      AttackChance: 1
-      HeavyChance0: 1
-      HeavyChance1: 0
-      HeavyChance2: 0
-      LightDoubleChance: 0
+      Time: 180
+      Difficulty: 15
+      ActiveInterval: 10
+      LightAnomalyThreshold: 50
+      HeavyAnomalyThreshold: 100
+      IncenseDrainSpeed: 1
+      TimeScale: 1
     - Hour: 4:00 AM
-      AreaChance2: 0.2
-      AreaChance3: 0.8
-      AreaChance4: 0
-      AreaChance5: 0
-      AttackChance: 0
-      HeavyChance0: 1
-      HeavyChance1: 0
-      HeavyChance2: 0
-      LightDoubleChance: 0.1
+      Time: 240
+      Difficulty: 15
+      ActiveInterval: 10
+      LightAnomalyThreshold: 50
+      HeavyAnomalyThreshold: 100
+      IncenseDrainSpeed: 1.1
+      TimeScale: 0.9
     - Hour: 5:00 AM
-      AreaChance2: 0.1
-      AreaChance3: 0.8
-      AreaChance4: 0.1
-      AreaChance5: 0
-      AttackChance: 0.1
-      HeavyChance0: 0.7
-      HeavyChance1: 0.3
-      HeavyChance2: 0
-      LightDoubleChance: 0.3
+      Time: 300
+      Difficulty: 15
+      ActiveInterval: 10
+      LightAnomalyThreshold: 50
+      HeavyAnomalyThreshold: 100
+      IncenseDrainSpeed: 1.1
+      TimeScale: 0.8
     AnomalyConfig:
     - AnomalyId: L_Coffin_MisplaceDate
       Am0: FALSE

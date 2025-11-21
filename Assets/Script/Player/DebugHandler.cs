@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class DebugHandler : MonoBehaviour
 {
+    [SerializeField] GameObject text;
+    bool isActive;
     void Update()
     {
         HandleDebugToggles();
@@ -39,6 +41,14 @@ public class DebugHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             GameManager.instance.levelManager.RefillIncense();
+        }
+    }
+
+    private void AnomalyCount()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            text.SetActive(!isActive);
         }
     }
 }

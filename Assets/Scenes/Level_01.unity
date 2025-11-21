@@ -622,9 +622,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 1
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!1001 &27234127
 PrefabInstance:
@@ -926,9 +928,11 @@ MonoBehaviour:
   anomalyLevel: 1
   area: 5
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 0}
   anomalyList:
   - {fileID: 1531973859}
@@ -1418,9 +1422,11 @@ MonoBehaviour:
   anomalyLevel: 3
   area: 0
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &48740904
 BoxCollider:
@@ -1501,6 +1507,60 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4652228008994145897, guid: dbabfafad335f4e47a9648fe6d6343da, type: 3}
   m_PrefabInstance: {fileID: 954072168}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &78606233
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 78606235}
+  - component: {fileID: 78606234}
+  m_Layer: 0
+  m_Name: TestEnemy2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &78606234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78606233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92af0c513ec46aa45ba7e395d2be6f83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  difficultyLevel: 0
+  lightAnomalyThreshold: 0
+  heavyAnomalyThreashold: 0
+  cooldownDuration: 0
+  graceDuration: 0
+  ghostPrefab: {fileID: 4716946634943998657, guid: afe0070eaaaa49b4783d0d7e67510f0a, type: 3}
+  currentCooldown: 10
+  currentGrace: 0
+  isAttacking: 0
+  anomalyPoint: 0
+--- !u!4 &78606235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78606233}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.85, y: 1.9, z: 6.12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &79062222
 GameObject:
   m_ObjectHideFlags: 0
@@ -2082,9 +2142,11 @@ MonoBehaviour:
   anomalyLevel: 3
   area: 0
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &112976082
 BoxCollider:
@@ -2411,9 +2473,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 2
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &146053664
 BoxCollider:
@@ -2990,9 +3054,11 @@ MonoBehaviour:
   anomalyLevel: 1
   area: 1
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &193931069
 BoxCollider:
@@ -3191,9 +3257,11 @@ MonoBehaviour:
   anomalyLevel: 3
   area: 0
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &227760056
 BoxCollider:
@@ -3399,9 +3467,11 @@ MonoBehaviour:
   anomalyLevel: 1
   area: 1
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 0}
   idleGhost: {fileID: 903679328}
   despawnDelay: 2
@@ -3520,9 +3590,11 @@ MonoBehaviour:
   anomalyLevel: 3
   area: 0
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &297355135
 BoxCollider:
@@ -4186,17 +4258,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DataContainer: {fileID: 11400000, guid: 9a660badbd5f4b141a92565bc63fd9e0, type: 2}
   anomalyPoint: 0
+  currentTime: 0
+  finishTime: 0
   currentArea: 0
   jumpscare: {fileID: 1975289639}
-  AreaChance2: 0
-  AreaChance3: 0
-  AreaChance4: 0
-  AreaChance5: 0
-  AttackChance: 0
-  HeavyChance0: 0
-  HeavyChance1: 0
-  HeavyChance2: 0
-  LightDoubleChance: 0
+  enemy: {fileID: 78606234}
   timedLevelUpdate: []
   timedAnomalyUpdate: []
   ActiveAnomalies: []
@@ -4891,9 +4957,11 @@ MonoBehaviour:
   anomalyLevel: 1
   area: 2
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &410060026
 BoxCollider:
@@ -4963,9 +5031,11 @@ MonoBehaviour:
   anomalyLevel: 1
   area: 3
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
   discolorMaterial: {fileID: 2100000, guid: 304691a9b5719054f869e06b4a992cf2, type: 2}
 --- !u!1001 &415882143
@@ -5630,9 +5700,11 @@ MonoBehaviour:
   anomalyLevel: 3
   area: 0
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &445449111
 BoxCollider:
@@ -6689,9 +6761,11 @@ MonoBehaviour:
   anomalyLevel: 3
   area: 0
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &542686226
 BoxCollider:
@@ -6960,9 +7034,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f345889d458d9f44fb7d431015932d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLoop: -1
-  maxLoop: 6
   currentTime: 0
+  midnightTime: 120
+  finishTime: 360
   timeSpeed: 1
   incenseSpeed: 3.31
   respawnPoint: {fileID: 1710545434}
@@ -6973,6 +7047,7 @@ MonoBehaviour:
   incenseSection: 2
   maxIncenseSection: 2
   VictoryMessage: {fileID: 16108830}
+  DefeatMessage: {fileID: 0}
 --- !u!4 &548395246
 Transform:
   m_ObjectHideFlags: 0
@@ -9001,9 +9076,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 3
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!1001 &759947183
 PrefabInstance:
@@ -9656,8 +9733,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4289244335
-  m_fontColor: {r: 0.6862745, g: 0.6745098, b: 0.65882355, a: 1}
+    rgba: 4281151655
+  m_fontColor: {r: 0.65524536, g: 0.1895159, b: 0.17807838, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9674,8 +9751,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30.11
+  m_fontSizeBase: 30.11
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10017,9 +10094,11 @@ MonoBehaviour:
   anomalyLevel: 1
   area: 4
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
   discolorMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!1001 &837299889
@@ -10995,9 +11074,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 1
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
   newTransform: {fileID: 459519507}
 --- !u!1001 &915406333
@@ -12755,9 +12836,11 @@ MonoBehaviour:
   anomalyLevel: 1
   area: 3
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!1001 &1024600405
 PrefabInstance:
@@ -14281,6 +14364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72cdec52c9ce8e947942c4f0e078a64b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 811140590}
 --- !u!1001 &1128318128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14652,9 +14736,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 5
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
   newTransform: {fileID: 1461378076}
 --- !u!65 &1151411651
@@ -14807,9 +14893,11 @@ MonoBehaviour:
   anomalyLevel: 1
   area: 2
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 0}
   anomalyList:
   - {fileID: 445449110}
@@ -15888,9 +15976,11 @@ MonoBehaviour:
   anomalyLevel: 3
   area: 0
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &1265877260
 BoxCollider:
@@ -16763,9 +16853,11 @@ MonoBehaviour:
   anomalyLevel: 1
   area: 4
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &1332577844
 BoxCollider:
@@ -18028,9 +18120,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 3
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
   newTransform: {fileID: 218493731}
 --- !u!65 &1467195565
@@ -18281,9 +18375,11 @@ MonoBehaviour:
   anomalyLevel: 3
   area: 0
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &1475284322
 BoxCollider:
@@ -18721,9 +18817,11 @@ MonoBehaviour:
   anomalyLevel: 1
   area: 3
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &1500283988
 BoxCollider:
@@ -19061,9 +19159,11 @@ MonoBehaviour:
   anomalyLevel: 3
   area: 0
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &1531973860
 BoxCollider:
@@ -19799,9 +19899,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 4
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!4 &1605253196 stripped
 Transform:
@@ -20340,6 +20442,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4343586772682971061, guid: 511da2e44f8b9f547a29be5a13cb778b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8796494641392861676}
+    - targetCorrespondingSourceObject: {fileID: 4343586772682971061, guid: 511da2e44f8b9f547a29be5a13cb778b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8796494641392861677}
   m_SourcePrefab: {fileID: 100100000, guid: 511da2e44f8b9f547a29be5a13cb778b, type: 3}
 --- !u!1 &1656474186
 GameObject:
@@ -20817,9 +20922,11 @@ MonoBehaviour:
   anomalyLevel: 3
   area: 0
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &1691984073
 BoxCollider:
@@ -21017,9 +21124,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 3
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &1698978088
 BoxCollider:
@@ -22540,9 +22649,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 2
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!23 &1850884751
 MeshRenderer:
@@ -22937,9 +23048,11 @@ MonoBehaviour:
   anomalyLevel: 1
   area: 5
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &1860034000
 BoxCollider:
@@ -23155,9 +23268,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 1
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!1001 &1884985346
 PrefabInstance:
@@ -23371,9 +23486,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 4
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!4 &1902905462 stripped
 Transform:
@@ -23616,9 +23733,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 0
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
   newTransform: {fileID: 659286807}
 --- !u!65 &1909472068
@@ -24222,9 +24341,11 @@ MonoBehaviour:
   anomalyLevel: 3
   area: 0
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 0}
   idleGhost: {fileID: 4716946634943998657, guid: afe0070eaaaa49b4783d0d7e67510f0a, type: 3}
   despawnDelay: 0
@@ -24456,9 +24577,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 5
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &1977149265
 BoxCollider:
@@ -25222,9 +25345,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 5
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!1 &2025862042
 GameObject:
@@ -25451,9 +25576,11 @@ MonoBehaviour:
   anomalyLevel: 1
   area: 5
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &2045478405
 BoxCollider:
@@ -26343,9 +26470,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 4
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!4 &2113685476 stripped
 Transform:
@@ -26402,9 +26531,11 @@ MonoBehaviour:
   anomalyLevel: 1
   area: 5
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
   anomalyList:
   - {fileID: 5939726348909473503}
@@ -27232,9 +27363,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 3
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!1001 &683299004275326534
 PrefabInstance:
@@ -27362,9 +27495,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 5
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!1 &1097683907357788155
 GameObject:
@@ -27577,9 +27712,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 2
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &2055522455904446392
 BoxCollider:
@@ -27814,9 +27951,11 @@ MonoBehaviour:
   anomalyLevel: 3
   area: 0
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &3523133970773366697
 BoxCollider:
@@ -28231,9 +28370,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 1
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
   discolorMaterial: {fileID: 2100000, guid: 55d61217ed31b894b919de17d2a1440c, type: 2}
 --- !u!1 &4343586774324346067 stripped
@@ -28292,9 +28433,11 @@ MonoBehaviour:
   anomalyLevel: 3
   area: 0
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!65 &5939726348909473504
 BoxCollider:
@@ -28435,9 +28578,11 @@ MonoBehaviour:
   anomalyLevel: 1
   area: 3
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
   turningOffset: 90
   playerArea: 0
@@ -28891,9 +29036,11 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 4
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
 --- !u!1001 &8217898307685704419
 PrefabInstance:
@@ -29362,11 +29509,34 @@ MonoBehaviour:
   anomalyLevel: 0
   area: 5
   anomalyPoint: 0
+  cooldown: 10
   isEnabled: 0
   isActive: 0
   currentAnomalyPoint: 0
+  CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
   newTransform: {fileID: 1106808808}
+--- !u!65 &8796494641392861677
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4343586774324346067}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.004006885, y: 0.0007637689, z: 0.0003160482}
+  m_Center: {x: -0.0020034495, y: -0.00019950133, z: 0.0000000017109281}
 --- !u!1001 &8993943362038516685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29540,3 +29710,4 @@ SceneRoots:
   - {fileID: 1710545434}
   - {fileID: 779300285}
   - {fileID: 1784614721}
+  - {fileID: 78606235}

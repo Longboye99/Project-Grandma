@@ -7,7 +7,6 @@ public class DisplaceAnomaly : Anomaly
     Quaternion originalRotation;
     private void Start()
     {
-        playerCam = GameObject.FindGameObjectWithTag("Player");
         originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
         originalPosition = this.gameObject.transform.position;
         originalRotation = this.gameObject.transform.rotation;
@@ -17,6 +16,7 @@ public class DisplaceAnomaly : Anomaly
     {
         isActive = true;
         currentAnomalyPoint = anomalyPoint;
+        Debug.Log("Trigger Displace Anomaly: " + this.name);
 
         gameObject.transform.position = newTransform.position;
         gameObject.transform.rotation = newTransform.rotation;
@@ -31,6 +31,7 @@ public class DisplaceAnomaly : Anomaly
 
             currentAnomalyPoint = 0;
             isActive = false;
+            CurrentCooldown = cooldown;
         }
     }
 }

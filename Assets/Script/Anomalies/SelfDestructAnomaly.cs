@@ -9,13 +9,6 @@ public class SelfDestructAnomaly : Anomaly
 
     private bool isInTransition;
 
-    private void Start()
-    {
-        playerCam = GameObject.FindGameObjectWithTag("Player");
-        playerArea = GameManager.instance.anomalyManager.currentArea;
-
-    }
-
     private void FixedUpdate()
     {
         playerArea = GameManager.instance.anomalyManager.currentArea;
@@ -45,7 +38,9 @@ public class SelfDestructAnomaly : Anomaly
     public override void TriggerAnomaly()
     {
         isActive = true;
+        currentAnomalyPoint = anomalyPoint;
         idleGhost.SetActive(true);
+        Debug.Log("Trigger Self Destruct Anomaly: " + this.name);
     }
 
     private void DespawnGhost()
@@ -60,6 +55,8 @@ public class SelfDestructAnomaly : Anomaly
             isActive = false;
             isInTransition = false;      
             idleGhost.SetActive(false);
+            CurrentCooldown = cooldown;
+            currentAnomalyPoint = 0;
         }
     }
 }

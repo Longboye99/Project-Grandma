@@ -6,7 +6,6 @@ public class DiscolorAnomaly : Anomaly
 
     private void Start()
     {
-        playerCam = GameObject.FindGameObjectWithTag("Player");
         originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
     }
 
@@ -14,6 +13,7 @@ public class DiscolorAnomaly : Anomaly
     {
         isActive = true;
         currentAnomalyPoint = anomalyPoint;
+        Debug.Log("Trigger Discolor Anomaly: " + this.name);
 
         gameObject.GetComponent<MeshRenderer>().material = discolorMaterial; //Make the object appear
     }
@@ -25,6 +25,7 @@ public class DiscolorAnomaly : Anomaly
             gameObject.GetComponent<MeshRenderer>().material = originalMaterial; //Make anomaly dissapear
             currentAnomalyPoint = 0;
             isActive = false;
+            CurrentCooldown = cooldown;
         }  
     }
 }

@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
             }
         }
 
-        SetAmbienceVolumn(1 - (0.15f * anomalyCount));  
+        SetAmbienceVolumn(1 - (0.3f * anomalyCount));  
     }
 
     public void SetAmbienceVolumn(float volumn)
