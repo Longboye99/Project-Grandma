@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class DiscolorAnomaly : Anomaly
 {
+    public Material originalMaterial;
     public Material discolorMaterial;
 
     private void Start()
@@ -13,8 +14,8 @@ public class DiscolorAnomaly : Anomaly
     {
         Debug.Log("Triggered Discolor Anomaly: " + this.name);
         isActive = true;
-        cooldown = cooldownTimer;
-        currentAnomalyPoint = anomalyPointValue;
+        CurrentCooldown = cooldown;
+        currentAnomalyPoint = anomalyPoint;
 
         gameObject.GetComponent<MeshRenderer>().material = discolorMaterial; //Make the object appear
     }

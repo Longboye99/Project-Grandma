@@ -28,7 +28,7 @@ public class AudioManager : MonoBehaviour
 
     private void EnableAmbience(Anomaly anomaly)
     {
-        if(anomaly.anomalyEnum == AnomalyEnum.AttackAnomaly)
+        if(anomaly.anomalyLevel == AnomalyEnum.AttackAnomaly)
         {
             Invoke("SetVolumnOne", 3);
             

@@ -100,7 +100,6 @@ public class ChaseJumpscareHandler : MonoBehaviour
                 UiAnimator.gameObject.SetActive(true);
                 UiAnimator.SetTrigger("TriggerJumpscare");
             }
-            
         }
     }
 

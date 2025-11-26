@@ -4,7 +4,6 @@ public class AppearingAnomaly : Anomaly
 {
     private void Start()
     {
-        originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<Collider>().enabled = false;
     }
@@ -13,8 +12,8 @@ public class AppearingAnomaly : Anomaly
     {
         Debug.Log("Triggered Appearing Anomaly: " + this.name);
         isActive = true;
-        cooldown = cooldownTimer;
-        currentAnomalyPoint = anomalyPointValue;
+        CurrentCooldown = cooldown;
+        currentAnomalyPoint = anomalyPoint;
 
         gameObject.GetComponent<MeshRenderer>().enabled = true; //Make the object appear
         gameObject.GetComponent<Collider>().enabled = true; //Make the object appear

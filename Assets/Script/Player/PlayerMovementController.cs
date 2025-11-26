@@ -59,4 +59,5 @@ public class PlayerMovementController : MonoBehaviour
     {
         inputDir = moveDir;
     }
+
 }

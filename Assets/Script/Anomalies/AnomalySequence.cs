@@ -15,8 +15,8 @@ public class AnomalySequence : Anomaly
         anomalyList[index].TriggerAnomaly();
         Debug.Log("Trigger Anomaly Sequence: " + this.name + index);
         isActive = true;
-        cooldown = cooldownTimer;
-        currentAnomalyPoint = anomalyPointValue;
+        CurrentCooldown = cooldown;
+        currentAnomalyPoint = anomalyPoint;
     }
 
     public override void UndoAnomaly(Anomaly anomaly)
@@ -47,7 +47,7 @@ public class AnomalySequence : Anomaly
         {
             anomalyList[index].TriggerAnomaly();
             isActive = true;
-            currentAnomalyPoint = anomalyPointValue;
+            currentAnomalyPoint = anomalyPoint;
         }
     }
 }

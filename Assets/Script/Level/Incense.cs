@@ -7,6 +7,11 @@ public class Incense : MonoBehaviour
     [SerializeField] GameObject endObject;
     [SerializeField] GameObject incenseStick;
     [SerializeField] Light incenseLight;
+
+    [SerializeField] Material incenseMaterial;
+    [SerializeField] Color emissionColorValue;
+    public float intensity;
+
     float startingLight;
     private Vector3 initialScale;
     private Vector3 initialDistance;
@@ -19,11 +24,16 @@ public class Incense : MonoBehaviour
         initialDistance = (endObject.transform.position - startObject.transform.position);
         endObject.transform.position = startObject.transform.position + (initialDistance * incensePercentage);
         startingLight = incenseLight.range;
+
+        emissionColorValue = incenseMaterial.color;
     }
 
     private void Update()
     {
         UpdateTransformForScale();
+        intensity = (incensePercentage * 4) - 2.5f;
+        incenseMaterial.SetColor("_EmissionColor", emissionColorValue * Mathf.Pow(2, intensity));
+        incenseLight.intensity = incensePercentage * 0.03f;
     }
 
     private void UpdateTransformForScale()

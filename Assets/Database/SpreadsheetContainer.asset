@@ -1,0 +1,254 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: SpreadsheetContainer
+  m_EditorClassIdentifier: Assembly-CSharp:Game.Database:SpreadsheetContainer
+  foldoutImportGUI: 1
+  documentId: 1dq28Rb85PaFYwtXRG8o-9N4GYTu2oppLsy4-MFvohHc
+  selectedTogglesIds:
+  - anomalies
+  - AnomalyConfig
+  - levelConfigs
+  foldoutSerializationGUI: 1
+  serializationOutputPath: ../../Configs
+  serializationFileName: Configs.v0.1
+  serializationFormat: 0
+  content:
+    anomalies:
+    - Id: Tall_water_pail
+      AnomalyPoint: 20
+      Cooldown: 60
+      Level: Level 2
+    - Id: Water_pail
+      AnomalyPoint: 10
+      Cooldown: 30
+      Level: Level 1
+    - Id: Clothes3
+      AnomalyPoint: 10
+      Cooldown: 30
+      Level: Level 1
+    - Id: Tum_Lid
+      AnomalyPoint: 10
+      Cooldown: 30
+      Level: Level 1
+    - Id: Bathroom_Cube
+      AnomalyPoint: 10
+      Cooldown: 30
+      Level: Level 1
+    - Id: Tall_Cylinder
+      AnomalyPoint: 20
+      Cooldown: 60
+      Level: Level 2
+    - Id: Flat_Cylinder
+      AnomalyPoint: 10
+      Cooldown: 30
+      Level: Level 1
+    - Id: Flat_Cylinder (1)
+      AnomalyPoint: 10
+      Cooldown: 30
+      Level: Level 1
+    - Id: Orange_Cube
+      AnomalyPoint: 10
+      Cooldown: 30
+      Level: Level 1
+    - Id: Blue_Cube
+      AnomalyPoint: 20
+      Cooldown: 60
+      Level: Level 2
+    - Id: Water_Bottle
+      AnomalyPoint: 10
+      Cooldown: 30
+      Level: Level 1
+    - Id: Table_Stuff (1)
+      AnomalyPoint: 10
+      Cooldown: 30
+      Level: Level 1
+    - Id: Table_Stuff (4)
+      AnomalyPoint: 10
+      Cooldown: 30
+      Level: Level 1
+    levelConfigs:
+    - Hour: 12:00 AM
+      Time: 0
+      Difficulty: 15
+      ActiveInterval: 10
+      LightAnomalyThreshold: 50
+      HeavyAnomalyThreshold: 100
+      IncenseDrainSpeed: 1
+      TimeScale: 1
+    - Hour: 1:00 AM
+      Time: 60
+      Difficulty: 15
+      ActiveInterval: 10
+      LightAnomalyThreshold: 50
+      HeavyAnomalyThreshold: 100
+      IncenseDrainSpeed: 1
+      TimeScale: 1
+    - Hour: 2:00 AM
+      Time: 120
+      Difficulty: 15
+      ActiveInterval: 10
+      LightAnomalyThreshold: 50
+      HeavyAnomalyThreshold: 100
+      IncenseDrainSpeed: 1
+      TimeScale: 1
+    - Hour: 3:00 AM
+      Time: 180
+      Difficulty: 15
+      ActiveInterval: 10
+      LightAnomalyThreshold: 50
+      HeavyAnomalyThreshold: 100
+      IncenseDrainSpeed: 1
+      TimeScale: 1
+    - Hour: 4:00 AM
+      Time: 240
+      Difficulty: 15
+      ActiveInterval: 10
+      LightAnomalyThreshold: 50
+      HeavyAnomalyThreshold: 100
+      IncenseDrainSpeed: 1.1
+      TimeScale: 0.9
+    - Hour: 5:00 AM
+      Time: 300
+      Difficulty: 15
+      ActiveInterval: 10
+      LightAnomalyThreshold: 50
+      HeavyAnomalyThreshold: 100
+      IncenseDrainSpeed: 1.1
+      TimeScale: 0.8
+    AnomalyConfig:
+    - AnomalyId: Tall_water_pail
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: Water_pail
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: Clothes3
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: Flat_Cylinder
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: Bathroom_Cube
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: Water_Bottle
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: Table_Stuff (1)
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: Table_Stuff (4)
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+    - AnomalyId: Orange_Cube
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE

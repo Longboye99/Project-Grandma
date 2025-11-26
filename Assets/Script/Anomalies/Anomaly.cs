@@ -1,53 +1,85 @@
+using Game.Database;
 using TMPro;
 using UnityEngine;
 
 public abstract class Anomaly: MonoBehaviour
 {
     [Header("Anomaly Config")]
-    public AnomalyEnum anomalyEnum;
-    public AreaEnum areaEnum;
-    public int anomalyPointValue;
-    public int cooldownTimer = 10;
+    public string id;
+    public AnomalyEnum anomalyLevel;
+    public AreaEnum area;
+    public int anomalyPoint;
+    public int cooldown = 10;
 
     [Header("Anomaly State")]
+    public bool isEnabled = false;
     public bool isActive;
     public int currentAnomalyPoint;
-
-    public float cooldown;
-
-    protected Material originalMaterial;
-    protected Material currentMaterial;
-    protected bool currentMeshActive;
-    public Material highlightMaterial;
-    protected bool isHighlighted = false; 
+    public float CurrentCooldown;
     
     protected GameObject playerCam;
 
+    public void Initialize(AnomalyData data)
+    {
+        anomalyPoint = data.AnomalyPoint;
+        cooldown = data.Cooldown;
+        switch (data.Level)
+        {
+            case "Level 1":
+                anomalyLevel = AnomalyEnum.LightAnomaly;
+                break;
+            case "Level 2":
+                anomalyLevel = AnomalyEnum.HeavyAnomaly;
+                break;
+            default:
+                break;
+        }
+
+        Debug.Log("Initialized Anomaly: " + id);
+    }
+
+    private void OnValidate()
+    {
+#if UNITY_EDITOR
+        id = this.name;
+        UnityEditor.EditorUtility.SetDirty(this);
+#endif
+    }
+
+    public void SetAnomalyEnabled(string text)
+    {
+        if (text == "TRUE")
+        {
+            isEnabled = true;
+        }
+        else
+        {
+            isEnabled = false;
+        }
+    }
 
     private void OnEnable()
     {
         playerCam = GameObject.FindGameObjectWithTag("Player");
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly += UndoAnomaly;
-        GameEventsManager.instance.debugEvents.onPressHighlight += PressHighlight;
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly -= UndoAnomaly;
-        GameEventsManager.instance.debugEvents.onPressHighlight -= PressHighlight;
     }
 
     protected void Update()
     {
-        if (cooldown > 0) //Counting down the cooldown
+        if (CurrentCooldown > 0 && isEnabled) //Counting down the cooldown
         {
-            cooldown -= Time.deltaTime;
+            CurrentCooldown -= Time.deltaTime;
         }
     }
 
     public bool SpawnAnomaly()
     {
-        if (cooldown <= 0 && !isActive && CheckPlayerIsLooking(false)) //Check if not in cooldown and not already actived
+        if (CurrentCooldown <= 0 && isEnabled && CheckPlayerIsLooking(false)) //Check if not in cooldown and not already actived
         {
             TriggerAnomaly();
             return true;
@@ -61,7 +93,6 @@ public abstract class Anomaly: MonoBehaviour
     public abstract void TriggerAnomaly();
 
     public abstract void UndoAnomaly(Anomaly anomaly);
-
 
     public bool CheckPlayerIsLooking(bool checkisLooking) //Calculate if the player is looking at the node or not
     {
@@ -106,7 +137,7 @@ public abstract class Anomaly: MonoBehaviour
 
     public void ActivateLightAnomalies()
     {
-        if (anomalyEnum == AnomalyEnum.HeavyAnomaly)
+        if (anomalyLevel == AnomalyEnum.HeavyAnomaly)
         {
             SpawnAnomaly();
         }
@@ -114,7 +145,7 @@ public abstract class Anomaly: MonoBehaviour
 
     public void ActivateHeavyAnomalies()
     {
-        if (anomalyEnum == AnomalyEnum.HeavyAnomaly)
+        if (anomalyLevel == AnomalyEnum.HeavyAnomaly)
         {
             SpawnAnomaly();
         }
@@ -123,28 +154,5 @@ public abstract class Anomaly: MonoBehaviour
     public void ActivateAllAnomalies()
     {
         SpawnAnomaly();
-    }
-
-    public void PressHighlight()
-    {
-        if (!isHighlighted && isActive)
-        {
-            isHighlighted = true;
-            currentMeshActive = GetComponent<MeshRenderer>().enabled;
-            if (!currentMeshActive)
-            {
-                gameObject.GetComponent<MeshRenderer>().enabled = true;
-            }
-
-            currentMaterial = GetComponent<MeshRenderer>().material;
-            gameObject.GetComponent<MeshRenderer>().material = highlightMaterial;
-        }
-        else if (isHighlighted)
-        {
-            isHighlighted = false;
-            gameObject.GetComponent<MeshRenderer>().material = currentMaterial;
-            gameObject.GetComponent<MeshRenderer>().enabled = currentMeshActive;
-            Debug.Log(this.gameObject.name + "mesh state was : " + currentMeshActive);
-        }
     }
 }

@@ -11,14 +11,15 @@ public class LevelManager : MonoBehaviour
     public float currentTime;
     public float midnightTime = 120;
     public float finishTime = 360;
-    [SerializeField] public int timeSpeed = 1;
+    public float timeSpeed = 1;
+    public float incenseSpeed = 1;
 
     [Header("Incense Config")]
-    [SerializeField] private float incenseCurrentTime;
-    [SerializeField] private Incense incense;
-    [SerializeField] private float incenseMaxTime;
-    [SerializeField] private int incenseSection;
-    [SerializeField] private int maxIncenseSection;
+    [SerializeField] float incenseCurrentTime;
+    [SerializeField] Incense incense;
+    [SerializeField] float incenseMaxTime;
+    [SerializeField] int incenseSection;
+    [SerializeField] int maxIncenseSection;
 
     public GameObject VictoryMessage;
     public GameObject DefeatMessage;
@@ -41,7 +42,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         incenseSection = maxIncenseSection;
-        incenseCurrentTime = incenseMaxTime;
+        //incenseCurrentTime = incenseMaxTime;
     }
 
     private void Update()
@@ -51,14 +52,14 @@ public class LevelManager : MonoBehaviour
         CheckVictory();
         CheckDefeat();
 
-        GameManager.instance.anomalyManager.CheckEnemyEvent();
+        GameManager.instance.anomalyManager.CheckEnemyEvent(currentTime);
         GameManager.instance.anomalyManager.TallyAnomalyPoint();
     }
 
     private void UpdateTime()
     { 
         currentTime += Time.deltaTime * timeSpeed;
-        incenseCurrentTime -=  Time.deltaTime * timeSpeed;
+        incenseCurrentTime -=  Time.deltaTime * incenseSpeed;
     }
     private void CheckVictory()
     {
