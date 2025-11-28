@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] GameObject playerCamera;
+    [SerializeField] GameObject playerCameraObject;
+    Camera playerCamera;
     [SerializeField] PlayerMovementController movementController;
     [SerializeField] float rayMaxDistance;
     private int layerMask = (1 << 6) | (1 << 7);
@@ -34,9 +35,10 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        movementController = GameObject.FindAnyObjectByType<PlayerMovementController>();
-        movementController.moveSpeed = baseMoveSpeed;
+        /*movementController = GameObject.FindAnyObjectByType<PlayerMovementController>();
+        movementController.moveSpeed = baseMoveSpeed;*/
         GameManager.instance.uiManager.silderMaxValue = maxProgression;
+        playerCamera = playerCameraObject.GetComponent<Camera>();
     }
 
     private void Update()
@@ -51,7 +53,7 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CheckRayCastForInteractable();
+        CheckCameraRayCastForInteractable();
     }
 
     private void StartInteract(InputEventContextEnum inputContext)
@@ -62,7 +64,7 @@ public class PlayerManager : MonoBehaviour
 
         isLookingAtIncense = (inputContext == InputEventContextEnum.Incense);
         isLookingAtBed = (inputContext == InputEventContextEnum.Bed);
-        movementController.moveSpeed = baseMoveSpeed / 2;
+        //movementController.moveSpeed = baseMoveSpeed / 2;
     }
 
     private void UpdateInteractValue()
@@ -86,7 +88,7 @@ public class PlayerManager : MonoBehaviour
             isHoldingInteract = false;
             isLookingAtIncense = false;
             isLookingAtBed = false;
-            movementController.moveSpeed = baseMoveSpeed;
+            //movementController.moveSpeed = baseMoveSpeed;
         }
         else
         {
@@ -101,15 +103,15 @@ public class PlayerManager : MonoBehaviour
         isHoldingInteract = false;
         isLookingAtIncense = false;
         isLookingAtBed = false;
-        movementController.moveSpeed = baseMoveSpeed;
+        //movementController.moveSpeed = baseMoveSpeed;
     }
 
     private void CheckRayCastForInteractable()
     {
-        Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * rayMaxDistance, Color.cyan);
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, rayMaxDistance, layerMask))
+        Debug.DrawRay(playerCameraObject.transform.position, playerCameraObject.transform.forward * rayMaxDistance, Color.cyan);
+        if (Physics.Raycast(playerCameraObject.transform.position, playerCameraObject.transform.forward, out RaycastHit hit, rayMaxDistance, layerMask))
         {
-            Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * hit.distance, Color.green);
+            Debug.DrawRay(playerCameraObject.transform.position, playerCameraObject.transform.forward * hit.distance, Color.green);
             if (hit.collider.gameObject.GetComponent<Anomaly>())
             {
                 currentAnomaly = hit.collider.gameObject.GetComponent<Anomaly>();
@@ -132,16 +134,47 @@ public class PlayerManager : MonoBehaviour
         }
         
     }
-  
-    private void OnDrawGizmos() //Funny green line in inspect
+
+    private void CheckCameraRayCastForInteractable()
+    {
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition/3);
+
+        Debug.DrawRay(playerCameraObject.transform.position, ray.direction*50, Color.cyan);
+        if (Physics.Raycast(ray, out RaycastHit hit, layerMask))
+        {
+            Debug.DrawRay(playerCameraObject.transform.position, hit.transform.position, Color.green);
+            if (hit.collider.gameObject.GetComponent<Anomaly>())
+            {
+                currentAnomaly = hit.collider.gameObject.GetComponent<Anomaly>();
+                GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Anomaly);
+            }
+            else if (hit.collider.gameObject.GetComponent<Incense>())
+            {
+                GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Incense);
+            }
+            else if (hit.collider.gameObject.GetComponent<Bed>())
+            {
+                GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Bed);
+            }
+
+        }
+        else
+        {
+            currentAnomaly = null;
+            GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Default);
+        }
+
+    }
+
+    /*private void OnDrawGizmos() //Funny green line in inspect
     {
         Vector3 endPos = playerCamera.transform.position + playerCamera.transform.forward * rayMaxDistance;
         Gizmos.color = Color.green;
         Gizmos.DrawLine(playerCamera.transform.position, endPos);
 
-    }
+    }*/
     
-    public void DisablePlayerMovement()
+    /*public void DisablePlayerMovement()
     {
         movementController.moveSpeed = 0;
     }
@@ -149,5 +182,5 @@ public class PlayerManager : MonoBehaviour
     public void EnablePlayerMovement()
     {
         movementController.moveSpeed = baseMoveSpeed;
-    }
+    }*/
 }

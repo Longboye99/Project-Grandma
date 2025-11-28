@@ -18,6 +18,15 @@ public class Incense : MonoBehaviour
     private float distance;
     public float incensePercentage;
 
+    private void OnMouseOver()
+    {
+        
+    }
+    private void OnMouseExit()
+    {
+        
+    }
+
     private void Start()
     {
         SetUpIncense();

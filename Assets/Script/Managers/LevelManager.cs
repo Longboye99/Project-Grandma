@@ -29,7 +29,6 @@ public class LevelManager : MonoBehaviour
     public Canvas DefeatMessage;
 
     bool isDefeated;
-    bool litIncense;
     float size;
 
 
@@ -165,7 +164,6 @@ public class LevelManager : MonoBehaviour
     public void RefillIncense()
     {
         incenseCurrentTime = incenseMaxTime;
-        litIncense = true;
         SetIncenseSize();
     }
 

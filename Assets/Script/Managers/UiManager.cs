@@ -10,6 +10,7 @@ public class UiManager : MonoBehaviour
     public GameObject anomalySliderObject;
     private Slider anomalySlider;
 
+    [SerializeField] Canvas sliderCanvas;
     public float sliderValue;
     public float silderMaxValue;
 
@@ -48,8 +49,11 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        /*Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;*/
+
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
 
         anomalySlider = anomalySliderObject.GetComponent<Slider>();
         anomalySliderObject.SetActive(false);
@@ -77,6 +81,10 @@ public class UiManager : MonoBehaviour
             handEnum = HandEnum.AnomalyHand;
         }
         anomalySliderObject.SetActive(true);
+        Vector2 mousePosition = Input.mousePosition;
+        Vector2 uiPosition;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)sliderCanvas.transform, mousePosition, sliderCanvas.worldCamera, out uiPosition); //Position magic to get canvas position of the mouse
+        anomalySlider.transform.position = sliderCanvas.transform.TransformPoint(uiPosition); //Teleport slider to the mouse position
     }
 
     private void CancelInteract(InputEventContextEnum context)
@@ -103,8 +111,8 @@ public class UiManager : MonoBehaviour
         {
             pausedCanvas.gameObject.SetActive(false);
             Time.timeScale = 1.0f;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
             isPaused = false;
             return;
         }
