@@ -5,24 +5,20 @@ public class AttackAnomaly : Anomaly
     [SerializeField] private GameObject idleGhost;
     [SerializeField] private float despawnDelay;
 
-    private GameObject spawnedGhost;
+    private ChaseJumpscareHandler spawnedGhost;
     private bool isInTransition;
-
-    private void Start()
-    {
-
-    }
 
     private void FixedUpdate()
     {
         if (isActive)
         {
-            if (CheckPlayerIsLooking(true))
+            if (CheckPlayerIsLooking(true) && GameManager.instance.anomalyManager.currentArea == AreaEnum.Coffin)
             {
                 if (!isInTransition)
                 {
                     isInTransition = true;
-                    Invoke("DespawnGhost", despawnDelay);
+                    spawnedGhost = Instantiate(idleGhost, this.transform.position, Quaternion.identity).GetComponent<ChaseJumpscareHandler>();
+                    spawnedGhost.StartJumpscare(3);
                 }
             }
         }
@@ -33,9 +29,7 @@ public class AttackAnomaly : Anomaly
     {
         Debug.Log("Triggered Attack Anomaly: " + this.name);
 
-        GameEventsManager.instance.anomalyEvents.TriggerAttackAnomaly();
         isActive = true;
-        spawnedGhost = Instantiate(idleGhost, this.transform.position, Quaternion.identity);
         
     }
 
@@ -50,6 +44,7 @@ public class AttackAnomaly : Anomaly
         {
             isActive = false;
             isInTransition = false;
+            CurrentCooldown = cooldown;
             Destroy(spawnedGhost);
             GameEventsManager.instance.anomalyEvents.UndoAnomaly(this);
         }

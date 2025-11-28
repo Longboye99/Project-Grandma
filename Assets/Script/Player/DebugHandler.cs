@@ -2,43 +2,53 @@ using UnityEngine;
 
 public class DebugHandler : MonoBehaviour
 {
+    [SerializeField] GameObject text;
+    bool isActive;
     void Update()
     {
         HandleDebugToggles();
+        ActivateLookedAnomaly();
+        UndoAllAnomaly();
+        RefillIncense();
     }
 
     private void HandleDebugToggles()
     {
-        /*if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.H))
         {
             GameEventsManager.instance.debugEvents.PressHighlight();
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.J))
+    private void ActivateLookedAnomaly()
+    {
+        if(Input.GetKeyDown(KeyCode.J))
         {
-            GameEventsManager.instance.debugEvents.ActivateLightAnomalies();
-            GameEventsManager.instance.anomalyEvents.TriggerLightAnomaly();
+            GameManager.instance.playerManager.currentAnomaly.TriggerAnomaly();
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.K))
+    private void UndoAllAnomaly()
+    {
+        if(Input.GetKeyDown(KeyCode.U))
         {
-            GameEventsManager.instance.debugEvents.ActivateHeavyAnomalies();
-            GameEventsManager.instance.anomalyEvents.TriggerHeavyAnomaly();
+            GameManager.instance.anomalyManager.UndoAllAnomaly();
         }
+    }
 
+    private void RefillIncense()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            GameManager.instance.levelManager.RefillIncense();
+        }
+    }
+
+    private void AnomalyCount()
+    {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            GameEventsManager.instance.debugEvents.ActivateAttackAnomalies();
+            text.SetActive(!isActive);
         }
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            GameEventsManager.instance.debugEvents.RefillIncense();
-        }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            GameEventsManager.instance.debugEvents.SnapIncense();
-        }*/
     }
 }

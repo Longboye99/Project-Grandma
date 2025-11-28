@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class PointClickCamera : MonoBehaviour
 {
     [Header("Camera Movement Setting")]
-    public GameObject PointCam;
+    public GameObject playerCameraObject;
+    private Camera playerCamera;
     public float camSmoothTime;
     public float camSpeed;
     public float turningOffset;
@@ -20,20 +22,22 @@ public class PointClickCamera : MonoBehaviour
     bool isTurning = false;
     bool disableSideTurning;
 
+    [SerializeField] GameObject flashLight;
+
     [Header("Cameras")]
     private GameObject currentCam;
-    [SerializeField] GameObject windowCam;
+    [SerializeField] GameObject kitchenCam;
     [SerializeField] GameObject coffinCam;
-    [SerializeField] GameObject doorCam;
-    [SerializeField] GameObject curtainCam;
+    [SerializeField] GameObject laundryCam;
+    [SerializeField] GameObject bathroomCam;
     [SerializeField] GameObject ceilingCam;
     private int cameraIndex;
 
-    [SerializeField] Animator sceneTransition;
 
     private void Start()
     {
-        currentCam = windowCam; //Set camera to default position
+        playerCamera = playerCameraObject.GetComponent<Camera>();
+        currentCam = kitchenCam; //Set camera to default position
         cameraIndex = 1;
         SetCamPosition();
 
@@ -43,6 +47,7 @@ public class PointClickCamera : MonoBehaviour
     private void Update()
     {
         HandleKeyboardInput();
+        FlashLightMovement();
 
         if (isTurning)
         {
@@ -65,7 +70,7 @@ public class PointClickCamera : MonoBehaviour
 
         
 
-        PointCam.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        this.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
     }
     private void HandleKeyboardInput()
     {
@@ -77,21 +82,39 @@ public class PointClickCamera : MonoBehaviour
         {
             TurnCameraRight();
         }
-        if (Input.GetKeyDown(KeyCode.W)) //When getting key input, set target for camera to turn to
+        /*if (Input.GetKeyDown(KeyCode.W)) //When getting key input, set target for camera to turn to
         {
             TurnCameraUp();
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             TurnCameraDown();
+        }*/
+    }
+
+    private void FlashLightMovement()
+    {
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition/3);
+        RaycastHit hit;
+        Vector3 dir;
+        if(Physics.Raycast(ray, out hit))
+        {
+            dir = (hit.point - flashLight.transform.position).normalized;
+            flashLight.transform.rotation = Quaternion.LookRotation(dir);
+            return;
         }
+        else
+        {
+            dir = (ray.GetPoint(10) - flashLight.transform.position).normalized;
+            flashLight.transform.rotation = Quaternion.LookRotation(dir);
+        }       
     }
 
     public void TurnCameraLeft()
     {
         if (!isTurning) //Don't turn if the player is already turning
         {
-            sceneTransition.SetTrigger("TransitionOut"); //Play fade to black animation
+            GameManager.instance.uiManager.TransitionOut();
             targetRotationY -= 90; //Set camera turn target to 90 degree to the left
             isTurning = true; //Keep track of when player is turning
 
@@ -107,7 +130,7 @@ public class PointClickCamera : MonoBehaviour
     {
         if (!isTurning) //Don't turn if the player is already turning
         {
-            sceneTransition.SetTrigger("TransitionOut"); //Play fade to black animation
+            GameManager.instance.uiManager.TransitionOut();
             targetRotationY += 90; //Set camera turn target to 90 degree to the right
             isTurning = true; //Keep track of when player is turning
 
@@ -140,12 +163,12 @@ public class PointClickCamera : MonoBehaviour
     private void HandleCameraMovement()
     {
         currentRotationY = Mathf.SmoothDamp(currentRotationY, targetRotationY, ref camSpeed, camSmoothTime); //Smooth camera turn (janky camera turn target rn FIX LATER)
-        PointCam.transform.rotation = Quaternion.Euler(currentCam.transform.eulerAngles.x, currentRotationY, currentCam.transform.eulerAngles.z);
+        this.transform.rotation = Quaternion.Euler(currentCam.transform.eulerAngles.x, currentRotationY, currentCam.transform.eulerAngles.z);
 
         if (currentRotationY >= targetRotationY - 5*turningOffset && currentRotationY <= targetRotationY + 5*turningOffset && isTurning) //Teleport camera to target position when it has almost turned toward the target
         {
             SwitchCamera();
-            sceneTransition.SetTrigger("TransitionIn");
+            GameManager.instance.uiManager.TransitionIn();
         }
 
         if (currentRotationY >= targetRotationY - turningOffset && currentRotationY <= targetRotationY + turningOffset && isTurning) //Enable turning again once player has turned toward the target
@@ -158,7 +181,7 @@ public class PointClickCamera : MonoBehaviour
     {
         if(cameraIndex == 1)
         {
-            currentCam = windowCam;
+            currentCam = kitchenCam;
         }
         else if(cameraIndex == 2)
         {
@@ -166,19 +189,20 @@ public class PointClickCamera : MonoBehaviour
         }
         else if (cameraIndex == 3)
         {
-            currentCam = doorCam;
+            currentCam = laundryCam;
         }
         else if (cameraIndex == 4)
         {
-            currentCam = curtainCam;
+            currentCam = bathroomCam;
         }
         SetCamPosition();
     }
 
     private void SetCamPosition() //Set the camera position and rotation to the target camera
     {
-        PointCam.transform.position = currentCam.transform.position;
-        PointCam.transform.rotation = currentCam.transform.rotation;
+        this.transform.position = currentCam.transform.position;
+        this.transform.rotation = currentCam.transform.rotation;
+        flashLight.transform.rotation = currentCam.transform.rotation;
         currentRotationY = currentCam.transform.eulerAngles.y ;
         targetRotationY = currentCam.transform.eulerAngles.y;
     }
@@ -187,13 +211,13 @@ public class PointClickCamera : MonoBehaviour
     {
         if (dir)
         {
-            PointCam.transform.position = ceilingCam.transform.position;
-            PointCam.transform.rotation = ceilingCam.transform.rotation;
+            playerCameraObject.transform.position = ceilingCam.transform.position;
+            playerCameraObject.transform.rotation = ceilingCam.transform.rotation;
         }
         else
         {
-            PointCam.transform.position = currentCam.transform.position;
-            PointCam.transform.rotation = currentCam.transform.rotation;
+            playerCameraObject.transform.position = currentCam.transform.position;
+            playerCameraObject.transform.rotation = currentCam.transform.rotation;
         }
     }
 }

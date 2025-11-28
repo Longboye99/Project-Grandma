@@ -5,18 +5,25 @@ using System;
 
 public class UiManager : MonoBehaviour
 {
+    [SerializeField] Canvas pausedCanvas;
+    [SerializeField] Animator transitionOverlay;
     public GameObject anomalySliderObject;
     private Slider anomalySlider;
 
+    [SerializeField] Canvas sliderCanvas;
     public float sliderValue;
     public float silderMaxValue;
 
     public TextMeshProUGUI timeDisplay;
     public TextMeshProUGUI anomalyPointDisplay;
+
     int hour;
     int minute;
     float currentTime;
     float midnightTime;
+
+    bool isPaused;
+
 
     private HandEnum handEnum;
 
@@ -27,6 +34,7 @@ public class UiManager : MonoBehaviour
     {
         GameEventsManager.instance.inputEvents.onStartInteract += ActivateInteractSlider;
         GameEventsManager.instance.inputEvents.onCancelInteract += CancelInteract;
+        GameEventsManager.instance.inputEvents.onPause += Pause;
         GameEventsManager.instance.playerEvents.onCompleteInteract += CompleteInteract;
     }
 
@@ -34,26 +42,29 @@ public class UiManager : MonoBehaviour
     {
         GameEventsManager.instance.inputEvents.onStartInteract -= ActivateInteractSlider;
         GameEventsManager.instance.inputEvents.onCancelInteract -= CancelInteract;
+        GameEventsManager.instance.inputEvents.onPause -= Pause;
         GameEventsManager.instance.playerEvents.onCompleteInteract -= CompleteInteract;
 
     }
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        /*Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;*/
+
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
 
         anomalySlider = anomalySliderObject.GetComponent<Slider>();
         anomalySliderObject.SetActive(false);
         anomalySlider.maxValue = GameManager.instance.playerManager.maxProgression;
 
-        midnightTime = GameManager.instance.levelManager.midnightTime;
     }
 
     private void Update()
     {
         anomalySlider.value = GameManager.instance.playerManager.interactProgression;
-        anomalyPointDisplay.text = GameManager.instance.anomalyManager.TallyAnomalyPoint().ToString();
+        anomalyPointDisplay.text = GameManager.instance.anomalyManager.ActiveAnomalies.Count.ToString();
         DisplayTime();
     }
 
@@ -70,6 +81,10 @@ public class UiManager : MonoBehaviour
             handEnum = HandEnum.AnomalyHand;
         }
         anomalySliderObject.SetActive(true);
+        Vector2 mousePosition = Input.mousePosition;
+        Vector2 uiPosition;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)sliderCanvas.transform, mousePosition, sliderCanvas.worldCamera, out uiPosition); //Position magic to get canvas position of the mouse
+        anomalySlider.transform.position = sliderCanvas.transform.TransformPoint(uiPosition); //Teleport slider to the mouse position
     }
 
     private void CancelInteract(InputEventContextEnum context)
@@ -90,30 +105,43 @@ public class UiManager : MonoBehaviour
         anomalySliderObject.SetActive(false);
     }
 
+    public void Pause()
+    {
+        if (isPaused)
+        {
+            pausedCanvas.gameObject.SetActive(false);
+            Time.timeScale = 1.0f;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            isPaused = false;
+            return;
+        }
+        pausedCanvas.gameObject.SetActive(true);
+        Time.timeScale = 0;
+        isPaused = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     private void DisplayTime()
     {
         currentTime = GameManager.instance.levelManager.currentTime;
 
-        if (currentTime < midnightTime)
-        {
-            hour = 22 + (int)Math.Floor(currentTime / 60);
-        }
-        else if (currentTime >= midnightTime)
-        {
-            hour = (int)Math.Floor((currentTime - 120) / 60);
-        }
+        hour = (int)Math.Floor(currentTime / 60);
         minute = (int)Math.Floor(currentTime % 60 / 10);
 
+        timeDisplay.text = "0" + hour.ToString() + " : " + minute.ToString() + "0";
 
-        if (currentTime < midnightTime)
-        {
-            timeDisplay.text = hour.ToString() + " : " + minute.ToString() + "0";
-        }
-        else if (currentTime >= midnightTime)
-        {
-            timeDisplay.text = "0" + hour.ToString() + " : " + minute.ToString() + "0";
-        }
+    }
 
+    public void TransitionIn()
+    {
+        transitionOverlay.SetTrigger("TransitionIn");
+    }
+
+    public void TransitionOut()
+    {
+        transitionOverlay.SetTrigger("TransitionOut");
     }
 }
 

@@ -4,6 +4,7 @@ using TMPro;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 using System.Collections.Generic;
 using System;
+using Unity.VisualScripting;
 
 public class LevelManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class LevelManager : MonoBehaviour
     public float timeSpeed = 1;
     public float incenseSpeed = 1;
 
+    [SerializeField] Transform respawnPoint;
+    [SerializeField] GameObject playerObject;
+
     [Header("Incense Config")]
     [SerializeField] float incenseCurrentTime;
     [SerializeField] Incense incense;
@@ -21,8 +25,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] int incenseSection;
     [SerializeField] int maxIncenseSection;
 
-    public GameObject VictoryMessage;
-    public GameObject DefeatMessage;
+    public Canvas VictoryMessage;
+    public Canvas DefeatMessage;
 
     bool isDefeated;
     float size;
@@ -42,9 +46,8 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         incenseSection = maxIncenseSection;
-        //incenseCurrentTime = incenseMaxTime;
-    }
 
+    }
     private void Update()
     {
         UpdateTime();
@@ -56,20 +59,17 @@ public class LevelManager : MonoBehaviour
         GameManager.instance.anomalyManager.TallyAnomalyPoint();
     }
 
-    private void UpdateTime()
-    { 
-        currentTime += Time.deltaTime * timeSpeed;
-        incenseCurrentTime -=  Time.deltaTime * incenseSpeed;
-    }
     private void CheckVictory()
     {
         if (currentTime >= finishTime)
         {
-            VictoryMessage.SetActive(true);
             Time.timeScale = 0;
+            VictoryMessage.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
-    }
 
+    }
     private void CheckDefeat()
     {
         if (incenseCurrentTime <= 0 && !isDefeated)
@@ -82,8 +82,59 @@ public class LevelManager : MonoBehaviour
 
     public void FinishedDefeatAnim()
     {
-        DefeatMessage.SetActive(true);
+        DefeatMessage.gameObject.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    /*public void ProgessLoop() // call when go to sleep or die
+    {
+        //low incense
+        incenseCurrentTime = 40;
+        SetIncenseSize();
+
+        //fade out anim, disable player movement
+        GameManager.instance.uiManager.TransitionOut();
+        GameManager.instance.playerManager.DisablePlayerMovement();
+
+        //Check if all anomaly is cleared
+        if (GameManager.instance.anomalyManager.ActiveAnomalies.Count == 0 && litIncense == true)
+        {
+            currentLoop++;
+            Debug.Log("Current Loop" + currentLoop);
+            if (currentLoop >= maxLoop)
+            {
+                Invoke("Victory", 2);
+                return;
+            }
+        }
+        else //yes > +1 loop,   no > something
+        {
+            if(currentLoop < 0)
+            {
+                currentLoop = 0;
+            }
+        }
+        
+        playerObject.transform.position = respawnPoint.transform.position;
+        litIncense = false;
+
+        Invoke("WakeUp", 2);
+        //fade in, enable movement
+        //wake up
+    }
+    */
+    /*
+    private void WakeUp()
+    {
+        GameManager.instance.anomalyManager.SpawnNextLoopAnomaly();
+        GameManager.instance.uiManager.TransitionIn();
+        GameManager.instance.playerManager.EnablePlayerMovement();
+    }
+    */
+    private void UpdateTime()
+    { 
+        currentTime += Time.deltaTime * timeSpeed;
+        incenseCurrentTime -=  Time.deltaTime * incenseSpeed;
     }
 
     //---------------------Incense functions----------------------------
@@ -108,18 +159,19 @@ public class LevelManager : MonoBehaviour
             incenseCurrentTime = incenseMaxTime;
         }
         Debug.Log(incenseCurrentTime + "-" + incenseMaxTime);
-        
     }
 
-    private void RefillIncense()
+    public void RefillIncense()
     {
         incenseCurrentTime = incenseMaxTime;
+        SetIncenseSize();
     }
 
     //----------------------------------------------------------------
-    
 
     
+
+
 
 
 }

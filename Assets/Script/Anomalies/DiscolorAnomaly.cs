@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class DiscolorAnomaly : Anomaly
 {
-    public Material originalMaterial;
     public Material discolorMaterial;
 
     private void Start()
@@ -12,10 +11,9 @@ public class DiscolorAnomaly : Anomaly
 
     public override void TriggerAnomaly()
     {
-        Debug.Log("Triggered Discolor Anomaly: " + this.name);
         isActive = true;
-        CurrentCooldown = cooldown;
         currentAnomalyPoint = anomalyPoint;
+        Debug.Log("Trigger Discolor Anomaly: " + this.name);
 
         gameObject.GetComponent<MeshRenderer>().material = discolorMaterial; //Make the object appear
     }
@@ -27,6 +25,7 @@ public class DiscolorAnomaly : Anomaly
             gameObject.GetComponent<MeshRenderer>().material = originalMaterial; //Make anomaly dissapear
             currentAnomalyPoint = 0;
             isActive = false;
+            CurrentCooldown = cooldown;
         }  
     }
 }

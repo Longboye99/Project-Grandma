@@ -28,6 +28,8 @@ public class LookAnomaly : Anomaly
     {
         anomaly.TriggerAnomaly();
         isActive = true;
+        currentAnomalyPoint = anomalyPoint;
+        Debug.Log("Trigger Look Anomaly: " + this.name);
     }
 
     public override void UndoAnomaly(Anomaly targetAnomaly)
@@ -36,6 +38,8 @@ public class LookAnomaly : Anomaly
         {
             isActive = false;
             lookScore = 0;
+            CurrentCooldown = cooldown;
+            currentAnomalyPoint = 0;
         }
     }
 }
