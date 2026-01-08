@@ -16,7 +16,7 @@ public class HeadBop : MonoBehaviour
 
     [SerializeField] PlayerMovementController m_Controller;
     Vector3 startPos;
-    bool isBobbing;
+    public bool isBobbing;
 
     private void OnEnable()
     {
@@ -56,7 +56,11 @@ public class HeadBop : MonoBehaviour
 
     private void CheckForTrigger()
     {
-        if(m_Controller.curSpeed > 0)
+        /*if(m_Controller.curSpeed > 0)
+        {
+            StartHeadbob();
+        }*/
+        if(isBobbing)
         {
             StartHeadbob();
         }

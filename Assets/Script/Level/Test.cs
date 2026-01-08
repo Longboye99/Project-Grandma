@@ -1,21 +1,21 @@
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Splines;
 
 public class Test : MonoBehaviour
 {
-    public Renderer m_Renderer;
-    // Use this for initialization
-    void Start()
-    {
-        m_Renderer = GetComponent<Renderer>();
-    }
+    public bool highlighted;
 
-    // Update is called once per frame
     void Update()
     {
-        if (m_Renderer.isVisible)
+        if (highlighted)
         {
-            Debug.Log("Object is visible");
+            this.GetComponent<Outline>().enabled = true;
         }
-        else Debug.Log("Object is no longer visible");
+        else
+        {
+            this.GetComponent<Outline>().enabled = false;
+        }
     }
 }

@@ -5,5 +5,6 @@ public enum InputEventContextEnum
     Default,
     Anomaly,
     Incense,
-    Bed
+    Bed,
+    Interactable
 }

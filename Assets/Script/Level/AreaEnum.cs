@@ -4,8 +4,8 @@ public enum AreaEnum
 {
     Default,
     Bathroom,
-    Storage,
     Coffin,
     Laundry,
-    Kitchen
+    Kitchen,
+    Upstair
 }

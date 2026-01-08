@@ -199,52 +199,52 @@ MonoBehaviour:
     levelConfigs:
     - Hour: 12:00 AM
       Time: 0
-      Difficulty: 15
-      ActiveInterval: 10
+      Difficulty: 0
+      ActiveInterval: 100
       LightAnomalyThreshold: 50
       HeavyAnomalyThreshold: 100
-      IncenseDrainSpeed: 1
+      IncenseDrainSpeed: 0.1
       TimeScale: 1
     - Hour: 1:00 AM
       Time: 60
-      Difficulty: 15
-      ActiveInterval: 10
+      Difficulty: 0
+      ActiveInterval: 100
       LightAnomalyThreshold: 50
       HeavyAnomalyThreshold: 100
-      IncenseDrainSpeed: 1
+      IncenseDrainSpeed: 0.1
       TimeScale: 1
     - Hour: 2:00 AM
       Time: 120
-      Difficulty: 15
-      ActiveInterval: 10
+      Difficulty: 5
+      ActiveInterval: 100
       LightAnomalyThreshold: 50
       HeavyAnomalyThreshold: 100
-      IncenseDrainSpeed: 1
+      IncenseDrainSpeed: 0.1
       TimeScale: 1
     - Hour: 3:00 AM
       Time: 180
-      Difficulty: 15
-      ActiveInterval: 10
+      Difficulty: 5
+      ActiveInterval: 60
       LightAnomalyThreshold: 50
       HeavyAnomalyThreshold: 100
-      IncenseDrainSpeed: 1
+      IncenseDrainSpeed: 0.1
       TimeScale: 1
     - Hour: 4:00 AM
       Time: 240
       Difficulty: 15
-      ActiveInterval: 10
+      ActiveInterval: 60
       LightAnomalyThreshold: 50
       HeavyAnomalyThreshold: 100
-      IncenseDrainSpeed: 1.1
-      TimeScale: 0.9
+      IncenseDrainSpeed: 0.1
+      TimeScale: 1
     - Hour: 5:00 AM
       Time: 300
       Difficulty: 15
-      ActiveInterval: 10
+      ActiveInterval: 60
       LightAnomalyThreshold: 50
       HeavyAnomalyThreshold: 100
-      IncenseDrainSpeed: 1.1
-      TimeScale: 0.8
+      IncenseDrainSpeed: 0.1
+      TimeScale: 1
     AnomalyConfig:
     - AnomalyId: L_Coffin_MisplaceDate
       Am0: FALSE
@@ -253,13 +253,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Coffin_ExtraGreen
       Am0: FALSE
       Am1: TRUE
@@ -267,13 +261,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Coffin_Doll
       Am0: FALSE
       Am1: FALSE
@@ -281,13 +269,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Coffin_ExtraChair
       Am0: FALSE
       Am1: FALSE
@@ -295,13 +277,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Coffin_MoreTrash
       Am0: FALSE
       Am1: TRUE
@@ -309,13 +285,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: H_Coffin_BloodyCoffin
       Am0: FALSE
       Am1: TRUE
@@ -323,13 +293,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: FALSE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
+      activationTimes: []
     - AnomalyId: H_Coffin_TurningChair
       Am0: FALSE
       Am1: TRUE
@@ -337,13 +301,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: FALSE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
+      activationTimes: []
     - AnomalyId: H_Coffin_Portrait
       Am0: FALSE
       Am1: FALSE
@@ -351,13 +309,7 @@ MonoBehaviour:
       Am3: FALSE
       Am4: TRUE
       Am5: FALSE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
-      - FALSE
+      activationTimes: []
     - AnomalyId: H_Coffin_SkullIncense
       Am0: FALSE
       Am1: FALSE
@@ -365,13 +317,7 @@ MonoBehaviour:
       Am3: FALSE
       Am4: TRUE
       Am5: FALSE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
-      - FALSE
+      activationTimes: []
     - AnomalyId: A_Coffin_Trampling
       Am0: FALSE
       Am1: FALSE
@@ -379,13 +325,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: FALSE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - FALSE
-      - TRUE
-      - TRUE
-      - FALSE
+      activationTimes: []
     - AnomalyId: L_Kitchen_Knife
       Am0: FALSE
       Am1: TRUE
@@ -393,13 +333,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Kitchen_Doll
       Am0: FALSE
       Am1: FALSE
@@ -407,13 +341,7 @@ MonoBehaviour:
       Am3: FALSE
       Am4: TRUE
       Am5: FALSE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
-      - FALSE
+      activationTimes: []
     - AnomalyId: L_Kitchen_FallenDishes
       Am0: FALSE
       Am1: TRUE
@@ -421,13 +349,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Kitchen_MoreCondiment
       Am0: FALSE
       Am1: FALSE
@@ -435,13 +357,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Kitchen_ExtraPots
       Am0: FALSE
       Am1: TRUE
@@ -449,13 +365,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: H_Kitchen_MealPrep
       Am0: FALSE
       Am1: TRUE
@@ -463,13 +373,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: FALSE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
+      activationTimes: []
     - AnomalyId: H_Kitchen_LotsOfKnives
       Am0: FALSE
       Am1: TRUE
@@ -477,13 +381,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: FALSE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
+      activationTimes: []
     - AnomalyId: H_Kitchen_BloodyFridge
       Am0: FALSE
       Am1: FALSE
@@ -491,13 +389,7 @@ MonoBehaviour:
       Am3: FALSE
       Am4: TRUE
       Am5: FALSE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
-      - FALSE
+      activationTimes: []
     - AnomalyId: H_Kitchen_BloodyRoof
       Am0: FALSE
       Am1: FALSE
@@ -505,13 +397,7 @@ MonoBehaviour:
       Am3: FALSE
       Am4: TRUE
       Am5: FALSE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
-      - FALSE
+      activationTimes: []
     - AnomalyId: L_Storage_FallingToaster
       Am0: FALSE
       Am1: TRUE
@@ -519,13 +405,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Storage_Doll
       Am0: FALSE
       Am1: TRUE
@@ -533,13 +413,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: FALSE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Storage_Sprout
       Am0: FALSE
       Am1: FALSE
@@ -547,13 +421,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Storage_ExtraSack
       Am0: FALSE
       Am1: TRUE
@@ -561,13 +429,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: H_Storage_BloodyRoof
       Am0: FALSE
       Am1: FALSE
@@ -575,13 +437,7 @@ MonoBehaviour:
       Am3: FALSE
       Am4: FALSE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - TRUE
-      - FALSE
-      - FALSE
-      - TRUE
+      activationTimes: []
     - AnomalyId: H_Storage_SackOfBodies
       Am0: FALSE
       Am1: FALSE
@@ -589,13 +445,7 @@ MonoBehaviour:
       Am3: FALSE
       Am4: TRUE
       Am5: FALSE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
-      - FALSE
+      activationTimes: []
     - AnomalyId: H_Storage_MoreDolls
       Am0: FALSE
       Am1: FALSE
@@ -603,13 +453,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: FALSE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - FALSE
-      - TRUE
-      - TRUE
-      - FALSE
+      activationTimes: []
     - AnomalyId: A_Storage_DollGathering
       Am0: FALSE
       Am1: FALSE
@@ -617,13 +461,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: FALSE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - TRUE
-      - TRUE
-      - FALSE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Laundry_ExtraDetergent
       Am0: FALSE
       Am1: TRUE
@@ -631,13 +469,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Laundry_ExtraShirt
       Am0: FALSE
       Am1: TRUE
@@ -645,13 +477,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Laundry_DuplicatePail
       Am0: FALSE
       Am1: FALSE
@@ -659,13 +485,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Laundry_SpilledWater
       Am0: FALSE
       Am1: TRUE
@@ -673,13 +493,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: H_Laundry_HangingBody
       Am0: FALSE
       Am1: FALSE
@@ -687,13 +501,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: FALSE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
+      activationTimes: []
     - AnomalyId: H_Laundry_BloodWater
       Am0: FALSE
       Am1: TRUE
@@ -701,13 +509,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: H_Laundry_BloodyTrail
       Am0: FALSE
       Am1: FALSE
@@ -715,13 +517,7 @@ MonoBehaviour:
       Am3: FALSE
       Am4: TRUE
       Am5: FALSE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
-      - FALSE
+      activationTimes: []
     - AnomalyId: L_Bathroom_Doll
       Am0: FALSE
       Am1: TRUE
@@ -729,13 +525,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Bathroom_DiscolorPail
       Am0: FALSE
       Am1: TRUE
@@ -743,13 +533,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Bathroom_MissingLid
       Am0: FALSE
       Am1: TRUE
@@ -757,13 +541,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: L_Bathroom_MisplaceCloth
       Am0: FALSE
       Am1: TRUE
@@ -771,13 +549,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
-      - TRUE
+      activationTimes: []
     - AnomalyId: H_Bathroom_Hands
       Am0: FALSE
       Am1: TRUE
@@ -785,13 +557,7 @@ MonoBehaviour:
       Am3: TRUE
       Am4: FALSE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
-      - FALSE
-      - TRUE
+      activationTimes: []
     - AnomalyId: H_Bathroom_HidingBehindWall
       Am0: FALSE
       Am1: TRUE
@@ -799,13 +565,7 @@ MonoBehaviour:
       Am3: FALSE
       Am4: TRUE
       Am5: FALSE
-      activationTimes:
-      - FALSE
-      - TRUE
-      - TRUE
-      - FALSE
-      - TRUE
-      - FALSE
+      activationTimes: []
     - AnomalyId: A_Bathroom_PulledIn
       Am0: FALSE
       Am1: FALSE
@@ -813,10 +573,4 @@ MonoBehaviour:
       Am3: FALSE
       Am4: FALSE
       Am5: TRUE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - FALSE
-      - FALSE
-      - FALSE
-      - TRUE
+      activationTimes: []

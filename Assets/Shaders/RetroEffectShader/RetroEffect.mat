@@ -59,7 +59,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
-    - _DitherOpacity: 0.1
+    - _DitherOpacity: 0.2
     - _Quantization: 64
     - _SaturationLayer: 0
     - _Stencil: 0

@@ -75,6 +75,10 @@ public class UiManager : MonoBehaviour
             lighterHandAnimator.SetTrigger("AnomalyHandUp");
             handEnum = HandEnum.LighterHand;
         }
+        else if (context == InputEventContextEnum.Interactable)
+        {
+            handEnum = HandEnum.Default;
+        }
         else
         {
             anomalyHandAnimator.SetTrigger("AnomalyHandUp");
@@ -93,7 +97,7 @@ public class UiManager : MonoBehaviour
         {
             lighterHandAnimator.SetTrigger("AnomalyHandDown");
         }
-        else
+        else if (handEnum == HandEnum.AnomalyHand)
         {
             anomalyHandAnimator.SetTrigger("AnomalyHandDown");
         }
@@ -147,6 +151,7 @@ public class UiManager : MonoBehaviour
 
 public enum HandEnum
 {
+    Default,
     AnomalyHand,
     LighterHand
 }
