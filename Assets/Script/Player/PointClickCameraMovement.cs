@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Splines;
+using System.Collections;
+using Unity.Mathematics;
 
 public class PointClickCameraMovement : MonoBehaviour
 {
@@ -11,17 +13,30 @@ public class PointClickCameraMovement : MonoBehaviour
     float currentRotationY;
     float targetRotationY = 0;
 
-    bool isTurning = false;
-    bool disableSideTurning;
+    public bool isTurning = false;
+    bool enableMovement;
+    public float lerpPercent;
 
     [SerializeField] GameObject flashLight;
 
     GameObject currentCam;
     [SerializeField] AreaNode currentNode;
+    [SerializeField] AreaNode coffinNode;
+
+    SplineAnimate splineAnimate;
+    SplineContainer currentSplineContainer;
+    Animator cameraAnimator;
+    HeadBop headBoper;
+    [SerializeField] float transitionInTime;
+    [SerializeField] float transitionOutTime;
 
     private void Start()
     {
+        splineAnimate = GetComponent<SplineAnimate>();
+        cameraAnimator = GetComponentInChildren<Animator>();
+        headBoper = GetComponentInChildren<HeadBop>();
         currentCam = currentNode.CameraPos; //Set camera to default position
+        
         SetCamPosition();
 
     }
@@ -29,38 +44,32 @@ public class PointClickCameraMovement : MonoBehaviour
     private void Update()
     {
         HandleKeyboardInput();
-
-        if (isTurning)
-        {
-            HandleCameraMovement(); //Do camera movement stuff
-        }
-
     }
 
     private void HandleKeyboardInput() //PLACE HOLDER#####################
     {
-        if (Input.GetKeyDown(KeyCode.A) && !disableSideTurning) //When getting key input, set target for camera to turn to
+        if (Input.GetKeyDown(KeyCode.A) && !enableMovement) //When getting key input, set target for camera to turn to
         {
             if (currentNode.directionDict.ContainsKey(Direction.Left))
             {
                 TurnCamera(currentNode.directionDict[Direction.Left]);
             }
         }
-        if (Input.GetKeyDown(KeyCode.D) && !disableSideTurning)
+        if (Input.GetKeyDown(KeyCode.D) && !enableMovement)
         {
             if (currentNode.directionDict.ContainsKey(Direction.Right))
             {
                 TurnCamera(currentNode.directionDict[Direction.Right]);
             }
         }
-        if (Input.GetKeyDown(KeyCode.A) && !disableSideTurning)
+        if (Input.GetKeyDown(KeyCode.A) && !enableMovement)
         {
             if (currentNode.directionDict.ContainsKey(Direction.Forward))
             {
                 TurnCamera(currentNode.directionDict[Direction.Forward]);
             }
         }
-        if (Input.GetKeyDown(KeyCode.S) && !disableSideTurning)
+        if (Input.GetKeyDown(KeyCode.S) && !enableMovement)
         {
             if (currentNode.directionDict.ContainsKey(Direction.Backward))
             {
@@ -73,7 +82,7 @@ public class PointClickCameraMovement : MonoBehaviour
     {
         if (!isTurning) //Don't turn if the player is already turning
         {
-            GameManager.instance.uiManager.TransitionOut();
+            //GameManager.instance.uiManager.TransitionOut();
             if (currentNode.pathDict[nextArea].direction == Direction.Left)
             {
                 targetRotationY -= 90; //Set camera turn target to 90 degree to the left
@@ -83,32 +92,128 @@ public class PointClickCameraMovement : MonoBehaviour
                 targetRotationY += 90; //Set camera turn target to 90 degree to the right
             }
             
+            currentSplineContainer = currentNode.pathDict[nextArea].splineContainer;
             currentNode = currentNode.pathDict[nextArea].areaNode;
             isTurning = true; //Keep track of when player is turning
+
+            StartCoroutine(TransitionIn());
         }
     }
 
-    private void HandleCameraMovement()
+    private IEnumerator TransitionIn()
     {
-        currentRotationY = Mathf.SmoothDamp(currentRotationY, targetRotationY, ref camSpeed, camSmoothTime); //Smooth camera turn (janky camera turn target rn FIX LATER)
-        this.transform.rotation = Quaternion.Euler(currentCam.transform.eulerAngles.x, currentRotationY, currentCam.transform.eulerAngles.z);
+        cameraAnimator.SetTrigger("TurnDown");
+        GameManager.instance.uiManager.FadeOut();
+        GameManager.instance.uiManager.HandShakeStart();
+        headBoper.isBobbing = true;
 
-        if (currentRotationY >= targetRotationY - 5 * turningOffset && currentRotationY <= targetRotationY + 5 * turningOffset && isTurning) //Teleport camera to target position when it has almost turned toward the target
+        Spline spline = currentSplineContainer.Spline;
+        float3 pos = spline.ToArray()[0].Position;
+
+        Vector3 splinePosition = currentSplineContainer.transform.TransformPoint(pos);
+        Quaternion splineRot = spline.ToArray()[0].Rotation;
+
+        Vector3 currentPos = transform.position;
+        Quaternion currentRot = this.transform.rotation;
+        
+        float elapsedTime = 0;
+        float waitTime = transitionInTime;
+
+        while (elapsedTime < waitTime)
         {
-            SwitchCamera();
-            GameManager.instance.uiManager.TransitionIn();
+            transform.position = Vector3.Lerp(currentPos, splinePosition, (elapsedTime/waitTime));
+            transform.rotation = Quaternion.Slerp(currentRot, splineRot, (elapsedTime / waitTime));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        splineAnimate.Container = currentSplineContainer;
+        PlaySplineAnimation();
+    }
+
+    private void PlaySplineAnimation()
+    {
+        splineAnimate.Play();
+        StartCoroutine(CheckSplineComplete());
+    }
+
+    private IEnumerator CheckSplineComplete()
+    {
+        while(splineAnimate.ElapsedTime < splineAnimate.Duration)
+        {
+            yield return null;
+        }
+        PlayTransitonOut();
+        splineAnimate.ElapsedTime = 0;
+    }
+
+    private void PlayTransitonOut()
+    {
+        SwitchCamera();
+        StartCoroutine(TransitionOut());
+    }
+
+    private IEnumerator TransitionOut()
+    {
+        cameraAnimator.SetTrigger("TurnUp");
+        GameManager.instance.uiManager.FadeIn();
+        GameManager.instance.uiManager.HandShakeEnd();
+        headBoper.isBobbing = false;
+
+        Vector3 targetPos = currentCam.transform.position;
+        Quaternion targetRot = currentCam.transform.rotation;
+
+        Vector3 currentPos = transform.position;
+        Quaternion currentRot = this.transform.rotation;
+
+        float elapsedTime = 0;
+        float waitTime = transitionOutTime;
+
+        while (elapsedTime < waitTime)
+        {
+            transform.position = Vector3.Lerp(currentPos, targetPos, (elapsedTime / waitTime));
+            transform.rotation = Quaternion.Slerp(currentRot, targetRot, (elapsedTime / waitTime));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }     
+
+        SetCamPosition();
+        GameEventsManager.instance.playerEvents.MoveToArea(currentNode.area);
+        yield return null;
+    }
+
+
+    private IEnumerator TurnCamera()
+    {
+        Quaternion currentPos = this.transform.rotation;
+        Quaternion targetTransform = Quaternion.Euler(currentCam.transform.eulerAngles.x, targetRotationY, currentCam.transform.eulerAngles.z);
+        float elapsedTime = 0;
+        float waitTime = 0.7f;
+        
+
+        while (elapsedTime < waitTime)
+        {
+            transform.rotation = Quaternion.Slerp(currentPos, targetTransform, (elapsedTime / waitTime));
+            elapsedTime += Time.deltaTime;
+          // Yield here
+            yield return null;
         }
 
-        if (currentRotationY >= targetRotationY - turningOffset && currentRotationY <= targetRotationY + turningOffset && isTurning) //Enable turning again once player has turned toward the target
-        {
-            isTurning = false;
-        }
+        // Make sure we got there
+        SwitchCamera();
+        GameManager.instance.uiManager.TransitionIn();
+        yield return null;
+    }
+
+    public void RespawnPlayer()
+    {
+        currentNode = coffinNode;
+        currentCam = currentNode.CameraPos;
+        SwitchCamera();
     }
 
     private void SwitchCamera() //Set target camera based on the index
     {
         currentCam = currentNode.CameraPos;
-        SetCamPosition();
     }
 
     private void SetCamPosition() //Set the camera position and rotation to the target camera
@@ -118,5 +223,8 @@ public class PointClickCameraMovement : MonoBehaviour
         flashLight.transform.rotation = currentCam.transform.rotation;
         currentRotationY = currentCam.transform.eulerAngles.y;
         targetRotationY = currentCam.transform.eulerAngles.y;
+
+        GameManager.instance.anomalyManager.currentArea = currentNode.area;
+        isTurning = false;
     }
 }

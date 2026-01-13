@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class HeadBop : MonoBehaviour
 {
-    [Range(0.001f, 0.01f)]
+    [Range(0.001f, 1f)]
     public float amount;
     float originalAmount;
 

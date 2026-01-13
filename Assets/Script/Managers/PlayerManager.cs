@@ -6,11 +6,10 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField] GameObject playerCameraObject;
     Camera playerCamera;
-    [SerializeField] PlayerMovementController movementController;
+    [SerializeField] PointClickCameraMovement cameraMovement;
     [SerializeField] float rayMaxDistance;
     private int layerMask = (1 << 6) | (1 << 7);
 
-    public float baseMoveSpeed;
     public float interactProgression;
     public float maxProgression = 1;
 
@@ -56,11 +55,6 @@ public class PlayerManager : MonoBehaviour
         
     }
 
-    private void FixedUpdate()
-    {
-        //CheckCameraRayCastForInteractable();
-    }
-
     private void StartInteract(InputEventContextEnum inputContext)
     {
         GameEventsManager.instance.anomalyEvents.StartHoldingAnomaly();
@@ -74,6 +68,11 @@ public class PlayerManager : MonoBehaviour
         }
         
         //movementController.moveSpeed = baseMoveSpeed / 2;
+    }
+
+    public void TeleportPlayerToRespawn()
+    {
+        cameraMovement.RespawnPlayer();
     }
 
     private void HandleInteractValue()

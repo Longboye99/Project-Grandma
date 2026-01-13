@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2843663264583088112}
-  - component: {fileID: 6087062937464551057}
   - component: {fileID: 2568261001049234102}
   - component: {fileID: 7700585766169406336}
   m_Layer: 0
@@ -35,24 +34,6 @@ Transform:
   - {fileID: 4504187363244593713}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6087062937464551057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4716946634943998657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a93c73ef09831343be52ee0c7a96a68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCam: {fileID: 0}
-  MoveSpeed: 40
-  ghostAnimator: {fileID: 8282918350642114844}
-  UiAnimator: {fileID: 0}
-  screamAudio: {fileID: 8300000, guid: d094383d71c7e6c48a0603caf528164c, type: 3}
-  noticeAudio: {fileID: 8300000, guid: 44c3f9bc3496c064aa2f006bf3a3eac8, type: 3}
 --- !u!54 &2568261001049234102
 Rigidbody:
   m_ObjectHideFlags: 0

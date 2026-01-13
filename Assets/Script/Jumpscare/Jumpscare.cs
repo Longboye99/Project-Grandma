@@ -21,10 +21,20 @@ public abstract class Jumpscare : MonoBehaviour
     wait til complete
     exit jumpscare
      */
-
-    public abstract void EnableJumpscare();
+    public JumpscareType JumpscareType;
+    public AreaEnum area;
+    
+    public abstract void TriggerJumpscare();
 
     public abstract void DisableJumpscare();
 
     
 }
+
+public enum JumpscareType
+{
+    OnScreen,
+    Transition,
+    AfterInteract
+}
+

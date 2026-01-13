@@ -7,6 +7,7 @@ public class PointClickCameraController : MonoBehaviour
 {
     [Header("Camera Movement Setting")]
     public GameObject playerCameraObject;
+    [SerializeField] Transform cameraPivot;
     private Camera playerCamera;
 
     public float sensX;
@@ -16,8 +17,6 @@ public class PointClickCameraController : MonoBehaviour
 
     float xRotation;
     float yRotation;
-
-
 
     [SerializeField] GameObject flashLight;
 
@@ -31,6 +30,10 @@ public class PointClickCameraController : MonoBehaviour
     {
         FlashLightMovement();
 
+        if(!GetComponent<PointClickCameraMovement>().isTurning)
+        {
+            MouseCameraMovement();
+        }
     }
 
     private void MouseCameraMovement()
@@ -38,10 +41,15 @@ public class PointClickCameraController : MonoBehaviour
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 
-        yRotation = currentRotationY + mouseX;
-        xRotation = mouseY;
+        yRotation += mouseX;
+        xRotation -= mouseY;
 
-        this.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        xRotation = Mathf.Clamp(xRotation, -10, 10);
+        yRotation = Mathf.Clamp(yRotation, -10, 10);
+        
+
+        cameraPivot.transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
+        Debug.Log(xRotation + ", " + yRotation);
     }
 
     private void FlashLightMovement()

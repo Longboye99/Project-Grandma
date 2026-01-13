@@ -1,18 +1,28 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class ChaseJumpscare : Jumpscare
 {
-    [SerializeField] GameObject playerCam;
+    [Header("Prefabs")]
+    [SerializeField] GameObject ghostPrefab;
+    [SerializeField] GameObject jumpscarePrefab;
+
+    GameObject playerCam;
     [SerializeField] float MoveSpeed = 10;
     float MinDist = 2.5f;
 
     [SerializeField] Animator ghostAnimator;
-    [SerializeField] Animator UiAnimator;
+    [SerializeField] Animator jumpscareAnimator;
+
+    Transform jumpscareCanvas;
 
     [SerializeField] AudioClip screamAudio;
     [SerializeField] AudioClip noticeAudio;
 
+    GameObject ghost;
+    GameObject jumpscare;
+    bool isActive;
 
     bool isChasing = false;
 
@@ -28,41 +38,44 @@ public class ChaseJumpscare : Jumpscare
     private void Start()
     {
         playerCam = GameObject.FindGameObjectWithTag("Player");
-        GameObject uiGameObject = GameObject.FindGameObjectWithTag("Jumpscare");
-        uiGameObject.GetComponent<Image>().enabled = true;
-        UiAnimator = uiGameObject.GetComponent<Animator>();
+        jumpscareCanvas = GameObject.FindGameObjectWithTag("Jumpscare").transform;
     }
 
-    public override void EnableJumpscare()
+    public override void TriggerJumpscare()
     {
-        
+        GameEventsManager.instance.playerEvents.EnableMovement(false);
+        ghost = Instantiate(ghostPrefab, transform.position, Quaternion.identity);
+        ghostAnimator = ghost.GetComponentInChildren<Animator>();
+        isActive = true;
+        Invoke("BeginTurning", 2);
     }
-
-    public override void DisableJumpscare()
-    {
-        
-    }
-
-    
-
-    void Update()
-    {
-        Vector3 camDirection = playerCam.transform.position;
-        camDirection.y = transform.position.y;
-        transform.LookAt(camDirection);
-
-        if (isChasing)
-        {
-            ChasePlayer();
-        }
-
-    }
-
-
     private void BeginTurning()
     {
         ghostAnimator.SetTrigger("Turning");
         GameManager.instance.sfxManager.PlaySoundFXClip(noticeAudio, this.transform, 0.3f);
+    }
+
+    public override void DisableJumpscare()
+    {
+        GameEventsManager.instance.anomalyEvents.FinishJumpscare();
+        isActive = false;
+        Invoke("DestroyGhost", 2);
+    }
+
+    void Update()
+    {
+        if (isActive && ghost != null)
+        {
+            Vector3 camDirection = playerCam.transform.position;
+            camDirection.y = transform.position.y;
+            ghost.transform.LookAt(camDirection);
+
+            if (isChasing)
+            {
+                ChasePlayer();
+            }
+        }
+        
     }
 
     private void FinishAnimationEvent(string name)
@@ -75,25 +88,36 @@ public class ChaseJumpscare : Jumpscare
         }
         else if (name == "FinishJumpscare")
         {
-            
+            DisableJumpscare();
         }
     }
 
     private void ChasePlayer()
     {
-        if (Vector3.Distance(transform.position, playerCam.transform.position) >= MinDist)
+        if (Vector3.Distance(ghost.transform.position, playerCam.transform.position) >= MinDist)
         {
-            transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+            ghost.transform.position += ghost.transform.forward * MoveSpeed * Time.deltaTime;
         }
         else
         {
             if (isChasing)
             {
                 isChasing = false;
-                UiAnimator.gameObject.SetActive(true);
-                UiAnimator.SetTrigger("TriggerJumpscare");
+                Destroy(ghost);
+                ghostAnimator = null;
+
+                jumpscare = Instantiate(jumpscarePrefab, jumpscareCanvas);
+                jumpscareAnimator = jumpscare.GetComponent<Animator>();
+                jumpscareAnimator.SetTrigger("TriggerJumpscare");
                 GameManager.instance.sfxManager.PlaySoundFXClip(screamAudio, this.transform, 1);
             }
         }
     }
+
+    private void DestroyGhost()
+    {
+        Destroy(jumpscare);
+        jumpscareAnimator = null;
+    }
+
 }

@@ -27,6 +27,7 @@ public class UiManager : MonoBehaviour
 
     private HandEnum handEnum;
 
+    [SerializeField] Animator flashLightHandAnimator;
     [SerializeField] Animator anomalyHandAnimator;
     [SerializeField] Animator lighterHandAnimator;
 
@@ -55,6 +56,8 @@ public class UiManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
 
+        flashLightHandAnimator.SetTrigger("HandUp");
+
         anomalySlider = anomalySliderObject.GetComponent<Slider>();
         anomalySliderObject.SetActive(false);
         anomalySlider.maxValue = GameManager.instance.playerManager.maxProgression;
@@ -72,7 +75,8 @@ public class UiManager : MonoBehaviour
     {
         if (context == InputEventContextEnum.Incense)
         {
-            lighterHandAnimator.SetTrigger("AnomalyHandUp");
+            flashLightHandAnimator.SetTrigger("HandDown");
+            lighterHandAnimator.SetTrigger("HandUp");
             handEnum = HandEnum.LighterHand;
         }
         else if (context == InputEventContextEnum.Interactable)
@@ -81,7 +85,8 @@ public class UiManager : MonoBehaviour
         }
         else
         {
-            anomalyHandAnimator.SetTrigger("AnomalyHandUp");
+            flashLightHandAnimator.SetTrigger("HandDown");
+            anomalyHandAnimator.SetTrigger("HandUp");
             handEnum = HandEnum.AnomalyHand;
         }
         anomalySliderObject.SetActive(true);
@@ -95,13 +100,14 @@ public class UiManager : MonoBehaviour
     {
         if (handEnum == HandEnum.LighterHand)
         {
-            lighterHandAnimator.SetTrigger("AnomalyHandDown");
+            lighterHandAnimator.SetTrigger("HandDown");           
         }
         else if (handEnum == HandEnum.AnomalyHand)
         {
-            anomalyHandAnimator.SetTrigger("AnomalyHandDown");
+            anomalyHandAnimator.SetTrigger("HandDown");
         }
         anomalySliderObject.SetActive(false);
+        flashLightHandAnimator.SetTrigger("HandUp");
     }
 
     private void CompleteInteract()
@@ -146,6 +152,25 @@ public class UiManager : MonoBehaviour
     public void TransitionOut()
     {
         transitionOverlay.SetTrigger("TransitionOut");
+    }
+
+    public void FadeIn()
+    {
+        transitionOverlay.SetTrigger("FadeIn");
+    }
+
+    public void FadeOut()
+    {
+        transitionOverlay.SetTrigger("FadeOut");
+    }
+
+    public void HandShakeStart()
+    {
+        flashLightHandAnimator.SetTrigger("HandShakeStart");
+    }
+    public void HandShakeEnd()
+    {
+        flashLightHandAnimator.SetTrigger("HandShakeEnd");
     }
 }
 

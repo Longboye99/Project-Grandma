@@ -10,8 +10,6 @@ public class AreaNode : MonoBehaviour
     public Dictionary<Direction, AreaEnum> directionDict = new Dictionary<Direction, AreaEnum>();
     public Dictionary<AreaEnum, AreaPathInfo> pathDict = new Dictionary<AreaEnum, AreaPathInfo>();
     
-    
-
     public GameObject CameraPos;
     public AreaEnum area;
 

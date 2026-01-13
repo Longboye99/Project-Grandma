@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public PlayerManager playerManager;
     public UiManager uiManager;
     public SfxManager sfxManager;
+    public JumpscareManager jumpscareManager;
 
     private void Awake()
     {

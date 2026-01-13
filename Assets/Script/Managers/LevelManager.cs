@@ -36,12 +36,16 @@ public class LevelManager : MonoBehaviour
     {
         GameEventsManager.instance.playerEvents.onRefillIncense += RefillIncense;
         GameEventsManager.instance.anomalyEvents.onSnapIncense += SnapIncense;
+        GameEventsManager.instance.playerEvents.onRespawnPlayer += RespawnPlayer;
+
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.playerEvents.onRefillIncense -= RefillIncense;
         GameEventsManager.instance.anomalyEvents.onSnapIncense -= SnapIncense;
+        GameEventsManager.instance.playerEvents.onRespawnPlayer -= RespawnPlayer;
+
     }
     private void Start()
     {
@@ -80,6 +84,20 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void RespawnPlayer()
+    {
+        GameManager.instance.uiManager.TransitionOut();
+        GameManager.instance.anomalyManager.UndoAllAnomaly();
+        Invoke("RespawnPlayer2", 2);
+    }
+
+    private void RespawnPlayer2()
+    {
+        GameManager.instance.playerManager.TeleportPlayerToRespawn();
+        GameManager.instance.uiManager.TransitionIn();
+        SnapIncense();
+    }
+    
     public void FinishedDefeatAnim()
     {
         DefeatMessage.gameObject.SetActive(true);
