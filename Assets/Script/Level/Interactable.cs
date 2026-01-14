@@ -12,7 +12,7 @@ public abstract class Interactable : MonoBehaviour
         GameEventsManager.instance.levelEvents.onTriggerInteractable -= Interact;
     }
 
-    public abstract void Interact(Interactable interactable);
+    public abstract void Interact(Interactable interactable, AreaEnum area);
 
     void Update()
     {

@@ -60,7 +60,7 @@ public class TestEnemy2 : MonoBehaviour
         { 
             if (anomalyPoint >= heavyAnomalyThreashold)
             {
-                GameEventsManager.instance.anomalyEvents.StartJumpscare(GameManager.instance.anomalyManager.currentArea);
+                GameEventsManager.instance.anomalyEvents.StartJumpscare();
                 currentGrace = graceDuration;
             }
 

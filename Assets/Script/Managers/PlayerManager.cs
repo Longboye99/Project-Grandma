@@ -64,7 +64,7 @@ public class PlayerManager : MonoBehaviour
         isLookingAtIncense = (inputContext == InputEventContextEnum.Incense);
         if(currentInteractable != null)
         {
-            GameEventsManager.instance.levelEvents.TriggerInteractable(currentInteractable);
+            GameEventsManager.instance.levelEvents.TriggerInteractable(currentInteractable, cameraMovement.currentNode.area);
         }
         
         //movementController.moveSpeed = baseMoveSpeed / 2;

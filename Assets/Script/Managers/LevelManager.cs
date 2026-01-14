@@ -79,8 +79,10 @@ public class LevelManager : MonoBehaviour
         if (incenseCurrentTime <= 0 && !isDefeated)
         {
             isDefeated = true;
-            timeSpeed = 0;
-            GameEventsManager.instance.levelEvents.PlayerDefeated();
+            Time.timeScale = 0;
+            DefeatMessage.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
@@ -95,7 +97,12 @@ public class LevelManager : MonoBehaviour
     {
         GameManager.instance.playerManager.TeleportPlayerToRespawn();
         GameManager.instance.uiManager.TransitionIn();
+
+        //fancy snap incense animation them
+
         SnapIncense();
+        PauseTimer(false);
+        GameEventsManager.instance.playerEvents.EnableMovement(true);
     }
     
     public void FinishedDefeatAnim()
@@ -153,6 +160,20 @@ public class LevelManager : MonoBehaviour
     { 
         currentTime += Time.deltaTime * timeSpeed;
         incenseCurrentTime -=  Time.deltaTime * incenseSpeed;
+    }
+
+    public void PauseTimer(bool pause)
+    {
+        if (pause)
+        {
+            timeSpeed = 0;
+            incenseSpeed = 0;
+        }
+        else
+        {
+            timeSpeed = 1;
+            incenseSpeed = 1;
+        }
     }
 
     //---------------------Incense functions----------------------------

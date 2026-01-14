@@ -3,13 +3,12 @@ using UnityEngine;
 public class DebugHandler : MonoBehaviour
 {
     [SerializeField] GameObject text;
+    [SerializeField] Canvas debugCanvas;
     bool isActive;
     void Update()
     {
         HandleDebugToggles();
         ActivateLookedAnomaly();
-        UndoAllAnomaly();
-        RefillIncense();
     }
 
     private void HandleDebugToggles()
@@ -17,38 +16,47 @@ public class DebugHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             GameEventsManager.instance.debugEvents.PressHighlight();
+            debugCanvas.gameObject.SetActive(!isActive);
+            text.SetActive(!isActive);
+            isActive = !isActive;
         }
     }
 
-    private void ActivateLookedAnomaly()
+    public void HighlightAnomaly()
+    {
+        GameEventsManager.instance.debugEvents.PressHighlight();
+    }
+
+    public void ActivateLookedAnomaly()
     {
         if(Input.GetKeyDown(KeyCode.J))
         {
-            GameManager.instance.playerManager.currentAnomaly.TriggerAnomaly();
+            GameManager.instance.anomalyManager.TriggerAnomaly(GameManager.instance.playerManager.currentAnomaly);
         }
     }
 
-    private void UndoAllAnomaly()
+    public void UndoAllAnomaly()
     {
-        if(Input.GetKeyDown(KeyCode.U))
-        {
-            GameManager.instance.anomalyManager.UndoAllAnomaly();
-        }
+        GameManager.instance.anomalyManager.UndoAllAnomaly();
     }
 
-    private void RefillIncense()
+    public void RefillIncense()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            GameManager.instance.levelManager.RefillIncense();
-        }
+        GameManager.instance.levelManager.RefillIncense();
     }
 
-    private void AnomalyCount()
+    public void ActivateAllAnomaly()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            text.SetActive(!isActive);
-        }
+        GameEventsManager.instance.debugEvents.ActivateAllAnomalies();
+    }
+
+    public void TriggerJumpscare()
+    {
+        GameManager.instance.jumpscareManager.EnableJumpscare();
+    }
+
+    public void SkipTime()
+    {
+        GameManager.instance.levelManager.currentTime += 60f;
     }
 }

@@ -39,10 +39,10 @@ public class AnomalyEvents
         onSnapIncense?.Invoke ();
     }
 
-    public event Action<AreaEnum> onStartJumpscare;
-    public void StartJumpscare(AreaEnum currentArea)
+    public event Action onStartJumpscare;
+    public void StartJumpscare()
     {
-        onStartJumpscare?.Invoke (currentArea);
+        onStartJumpscare?.Invoke ();
     }
 
     public event Action onFinishJumpscare;

@@ -13,7 +13,7 @@ public class ToggleInteractable : Interactable
         }
     }
 
-    public override void Interact(Interactable interactable)
+    public override void Interact(Interactable interactable, AreaEnum area)
     {
         if (interactable == this)
         {

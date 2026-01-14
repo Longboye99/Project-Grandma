@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Splines;
 using System.Collections;
 using Unity.Mathematics;
+using System.Security.Cryptography;
 
 public class PointClickCameraMovement : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PointClickCameraMovement : MonoBehaviour
     public float camSmoothTime;
     public float camSpeed;
     public float turningOffset;
+    public float movementCooldown = 0.6f;
 
     float currentRotationY;
     float targetRotationY = 0;
@@ -20,8 +22,9 @@ public class PointClickCameraMovement : MonoBehaviour
     [SerializeField] GameObject flashLight;
 
     GameObject currentCam;
-    [SerializeField] AreaNode currentNode;
+    public AreaNode currentNode;
     [SerializeField] AreaNode coffinNode;
+    [SerializeField] Transform IncenseCam;
 
     SplineAnimate splineAnimate;
     SplineContainer currentSplineContainer;
@@ -82,6 +85,7 @@ public class PointClickCameraMovement : MonoBehaviour
     {
         if (!isTurning) //Don't turn if the player is already turning
         {
+            isTurning = true; //Keep track of when player is turning
             //GameManager.instance.uiManager.TransitionOut();
             if (currentNode.pathDict[nextArea].direction == Direction.Left)
             {
@@ -93,8 +97,9 @@ public class PointClickCameraMovement : MonoBehaviour
             }
             
             currentSplineContainer = currentNode.pathDict[nextArea].splineContainer;
+            splineAnimate.Duration = currentNode.pathDict[nextArea].duration;
             currentNode = currentNode.pathDict[nextArea].areaNode;
-            isTurning = true; //Keep track of when player is turning
+            
 
             StartCoroutine(TransitionIn());
         }
@@ -126,12 +131,13 @@ public class PointClickCameraMovement : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        splineAnimate.Container = currentSplineContainer;
+        
         PlaySplineAnimation();
     }
 
     private void PlaySplineAnimation()
     {
+        splineAnimate.Container = currentSplineContainer;
         splineAnimate.Play();
         StartCoroutine(CheckSplineComplete());
     }
@@ -209,6 +215,7 @@ public class PointClickCameraMovement : MonoBehaviour
         currentNode = coffinNode;
         currentCam = currentNode.CameraPos;
         SwitchCamera();
+        SetCamPosition();
     }
 
     private void SwitchCamera() //Set target camera based on the index
@@ -225,6 +232,82 @@ public class PointClickCameraMovement : MonoBehaviour
         targetRotationY = currentCam.transform.eulerAngles.y;
 
         GameManager.instance.anomalyManager.currentArea = currentNode.area;
+        StartCoroutine(Movementcooldown());
+    }
+
+    private void IncenseCutscene()
+    {
+        StartCoroutine(MoveToIncense());
+    }
+
+    private IEnumerator MoveToIncense()
+    {
+        Vector3 targetPos = IncenseCam.position;
+        Quaternion targetRot = IncenseCam.rotation;
+
+        Vector3 currentPos = transform.position;
+        Quaternion currentRot = this.transform.rotation;
+
+        float elapsedTime = 0;
+        float waitTime = transitionOutTime;
+
+        while (elapsedTime < waitTime)
+        {
+            transform.position = Vector3.Lerp(currentPos, targetPos, (elapsedTime / waitTime));
+            transform.rotation = Quaternion.Slerp(currentRot, targetRot, (elapsedTime / waitTime));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPos;
+    }
+
+    private void DoIncenseSnap()
+    {
+        //animationStuff
+    }
+
+    private IEnumerator WaitForSeconds()
+    {
+        yield return new WaitForSeconds(2);
+        MoveAway();
+    }
+
+    private void MoveAway()
+    {
+        StartCoroutine(MoveCamBack());  
+    }
+
+    private IEnumerator MoveCamBack()
+    {
+        cameraAnimator.SetTrigger("TurnUp");
+        GameManager.instance.uiManager.FadeIn();
+        GameManager.instance.uiManager.HandShakeEnd();
+        headBoper.isBobbing = false;
+
+        Vector3 targetPos = currentCam.transform.position;
+        Quaternion targetRot = currentCam.transform.rotation;
+
+        Vector3 currentPos = transform.position;
+        Quaternion currentRot = this.transform.rotation;
+
+        float elapsedTime = 0;
+        float waitTime = transitionOutTime;
+
+        while (elapsedTime < waitTime)
+        {
+            transform.position = Vector3.Lerp(currentPos, targetPos, (elapsedTime / waitTime));
+            transform.rotation = Quaternion.Slerp(currentRot, targetRot, (elapsedTime / waitTime));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        SetCamPosition();
+    }
+
+    private IEnumerator Movementcooldown()
+    {
+        yield return new WaitForSeconds(movementCooldown);
         isTurning = false;
     }
 }

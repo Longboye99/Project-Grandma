@@ -158,6 +158,15 @@ public class AnomalyManager : MonoBehaviour
         return false;
     }
 
+    public void TriggerAnomaly(Anomaly anomaly)
+    {       
+        if(anomaly.isActive == false)
+        {
+            anomaly.TriggerAnomaly();
+            ActiveAnomalies.Add(anomaly);
+        }         
+    }
+
     
     private void UndoAnomaly(Anomaly anomaly)
     {
@@ -173,6 +182,7 @@ public class AnomalyManager : MonoBehaviour
     {
         foreach (Anomaly anomaly in ActiveAnomalies)
         {
+            anomaly.UndoAnomaly(anomaly);
             AddAnomalyToAvailableList(anomaly);
         }
         ActiveAnomalies.Clear();

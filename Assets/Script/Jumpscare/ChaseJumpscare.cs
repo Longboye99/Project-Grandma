@@ -43,7 +43,6 @@ public class ChaseJumpscare : Jumpscare
 
     public override void TriggerJumpscare()
     {
-        GameEventsManager.instance.playerEvents.EnableMovement(false);
         ghost = Instantiate(ghostPrefab, transform.position, Quaternion.identity);
         ghostAnimator = ghost.GetComponentInChildren<Animator>();
         isActive = true;
@@ -80,13 +79,13 @@ public class ChaseJumpscare : Jumpscare
 
     private void FinishAnimationEvent(string name)
     {
-        if (name == "FinishTurning")
+        if (name == "FinishTurning" && isActive)
         {
             ghostAnimator.SetTrigger("Running");
             isChasing = true;
             
         }
-        else if (name == "FinishJumpscare")
+        else if (name == "FinishJumpscare" && isActive)
         {
             DisableJumpscare();
         }
@@ -100,7 +99,7 @@ public class ChaseJumpscare : Jumpscare
         }
         else
         {
-            if (isChasing)
+            if (isChasing && Vector3.Distance(ghost.transform.position, playerCam.transform.position) < MinDist)
             {
                 isChasing = false;
                 Destroy(ghost);

@@ -15,6 +15,7 @@ public class GameEventsManager : MonoBehaviour
             }
             return _instance;
         }
+
     }
 
     public AnomalyEvents anomalyEvents;

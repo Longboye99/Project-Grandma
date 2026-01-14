@@ -49,7 +49,6 @@ public class PointClickCameraController : MonoBehaviour
         
 
         cameraPivot.transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
-        Debug.Log(xRotation + ", " + yRotation);
     }
 
     private void FlashLightMovement()
