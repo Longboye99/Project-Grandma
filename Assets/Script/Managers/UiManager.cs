@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Collections;
 
 public class UiManager : MonoBehaviour
 {
@@ -57,11 +58,18 @@ public class UiManager : MonoBehaviour
         Cursor.visible = true;
 
         flashLightHandAnimator.SetTrigger("HandUp");
+        StartCoroutine(TransitionStart());
 
         anomalySlider = anomalySliderObject.GetComponent<Slider>();
         anomalySliderObject.SetActive(false);
         anomalySlider.maxValue = GameManager.instance.playerManager.maxProgression;
 
+    }
+
+    private IEnumerator TransitionStart()
+    {
+        yield return new WaitForSeconds(0.8f);
+        transitionOverlay.SetTrigger("TransitionIn");
     }
 
     private void Update()

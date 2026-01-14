@@ -33,6 +33,16 @@ public class PointClickCameraMovement : MonoBehaviour
     [SerializeField] float transitionInTime;
     [SerializeField] float transitionOutTime;
 
+    private void OnEnable()
+    {
+        GameEventsManager.instance.playerEvents.onEnableMovement += EnableMovement;
+    }
+
+    private void OnDisable()
+    {
+        GameEventsManager.instance.playerEvents.onEnableMovement -= EnableMovement;
+    }
+
     private void Start()
     {
         splineAnimate = GetComponent<SplineAnimate>();
@@ -80,6 +90,10 @@ public class PointClickCameraMovement : MonoBehaviour
             }
         }
     }
+    private void EnableMovement(bool enable)
+    {
+        enableMovement = enable;
+    }
 
     public void TurnCamera(AreaEnum nextArea)
     {
@@ -107,7 +121,7 @@ public class PointClickCameraMovement : MonoBehaviour
 
     private IEnumerator TransitionIn()
     {
-        cameraAnimator.SetTrigger("TurnDown");
+        //cameraAnimator.SetTrigger("TurnDown");
         GameManager.instance.uiManager.FadeOut();
         GameManager.instance.uiManager.HandShakeStart();
         headBoper.isBobbing = true;
@@ -160,7 +174,7 @@ public class PointClickCameraMovement : MonoBehaviour
 
     private IEnumerator TransitionOut()
     {
-        cameraAnimator.SetTrigger("TurnUp");
+        //cameraAnimator.SetTrigger("TurnUp");
         GameManager.instance.uiManager.FadeIn();
         GameManager.instance.uiManager.HandShakeEnd();
         headBoper.isBobbing = false;
@@ -235,7 +249,7 @@ public class PointClickCameraMovement : MonoBehaviour
         StartCoroutine(Movementcooldown());
     }
 
-    private void IncenseCutscene()
+    public void IncenseCutsceneIn()
     {
         StartCoroutine(MoveToIncense());
     }
@@ -262,25 +276,14 @@ public class PointClickCameraMovement : MonoBehaviour
         transform.position = targetPos;
     }
 
-    private void DoIncenseSnap()
+    public void IncenseCutSceneOut()
     {
-        //animationStuff
+        StartCoroutine(MoveAwayFromIncense());  
     }
 
-    private IEnumerator WaitForSeconds()
+    private IEnumerator MoveAwayFromIncense()
     {
-        yield return new WaitForSeconds(2);
-        MoveAway();
-    }
-
-    private void MoveAway()
-    {
-        StartCoroutine(MoveCamBack());  
-    }
-
-    private IEnumerator MoveCamBack()
-    {
-        cameraAnimator.SetTrigger("TurnUp");
+        //cameraAnimator.SetTrigger("TurnUp");
         GameManager.instance.uiManager.FadeIn();
         GameManager.instance.uiManager.HandShakeEnd();
         headBoper.isBobbing = false;

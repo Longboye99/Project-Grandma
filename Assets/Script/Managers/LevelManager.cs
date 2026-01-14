@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour
 
     bool isDefeated;
     float size;
+    PointClickCameraMovement cameraMovement;
 
 
     private void OnEnable()
@@ -50,6 +51,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         incenseSection = maxIncenseSection;
+        cameraMovement = GameObject.FindGameObjectWithTag("PlayerCollider").GetComponent<PointClickCameraMovement>();
 
     }
     private void Update()

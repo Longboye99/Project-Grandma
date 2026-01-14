@@ -1722,7 +1722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &78606234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7086,11 +7086,11 @@ MonoBehaviour:
   pathInfos:
   - areaNode: {fileID: 955209781}
     splineContainer: {fileID: 709669395}
-    duration: 1.2
+    duration: 3
     direction: 2
   - areaNode: {fileID: 1620426506}
     splineContainer: {fileID: 1989072901}
-    duration: 1.2
+    duration: 3
     direction: 1
   CameraPos: {fileID: 455363513}
   area: 2
@@ -9871,7 +9871,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -220, y: -75.600006}
+  m_AnchoredPosition: {x: -220, y: -205.72998}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &620156393
@@ -14406,8 +14406,8 @@ MonoBehaviour:
   currentNode: {fileID: 455363518}
   coffinNode: {fileID: 455363518}
   IncenseCam: {fileID: 0}
-  transitionInTime: 0.2
-  transitionOutTime: 0.2
+  transitionInTime: 0.6
+  transitionOutTime: 0.6
 --- !u!114 &933045092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14888,7 +14888,7 @@ MonoBehaviour:
   pathInfos:
   - areaNode: {fileID: 455363518}
     splineContainer: {fileID: 325075686}
-    duration: 1.2
+    duration: 3
     direction: 1
   CameraPos: {fileID: 955209775}
   area: 5
@@ -21444,7 +21444,7 @@ MonoBehaviour:
     direction: 1
   - areaNode: {fileID: 1620426506}
     splineContainer: {fileID: 1970628156}
-    duration: 1.2
+    duration: 3
     direction: 2
   CameraPos: {fileID: 1363868548}
   area: 1
@@ -25611,11 +25611,11 @@ MonoBehaviour:
   pathInfos:
   - areaNode: {fileID: 455363518}
     splineContainer: {fileID: 2071054549}
-    duration: 1.2
+    duration: 3
     direction: 2
   - areaNode: {fileID: 2036866472}
     splineContainer: {fileID: 1913427421}
-    duration: 1.2
+    duration: 3
     direction: 1
   CameraPos: {fileID: 1620426501}
   area: 4
@@ -25825,7 +25825,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -130.63, y: -75.600006}
+  m_AnchoredPosition: {x: -130.63, y: -205.72998}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 1, y: 0}
 --- !u!95 &1642081658
@@ -30611,7 +30611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1944150359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32625,7 +32625,7 @@ MonoBehaviour:
   pathInfos:
   - areaNode: {fileID: 1620426506}
     splineContainer: {fileID: 1321109638}
-    duration: 1.2
+    duration: 3
     direction: 1
   - areaNode: {fileID: 1363868553}
     splineContainer: {fileID: 737573828}
