@@ -83,7 +83,7 @@ public class PlayerManager : MonoBehaviour
             {
                 GameEventsManager.instance.playerEvents.RefilIncense();
             }
-            else if (currentAnomaly != null)
+            else if (currentAnomaly != null && currentAnomaly.isActive)
             {
                 GameEventsManager.instance.anomalyEvents.UndoAnomaly(currentAnomaly);
             }
