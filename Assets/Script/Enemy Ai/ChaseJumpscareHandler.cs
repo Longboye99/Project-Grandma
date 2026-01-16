@@ -7,7 +7,7 @@ public class ChaseJumpscareHandler : MonoBehaviour
 {
     [SerializeField] GameObject playerCam;
     [SerializeField] float MoveSpeed = 10;
-    float MinDist = 3;
+    float MinDist = 2.5f;
 
     [SerializeField] Animator ghostAnimator;
     [SerializeField] Animator UiAnimator;
@@ -37,7 +37,7 @@ public class ChaseJumpscareHandler : MonoBehaviour
         uiGameObject.GetComponent<Image>().enabled = true;
         UiAnimator = uiGameObject.GetComponent<Animator>();
 
-        //Invoke("StartJumpscare", 5);
+        StartJumpscare(2);
 
     }
 

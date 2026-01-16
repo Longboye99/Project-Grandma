@@ -40,10 +40,9 @@ public class FlashlightOverlay : MonoBehaviour
         StartCoroutine(WaitForFlickering());
     }
 
-    private void Blink(Anomaly anomaly)
+    public void Blink(Anomaly anomaly)
     {
         animator.SetTrigger("LightDown");
         StartCoroutine(WaitForFlickering());
-
     }
 }

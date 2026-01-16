@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class GameEventsManager : MonoBehaviour
 {
+    public AnomalyEvents anomalyEvents;
+    public DebugEvents debugEvents;
+    public PlayerEvents playerEvents;
+    public LevelEvents levelEvents;
+    public InputEvents inputEvents;
+
     private static GameEventsManager _instance;
     public static GameEventsManager instance 
     {
@@ -17,11 +23,7 @@ public class GameEventsManager : MonoBehaviour
         }
     }
 
-    public AnomalyEvents anomalyEvents;
-    public DebugEvents debugEvents;
-    public PlayerEvents playerEvents;
-    public LevelEvents levelEvents;
-    public InputEvents inputEvents;
+    
 
     private void Awake()
     {

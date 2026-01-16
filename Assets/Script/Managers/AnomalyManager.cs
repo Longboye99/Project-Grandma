@@ -56,14 +56,6 @@ public class AnomalyManager : MonoBehaviour
         }
     }
 
-    /*
-    public void SpawnNextLoopAnomaly()
-    {
-        CheckEnemyEvent();
-        ResetAvailableAnomalyLists();
-        SpawnAnomaly();
-    }*/
-
     public void CheckEnemyEvent(float currentTime)
     {  
         if (timedLevelUpdate[eventIndex] != null)
@@ -166,141 +158,16 @@ public class AnomalyManager : MonoBehaviour
         return false;
     }
 
-    public bool SpawnRandomAttackAnomaly()//Randomly trigger an attack anomaly
-    {
-        AreaAnomaly targetArea = dict[currentArea];
-
-        for (int i = 0; i < spawningTries; i++)
+    public void TriggerAnomaly(Anomaly anomaly)
+    {       
+        if(anomaly.isActive == false)
         {
-            int random = Random.Range(0, targetArea.attackAnomalies.Count);
-            if (targetArea.attackAnomalies.Count > 0)
-            {
-                if (targetArea.attackAnomalies[random].SpawnAnomaly() == true)
-                {
-                    GameEventsManager.instance.anomalyEvents.TriggerAttackAnomaly();
-                    ActiveAnomalies.Add(targetArea.attackAnomalies[random]);
-                    targetArea.attackAnomalies.RemoveAt(random);
-                    return true;
-                }
-            }
-        }
-        Debug.Log("Failed to Spawn Attack Anomaly");
-        return false;
+            anomaly.TriggerAnomaly();
+            ActiveAnomalies.Add(anomaly);
+        }         
     }
-    /*
-    private void SpawnAnomaly()
-    {
-        if(AreaChance2 + AreaChance3 + AreaChance4 + AreaChance5 == 0)
-        {
-            Debug.Log("No area has been selected");
-            return;
-        }
 
-        //random area number
-        int randomAreaCount = GetRandomValue(
-            new RandomSelection(2,2,AreaChance2),
-            new RandomSelection(3,3,AreaChance3),
-            new RandomSelection(4,4,AreaChance4),
-            new RandomSelection(5,5,AreaChance5)
-            );
-
-        List<AreaAnomaly> availableArea = RandomSpawnArea(randomAreaCount);
-
-        //if attack anomaly spawn
-        int rnd;
-        int randomAttack = Random.Range(0, 100);
-        if(randomAttack <= AttackChance * 100 )
-        {
-            //where attack anomaly
-
-            //Add emergency code here
-
-            rnd = Random.Range(0,availableArea.Count);
-            AreaAnomaly targetArea = availableArea[rnd];
-            availableArea.RemoveAt(rnd);
-
-            //which anomaly
-            rnd = Random.Range(0, targetArea.attackAnomalies.Count);
-            targetArea.attackAnomalies[rnd].TriggerAnomaly();
-
-            Debug.Log("Spawned Attack Anomaly: " + targetArea.attackAnomalies[rnd].name + ", At Area: " + targetArea.areaEnum.ToString());
-
-            //active
-            ActiveAnomalies.Add(targetArea.attackAnomalies[rnd]);
-            targetArea.attackAnomalies.RemoveAt(rnd);
-
-        }
-
-        if(GameManager.instance.levelManager.currentLoop == 3 && !hasJumpscared)
-        {
-            hasJumpscared = true;
-            jumpscare.TriggerAnomaly();
-        }
-
-        //if heavy anomaly spawn
-        int randomHeavyAnomalyCount = GetRandomValue(
-            new RandomSelection(0,0,HeavyChance0),
-            new RandomSelection(1,1,HeavyChance1),
-            new RandomSelection(2,2,HeavyChance2)
-            );
-        if(randomHeavyAnomalyCount > 0)
-        {
-            for (int i = 0; i < randomHeavyAnomalyCount; i++)
-            {
-                //where
-                rnd = Random.Range(0, availableArea.Count);
-                AreaAnomaly targetArea = availableArea[rnd];
-                availableArea.RemoveAt(rnd);
-
-                rnd = Random.Range(0, targetArea.heavyAnomalies.Count);
-                targetArea.heavyAnomalies[rnd].TriggerAnomaly();
-
-                Debug.Log("Spawned Heavy Anomaly: " + targetArea.heavyAnomalies[rnd].name + ", At Area: " + targetArea.areaEnum.ToString());
-
-                ActiveAnomalies.Add(targetArea.heavyAnomalies[rnd]);
-                targetArea.heavyAnomalies.RemoveAt(rnd);
-
-            }
-            
-        }
-        //spawn light anomaly in left over areas
-        foreach (var area in availableArea)
-        {
-            if (availableArea.Count == 0) break;
-
-            //random how many light anomaly the rest of the area has
-            int randomDouble = Random.Range(0, 100);
-            if(randomDouble <= AttackChance * 100)
-            {
-                //spawn twice
-                for (int i = 0; i < 2; i++)
-                {
-                    rnd = Random.Range(0, area.lightAnomalies.Count);
-                    area.lightAnomalies[rnd].TriggerAnomaly();
-
-                    Debug.Log("Spawned Light Anomaly: " + area.lightAnomalies[rnd].name + ", At Area: " + area.areaEnum.ToString());
-
-                    ActiveAnomalies.Add(area.lightAnomalies[rnd]);
-                    area.lightAnomalies.RemoveAt(rnd);
-
-                }
-            }
-            else
-            {
-                //spawn once
-                rnd = Random.Range(0, area.lightAnomalies.Count);
-                area.lightAnomalies[rnd].TriggerAnomaly();
-
-                Debug.Log("Spawned Light Anomaly: " + area.lightAnomalies[rnd].name + ", At Area: " + area.areaEnum.ToString());
-
-                ActiveAnomalies.Add(area.lightAnomalies[rnd]);
-                area.lightAnomalies.RemoveAt(rnd);
-
-            }
-        }
-        
-    }
-        */
+    
     private void UndoAnomaly(Anomaly anomaly)
     {
         if (!ActiveAnomalies.Contains(anomaly))
@@ -315,6 +182,7 @@ public class AnomalyManager : MonoBehaviour
     {
         foreach (Anomaly anomaly in ActiveAnomalies)
         {
+            anomaly.UndoAnomaly(anomaly);
             AddAnomalyToAvailableList(anomaly);
         }
         ActiveAnomalies.Clear();
@@ -410,6 +278,11 @@ public class AnomalyManager : MonoBehaviour
             /*availableArea.Add(area.Value);
             Debug.Log("Available Area :" + area.Value.areaEnum.ToString());*/
 
+        }
+
+        if(anomalyPoint <= enemy.lightAnomalyThreshold && availableArea.Contains(dict[currentArea])) //if enemy not in heavy phase, dont spawn anomaly in front of player
+        {
+            availableArea.Remove(dict[currentArea]);
         }
 
         //Remove area til we have the right amount

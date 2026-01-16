@@ -1,21 +1,20 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Splines;
 
 public class Test : MonoBehaviour
 {
-    public Renderer m_Renderer;
-    // Use this for initialization
-    void Start()
+    private void Start()
     {
-        m_Renderer = GetComponent<Renderer>();
+        StartCoroutine(Wait(5));
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator<WaitForSeconds> Wait(float seconds)
     {
-        if (m_Renderer.isVisible)
-        {
-            Debug.Log("Object is visible");
-        }
-        else Debug.Log("Object is no longer visible");
+        Debug.Log("waiting");
+        yield return new WaitForSeconds(seconds);
+        Debug.Log("wait end");
     }
 }

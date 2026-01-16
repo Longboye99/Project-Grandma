@@ -20,4 +20,22 @@ public class PlayerEvents
     {
         onCompleteInteract?.Invoke();
     }
+
+    public event Action<AreaEnum> onMoveToArea;
+    public void MoveToArea(AreaEnum area)
+    {
+        onMoveToArea?.Invoke(area);
+    }
+
+    public event Action<bool> onEnableMovement;
+    public void EnableMovement(bool value)
+    {
+        onEnableMovement?.Invoke(value);
+    }
+
+    public event Action onRespawnPlayer;
+    public void RespawnPlayer()
+    {
+        onRespawnPlayer?.Invoke();
+    }
 }

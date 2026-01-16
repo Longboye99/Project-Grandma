@@ -3,15 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class Button : MonoBehaviour
 {
-    [SerializeField] string sceneName;
+    [SerializeField] int sceneIndex;
 
     public void LoadNewScene()
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneIndex);
+        Time.timeScale = 1.0f;
     }
-
-    public void PlayFadeOut()
-    {
-
-    }    
 }

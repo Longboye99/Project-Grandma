@@ -11,6 +11,7 @@ public class SfxManager : MonoBehaviour
     {
         AudioSource audioSource = AudioSource.Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
         audioSource.clip = audioCip;
+        audioSource.volume = volumn;
         audioSource.Play();
         float clipLength = audioSource.clip.length; 
         GameObject.Destroy(audioSource.gameObject, clipLength );

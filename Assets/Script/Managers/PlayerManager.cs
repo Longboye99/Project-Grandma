@@ -6,19 +6,21 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField] GameObject playerCameraObject;
     Camera playerCamera;
-    [SerializeField] PlayerMovementController movementController;
+    [SerializeField] PointClickCameraMovement cameraMovement;
     [SerializeField] float rayMaxDistance;
+    [SerializeField] AudioClip lighterAudio;
+    [SerializeField] float volumn;
     private int layerMask = (1 << 6) | (1 << 7);
 
-    public float baseMoveSpeed;
     public float interactProgression;
     public float maxProgression = 1;
 
-    private bool isHoldingInteract = false;
+    public bool isHoldingInteract = false;
 
     public Anomaly currentAnomaly;
-    public bool isLookingAtBed;
-    public bool isLookingAtIncense;
+    private bool isLookingAtIncense;
+
+    public Interactable currentInteractable;
 
 
     private void OnEnable()
@@ -45,15 +47,14 @@ public class PlayerManager : MonoBehaviour
     {
         if (isHoldingInteract)
         {
-            UpdateInteractValue();
+            HandleInteractValue();
             GameManager.instance.uiManager.sliderValue = interactProgression;
         }
+        else
+        {
+            CheckCameraRayCastForInteractable();
+        }
         
-    }
-
-    private void FixedUpdate()
-    {
-        CheckCameraRayCastForInteractable();
     }
 
     private void StartInteract(InputEventContextEnum inputContext)
@@ -63,31 +64,50 @@ public class PlayerManager : MonoBehaviour
         isHoldingInteract = true; //Keep track when mosue is already been held
 
         isLookingAtIncense = (inputContext == InputEventContextEnum.Incense);
-        isLookingAtBed = (inputContext == InputEventContextEnum.Bed);
+        if(currentInteractable != null)
+        {
+            GameEventsManager.instance.levelEvents.TriggerInteractable(currentInteractable, cameraMovement.currentNode.area);
+        }
+        
         //movementController.moveSpeed = baseMoveSpeed / 2;
     }
 
-    private void UpdateInteractValue()
+    public void TeleportPlayerToRespawn()
+    {
+        cameraMovement.RespawnPlayer();
+    }
+
+    private void HandleInteractValue()
     {
         if (interactProgression >= maxProgression) //If timer is complete and is still active (this is to stop the slider from reactivating again without letting go of the mouse)
         {
+
             if (isLookingAtIncense)
             {
                 GameEventsManager.instance.playerEvents.RefilIncense();
+                GameManager.instance.sfxManager.PlaySoundFXClip(lighterAudio, playerCameraObject.transform, volumn);
+                GameManager.instance.uiManager.CheckAnomalyCursor(true);
+
             }
-            else if (isLookingAtBed)
-            {
-                GameEventsManager.instance.playerEvents.ProgressLoop();
-            }
-            else if (currentAnomaly != null)
+            else if (currentAnomaly != null && currentAnomaly.isActive)
             {
                 GameEventsManager.instance.anomalyEvents.UndoAnomaly(currentAnomaly);
+                GameManager.instance.uiManager.CheckAnomalyCursor(true);
+            }
+            else if (currentInteractable != null)
+            {
+                
+            }
+            else
+            {
+                GameManager.instance.uiManager.CheckAnomalyCursor(false);
             }
             
             GameEventsManager.instance.playerEvents.CompleteInteract();
+            
+
             isHoldingInteract = false;
             isLookingAtIncense = false;
-            isLookingAtBed = false;
             //movementController.moveSpeed = baseMoveSpeed;
         }
         else
@@ -96,42 +116,11 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-
-
     private void CancelInteract(InputEventContextEnum inputContext)
     {
         isHoldingInteract = false;
         isLookingAtIncense = false;
-        isLookingAtBed = false;
         //movementController.moveSpeed = baseMoveSpeed;
-    }
-
-    private void CheckRayCastForInteractable()
-    {
-        Debug.DrawRay(playerCameraObject.transform.position, playerCameraObject.transform.forward * rayMaxDistance, Color.cyan);
-        if (Physics.Raycast(playerCameraObject.transform.position, playerCameraObject.transform.forward, out RaycastHit hit, rayMaxDistance, layerMask))
-        {
-            Debug.DrawRay(playerCameraObject.transform.position, playerCameraObject.transform.forward * hit.distance, Color.green);
-            if (hit.collider.gameObject.GetComponent<Anomaly>())
-            {
-                currentAnomaly = hit.collider.gameObject.GetComponent<Anomaly>();
-                GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Anomaly);
-            }
-            else if (hit.collider.gameObject.GetComponent<Incense>())
-            {
-                GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Incense);
-            }
-            else if (hit.collider.gameObject.GetComponent<Bed>())
-            {
-                GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Bed);
-            }
-            
-        }
-        else
-        {
-            currentAnomaly = null;
-            GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Default);
-        }
         
     }
 
@@ -147,24 +136,40 @@ public class PlayerManager : MonoBehaviour
             {
                 currentAnomaly = hit.collider.gameObject.GetComponent<Anomaly>();
                 GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Anomaly);
+
+                currentInteractable = null;
             }
             else if (hit.collider.gameObject.GetComponent<Incense>())
             {
                 GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Incense);
+
+                currentAnomaly = null;
+                currentInteractable = null;
             }
-            else if (hit.collider.gameObject.GetComponent<Bed>())
+            else if (hit.collider.gameObject.GetComponent<Interactable>())
             {
-                GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Bed);
+                currentInteractable = hit.collider.gameObject.GetComponent<Interactable>();
+                GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Interactable);
+
+                currentAnomaly = null;
+            }
+            else
+            {
+                currentAnomaly = null;
+                currentInteractable = null;
+                GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Default);
             }
 
         }
         else
         {
             currentAnomaly = null;
+            currentInteractable = null;
             GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Default);
         }
 
     }
+
 
     /*private void OnDrawGizmos() //Funny green line in inspect
     {
