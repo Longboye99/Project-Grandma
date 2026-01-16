@@ -25,14 +25,15 @@ public class PointClickCameraController : MonoBehaviour
         playerCamera = playerCameraObject.GetComponent<Camera>();
     }
 
-
     private void Update()
     {
-        FlashLightMovement();
-
-        if(!GetComponent<PointClickCameraMovement>().isTurning)
+        if (!GameManager.instance.uiManager.isPaused)
         {
             MouseCameraMovement();
+            if (!GameManager.instance.playerManager.isHoldingInteract)
+            {
+                FlashLightMovement();
+            }
         }
     }
 
@@ -46,7 +47,6 @@ public class PointClickCameraController : MonoBehaviour
 
         xRotation = Mathf.Clamp(xRotation, -10, 10);
         yRotation = Mathf.Clamp(yRotation, -10, 10);
-        
 
         cameraPivot.transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
     }

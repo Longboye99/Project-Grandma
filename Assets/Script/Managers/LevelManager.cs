@@ -4,6 +4,7 @@ using TMPro;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 using System.Collections.Generic;
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 
 public class LevelManager : MonoBehaviour
@@ -15,22 +16,23 @@ public class LevelManager : MonoBehaviour
     public float timeSpeed = 1;
     public float incenseSpeed = 1;
 
-    [SerializeField] Transform respawnPoint;
-    [SerializeField] GameObject playerObject;
 
     [Header("Incense Config")]
-    [SerializeField] float incenseCurrentTime;
+    [SerializeField] public float incenseCurrentTime;
     [SerializeField] Incense incense;
     [SerializeField] float incenseMaxTime;
     [SerializeField] int incenseSection;
     [SerializeField] int maxIncenseSection;
+    [SerializeField] GameObject incenseWarning;
+    [SerializeField] float incenseWarningThreshold;
+    bool isWarning;
 
     public Canvas VictoryMessage;
     public Canvas DefeatMessage;
 
     bool isDefeated;
     float size;
-    PointClickCameraMovement cameraMovement;
+    PlayerCutsceneController playerCutsceneController;
 
 
     private void OnEnable()
@@ -51,8 +53,8 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         incenseSection = maxIncenseSection;
-        cameraMovement = GameObject.FindGameObjectWithTag("PlayerCollider").GetComponent<PointClickCameraMovement>();
-
+        playerCutsceneController = GameObject.FindGameObjectWithTag("PlayerCollider").GetComponent<PlayerCutsceneController>();
+        RefillIncense();
     }
     private void Update()
     {
@@ -60,9 +62,16 @@ public class LevelManager : MonoBehaviour
         SetIncenseSize();
         CheckVictory();
         CheckDefeat();
+        CheckIncenseWarning();
 
         GameManager.instance.anomalyManager.CheckEnemyEvent(currentTime);
         GameManager.instance.anomalyManager.TallyAnomalyPoint();
+    }
+
+    private void UpdateTime()
+    {
+        currentTime += Time.deltaTime * timeSpeed;
+        incenseCurrentTime -= Time.deltaTime * incenseSpeed;
     }
 
     private void CheckVictory()
@@ -87,83 +96,11 @@ public class LevelManager : MonoBehaviour
             Cursor.visible = true;
         }
     }
-
-    public void RespawnPlayer()
-    {
-        GameManager.instance.uiManager.TransitionOut();
-        GameManager.instance.anomalyManager.UndoAllAnomaly();
-        Invoke("RespawnPlayer2", 2);
-    }
-
-    private void RespawnPlayer2()
-    {
-        GameManager.instance.playerManager.TeleportPlayerToRespawn();
-        GameManager.instance.uiManager.TransitionIn();
-
-        //fancy snap incense animation them
-
-        SnapIncense();
-        PauseTimer(false);
-        GameEventsManager.instance.playerEvents.EnableMovement(true);
-    }
-    
     public void FinishedDefeatAnim()
     {
         DefeatMessage.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
-
-    /*public void ProgessLoop() // call when go to sleep or die
-    {
-        //low incense
-        incenseCurrentTime = 40;
-        SetIncenseSize();
-
-        //fade out anim, disable player movement
-        GameManager.instance.uiManager.TransitionOut();
-        GameManager.instance.playerManager.DisablePlayerMovement();
-
-        //Check if all anomaly is cleared
-        if (GameManager.instance.anomalyManager.ActiveAnomalies.Count == 0 && litIncense == true)
-        {
-            currentLoop++;
-            Debug.Log("Current Loop" + currentLoop);
-            if (currentLoop >= maxLoop)
-            {
-                Invoke("Victory", 2);
-                return;
-            }
-        }
-        else //yes > +1 loop,   no > something
-        {
-            if(currentLoop < 0)
-            {
-                currentLoop = 0;
-            }
-        }
-        
-        playerObject.transform.position = respawnPoint.transform.position;
-        litIncense = false;
-
-        Invoke("WakeUp", 2);
-        //fade in, enable movement
-        //wake up
-    }
-    */
-    /*
-    private void WakeUp()
-    {
-        GameManager.instance.anomalyManager.SpawnNextLoopAnomaly();
-        GameManager.instance.uiManager.TransitionIn();
-        GameManager.instance.playerManager.EnablePlayerMovement();
-    }
-    */
-    private void UpdateTime()
-    { 
-        currentTime += Time.deltaTime * timeSpeed;
-        incenseCurrentTime -=  Time.deltaTime * incenseSpeed;
-    }
-
     public void PauseTimer(bool pause)
     {
         if (pause)
@@ -177,6 +114,55 @@ public class LevelManager : MonoBehaviour
             incenseSpeed = 1;
         }
     }
+
+    private void CheckIncenseWarning()
+    {
+        if(incenseCurrentTime < incenseWarningThreshold && !isWarning)
+        {
+            Debug.LogWarning("Incense Low");
+            isWarning = true;
+            incenseWarning.SetActive(true);
+        }
+        else if(incenseCurrentTime > incenseWarningThreshold && isWarning)
+        {
+            isWarning = false;
+            incenseWarning.SetActive(false);
+        }
+    }
+
+    //-------------------------Respawn--------------------------------
+
+    public void RespawnPlayer()
+    {
+        GameManager.instance.uiManager.FlashlightHand(false);
+        GameManager.instance.uiManager.TransitionOut();
+        GameManager.instance.anomalyManager.UndoAllAnomaly();
+        StartCoroutine(RespawnSequence());
+    }
+
+    private IEnumerator RespawnSequence()
+    {
+        yield return new WaitForSeconds(2f);
+
+        GameManager.instance.playerManager.TeleportPlayerToRespawn();
+        GameManager.instance.uiManager.TransitionIn();
+
+        yield return new WaitForSeconds(0.2f);
+
+        playerCutsceneController.IncenseCutsceneSequence();
+    }
+
+    public void FinishRespawnCutscene()
+    {
+        GameManager.instance.uiManager.FlashlightHand(true);
+
+        PauseTimer(false);
+        GameEventsManager.instance.playerEvents.EnableMovement(true);
+    }
+    
+    //-------------------------------------------------------------------
+
+    
 
     //---------------------Incense functions----------------------------
     private void SetIncenseSize()

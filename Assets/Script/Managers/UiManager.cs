@@ -9,6 +9,8 @@ public class UiManager : MonoBehaviour
     [SerializeField] Canvas pausedCanvas;
     [SerializeField] Animator transitionOverlay;
     public GameObject anomalySliderObject;
+    public GameObject mouseCursor;
+    Animator mouseCursorAnimator;
     private Slider anomalySlider;
 
     [SerializeField] Canvas sliderCanvas;
@@ -23,7 +25,7 @@ public class UiManager : MonoBehaviour
     float currentTime;
     float midnightTime;
 
-    bool isPaused;
+    public bool isPaused;
 
 
     private HandEnum handEnum;
@@ -55,10 +57,11 @@ public class UiManager : MonoBehaviour
         Cursor.visible = false;*/
 
         Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+        Cursor.visible = false;
+        mouseCursorAnimator = mouseCursor.GetComponent<Animator>();
+
 
         flashLightHandAnimator.SetTrigger("HandUp");
-        StartCoroutine(TransitionStart());
 
         anomalySlider = anomalySliderObject.GetComponent<Slider>();
         anomalySliderObject.SetActive(false);
@@ -66,17 +69,25 @@ public class UiManager : MonoBehaviour
 
     }
 
-    private IEnumerator TransitionStart()
-    {
-        yield return new WaitForSeconds(0.8f);
-        transitionOverlay.SetTrigger("TransitionIn");
-    }
-
     private void Update()
     {
         anomalySlider.value = GameManager.instance.playerManager.interactProgression;
         anomalyPointDisplay.text = GameManager.instance.anomalyManager.ActiveAnomalies.Count.ToString();
         DisplayTime();
+        MoveCursor();
+
+    }
+
+    private void MoveCursor()
+    {
+        if (!GameManager.instance.playerManager.isHoldingInteract)
+        {
+            Vector2 mousePosition = Input.mousePosition;
+            Vector2 uiPosition;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)sliderCanvas.transform, mousePosition, sliderCanvas.worldCamera, out uiPosition); //Position magic to get canvas position of the mouse
+            mouseCursor.transform.position = sliderCanvas.transform.TransformPoint(uiPosition);
+        }
+        
     }
 
     private void ActivateInteractSlider(InputEventContextEnum context)
@@ -85,16 +96,25 @@ public class UiManager : MonoBehaviour
         {
             flashLightHandAnimator.SetTrigger("HandDown");
             lighterHandAnimator.SetTrigger("HandUp");
+
+            mouseCursorAnimator.SetTrigger("Lighting");
+
             handEnum = HandEnum.LighterHand;
         }
         else if (context == InputEventContextEnum.Interactable)
         {
             handEnum = HandEnum.Default;
+
+            mouseCursorAnimator.SetTrigger("Interact");
         }
         else
         {
             flashLightHandAnimator.SetTrigger("HandDown");
             anomalyHandAnimator.SetTrigger("HandUp");
+
+            mouseCursorAnimator.SetTrigger("CheckAnomaly");
+
+
             handEnum = HandEnum.AnomalyHand;
         }
         anomalySliderObject.SetActive(true);
@@ -116,11 +136,35 @@ public class UiManager : MonoBehaviour
         }
         anomalySliderObject.SetActive(false);
         flashLightHandAnimator.SetTrigger("HandUp");
+
+        mouseCursorAnimator.SetTrigger("Default");
+
     }
 
     private void CompleteInteract()
     {
         anomalySliderObject.SetActive(false);
+
+        //Coroutine cursor here
+    }
+
+    public void CheckAnomalyCursor(bool value)
+    {
+        if(value == true)
+        {
+            mouseCursorAnimator.SetTrigger("Correct");
+        }
+        else
+        {
+            mouseCursorAnimator.SetTrigger("Incorrect");
+        }
+
+        Invoke("SetCursorDefault", 1);
+    }
+
+    public void SetCursorDefault()
+    {
+        mouseCursorAnimator.SetTrigger("Default");
     }
 
     public void Pause()
@@ -130,7 +174,7 @@ public class UiManager : MonoBehaviour
             pausedCanvas.gameObject.SetActive(false);
             Time.timeScale = 1.0f;
             Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
+            Cursor.visible = false;
             isPaused = false;
             return;
         }
@@ -150,6 +194,19 @@ public class UiManager : MonoBehaviour
 
         timeDisplay.text = "0" + hour.ToString() + " : " + minute.ToString() + "0";
 
+    }
+
+    public void FlashlightHand(bool isUp)
+    {
+        if (isUp)
+        {
+            flashLightHandAnimator.SetTrigger("HandUp");
+
+        }
+        else
+        {
+            flashLightHandAnimator.SetTrigger("HandDown");
+        }
     }
 
     public void TransitionIn()

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Splines;
 using System.Collections;
 using Unity.Mathematics;
+using UnityEngine.UI;
 using System.Security.Cryptography;
 
 public class PointClickCameraMovement : MonoBehaviour
@@ -11,20 +12,22 @@ public class PointClickCameraMovement : MonoBehaviour
     public float camSpeed;
     public float turningOffset;
     public float movementCooldown = 0.6f;
-
-    float currentRotationY;
-    float targetRotationY = 0;
+    public bool turnDownCam;
 
     public bool isTurning = false;
+    public bool isWalking = false;
     bool enableMovement;
-    public float lerpPercent;
 
     [SerializeField] GameObject flashLight;
+    [SerializeField] GameObject buttonCanvas;
+    [SerializeField] GameObject leftButton;
+    [SerializeField] GameObject rightButton;
+    [SerializeField] GameObject forwardButton;
+    [SerializeField] GameObject backwardButton;
 
     GameObject currentCam;
     public AreaNode currentNode;
-    [SerializeField] AreaNode coffinNode;
-    [SerializeField] Transform IncenseCam;
+    [SerializeField] AreaNode startingNode;
 
     SplineAnimate splineAnimate;
     SplineContainer currentSplineContainer;
@@ -48,9 +51,12 @@ public class PointClickCameraMovement : MonoBehaviour
         splineAnimate = GetComponent<SplineAnimate>();
         cameraAnimator = GetComponentInChildren<Animator>();
         headBoper = GetComponentInChildren<HeadBop>();
+
+        currentNode = startingNode;
         currentCam = currentNode.CameraPos; //Set camera to default position
-        
+
         SetCamPosition();
+        StartCoroutine(Movementcooldown());
 
     }
 
@@ -61,59 +67,82 @@ public class PointClickCameraMovement : MonoBehaviour
 
     private void HandleKeyboardInput() //PLACE HOLDER#####################
     {
-        if (Input.GetKeyDown(KeyCode.A) && !enableMovement) //When getting key input, set target for camera to turn to
+        if (Input.GetKeyDown(KeyCode.A)) //When getting key input, set target for camera to turn to
         {
-            if (currentNode.directionDict.ContainsKey(Direction.Left))
-            {
-                TurnCamera(currentNode.directionDict[Direction.Left]);
-            }
+            TurnLeft();
         }
-        if (Input.GetKeyDown(KeyCode.D) && !enableMovement)
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            if (currentNode.directionDict.ContainsKey(Direction.Right))
-            {
-                TurnCamera(currentNode.directionDict[Direction.Right]);
-            }
+            TurnRight();
         }
-        if (Input.GetKeyDown(KeyCode.A) && !enableMovement)
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            if (currentNode.directionDict.ContainsKey(Direction.Forward))
-            {
-                TurnCamera(currentNode.directionDict[Direction.Forward]);
-            }
+            TurnForward();
         }
-        if (Input.GetKeyDown(KeyCode.S) && !enableMovement)
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            if (currentNode.directionDict.ContainsKey(Direction.Backward))
-            {
-                TurnCamera(currentNode.directionDict[Direction.Backward]);
-            }
+            TurnBackward();
         }
     }
+
+    public void TurnRight()
+    {
+        if (currentNode.directionDict.ContainsKey(Direction.Right) && !enableMovement)
+        {
+            TurnCamera(currentNode.directionDict[Direction.Right]);
+        }
+    }
+
+    public void TurnLeft()
+    {
+        if (currentNode.directionDict.ContainsKey(Direction.Left) && !enableMovement)
+        {
+            TurnCamera(currentNode.directionDict[Direction.Left]);
+        }
+    }
+
+    public void TurnForward()
+    {
+        if (currentNode.directionDict.ContainsKey(Direction.Forward) && !enableMovement)
+        {
+            TurnCamera(currentNode.directionDict[Direction.Forward]);
+        }
+    }
+
+    public void TurnBackward()
+    {
+        if (currentNode.directionDict.ContainsKey(Direction.Backward) && !enableMovement)
+        {
+            TurnCamera(currentNode.directionDict[Direction.Backward]);
+        }
+    }
+
     private void EnableMovement(bool enable)
     {
         enableMovement = enable;
+        if (enableMovement == true)
+        {
+            buttonCanvas.SetActive(true);
+
+        }
+        else
+        {
+            buttonCanvas.SetActive(false);
+        }
     }
 
     public void TurnCamera(AreaEnum nextArea)
     {
         if (!isTurning) //Don't turn if the player is already turning
         {
+            buttonCanvas.SetActive(false);
             isTurning = true; //Keep track of when player is turning
             //GameManager.instance.uiManager.TransitionOut();
-            if (currentNode.pathDict[nextArea].direction == Direction.Left)
-            {
-                targetRotationY -= 90; //Set camera turn target to 90 degree to the left
-            }
-            else
-            {
-                targetRotationY += 90; //Set camera turn target to 90 degree to the right
-            }
-            
+
             currentSplineContainer = currentNode.pathDict[nextArea].splineContainer;
             splineAnimate.Duration = currentNode.pathDict[nextArea].duration;
             currentNode = currentNode.pathDict[nextArea].areaNode;
-            
+
 
             StartCoroutine(TransitionIn());
         }
@@ -121,7 +150,11 @@ public class PointClickCameraMovement : MonoBehaviour
 
     private IEnumerator TransitionIn()
     {
-        //cameraAnimator.SetTrigger("TurnDown");
+        if (turnDownCam)
+        {
+            cameraAnimator.SetTrigger("TurnDown");
+
+        }
         GameManager.instance.uiManager.FadeOut();
         GameManager.instance.uiManager.HandShakeStart();
         headBoper.isBobbing = true;
@@ -134,18 +167,18 @@ public class PointClickCameraMovement : MonoBehaviour
 
         Vector3 currentPos = transform.position;
         Quaternion currentRot = this.transform.rotation;
-        
+
         float elapsedTime = 0;
         float waitTime = transitionInTime;
 
         while (elapsedTime < waitTime)
         {
-            transform.position = Vector3.Lerp(currentPos, splinePosition, (elapsedTime/waitTime));
+            transform.position = Vector3.Lerp(currentPos, splinePosition, (elapsedTime / waitTime));
             transform.rotation = Quaternion.Slerp(currentRot, splineRot, (elapsedTime / waitTime));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
+
         PlaySplineAnimation();
     }
 
@@ -153,12 +186,13 @@ public class PointClickCameraMovement : MonoBehaviour
     {
         splineAnimate.Container = currentSplineContainer;
         splineAnimate.Play();
+        isWalking = true;
         StartCoroutine(CheckSplineComplete());
     }
 
     private IEnumerator CheckSplineComplete()
     {
-        while(splineAnimate.ElapsedTime < splineAnimate.Duration)
+        while (splineAnimate.ElapsedTime < splineAnimate.Duration)
         {
             yield return null;
         }
@@ -168,13 +202,18 @@ public class PointClickCameraMovement : MonoBehaviour
 
     private void PlayTransitonOut()
     {
+        isWalking = false;
         SwitchCamera();
         StartCoroutine(TransitionOut());
     }
 
     private IEnumerator TransitionOut()
     {
-        //cameraAnimator.SetTrigger("TurnUp");
+        if (turnDownCam)
+        {
+            cameraAnimator.SetTrigger("TurnUp");
+
+        }
         GameManager.instance.uiManager.FadeIn();
         GameManager.instance.uiManager.HandShakeEnd();
         headBoper.isBobbing = false;
@@ -194,39 +233,17 @@ public class PointClickCameraMovement : MonoBehaviour
             transform.rotation = Quaternion.Slerp(currentRot, targetRot, (elapsedTime / waitTime));
             elapsedTime += Time.deltaTime;
             yield return null;
-        }     
-
-        SetCamPosition();
-        GameEventsManager.instance.playerEvents.MoveToArea(currentNode.area);
-        yield return null;
-    }
-
-
-    private IEnumerator TurnCamera()
-    {
-        Quaternion currentPos = this.transform.rotation;
-        Quaternion targetTransform = Quaternion.Euler(currentCam.transform.eulerAngles.x, targetRotationY, currentCam.transform.eulerAngles.z);
-        float elapsedTime = 0;
-        float waitTime = 0.7f;
-        
-
-        while (elapsedTime < waitTime)
-        {
-            transform.rotation = Quaternion.Slerp(currentPos, targetTransform, (elapsedTime / waitTime));
-            elapsedTime += Time.deltaTime;
-          // Yield here
-            yield return null;
         }
 
-        // Make sure we got there
-        SwitchCamera();
-        GameManager.instance.uiManager.TransitionIn();
+        SetCamPosition();
+        StartCoroutine(Movementcooldown());
+        GameEventsManager.instance.playerEvents.MoveToArea(currentNode.area);
         yield return null;
     }
 
     public void RespawnPlayer()
     {
-        currentNode = coffinNode;
+        currentNode = startingNode;
         currentCam = currentNode.CameraPos;
         SwitchCamera();
         SetCamPosition();
@@ -237,80 +254,41 @@ public class PointClickCameraMovement : MonoBehaviour
         currentCam = currentNode.CameraPos;
     }
 
-    private void SetCamPosition() //Set the camera position and rotation to the target camera
+    public void SetCamPosition() //Set the camera position and rotation to the target camera
     {
         this.transform.position = currentCam.transform.position;
         this.transform.rotation = currentCam.transform.rotation;
         flashLight.transform.rotation = currentCam.transform.rotation;
-        currentRotationY = currentCam.transform.eulerAngles.y;
-        targetRotationY = currentCam.transform.eulerAngles.y;
 
         GameManager.instance.anomalyManager.currentArea = currentNode.area;
-        StartCoroutine(Movementcooldown());
     }
 
-    public void IncenseCutsceneIn()
-    {
-        StartCoroutine(MoveToIncense());
-    }
-
-    private IEnumerator MoveToIncense()
-    {
-        Vector3 targetPos = IncenseCam.position;
-        Quaternion targetRot = IncenseCam.rotation;
-
-        Vector3 currentPos = transform.position;
-        Quaternion currentRot = this.transform.rotation;
-
-        float elapsedTime = 0;
-        float waitTime = transitionOutTime;
-
-        while (elapsedTime < waitTime)
-        {
-            transform.position = Vector3.Lerp(currentPos, targetPos, (elapsedTime / waitTime));
-            transform.rotation = Quaternion.Slerp(currentRot, targetRot, (elapsedTime / waitTime));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.position = targetPos;
-    }
-
-    public void IncenseCutSceneOut()
-    {
-        StartCoroutine(MoveAwayFromIncense());  
-    }
-
-    private IEnumerator MoveAwayFromIncense()
-    {
-        //cameraAnimator.SetTrigger("TurnUp");
-        GameManager.instance.uiManager.FadeIn();
-        GameManager.instance.uiManager.HandShakeEnd();
-        headBoper.isBobbing = false;
-
-        Vector3 targetPos = currentCam.transform.position;
-        Quaternion targetRot = currentCam.transform.rotation;
-
-        Vector3 currentPos = transform.position;
-        Quaternion currentRot = this.transform.rotation;
-
-        float elapsedTime = 0;
-        float waitTime = transitionOutTime;
-
-        while (elapsedTime < waitTime)
-        {
-            transform.position = Vector3.Lerp(currentPos, targetPos, (elapsedTime / waitTime));
-            transform.rotation = Quaternion.Slerp(currentRot, targetRot, (elapsedTime / waitTime));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        SetCamPosition();
-    }
-
-    private IEnumerator Movementcooldown()
+    public IEnumerator Movementcooldown()
     {
         yield return new WaitForSeconds(movementCooldown);
         isTurning = false;
+
+        buttonCanvas.SetActive(true);
+        SwitchButtonDirection();
+    }
+
+    private void SwitchButtonDirection()
+    {
+        rightButton.SetActive(false);
+        leftButton.SetActive(false);
+        backwardButton.SetActive(false);
+
+        if (currentNode.directionDict.ContainsKey(Direction.Left))
+        {
+            leftButton.SetActive(true);
+        }
+        if (currentNode.directionDict.ContainsKey(Direction.Right))
+        {
+            rightButton.SetActive(true);
+        }
+        if (currentNode.directionDict.ContainsKey(Direction.Backward))
+        {
+            backwardButton.SetActive(true);
+        }
     }
 }

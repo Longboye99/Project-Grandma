@@ -8,12 +8,14 @@ public class PlayerManager : MonoBehaviour
     Camera playerCamera;
     [SerializeField] PointClickCameraMovement cameraMovement;
     [SerializeField] float rayMaxDistance;
+    [SerializeField] AudioClip lighterAudio;
+    [SerializeField] float volumn;
     private int layerMask = (1 << 6) | (1 << 7);
 
     public float interactProgression;
     public float maxProgression = 1;
 
-    private bool isHoldingInteract = false;
+    public bool isHoldingInteract = false;
 
     public Anomaly currentAnomaly;
     private bool isLookingAtIncense;
@@ -79,20 +81,31 @@ public class PlayerManager : MonoBehaviour
     {
         if (interactProgression >= maxProgression) //If timer is complete and is still active (this is to stop the slider from reactivating again without letting go of the mouse)
         {
+
             if (isLookingAtIncense)
             {
                 GameEventsManager.instance.playerEvents.RefilIncense();
+                GameManager.instance.sfxManager.PlaySoundFXClip(lighterAudio, playerCameraObject.transform, volumn);
+                GameManager.instance.uiManager.CheckAnomalyCursor(true);
+
             }
             else if (currentAnomaly != null && currentAnomaly.isActive)
             {
                 GameEventsManager.instance.anomalyEvents.UndoAnomaly(currentAnomaly);
+                GameManager.instance.uiManager.CheckAnomalyCursor(true);
             }
             else if (currentInteractable != null)
             {
                 
             }
+            else
+            {
+                GameManager.instance.uiManager.CheckAnomalyCursor(false);
+            }
             
             GameEventsManager.instance.playerEvents.CompleteInteract();
+            
+
             isHoldingInteract = false;
             isLookingAtIncense = false;
             //movementController.moveSpeed = baseMoveSpeed;

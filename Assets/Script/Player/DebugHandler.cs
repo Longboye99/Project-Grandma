@@ -9,6 +9,7 @@ public class DebugHandler : MonoBehaviour
     {
         HandleDebugToggles();
         ActivateLookedAnomaly();
+        TriggerBypassAnomaly();
     }
 
     private void HandleDebugToggles()
@@ -35,6 +36,14 @@ public class DebugHandler : MonoBehaviour
         }
     }
 
+    public void TriggerBypassAnomaly()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GameManager.instance.playerManager.currentAnomaly.TriggerAnomaly();
+        }
+    }
+
     public void UndoAllAnomaly()
     {
         GameManager.instance.anomalyManager.UndoAllAnomaly();
@@ -58,5 +67,10 @@ public class DebugHandler : MonoBehaviour
     public void SkipTime()
     {
         GameManager.instance.levelManager.currentTime += 60f;
+    }
+
+    public void ReduceIncense()
+    {
+        GameManager.instance.levelManager.incenseCurrentTime -= 10;
     }
 }
