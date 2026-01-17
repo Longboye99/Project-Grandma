@@ -9,7 +9,6 @@ public class DebugHandler : MonoBehaviour
     {
         HandleDebugToggles();
         ActivateLookedAnomaly();
-        TriggerBypassAnomaly();
     }
 
     private void HandleDebugToggles()
@@ -20,6 +19,11 @@ public class DebugHandler : MonoBehaviour
             debugCanvas.gameObject.SetActive(!isActive);
             text.SetActive(!isActive);
             isActive = !isActive;
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            TriggerJumpscare();
         }
     }
 

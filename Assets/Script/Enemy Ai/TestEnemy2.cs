@@ -54,6 +54,7 @@ public class TestEnemy2 : MonoBehaviour
     
     private void TrySpawningAnomaly()
     {
+        anomalyPoint = 0;
         anomalyPoint = anomalyManager.TallyAnomalyPoint();
         Debug.Log("Try Spawning Anomaly At Anomaly Point: " + anomalyPoint);
         if (difficultyLevel >= Random.Range(0, 20) && currentGrace <= 0)
@@ -67,10 +68,11 @@ public class TestEnemy2 : MonoBehaviour
             else if (anomalyPoint >= lightAnomalyThreshold)
             {
                 anomalyManager.SpawnRandomHeavyAnomaly();
+                anomalyManager.SpawnRandomLightAnomaly();
+
             }
             else
             {
-                anomalyManager.SpawnRandomLightAnomaly();
             }
         }
         currentCooldown = cooldownDuration;

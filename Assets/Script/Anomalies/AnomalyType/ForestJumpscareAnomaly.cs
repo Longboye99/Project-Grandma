@@ -64,7 +64,7 @@ public class ForestJumpscareAnomaly : Anomaly
             isActive = false;
             isDoingJumpscare = true;
             ghostAnimator = ghost.GetComponentInChildren<Animator>();
-            Invoke("BeginTurning", 0.3f);
+            Invoke("BeginTurning", 0.5f);
         }
         
     }

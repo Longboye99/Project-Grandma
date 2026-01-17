@@ -280,7 +280,7 @@ public class AnomalyManager : MonoBehaviour
 
         }
 
-        if(anomalyPoint <= enemy.lightAnomalyThreshold && availableArea.Contains(dict[currentArea])) //if enemy not in heavy phase, dont spawn anomaly in front of player
+        if(availableArea.Contains(dict[currentArea])) //if enemy not in heavy phase, dont spawn anomaly in front of player
         {
             availableArea.Remove(dict[currentArea]);
         }

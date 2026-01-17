@@ -25,7 +25,8 @@ public class JumpscareManager : MonoBehaviour
     wait til complete
     exit jumpscare
      */
-
+    [SerializeField] AudioClip riserAudio;
+    [SerializeField] float riserVolume;
     [SerializeField] List<JumpscareContainer> jumpscareList;
     Dictionary<AreaEnum, JumpscareContainer> jumpscareDict = new Dictionary<AreaEnum, JumpscareContainer>();
     PointClickCameraMovement cameraMovement;
@@ -60,7 +61,7 @@ public class JumpscareManager : MonoBehaviour
     public void EnableJumpscare()
     {
         jumpscareEnabled = true;
-
+        GameManager.instance.sfxManager.PlaySoundFXClip(riserAudio, cameraMovement.transform, riserVolume);
         StartCoroutine(StartJumpscareCountDown());
         //Start timer
         //if player do something activate instantly
@@ -70,7 +71,8 @@ public class JumpscareManager : MonoBehaviour
 
     private IEnumerator StartJumpscareCountDown()
     {
-        float duration = 3;
+        float duration = 7;
+        
 
         yield return new WaitForSeconds(duration);
 
