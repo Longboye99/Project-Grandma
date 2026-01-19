@@ -20,9 +20,9 @@ public class LevelManager : MonoBehaviour
     [Header("Incense Config")]
     [SerializeField] public float incenseCurrentTime;
     [SerializeField] Incense incense;
-    [SerializeField] float incenseMaxTime;
-    [SerializeField] int incenseSection;
-    [SerializeField] int maxIncenseSection;
+    [SerializeField] public float incenseMaxTime;
+    [SerializeField] public int incenseSection;
+    [SerializeField] public int maxIncenseSection;
     [SerializeField] GameObject incenseWarning;
     [SerializeField] float incenseWarningThreshold;
     bool isWarning;
@@ -53,6 +53,7 @@ public class LevelManager : MonoBehaviour
     }
     private void Start()
     {
+        incenseWarning.SetActive(false);
         incenseSection = maxIncenseSection;
         playerCutsceneController = GameObject.FindGameObjectWithTag("PlayerCollider").GetComponent<PlayerCutsceneController>();
         RefillIncense();

@@ -12,8 +12,8 @@ public class TestEnemy2 : MonoBehaviour
     [SerializeField] GameObject ghostPrefab;
 
     [Header("State")]
-    [SerializeField] private float currentCooldown;
-    [SerializeField] private float currentGrace;
+    [SerializeField] public float currentCooldown;
+    [SerializeField] public float currentGrace;
     [SerializeField] private bool isAttacking;
     [SerializeField] private int anomalyPoint;
 

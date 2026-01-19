@@ -9,19 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: SpreadsheetContainer
-  m_EditorClassIdentifier: Assembly-CSharp:Game.Database:SpreadsheetContainer
-  foldoutImportGUI: 1
-  documentId: 1PqyO8TCiZNLqMfaZ7TNA_k50q7AIbVq75uVizDdvmhE
-  selectedTogglesIds:
-  - anomalies
-  - AnomalyConfig
-  - levelConfigs
-  foldoutSerializationGUI: 1
-  serializationOutputPath: ../../Configs
-  serializationFileName: Configs.v0.1
-  serializationFormat: 0
+  m_Script: {fileID: 11500000, guid: 53154f07fc69ab04fa6c7c4515b736ea, type: 3}
+  m_Name: Data
+  m_EditorClassIdentifier: 
   content:
     anomalies:
     - Id: L_Coffin_Doll

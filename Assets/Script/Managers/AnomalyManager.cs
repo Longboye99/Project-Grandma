@@ -7,7 +7,7 @@ using Game.Database;
 
 public class AnomalyManager : MonoBehaviour
 {
-    [SerializeField] SpreadsheetContainer DataContainer;
+    [SerializeField] LocalSpreadsheetContainer DataContainer;
 
     [Header("State")]
     public int anomalyPoint;
