@@ -18,7 +18,7 @@ public class UiManager : MonoBehaviour
     public float silderMaxValue;
 
     public TextMeshProUGUI timeDisplay;
-    public TextMeshProUGUI anomalyPointDisplay;
+    
 
     int hour;
     int minute;
@@ -26,7 +26,6 @@ public class UiManager : MonoBehaviour
     float midnightTime;
 
     public bool isPaused;
-
 
     private HandEnum handEnum;
 
@@ -36,7 +35,6 @@ public class UiManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEventsManager.instance.inputEvents.onStartInteract += ActivateInteractSlider;
         GameEventsManager.instance.inputEvents.onCancelInteract += CancelInteract;
         GameEventsManager.instance.inputEvents.onPause += Pause;
         GameEventsManager.instance.playerEvents.onCompleteInteract += CompleteInteract;
@@ -44,7 +42,6 @@ public class UiManager : MonoBehaviour
 
     private void OnDisable()
     {
-        GameEventsManager.instance.inputEvents.onStartInteract -= ActivateInteractSlider;
         GameEventsManager.instance.inputEvents.onCancelInteract -= CancelInteract;
         GameEventsManager.instance.inputEvents.onPause -= Pause;
         GameEventsManager.instance.playerEvents.onCompleteInteract -= CompleteInteract;
@@ -61,7 +58,7 @@ public class UiManager : MonoBehaviour
         mouseCursorAnimator = mouseCursor.GetComponent<Animator>();
 
 
-        flashLightHandAnimator.SetTrigger("HandUp");
+        //flashLightHandAnimator.SetTrigger("HandUp");
 
         anomalySlider = anomalySliderObject.GetComponent<Slider>();
         anomalySliderObject.SetActive(false);
@@ -72,7 +69,7 @@ public class UiManager : MonoBehaviour
     private void Update()
     {
         anomalySlider.value = GameManager.instance.playerManager.interactProgression;
-        anomalyPointDisplay.text = GameManager.instance.anomalyManager.ActiveAnomalies.Count.ToString();
+        
         DisplayTime();
         MoveCursor();
 
@@ -90,11 +87,14 @@ public class UiManager : MonoBehaviour
         
     }
 
-    private void ActivateInteractSlider(InputEventContextEnum context)
+    public void ActivateInteractSlider(InputEventContextEnum context)
     {
         if (context == InputEventContextEnum.Incense)
         {
+            flashLightHandAnimator.ResetTrigger("HandUp");
             flashLightHandAnimator.SetTrigger("HandDown");
+
+            lighterHandAnimator.ResetTrigger("HandDown");
             lighterHandAnimator.SetTrigger("HandUp");
 
             mouseCursorAnimator.SetTrigger("Lighting");
@@ -109,7 +109,10 @@ public class UiManager : MonoBehaviour
         }
         else
         {
+            flashLightHandAnimator.ResetTrigger("HandUp");
             flashLightHandAnimator.SetTrigger("HandDown");
+
+            anomalyHandAnimator.ResetTrigger("HandDown");
             anomalyHandAnimator.SetTrigger("HandUp");
 
             mouseCursorAnimator.SetTrigger("CheckAnomaly");
@@ -124,17 +127,21 @@ public class UiManager : MonoBehaviour
         anomalySlider.transform.position = sliderCanvas.transform.TransformPoint(uiPosition); //Teleport slider to the mouse position
     }
 
-    private void CancelInteract(InputEventContextEnum context)
+    public void CancelInteract(InputEventContextEnum context)
     {
         if (handEnum == HandEnum.LighterHand)
         {
+            lighterHandAnimator.ResetTrigger("HandUp");           
             lighterHandAnimator.SetTrigger("HandDown");           
         }
         else if (handEnum == HandEnum.AnomalyHand)
         {
+            anomalyHandAnimator.ResetTrigger("HandUp");
             anomalyHandAnimator.SetTrigger("HandDown");
         }
         anomalySliderObject.SetActive(false);
+
+        flashLightHandAnimator.ResetTrigger("HandDown");
         flashLightHandAnimator.SetTrigger("HandUp");
 
         mouseCursorAnimator.SetTrigger("Default");
@@ -200,11 +207,13 @@ public class UiManager : MonoBehaviour
     {
         if (isUp)
         {
+            flashLightHandAnimator.ResetTrigger("HandDown");
             flashLightHandAnimator.SetTrigger("HandUp");
 
         }
         else
         {
+            flashLightHandAnimator.ResetTrigger("HandUp");
             flashLightHandAnimator.SetTrigger("HandDown");
         }
     }

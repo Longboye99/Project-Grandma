@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,74 +15,130 @@ public class PlayerManager : MonoBehaviour
 
     public float interactProgression;
     public float maxProgression = 1;
-
     public bool isHoldingInteract = false;
+    public bool completedInteract;
+    bool enableInteract = true;
 
     public Anomaly currentAnomaly;
     private bool isLookingAtIncense;
 
+    [Header("Interact Control")]
     public Interactable currentInteractable;
-
+    [SerializeField] float minimumHeldDuration;
+    [SerializeField] bool doingHeldCountdown;
+    float pressedTime;
+    InputEventContextEnum inputEventContext;
 
     private void OnEnable()
     {
         GameEventsManager.instance.inputEvents.onStartInteract += StartInteract;
         GameEventsManager.instance.inputEvents.onCancelInteract += CancelInteract;
+        GameEventsManager.instance.playerEvents.onEnableInteract += EnableInteract;
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.inputEvents.onStartInteract -= StartInteract;
         GameEventsManager.instance.inputEvents.onCancelInteract -= CancelInteract;
+        GameEventsManager.instance.playerEvents.onEnableInteract -= EnableInteract;
+
     }
 
     private void Start()
     {
-        /*movementController = GameObject.FindAnyObjectByType<PlayerMovementController>();
-        movementController.moveSpeed = baseMoveSpeed;*/
         GameManager.instance.uiManager.silderMaxValue = maxProgression;
         playerCamera = playerCameraObject.GetComponent<Camera>();
     }
 
     private void Update()
     {
-        if (isHoldingInteract)
+        if (enableInteract)
         {
-            HandleInteractValue();
-            GameManager.instance.uiManager.sliderValue = interactProgression;
+            if (doingHeldCountdown)// start countdown before holding
+            {
+                CheckCameraRayCastForInteractable();
+
+                if (Time.timeSinceLevelLoad - pressedTime > minimumHeldDuration) //if hold long enough, start holding
+                {
+                    GameEventsManager.instance.anomalyEvents.StartHoldingAnomaly();
+                    doingHeldCountdown = false;
+                    isHoldingInteract = true;
+                    GameManager.instance.uiManager.ActivateInteractSlider(inputEventContext);
+                }
+            }
+            else if (isHoldingInteract)
+            {
+                HandleInteractValue();
+                GameManager.instance.uiManager.sliderValue = interactProgression;
+            }
+            else
+            {
+                CheckCameraRayCastForInteractable();
+            }
         }
-        else
-        {
-            CheckCameraRayCastForInteractable();
-        }
+        
         
     }
 
     private void StartInteract(InputEventContextEnum inputContext)
     {
-        GameEventsManager.instance.anomalyEvents.StartHoldingAnomaly();
-        interactProgression = 0; //Reset slider timer
-        isHoldingInteract = true; //Keep track when mosue is already been held
+        if (!GameManager.instance.uiManager.isPaused)
+        {
+            inputEventContext = inputContext;
 
-        isLookingAtIncense = (inputContext == InputEventContextEnum.Incense);
-        if(currentInteractable != null)
+            pressedTime = Time.timeSinceLevelLoad;
+            doingHeldCountdown = true;
+
+            isHoldingInteract = false;
+            completedInteract = false;
+
+            isLookingAtIncense = (inputContext == InputEventContextEnum.Incense);
+            interactProgression = 0;
+        }
+    }
+
+    private void PerformClick()
+    {
+        if (currentInteractable != null)
         {
             GameEventsManager.instance.levelEvents.TriggerInteractable(currentInteractable, cameraMovement.currentNode.area);
         }
-        
-        //movementController.moveSpeed = baseMoveSpeed / 2;
     }
 
-    public void TeleportPlayerToRespawn()
+    private void CancelInteract(InputEventContextEnum inputContext)
     {
-        cameraMovement.RespawnPlayer();
+        if (!completedInteract)
+        {
+            GameManager.instance.uiManager.CancelInteract(inputContext);
+        }
+        
+        if (!GameManager.instance.uiManager.isPaused)
+        {
+            doingHeldCountdown = false;
+
+            if (isHoldingInteract == false && !completedInteract) //Do click if not hold for long enough
+            {
+                PerformClick();
+                Debug.Log("Clicking");
+            }
+            else if (completedInteract)
+            {
+
+            }
+            else
+            {
+                isHoldingInteract = false; //cancel normally if already holding
+                isLookingAtIncense = false;
+            }
+        }
+        
     }
 
     private void HandleInteractValue()
     {
         if (interactProgression >= maxProgression) //If timer is complete and is still active (this is to stop the slider from reactivating again without letting go of the mouse)
         {
-
+            Debug.Log("Holding Complete");
             if (isLookingAtIncense)
             {
                 GameEventsManager.instance.playerEvents.RefilIncense();
@@ -104,26 +161,34 @@ public class PlayerManager : MonoBehaviour
             }
             
             GameEventsManager.instance.playerEvents.CompleteInteract();
-            
 
+            completedInteract = true;
             isHoldingInteract = false;
             isLookingAtIncense = false;
-            //movementController.moveSpeed = baseMoveSpeed;
+            
+            CancelInteract(InputEventContextEnum.Default);
         }
         else
         {
+            Debug.Log("Holding");
             interactProgression += Time.deltaTime;
         }
     }
 
-    private void CancelInteract(InputEventContextEnum inputContext)
+    private void EnableInteract(bool value)
     {
-        isHoldingInteract = false;
-        isLookingAtIncense = false;
-        //movementController.moveSpeed = baseMoveSpeed;
-        
+        if(value == true)
+        {
+            enableInteract = true;
+        }
+        else
+        {
+            enableInteract = false;
+            CancelInteract(InputEventContextEnum.Default);
+        }
     }
 
+    
     private void CheckCameraRayCastForInteractable()
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition/3);
@@ -170,22 +235,9 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-
-    /*private void OnDrawGizmos() //Funny green line in inspect
+    public void TeleportPlayerToRespawn()
     {
-        Vector3 endPos = playerCamera.transform.position + playerCamera.transform.forward * rayMaxDistance;
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(playerCamera.transform.position, endPos);
-
-    }*/
-    
-    /*public void DisablePlayerMovement()
-    {
-        movementController.moveSpeed = 0;
+        cameraMovement.RespawnPlayer();
     }
 
-    public void EnablePlayerMovement()
-    {
-        movementController.moveSpeed = baseMoveSpeed;
-    }*/
 }

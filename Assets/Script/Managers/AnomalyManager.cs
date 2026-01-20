@@ -7,7 +7,7 @@ using Game.Database;
 
 public class AnomalyManager : MonoBehaviour
 {
-    [SerializeField] SpreadsheetContainer DataContainer;
+    [SerializeField] LocalSpreadsheetContainer DataContainer;
 
     [Header("State")]
     public int anomalyPoint;
@@ -56,7 +56,7 @@ public class AnomalyManager : MonoBehaviour
         }
     }
 
-    public void CheckEnemyEvent(float currentTime)
+    public void CheckEnemyEvent(float currentTime) //Check when to update ai and level data
     {  
         if (timedLevelUpdate[eventIndex] != null)
         {
@@ -82,7 +82,7 @@ public class AnomalyManager : MonoBehaviour
         return anomalyPoint;
     }
 
-    private void UpdateLevelData(LevelData data)
+    private void UpdateLevelData(LevelData data) //update ai and level data
     {
         enemy.difficultyLevel = data.Difficulty;
         enemy.cooldownDuration = data.ActiveInterval;
@@ -93,7 +93,7 @@ public class AnomalyManager : MonoBehaviour
         GameManager.instance.levelManager.timeSpeed = data.TimeScale;
     }
 
-    private void UpdateAnomaliesData(int index)
+    private void UpdateAnomaliesData(int index) //Update anomaly data inside container
     {
         foreach (Anomaly anomaly in AllAnomalies)
         {
@@ -102,9 +102,10 @@ public class AnomalyManager : MonoBehaviour
             {
                 string newAnomalyState = data.activationTimes[index];
                 anomaly.SetAnomalyEnabled(newAnomalyState);
-                //Debug.Log("Update Anomaly Data of Loop: " + index + " | " + anomaly.name + " : " +  newAnomalyState);
             }
         }
+
+        ResetAvailableAnomalyLists();
     }
 
     public bool SpawnRandomLightAnomaly()//Randomly trigger a light anomaly
@@ -167,7 +168,6 @@ public class AnomalyManager : MonoBehaviour
         }         
     }
 
-    
     private void UndoAnomaly(Anomaly anomaly)
     {
         if (!ActiveAnomalies.Contains(anomaly))
@@ -188,9 +188,13 @@ public class AnomalyManager : MonoBehaviour
         ActiveAnomalies.Clear();
     }
 
-    private void AddAnomalyToAvailableList(Anomaly anomaly)
+    private void AddAnomalyToAvailableList(Anomaly anomaly) //return anomaly to their container
     {
-        if (anomaly.anomalyLevel == AnomalyEnum.LightAnomaly)
+        if (anomaly.isEnabled == false)
+        {
+            dict[anomaly.area].DisabledAnomalies.Add(anomaly);
+        }
+        else if (anomaly.anomalyLevel == AnomalyEnum.LightAnomaly)
         {
             dict[anomaly.area].lightAnomalies.Add(anomaly);
             Debug.Log("Added light anomaly: " + anomaly.name + ", in area: " + anomaly.area);
@@ -217,8 +221,6 @@ public class AnomalyManager : MonoBehaviour
 
     private void ResetAvailableAnomalyLists()
     {
-        UndoAllAnomaly();
-
         foreach (var areaAnomaly in dict)
         {
             foreach (Anomaly anomaly in areaAnomaly.Value.lightAnomalies)
@@ -273,14 +275,10 @@ public class AnomalyManager : MonoBehaviour
             {
                 availableArea.Add(area.Value);
                 //Debug.Log("Available Area :" + area.Value.areaEnum.ToString());
-
             }
-            /*availableArea.Add(area.Value);
-            Debug.Log("Available Area :" + area.Value.areaEnum.ToString());*/
-
         }
 
-        if(anomalyPoint <= enemy.lightAnomalyThreshold && availableArea.Contains(dict[currentArea])) //if enemy not in heavy phase, dont spawn anomaly in front of player
+        if(availableArea.Contains(dict[currentArea])) //if enemy not in heavy phase, dont spawn anomaly in front of player
         {
             availableArea.Remove(dict[currentArea]);
         }

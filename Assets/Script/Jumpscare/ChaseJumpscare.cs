@@ -81,14 +81,19 @@ public class ChaseJumpscare : Jumpscare
     {
         if (name == "FinishTurning" && isActive)
         {
-            ghostAnimator.SetTrigger("Running");
-            isChasing = true;
+            Invoke("Run", 1.5f);
             
         }
         else if (name == "FinishJumpscare" && isActive)
         {
             DisableJumpscare();
         }
+    }
+
+    private void Run()
+    {
+        ghostAnimator.SetTrigger("Running");
+        isChasing = true;
     }
 
     private void ChasePlayer()

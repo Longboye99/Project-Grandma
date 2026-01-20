@@ -1,15 +1,41 @@
+using TMPro;
 using UnityEngine;
 
 public class DebugHandler : MonoBehaviour
 {
-    [SerializeField] GameObject text;
+    [SerializeField] TestEnemy2 enemy;
+    
     [SerializeField] Canvas debugCanvas;
+
+    [SerializeField] TextMeshProUGUI anomalyCountDisplay;
+    [SerializeField] TextMeshProUGUI anomalyPointDisplay;
+
+    [SerializeField] TextMeshProUGUI difficultyDisplay;
+    [SerializeField] TextMeshProUGUI cooldownDisplay;
+    [SerializeField] TextMeshProUGUI graceDisplay;
+
+    [SerializeField] TextMeshProUGUI incenseSpeedDisplay;
+    [SerializeField] TextMeshProUGUI TimeSpeedDisplay;
+
     bool isActive;
+
     void Update()
     {
         HandleDebugToggles();
         ActivateLookedAnomaly();
-        TriggerBypassAnomaly();
+        if(isActive)
+        {
+            anomalyCountDisplay.text = GameManager.instance.anomalyManager.ActiveAnomalies.Count.ToString();
+            anomalyPointDisplay.text = GameManager.instance.anomalyManager.TallyAnomalyPoint().ToString();
+
+            difficultyDisplay.text = enemy.difficultyLevel.ToString();
+            cooldownDisplay.text = (Mathf.Floor(enemy.currentCooldown * 100)/100).ToString();
+            graceDisplay.text = (Mathf.Floor(enemy.graceDuration * 100) / 100).ToString();
+
+            incenseSpeedDisplay.text = GameManager.instance.levelManager.incenseSpeed.ToString();
+            TimeSpeedDisplay.text = GameManager.instance.levelManager.timeSpeed.ToString();
+        }
+        
     }
 
     private void HandleDebugToggles()
@@ -18,8 +44,12 @@ public class DebugHandler : MonoBehaviour
         {
             GameEventsManager.instance.debugEvents.PressHighlight();
             debugCanvas.gameObject.SetActive(!isActive);
-            text.SetActive(!isActive);
             isActive = !isActive;
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            TriggerJumpscare();
         }
     }
 

@@ -20,9 +20,9 @@ public class LevelManager : MonoBehaviour
     [Header("Incense Config")]
     [SerializeField] public float incenseCurrentTime;
     [SerializeField] Incense incense;
-    [SerializeField] float incenseMaxTime;
-    [SerializeField] int incenseSection;
-    [SerializeField] int maxIncenseSection;
+    [SerializeField] public float incenseMaxTime;
+    [SerializeField] public int incenseSection;
+    [SerializeField] public int maxIncenseSection;
     [SerializeField] GameObject incenseWarning;
     [SerializeField] float incenseWarningThreshold;
     bool isWarning;
@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour
     public Canvas VictoryMessage;
     public Canvas DefeatMessage;
 
+    bool isVictory;
     bool isDefeated;
     float size;
     PlayerCutsceneController playerCutsceneController;
@@ -52,6 +53,7 @@ public class LevelManager : MonoBehaviour
     }
     private void Start()
     {
+        incenseWarning.SetActive(false);
         incenseSection = maxIncenseSection;
         playerCutsceneController = GameObject.FindGameObjectWithTag("PlayerCollider").GetComponent<PlayerCutsceneController>();
         RefillIncense();
@@ -76,15 +78,22 @@ public class LevelManager : MonoBehaviour
 
     private void CheckVictory()
     {
-        if (currentTime >= finishTime)
+        if (currentTime >= finishTime && !isVictory)
         {
-            Time.timeScale = 0;
-            VictoryMessage.gameObject.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            isVictory = true;
+            GameManager.instance.uiManager.TransitionOut();
+            Invoke("Victory", 2);
         }
-
     }
+
+    private void Victory()
+    {
+        Time.timeScale = 0;
+        VictoryMessage.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     private void CheckDefeat()
     {
         if (incenseCurrentTime <= 0 && !isDefeated)
@@ -142,7 +151,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator RespawnSequence()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         GameManager.instance.playerManager.TeleportPlayerToRespawn();
         GameManager.instance.uiManager.TransitionIn();
@@ -161,6 +170,13 @@ public class LevelManager : MonoBehaviour
     }
     
     //-------------------------------------------------------------------
+
+    public IEnumerator DefeatCutscene()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        
+    }
 
     
 

@@ -16,10 +16,11 @@ public class PointClickCameraMovement : MonoBehaviour
 
     public bool isTurning = false;
     public bool isWalking = false;
-    bool enableMovement;
+    [SerializeField] bool enableMovement = true;
 
     [SerializeField] GameObject flashLight;
     [SerializeField] GameObject buttonCanvas;
+
     [SerializeField] GameObject leftButton;
     [SerializeField] GameObject rightButton;
     [SerializeField] GameObject forwardButton;
@@ -87,7 +88,7 @@ public class PointClickCameraMovement : MonoBehaviour
 
     public void TurnRight()
     {
-        if (currentNode.directionDict.ContainsKey(Direction.Right) && !enableMovement)
+        if (currentNode.directionDict.ContainsKey(Direction.Right) && enableMovement)
         {
             TurnCamera(currentNode.directionDict[Direction.Right]);
         }
@@ -95,7 +96,7 @@ public class PointClickCameraMovement : MonoBehaviour
 
     public void TurnLeft()
     {
-        if (currentNode.directionDict.ContainsKey(Direction.Left) && !enableMovement)
+        if (currentNode.directionDict.ContainsKey(Direction.Left) && enableMovement)
         {
             TurnCamera(currentNode.directionDict[Direction.Left]);
         }
@@ -111,7 +112,7 @@ public class PointClickCameraMovement : MonoBehaviour
 
     public void TurnBackward()
     {
-        if (currentNode.directionDict.ContainsKey(Direction.Backward) && !enableMovement)
+        if (currentNode.directionDict.ContainsKey(Direction.Backward) && enableMovement)
         {
             TurnCamera(currentNode.directionDict[Direction.Backward]);
         }
