@@ -33,6 +33,12 @@ public class PlayerEvents
         onEnableMovement?.Invoke(value);
     }
 
+    public event Action<bool> onEnableInteract;
+    public void EnableInteract(bool value)
+    {
+        onEnableInteract?.Invoke(value);
+    }
+
     public event Action onRespawnPlayer;
     public void RespawnPlayer()
     {

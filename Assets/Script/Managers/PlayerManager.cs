@@ -17,6 +17,7 @@ public class PlayerManager : MonoBehaviour
     public float maxProgression = 1;
     public bool isHoldingInteract = false;
     public bool completedInteract;
+    bool enableInteract = true;
 
     public Anomaly currentAnomaly;
     private bool isLookingAtIncense;
@@ -32,44 +33,50 @@ public class PlayerManager : MonoBehaviour
     {
         GameEventsManager.instance.inputEvents.onStartInteract += StartInteract;
         GameEventsManager.instance.inputEvents.onCancelInteract += CancelInteract;
+        GameEventsManager.instance.playerEvents.onEnableInteract += EnableInteract;
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.inputEvents.onStartInteract -= StartInteract;
         GameEventsManager.instance.inputEvents.onCancelInteract -= CancelInteract;
+        GameEventsManager.instance.playerEvents.onEnableInteract -= EnableInteract;
+
     }
 
     private void Start()
     {
-
         GameManager.instance.uiManager.silderMaxValue = maxProgression;
         playerCamera = playerCameraObject.GetComponent<Camera>();
     }
 
     private void Update()
     {
-        if (doingHeldCountdown)// start countdown before holding
+        if (enableInteract)
         {
-           CheckCameraRayCastForInteractable();
-
-            if (Time.timeSinceLevelLoad - pressedTime > minimumHeldDuration) //if hold long enough, start holding
+            if (doingHeldCountdown)// start countdown before holding
             {
-                GameEventsManager.instance.anomalyEvents.StartHoldingAnomaly();
-                doingHeldCountdown = false;
-                isHoldingInteract = true;
-                GameManager.instance.uiManager.ActivateInteractSlider(inputEventContext);
+                CheckCameraRayCastForInteractable();
+
+                if (Time.timeSinceLevelLoad - pressedTime > minimumHeldDuration) //if hold long enough, start holding
+                {
+                    GameEventsManager.instance.anomalyEvents.StartHoldingAnomaly();
+                    doingHeldCountdown = false;
+                    isHoldingInteract = true;
+                    GameManager.instance.uiManager.ActivateInteractSlider(inputEventContext);
+                }
+            }
+            else if (isHoldingInteract)
+            {
+                HandleInteractValue();
+                GameManager.instance.uiManager.sliderValue = interactProgression;
+            }
+            else
+            {
+                CheckCameraRayCastForInteractable();
             }
         }
-        else if (isHoldingInteract)
-        {
-            HandleInteractValue();
-            GameManager.instance.uiManager.sliderValue = interactProgression;
-        }
-        else
-        {
-            CheckCameraRayCastForInteractable();
-        }
+        
         
     }
 
@@ -100,7 +107,11 @@ public class PlayerManager : MonoBehaviour
 
     private void CancelInteract(InputEventContextEnum inputContext)
     {
-        GameManager.instance.uiManager.CancelInteract(inputContext);
+        if (!completedInteract)
+        {
+            GameManager.instance.uiManager.CancelInteract(inputContext);
+        }
+        
         if (!GameManager.instance.uiManager.isPaused)
         {
             doingHeldCountdown = false;
@@ -154,7 +165,8 @@ public class PlayerManager : MonoBehaviour
             completedInteract = true;
             isHoldingInteract = false;
             isLookingAtIncense = false;
-
+            
+            CancelInteract(InputEventContextEnum.Default);
         }
         else
         {
@@ -163,8 +175,20 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    
+    private void EnableInteract(bool value)
+    {
+        if(value == true)
+        {
+            enableInteract = true;
+        }
+        else
+        {
+            enableInteract = false;
+            CancelInteract(InputEventContextEnum.Default);
+        }
+    }
 
+    
     private void CheckCameraRayCastForInteractable()
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition/3);
@@ -211,29 +235,9 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    
-
     public void TeleportPlayerToRespawn()
     {
         cameraMovement.RespawnPlayer();
     }
 
-
-    /*private void OnDrawGizmos() //Funny green line in inspect
-    {
-        Vector3 endPos = playerCamera.transform.position + playerCamera.transform.forward * rayMaxDistance;
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(playerCamera.transform.position, endPos);
-
-    }*/
-
-    /*public void DisablePlayerMovement()
-    {
-        movementController.moveSpeed = 0;
-    }
-
-    public void EnablePlayerMovement()
-    {
-        movementController.moveSpeed = baseMoveSpeed;
-    }*/
 }
