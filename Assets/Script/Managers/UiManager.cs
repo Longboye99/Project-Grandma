@@ -73,6 +73,27 @@ public class UiManager : MonoBehaviour
         DisplayTime();
         MoveCursor();
 
+        
+    }
+
+    public void IncenseMouseHover(bool value)
+    {
+        if(value == true)
+        {
+            if (!mouseCursorAnimator.GetCurrentAnimatorStateInfo(0).IsName("cursorLightIncense")
+            && GameManager.instance.playerManager.enableInteract)
+            {
+                mouseCursorAnimator.SetTrigger("Lighting");
+            }
+        }
+        else
+        {
+            if (!mouseCursorAnimator.GetCurrentAnimatorStateInfo(0).IsName("cursorWrongAnomaly")
+                && !mouseCursorAnimator.GetCurrentAnimatorStateInfo(0).IsName("cursorCorrectAnomaly"))
+            {
+                SetCursorDefault();
+            }
+        }
     }
 
     private void MoveCursor()

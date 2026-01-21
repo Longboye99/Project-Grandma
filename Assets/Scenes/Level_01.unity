@@ -16148,7 +16148,9 @@ MonoBehaviour:
   maxProgression: 1.5
   isHoldingInteract: 0
   completedInteract: 0
+  enableInteract: 1
   currentAnomaly: {fileID: 0}
+  isLookingAtIncense: 0
   currentInteractable: {fileID: 0}
   minimumHeldDuration: 0.15
   doingHeldCountdown: 0
