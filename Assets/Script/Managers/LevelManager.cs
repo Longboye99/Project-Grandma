@@ -4,6 +4,8 @@ using TMPro;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 using System.Collections.Generic;
 using System;
+using System.Collections;
+using Unity.VisualScripting;
 
 public class LevelManager : MonoBehaviour
 {
@@ -14,60 +16,82 @@ public class LevelManager : MonoBehaviour
     public float timeSpeed = 1;
     public float incenseSpeed = 1;
 
+
     [Header("Incense Config")]
-    [SerializeField] float incenseCurrentTime;
+    [SerializeField] public float incenseCurrentTime;
     [SerializeField] Incense incense;
-    [SerializeField] float incenseMaxTime;
-    [SerializeField] int incenseSection;
-    [SerializeField] int maxIncenseSection;
+    [SerializeField] public float incenseMaxTime;
+    [SerializeField] public int incenseSection;
+    [SerializeField] public int maxIncenseSection;
+    [SerializeField] GameObject incenseWarning;
+    [SerializeField] float incenseWarningThreshold;
+    bool isWarning;
 
-    public GameObject VictoryMessage;
-    public GameObject DefeatMessage;
+    public Canvas VictoryMessage;
+    public Canvas DefeatMessage;
 
+    bool isVictory;
     bool isDefeated;
     float size;
+    PlayerCutsceneController playerCutsceneController;
 
 
     private void OnEnable()
     {
         GameEventsManager.instance.playerEvents.onRefillIncense += RefillIncense;
         GameEventsManager.instance.anomalyEvents.onSnapIncense += SnapIncense;
+        GameEventsManager.instance.playerEvents.onRespawnPlayer += RespawnPlayer;
+
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.playerEvents.onRefillIncense -= RefillIncense;
         GameEventsManager.instance.anomalyEvents.onSnapIncense -= SnapIncense;
+        GameEventsManager.instance.playerEvents.onRespawnPlayer -= RespawnPlayer;
+
     }
     private void Start()
     {
+        incenseWarning.SetActive(false);
         incenseSection = maxIncenseSection;
-        //incenseCurrentTime = incenseMaxTime;
+        playerCutsceneController = GameObject.FindGameObjectWithTag("PlayerCollider").GetComponent<PlayerCutsceneController>();
+        RefillIncense();
     }
-
     private void Update()
     {
         UpdateTime();
         SetIncenseSize();
         CheckVictory();
         CheckDefeat();
+        CheckIncenseWarning();
 
         GameManager.instance.anomalyManager.CheckEnemyEvent(currentTime);
         GameManager.instance.anomalyManager.TallyAnomalyPoint();
     }
 
     private void UpdateTime()
-    { 
+    {
         currentTime += Time.deltaTime * timeSpeed;
-        incenseCurrentTime -=  Time.deltaTime * incenseSpeed;
+        incenseCurrentTime -= Time.deltaTime * incenseSpeed;
     }
+
     private void CheckVictory()
     {
-        if (currentTime >= finishTime)
+        if (currentTime >= finishTime && !isVictory)
         {
-            VictoryMessage.SetActive(true);
-            Time.timeScale = 0;
+            isVictory = true;
+            GameManager.instance.uiManager.TransitionOut();
+            Invoke("Victory", 2);
         }
+    }
+
+    private void Victory()
+    {
+        Time.timeScale = 0;
+        VictoryMessage.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void CheckDefeat()
@@ -75,16 +99,86 @@ public class LevelManager : MonoBehaviour
         if (incenseCurrentTime <= 0 && !isDefeated)
         {
             isDefeated = true;
+            Time.timeScale = 0;
+            DefeatMessage.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+    public void FinishedDefeatAnim()
+    {
+        DefeatMessage.gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void PauseTimer(bool pause)
+    {
+        if (pause)
+        {
             timeSpeed = 0;
-            GameEventsManager.instance.levelEvents.PlayerDefeated();
+            incenseSpeed = 0;
+        }
+        else
+        {
+            timeSpeed = 1;
+            incenseSpeed = 1;
         }
     }
 
-    public void FinishedDefeatAnim()
+    private void CheckIncenseWarning()
     {
-        DefeatMessage.SetActive(true);
-        Time.timeScale = 0;
+        if(incenseCurrentTime < incenseWarningThreshold && !isWarning)
+        {
+            Debug.LogWarning("Incense Low");
+            isWarning = true;
+            incenseWarning.SetActive(true);
+        }
+        else if(incenseCurrentTime > incenseWarningThreshold && isWarning)
+        {
+            isWarning = false;
+            incenseWarning.SetActive(false);
+        }
     }
+
+    //-------------------------Respawn--------------------------------
+
+    public void RespawnPlayer()
+    {
+        GameManager.instance.uiManager.FlashlightHand(false);
+        GameManager.instance.uiManager.TransitionOut();
+        GameManager.instance.anomalyManager.UndoAllAnomaly();
+        StartCoroutine(RespawnSequence());
+    }
+
+    private IEnumerator RespawnSequence()
+    {
+        yield return new WaitForSeconds(3f);
+
+        GameManager.instance.playerManager.TeleportPlayerToRespawn();
+        GameManager.instance.uiManager.TransitionIn();
+
+        yield return new WaitForSeconds(0.2f);
+
+        playerCutsceneController.IncenseCutsceneSequence();
+    }
+
+    public void FinishRespawnCutscene()
+    {
+        GameManager.instance.uiManager.FlashlightHand(true);
+
+        PauseTimer(false);
+        GameEventsManager.instance.playerEvents.EnableMovement(true);
+    }
+    
+    //-------------------------------------------------------------------
+
+    public IEnumerator DefeatCutscene()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        
+    }
+
+    
 
     //---------------------Incense functions----------------------------
     private void SetIncenseSize()
@@ -108,18 +202,19 @@ public class LevelManager : MonoBehaviour
             incenseCurrentTime = incenseMaxTime;
         }
         Debug.Log(incenseCurrentTime + "-" + incenseMaxTime);
-        
     }
 
-    private void RefillIncense()
+    public void RefillIncense()
     {
         incenseCurrentTime = incenseMaxTime;
+        SetIncenseSize();
     }
 
     //----------------------------------------------------------------
-    
 
     
+
+
 
 
 }

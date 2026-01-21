@@ -8,13 +8,14 @@ public class GameManager : MonoBehaviour
     public AnomalyManager anomalyManager;
     public PlayerManager playerManager;
     public UiManager uiManager;
-    public CutsceneManager cutSceneManager;
+    public SfxManager sfxManager;
+    public JumpscareManager jumpscareManager;
 
     private void Awake()
     {
         if (instance != null)
         {
-            Debug.LogError("Found more than one Game Events Manager in the scene.");
+            Debug.LogError("Found more than one Game Manager in the scene.");
         }
         instance = this;
     }

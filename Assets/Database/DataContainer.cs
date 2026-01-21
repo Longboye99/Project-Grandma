@@ -9,12 +9,12 @@ namespace Game.Database
     [Serializable]
     public class SpreadsheetContent
     {
-        [SpreadsheetPage("Test Data")]
+        [SpreadsheetPage("Anomaly Data")]
         public List<AnomalyData> anomalies;
-        [SpreadsheetPage("Night0 LevelConfig")]
+        [SpreadsheetPage("Night0 EnemyConfig")]
         public List<LevelData> levelConfigs;
         [SpreadsheetPage("Night0 AnomalyConfig")]
-        public List<LevelAnomalyData> AnomalyConfig;
+        public List<LevelAnomalyData> AnomalyConfig; 
     }
 
     [CreateAssetMenu(fileName = "SpreadsheetContainer", menuName = "SpreadsheetContainer")]

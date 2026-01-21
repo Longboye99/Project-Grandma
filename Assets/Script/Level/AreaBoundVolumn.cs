@@ -12,4 +12,13 @@ public class AreaBoundVolumn : MonoBehaviour
             GameManager.instance.anomalyManager.currentArea = area;
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "PlayerCollider")
+        {
+            Debug.Log(other.gameObject.name + " Entered Area : " + area.ToString());
+            GameManager.instance.anomalyManager.currentArea = default;
+        }
+    }
 }

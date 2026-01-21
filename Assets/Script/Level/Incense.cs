@@ -18,13 +18,19 @@ public class Incense : MonoBehaviour
     private float distance;
     public float incensePercentage;
 
+    private void OnMouseOver()
+    {
+        
+    }
+    private void OnMouseExit()
+    {
+        
+    }
+
     private void Start()
     {
-        initialScale = incenseStick.transform.localScale;
-        initialDistance = (endObject.transform.position - startObject.transform.position);
-        endObject.transform.position = startObject.transform.position + (initialDistance * incensePercentage);
+        SetUpIncense();
         startingLight = incenseLight.range;
-
         emissionColorValue = incenseMaterial.color;
     }
 
@@ -34,6 +40,13 @@ public class Incense : MonoBehaviour
         intensity = (incensePercentage * 4) - 2.5f;
         incenseMaterial.SetColor("_EmissionColor", emissionColorValue * Mathf.Pow(2, intensity));
         incenseLight.intensity = incensePercentage * 0.03f;
+    }
+
+    private void SetUpIncense()
+    {
+        initialScale = incenseStick.transform.localScale;
+        initialDistance = (endObject.transform.position - startObject.transform.position);
+        endObject.transform.position = startObject.transform.position + (initialDistance * incensePercentage);
     }
 
     private void UpdateTransformForScale()

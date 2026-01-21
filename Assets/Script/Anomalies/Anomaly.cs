@@ -16,13 +16,19 @@ public abstract class Anomaly: MonoBehaviour
     public bool isActive;
     public int currentAnomalyPoint;
     public float CurrentCooldown;
-    
+
+    [Header("Debug")]
+    protected Material originalMaterial;
+    protected Material currentMaterial;
+    protected bool currentMeshActive;
+    public Material highlightMaterial;
+    protected bool isHighlighted = false;
+
     protected GameObject playerCam;
 
     public void Initialize(AnomalyData data)
     {
         anomalyPoint = data.AnomalyPoint;
-        cooldown = data.Cooldown;
         switch (data.Level)
         {
             case "Level 1":
@@ -35,7 +41,7 @@ public abstract class Anomaly: MonoBehaviour
                 break;
         }
 
-        Debug.Log("Initialized Anomaly: " + id);
+        //Debug.Log("Initialized Anomaly: " + id);
     }
 
     private void OnValidate()
@@ -62,11 +68,13 @@ public abstract class Anomaly: MonoBehaviour
     {
         playerCam = GameObject.FindGameObjectWithTag("Player");
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly += UndoAnomaly;
+        GameEventsManager.instance.debugEvents.onPressHighlight += PressHighlight;
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly -= UndoAnomaly;
+        GameEventsManager.instance.debugEvents.onPressHighlight -= PressHighlight;
     }
 
     protected void Update()
@@ -76,7 +84,6 @@ public abstract class Anomaly: MonoBehaviour
             CurrentCooldown -= Time.deltaTime;
         }
     }
-
     public bool SpawnAnomaly()
     {
         if (CurrentCooldown <= 0 && isEnabled && CheckPlayerIsLooking(false)) //Check if not in cooldown and not already actived
@@ -106,18 +113,18 @@ public abstract class Anomaly: MonoBehaviour
         {
             if (Physics.Raycast(playerCam.transform.position, transform.position - playerCam.transform.position, out RaycastHit hit, dist, (1 << 7)))
             {
-                //Debug.DrawLine(playerCam.transform.position, hit.point, Color.yellow);
+                Debug.DrawLine(playerCam.transform.position, hit.point, Color.yellow);
                 isLooking = true;
             }
             else
             {
-                
+
                 isLooking = false;
             }
         }
         else
         {
-            //Debug.DrawLine(playerCam.transform.position, transform.position, Color.red);
+            Debug.DrawLine(playerCam.transform.position, transform.position, Color.red);
 
             isLooking = true;
         }
@@ -131,15 +138,15 @@ public abstract class Anomaly: MonoBehaviour
             return isLooking;
         }
     }
-    
+
 
     //---------------------Debug functions ------------------------------
 
     public void ActivateLightAnomalies()
     {
-        if (anomalyLevel == AnomalyEnum.HeavyAnomaly)
+        if (anomalyLevel == AnomalyEnum.LightAnomaly)
         {
-            SpawnAnomaly();
+            TriggerAnomaly();
         }
     }
 
@@ -147,12 +154,35 @@ public abstract class Anomaly: MonoBehaviour
     {
         if (anomalyLevel == AnomalyEnum.HeavyAnomaly)
         {
-            SpawnAnomaly();
+            TriggerAnomaly();
         }
     }
 
     public void ActivateAllAnomalies()
     {
-        SpawnAnomaly();
+        TriggerAnomaly();
+    }
+
+    public void PressHighlight()
+    {
+        if (!isHighlighted && isActive)
+        {
+            isHighlighted = true;
+            currentMeshActive = GetComponent<MeshRenderer>().enabled;
+            if (!currentMeshActive)
+            {
+                gameObject.GetComponent<MeshRenderer>().enabled = true;
+            }
+
+            currentMaterial = GetComponent<MeshRenderer>().material;
+            gameObject.GetComponent<MeshRenderer>().material = highlightMaterial;
+        }
+        else if (isHighlighted)
+        {
+            isHighlighted = false;
+            gameObject.GetComponent<MeshRenderer>().material = currentMaterial;
+            gameObject.GetComponent<MeshRenderer>().enabled = currentMeshActive;
+            Debug.Log(this.gameObject.name + "mesh state was : " + currentMeshActive);
+        }
     }
 }

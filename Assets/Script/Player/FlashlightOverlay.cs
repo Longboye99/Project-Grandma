@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static Unity.Collections.AllocatorManager;
 
 public class FlashlightOverlay : MonoBehaviour
 {
@@ -10,24 +11,16 @@ public class FlashlightOverlay : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEventsManager.instance.anomalyEvents.onTriggerLightAnomaly += TriggerLightAnomaly;
-        GameEventsManager.instance.anomalyEvents.onTriggerHeavyAnomaly += TriggerHeavyAnomaly;
+        GameEventsManager.instance.anomalyEvents.onUndoAnomaly += Blink;
     }
 
     private void OnDisable()
     {
-        GameEventsManager.instance.anomalyEvents.onTriggerLightAnomaly -= TriggerLightAnomaly;
-        GameEventsManager.instance.anomalyEvents.onTriggerHeavyAnomaly -= TriggerHeavyAnomaly;
+        GameEventsManager.instance.anomalyEvents.onUndoAnomaly -= Blink;
+
 
     }
 
-    private void Update()
-    {
-        /*Vector2 mousePosition = Input.mousePosition;
-        Vector2 uiPosition;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)canvas.transform, mousePosition, canvas.worldCamera, out uiPosition); //Position magic to get canvas position of the mouse
-        transform.position = canvas.transform.TransformPoint(uiPosition); //Teleport slider to the mouse position*/
-    }
 
     private void TriggerLightAnomaly()
     {
@@ -47,4 +40,9 @@ public class FlashlightOverlay : MonoBehaviour
         StartCoroutine(WaitForFlickering());
     }
 
+    public void Blink(Anomaly anomaly)
+    {
+        animator.SetTrigger("LightDown");
+        StartCoroutine(WaitForFlickering());
+    }
 }

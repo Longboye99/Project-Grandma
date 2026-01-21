@@ -26,4 +26,12 @@ public class InputManager : MonoBehaviour
             GameEventsManager.instance.inputEvents.CancelInteract();
         }
     }
+
+    public void Pause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameEventsManager.instance.inputEvents.Pause();
+        }
+    }
 }

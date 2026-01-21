@@ -7,10 +7,15 @@ public class ChaseJumpscareHandler : MonoBehaviour
 {
     [SerializeField] GameObject playerCam;
     [SerializeField] float MoveSpeed = 10;
-    float MinDist = 3;
+    float MinDist = 2.5f;
 
     [SerializeField] Animator ghostAnimator;
     [SerializeField] Animator UiAnimator;
+
+    [SerializeField] AudioClip screamAudio;
+    [SerializeField] AudioClip noticeAudio;
+
+
     bool isChasing = false;
     bool jumpscare = false;
     bool isInTransition = false;
@@ -31,6 +36,8 @@ public class ChaseJumpscareHandler : MonoBehaviour
         GameObject uiGameObject = GameObject.FindGameObjectWithTag("Jumpscare");
         uiGameObject.GetComponent<Image>().enabled = true;
         UiAnimator = uiGameObject.GetComponent<Animator>();
+
+        StartJumpscare(2);
 
     }
 
@@ -59,10 +66,15 @@ public class ChaseJumpscareHandler : MonoBehaviour
 
     }
 
-    public void StartJumpscare()
+    public void StartJumpscare(int sec)
+    {
+        Invoke("DoJumpscare", sec);
+        GameManager.instance.sfxManager.PlaySoundFXClip(noticeAudio, this.transform, 0.4f);
+    }
+
+    private void DoJumpscare()
     {
         jumpscare = true;
-        GameEventsManager.instance.anomalyEvents.TriggerAttackAnomaly();
     }
 
     private void BeginTurning()
@@ -76,14 +88,21 @@ public class ChaseJumpscareHandler : MonoBehaviour
         {
             ghostAnimator.SetTrigger("Running");
             isChasing = true;
+            GameManager.instance.sfxManager.PlaySoundFXClip(screamAudio, this.transform, 1);
         }
         else if(name == "FinishJumpscare")
         {
             GameManager.instance.levelManager.FinishedDefeatAnim();
-            /*UiAnimator.gameObject.SetActive(false);
-            UiAnimator.SetTrigger("ExitJumpscare");
-            Destroy(this.gameObject);*/
+
+            Invoke("ExitJumpscare", 1.5f);
         }
+    }
+
+    private void ExitJumpscare()
+    {
+        UiAnimator.gameObject.SetActive(false);
+        UiAnimator.SetTrigger("ExitJumpscare");
+        Destroy(this.gameObject);
     }
 
     private void ChasePlayer()
