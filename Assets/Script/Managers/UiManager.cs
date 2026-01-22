@@ -6,16 +6,29 @@ using System.Collections;
 
 public class UiManager : MonoBehaviour
 {
+    [Header("Canvas")]
     [SerializeField] Canvas pausedCanvas;
-    [SerializeField] Animator transitionOverlay;
+    [SerializeField] Canvas sliderCanvas;
+
+    [Header("Hand UI")]
+    [SerializeField] Animator flashLightHandAnimator;
+    [SerializeField] Animator anomalyHandAnimator;
+    [SerializeField] Animator lighterHandAnimator;
+
+    [Header("Cursor and Slider")]
     public GameObject anomalySliderObject;
     public GameObject mouseCursor;
-    Animator mouseCursorAnimator;
+    public Animator mouseCursorAnimator;
     private Slider anomalySlider;
-
-    [SerializeField] Canvas sliderCanvas;
     public float sliderValue;
     public float silderMaxValue;
+
+    [SerializeField] Animator transitionOverlay;
+
+    
+
+    
+    
 
     public TextMeshProUGUI timeDisplay;
     
@@ -29,9 +42,7 @@ public class UiManager : MonoBehaviour
 
     private HandEnum handEnum;
 
-    [SerializeField] Animator flashLightHandAnimator;
-    [SerializeField] Animator anomalyHandAnimator;
-    [SerializeField] Animator lighterHandAnimator;
+    
 
     private void OnEnable()
     {
@@ -55,7 +66,6 @@ public class UiManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
-        mouseCursorAnimator = mouseCursor.GetComponent<Animator>();
 
 
         //flashLightHandAnimator.SetTrigger("HandUp");
@@ -237,6 +247,7 @@ public class UiManager : MonoBehaviour
             flashLightHandAnimator.ResetTrigger("HandUp");
             flashLightHandAnimator.SetTrigger("HandDown");
         }
+        Debug.Log("Flashlight Hand Enable Mode: " + isUp);
     }
 
     public void TransitionIn()

@@ -55,9 +55,8 @@ public class PointClickCameraMovement : MonoBehaviour
 
         currentNode = startingNode;
         currentCam = currentNode.CameraPos; //Set camera to default position
+        GameManager.instance.anomalyManager.currentArea = currentNode.area;
 
-        SetCamPosition();
-        StartCoroutine(Movementcooldown());
 
     }
 

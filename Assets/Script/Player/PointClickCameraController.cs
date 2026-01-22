@@ -69,4 +69,9 @@ public class PointClickCameraController : MonoBehaviour
         }       
     }
 
+    public void EnableFlashlight(bool value)
+    {
+        flashLight.SetActive(value);
+    }
+
 }

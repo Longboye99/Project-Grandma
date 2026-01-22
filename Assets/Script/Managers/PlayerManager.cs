@@ -196,6 +196,8 @@ public class PlayerManager : MonoBehaviour
             enableInteract = false;
             CancelInteract(InputEventContextEnum.Default);
         }
+
+        Debug.Log("Interact Enable Mode: " + value);
     }
 
     
