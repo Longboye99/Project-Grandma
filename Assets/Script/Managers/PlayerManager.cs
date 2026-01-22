@@ -17,10 +17,10 @@ public class PlayerManager : MonoBehaviour
     public float maxProgression = 1;
     public bool isHoldingInteract = false;
     public bool completedInteract;
-    bool enableInteract = true;
+    public bool enableInteract = true;
 
     public Anomaly currentAnomaly;
-    private bool isLookingAtIncense;
+    public bool isLookingAtIncense;
 
     [Header("Interact Control")]
     public Interactable currentInteractable;
@@ -73,7 +73,17 @@ public class PlayerManager : MonoBehaviour
             }
             else
             {
-                CheckCameraRayCastForInteractable();
+                RaycastHit hit = CheckCameraRayCastForInteractable();
+
+                if (hit.collider != null && hit.collider.gameObject.GetComponent<Incense>())
+                {
+                    GameManager.instance.uiManager.IncenseMouseHover(true);
+                }
+                else if (!isHoldingInteract)
+                {
+                    GameManager.instance.uiManager.IncenseMouseHover(false);
+
+                }
             }
         }
         
@@ -175,7 +185,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void EnableInteract(bool value)
+    public void EnableInteract(bool value)
     {
         if(value == true)
         {
@@ -186,10 +196,12 @@ public class PlayerManager : MonoBehaviour
             enableInteract = false;
             CancelInteract(InputEventContextEnum.Default);
         }
+
+        Debug.Log("Interact Enable Mode: " + value);
     }
 
     
-    private void CheckCameraRayCastForInteractable()
+    private RaycastHit CheckCameraRayCastForInteractable()
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition/3);
 
@@ -210,6 +222,7 @@ public class PlayerManager : MonoBehaviour
 
                 currentAnomaly = null;
                 currentInteractable = null;
+
             }
             else if (hit.collider.gameObject.GetComponent<Interactable>())
             {
@@ -233,6 +246,7 @@ public class PlayerManager : MonoBehaviour
             GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Default);
         }
 
+        return hit;
     }
 
     public void TeleportPlayerToRespawn()

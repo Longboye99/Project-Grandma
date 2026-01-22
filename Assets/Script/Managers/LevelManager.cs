@@ -144,6 +144,7 @@ public class LevelManager : MonoBehaviour
     public void RespawnPlayer()
     {
         GameManager.instance.uiManager.FlashlightHand(false);
+        GameManager.instance.playerManager.EnableInteract(false);
         GameManager.instance.uiManager.TransitionOut();
         GameManager.instance.anomalyManager.UndoAllAnomaly();
         StartCoroutine(RespawnSequence());
@@ -164,6 +165,7 @@ public class LevelManager : MonoBehaviour
     public void FinishRespawnCutscene()
     {
         GameManager.instance.uiManager.FlashlightHand(true);
+        GameManager.instance.playerManager.EnableInteract(true);
 
         PauseTimer(false);
         GameEventsManager.instance.playerEvents.EnableMovement(true);

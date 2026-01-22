@@ -55,9 +55,8 @@ public class PointClickCameraMovement : MonoBehaviour
 
         currentNode = startingNode;
         currentCam = currentNode.CameraPos; //Set camera to default position
+        GameManager.instance.anomalyManager.currentArea = currentNode.area;
 
-        SetCamPosition();
-        StartCoroutine(Movementcooldown());
 
     }
 
@@ -138,7 +137,7 @@ public class PointClickCameraMovement : MonoBehaviour
         {
             buttonCanvas.SetActive(false);
             isTurning = true; //Keep track of when player is turning
-            //GameManager.instance.uiManager.TransitionOut();
+            GameManager.instance.playerManager.EnableInteract(false);
 
             currentSplineContainer = currentNode.pathDict[nextArea].splineContainer;
             splineAnimate.Duration = currentNode.pathDict[nextArea].duration;
@@ -156,6 +155,7 @@ public class PointClickCameraMovement : MonoBehaviour
             cameraAnimator.SetTrigger("TurnDown");
 
         }
+        
         GameManager.instance.uiManager.FadeOut();
         GameManager.instance.uiManager.HandShakeStart();
         headBoper.isBobbing = true;
@@ -268,6 +268,7 @@ public class PointClickCameraMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(movementCooldown);
         isTurning = false;
+        GameManager.instance.playerManager.EnableInteract(true);
 
         buttonCanvas.SetActive(true);
         SwitchButtonDirection();
