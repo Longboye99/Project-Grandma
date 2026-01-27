@@ -74,9 +74,9 @@ public class PlayerCutsceneController : MonoBehaviour
         ghostHand.SetActive(true);
 
     }
-    public void MoveAwayFromIncenseTrigger()
+    public void MoveAwayFromIncenseTrigger(float sec)
     {
-        StartCoroutine(MoveAwayFromIncense());
+        StartCoroutine(MoveAwayFromIncense(sec));
     }
     private IEnumerator MoveAwayFromIncense()
     {
@@ -100,8 +100,31 @@ public class PlayerCutsceneController : MonoBehaviour
         pointClickCameraMovement.SetCamPosition();
         pointClickCameraMovement.isTurning = false;
         pointClickCameraController.EnableFlashlight(true);
-        GameManager.instance.levelManager.FinishRespawnCutscene();
+        GameManager.instance.levelManager.FinishRespawnCutscene(); 
+    }
 
-       
+    private IEnumerator MoveAwayFromIncense(float sec)
+    {
+        Vector3 targetPos = pointClickCameraMovement.currentNode.CameraPos.transform.position;
+        Quaternion targetRot = pointClickCameraMovement.currentNode.CameraPos.transform.rotation;
+
+        Vector3 currentPos = transform.position;
+        Quaternion currentRot = this.transform.rotation;
+
+        float elapsedTime = 0;
+        float waitTime = sec;
+
+        while (elapsedTime < waitTime)
+        {
+            transform.position = Vector3.Lerp(currentPos, targetPos, (elapsedTime / waitTime));
+            transform.rotation = Quaternion.Slerp(currentRot, targetRot, (elapsedTime / waitTime));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        pointClickCameraMovement.SetCamPosition();
+        pointClickCameraMovement.isTurning = false;
+        pointClickCameraController.EnableFlashlight(true);
+        GameManager.instance.levelManager.FinishRespawnCutscene();
     }
 }

@@ -24,20 +24,14 @@ public class UiManager : MonoBehaviour
     public float silderMaxValue;
 
     [SerializeField] Animator transitionOverlay;
+    public SubtitleTextController subtitleTextController;
 
-    
-
-    
-    
-
+    [Header("Timer")]
     public TextMeshProUGUI timeDisplay;
-    
-
     int hour;
     int minute;
     float currentTime;
     float midnightTime;
-
     public bool isPaused;
 
     private HandEnum handEnum;

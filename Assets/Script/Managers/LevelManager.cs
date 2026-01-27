@@ -56,7 +56,8 @@ public class LevelManager : MonoBehaviour
         incenseWarning.SetActive(false);
         incenseSection = maxIncenseSection;
         playerCutsceneController = GameObject.FindGameObjectWithTag("PlayerCollider").GetComponent<PlayerCutsceneController>();
-        RefillIncense();
+        GameManager.instance.anomalyManager.CheckEnemyEvent(0);
+
     }
     private void Update()
     {
@@ -116,12 +117,14 @@ public class LevelManager : MonoBehaviour
         {
             timeSpeed = 0;
             incenseSpeed = 0;
+            
         }
         else
         {
             timeSpeed = 1;
             incenseSpeed = 1;
         }
+        Debug.Log("Paused Timer: " + pause);
     }
 
     private void CheckIncenseWarning()

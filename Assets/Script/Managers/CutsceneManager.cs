@@ -4,18 +4,29 @@ using UnityEngine.Playables;
 
 public class CutsceneManager : MonoBehaviour
 {
+    [Header("Player Components")]
     [SerializeField] PlayerCutsceneController cutsceneController;
+    [SerializeField] PointClickCameraMovement pointClickCameraMovement;
     [SerializeField] PointClickCameraController pointClickCameraController;
     [SerializeField] PlayableDirector cutscenePlayer;
-    [SerializeField] PlayableAsset openingCutscene;
+    [SerializeField] GameObject flashlightHand;
+
+    [Header("Anomaly")]
+    [SerializeField] Anomaly anomaly;
+
+    [Header("Tutorial Text")]
+    [SerializeField] GameObject tutorialText;
+
 
     private void OnEnable()
     {
         GameEventsManager.instance.anomalyEvents.onFinishAnimationEvent += FinishAnimationEvent;
+        GameEventsManager.instance.playerEvents.onRefillIncense += OnRefilIncense;
     }
     private void OnDisable()
     {
         GameEventsManager.instance.anomalyEvents.onFinishAnimationEvent -= FinishAnimationEvent;
+        GameEventsManager.instance.playerEvents.onRefillIncense -= OnRefilIncense;
 
     }
 
@@ -49,16 +60,40 @@ public class CutsceneManager : MonoBehaviour
 
     private void FinishStartingCutscene()
     {
-        cutsceneController.MoveAwayFromIncenseTrigger();
-        Invoke("FlashlightDelay", 0.5f);
-    }
-
-    private void FlashlightDelay()
-    {
+        pointClickCameraMovement.SetCamPosition();
+        pointClickCameraMovement.isTurning = false;
         pointClickCameraController.EnableFlashlight(true);
+        GameManager.instance.uiManager.FlashlightHand(true);
+        GameManager.instance.playerManager.EnableInteract(true);
+        Invoke("DisplayIncenseSubtitle", 1);
+    }
+
+    private void DisplayIncenseSubtitle()
+    {
+        GameManager.instance.uiManager.subtitleTextController.SetSubtitleText("ต้องจุดธูปใหม่แล้ว");
+    }
+
+
+    private void OnRefilIncense()
+    {
+        GameEventsManager.instance.playerEvents.EnableMovement(true);
+        GameManager.instance.levelManager.PauseTimer(false);
+
+        GameManager.instance.uiManager.subtitleTextController.DisableTitleText();
+        Invoke("SpawnAnomaly", 1);
+    }
+    
+    private void SpawnAnomaly()
+    {
+        anomaly.TriggerAnomaly();
 
     }
 
+    private void DisplayAnomalySubtitle()
+    {
+
+    }
+ 
 
     //some anomaly spawning
 }
