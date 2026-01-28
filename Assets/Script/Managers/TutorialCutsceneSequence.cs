@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class CutsceneManager : MonoBehaviour
+public class TutorialCutsceneSequence : MonoBehaviour
 {
     [Header("Player Components")]
     [SerializeField] PlayerCutsceneController cutsceneController;
