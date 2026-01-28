@@ -9,8 +9,6 @@ public class FloatingTextController : MonoBehaviour
     GameObject currentTutorial;
     Animator currentAnimator;
 
-    [SerializeField] Animator textAnimator;
-
     private void OnEnable()
     {
         GameEventsManager.instance.anomalyEvents.onFinishAnimationEvent += RemoveTutorialText;
@@ -20,6 +18,12 @@ public class FloatingTextController : MonoBehaviour
     {
         GameEventsManager.instance.anomalyEvents.onFinishAnimationEvent -= RemoveTutorialText;
 
+    }
+
+    private void Start()
+    {
+        movementTutorial.SetActive(false);
+        incenseTutorial.SetActive(false);
     }
 
     public void EnableTutorialText(TutorialText tutorialType, float sec)
@@ -32,7 +36,7 @@ public class FloatingTextController : MonoBehaviour
         Invoke("DisableTutorialText", sec);
     }
 
-    public void SetSubtitleText(TutorialText tutorialType)
+    public void EnableTutorialText(TutorialText tutorialType)
     {
         currentTutorial = SelectText(tutorialType);
         currentAnimator = currentTutorial.GetComponent<Animator>();
@@ -42,7 +46,7 @@ public class FloatingTextController : MonoBehaviour
 
     public void DisableTutorialText()
     {
-        currentAnimator.SetTrigger("TextFading");
+        currentAnimator.SetTrigger("TextFadeOut");
     }
 
     private void RemoveTutorialText(string eventName)
@@ -50,6 +54,7 @@ public class FloatingTextController : MonoBehaviour
         if (eventName == "FinishTextFading")
         {
             currentTutorial.SetActive(false);
+            currentTutorial = null;
             currentAnimator = null;
         }
     }

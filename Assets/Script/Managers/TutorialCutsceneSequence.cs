@@ -14,9 +14,6 @@ public class TutorialCutsceneSequence : MonoBehaviour
     [Header("Anomaly")]
     [SerializeField] Anomaly anomaly;
 
-    [Header("Tutorial Text")]
-    [SerializeField] GameObject tutorialText;
-
 
     private void OnEnable()
     {
@@ -38,6 +35,7 @@ public class TutorialCutsceneSequence : MonoBehaviour
         GameManager.instance.playerManager.EnableInteract(false);
         GameEventsManager.instance.playerEvents.EnableMovement(false);
         GameManager.instance.levelManager.PauseTimer(true);
+        GameManager.instance.uiManager.EnableGameOverlay(false);
 
         cutsceneController.TeleportToIncense();
         DoStartingCutscene();
@@ -65,12 +63,15 @@ public class TutorialCutsceneSequence : MonoBehaviour
         pointClickCameraController.EnableFlashlight(true);
         GameManager.instance.uiManager.FlashlightHand(true);
         GameManager.instance.playerManager.EnableInteract(true);
+        GameManager.instance.uiManager.EnableGameOverlay(true);
+
         Invoke("DisplayIncenseSubtitle", 1);
     }
 
     private void DisplayIncenseSubtitle()
     {
         GameManager.instance.uiManager.subtitleTextController.SetSubtitleText("ต้องจุดธูปใหม่แล้ว");
+        GameManager.instance.uiManager.floatingTextController.EnableTutorialText(TutorialText.IncenseTutorial);
     }
 
 
@@ -80,13 +81,26 @@ public class TutorialCutsceneSequence : MonoBehaviour
         GameManager.instance.levelManager.PauseTimer(false);
 
         GameManager.instance.uiManager.subtitleTextController.DisableTitleText();
+        GameManager.instance.uiManager.floatingTextController.DisableTutorialText(); ;
+
         Invoke("SpawnAnomaly", 1);
     }
     
     private void SpawnAnomaly()
     {
         anomaly.TriggerAnomaly();
+        Invoke("DoAnomalyDialogue", 5f);
+    }
 
+    private void DoAnomalyDialogue()
+    {
+        GameManager.instance.uiManager.subtitleTextController.SetSubtitleText("มันมาอีกแล้วรึเปล่า... ต้องไปเช็ค", 7);
+        Invoke("OpenMovementTutorial", 5);
+    }
+
+    private void OpenMovementTutorial()
+    {
+        GameManager.instance.uiManager.floatingTextController.EnableTutorialText(TutorialText.MovementTutorial, 5);
     }
 
     private void DisplayAnomalySubtitle()

@@ -8,7 +8,7 @@ public class UiManager : MonoBehaviour
 {
     [Header("Canvas")]
     [SerializeField] Canvas pausedCanvas;
-    [SerializeField] Canvas sliderCanvas;
+    [SerializeField] Canvas overlayCanvas;
 
     [Header("Hand UI")]
     [SerializeField] Animator flashLightHandAnimator;
@@ -25,6 +25,7 @@ public class UiManager : MonoBehaviour
 
     [SerializeField] Animator transitionOverlay;
     public SubtitleTextController subtitleTextController;
+    public FloatingTextController floatingTextController;
 
     [Header("Timer")]
     public TextMeshProUGUI timeDisplay;
@@ -106,8 +107,8 @@ public class UiManager : MonoBehaviour
         {
             Vector2 mousePosition = Input.mousePosition;
             Vector2 uiPosition;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)sliderCanvas.transform, mousePosition, sliderCanvas.worldCamera, out uiPosition); //Position magic to get canvas position of the mouse
-            mouseCursor.transform.position = sliderCanvas.transform.TransformPoint(uiPosition);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)overlayCanvas.transform, mousePosition, overlayCanvas.worldCamera, out uiPosition); //Position magic to get canvas position of the mouse
+            mouseCursor.transform.position = overlayCanvas.transform.TransformPoint(uiPosition);
         }
         
     }
@@ -148,8 +149,8 @@ public class UiManager : MonoBehaviour
         anomalySliderObject.SetActive(true);
         Vector2 mousePosition = Input.mousePosition;
         Vector2 uiPosition;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)sliderCanvas.transform, mousePosition, sliderCanvas.worldCamera, out uiPosition); //Position magic to get canvas position of the mouse
-        anomalySlider.transform.position = sliderCanvas.transform.TransformPoint(uiPosition); //Teleport slider to the mouse position
+        RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)overlayCanvas.transform, mousePosition, overlayCanvas.worldCamera, out uiPosition); //Position magic to get canvas position of the mouse
+        anomalySlider.transform.position = overlayCanvas.transform.TransformPoint(uiPosition); //Teleport slider to the mouse position
     }
 
     public void CancelInteract(InputEventContextEnum context)
@@ -271,6 +272,18 @@ public class UiManager : MonoBehaviour
     public void HandShakeEnd()
     {
         flashLightHandAnimator.SetTrigger("HandShakeEnd");
+    }
+
+    public void EnableGameOverlay(bool value)
+    {
+        if(value)
+        {
+            overlayCanvas.gameObject.SetActive(true);
+        }
+        else
+        {
+            overlayCanvas.gameObject.SetActive(false);
+        }
     }
 }
 

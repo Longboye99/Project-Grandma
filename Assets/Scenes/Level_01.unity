@@ -723,13 +723,15 @@ GameObject:
   - component: {fileID: 28389694}
   - component: {fileID: 28389696}
   - component: {fileID: 28389695}
+  - component: {fileID: 28389697}
+  - component: {fileID: 28389698}
   m_Layer: 5
   m_Name: IncenseTextTutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &28389694
 RectTransform:
   m_ObjectHideFlags: 0
@@ -739,7 +741,7 @@ RectTransform:
   m_GameObject: {fileID: 28389693}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.23081061, y: 0.20833193, z: 0.39141005}
+  m_LocalScale: {x: 0.19308414, y: 0.17427965, z: 0.32743326}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1083229805}
@@ -747,7 +749,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 28, y: 6}
+  m_AnchoredPosition: {x: 34, y: -75}
   m_SizeDelta: {x: 1870, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &28389695
@@ -788,6 +790,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28389693}
   m_CullTransparentMesh: 1
+--- !u!95 &28389697
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28389693}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ebae0f2e770553543a7dffc7e847d2d4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &28389698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28389693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c0cf5a092507b428d069656cef2edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName1: FinishTextFading
+  eventName2: 
+  eventName3: 
 --- !u!1 &29128822
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,7 +1733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausedCanvas: {fileID: 1309172969}
-  sliderCanvas: {fileID: 1089054898}
+  overlayCanvas: {fileID: 1089054898}
   flashLightHandAnimator: {fileID: 956789309}
   anomalyHandAnimator: {fileID: 620156395}
   lighterHandAnimator: {fileID: 1642081658}
@@ -1705,6 +1744,7 @@ MonoBehaviour:
   silderMaxValue: 1
   transitionOverlay: {fileID: 1263498689}
   subtitleTextController: {fileID: 57842429}
+  floatingTextController: {fileID: 57842430}
   timeDisplay: {fileID: 625568796}
   isPaused: 0
 --- !u!4 &57842426
@@ -1780,9 +1820,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3be21a4a9642d4abe0592038ad2cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementTutorial: {fileID: 0}
-  incenseTutorial: {fileID: 0}
-  textAnimator: {fileID: 0}
+  movementTutorial: {fileID: 962814220}
+  incenseTutorial: {fileID: 28389693}
 --- !u!1 &59014537
 GameObject:
   m_ObjectHideFlags: 0
@@ -2341,6 +2380,11 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &79285035 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f46305ebe78b97c4aabc9bf5540abda0, type: 3}
+  m_PrefabInstance: {fileID: 1652740597}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &84736292
 GameObject:
   m_ObjectHideFlags: 0
@@ -11227,7 +11271,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 0.9471848, b: 0.80067927, a: 1}
-  m_Intensity: 5
+  m_Intensity: 10.27
   m_Range: 12.098934
   m_SpotAngle: 54.559067
   m_InnerSpotAngle: 30.839012
@@ -17688,6 +17732,8 @@ GameObject:
   - component: {fileID: 962814221}
   - component: {fileID: 962814223}
   - component: {fileID: 962814222}
+  - component: {fileID: 962814224}
+  - component: {fileID: 962814225}
   m_Layer: 5
   m_Name: MovementTextTutorial
   m_TagString: Untagged
@@ -17753,6 +17799,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 962814220}
   m_CullTransparentMesh: 1
+--- !u!95 &962814224
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962814220}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ebae0f2e770553543a7dffc7e847d2d4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &962814225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962814220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c0cf5a092507b428d069656cef2edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName1: FinishTextFading
+  eventName2: 
+  eventName3: 
 --- !u!4 &963769981 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 44023629069449883, guid: 44f72f06bb1c8a54caca04384e0083f2, type: 3}
@@ -21807,6 +21890,7 @@ Transform:
   - {fileID: 1656474187}
   - {fileID: 1423820768}
   - {fileID: 84840508}
+  - {fileID: 1652740598}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1186002362
@@ -22579,7 +22663,6 @@ Transform:
   - {fileID: 2036064101}
   - {fileID: 868827981}
   - {fileID: 42412908}
-  - {fileID: 1652740598}
   m_Father: {fileID: 1145891561}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1238270622 stripped
@@ -23908,6 +23991,7 @@ GameObject:
   - component: {fileID: 1318589440}
   - component: {fileID: 1318589439}
   - component: {fileID: 1318589438}
+  - component: {fileID: 1318589442}
   m_Layer: 6
   m_Name: IncenseStick
   m_TagString: Untagged
@@ -24006,6 +24090,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1185812446}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1318589442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318589437}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1321109636
 GameObject:
   m_ObjectHideFlags: 0
@@ -30261,31 +30363,31 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1230958582}
+    m_TransformParent: {fileID: 1185812446}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f46305ebe78b97c4aabc9bf5540abda0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.4253225
+      value: 0.63798374
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f46305ebe78b97c4aabc9bf5540abda0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4253225
+      value: 0.63798374
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f46305ebe78b97c4aabc9bf5540abda0, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.4253225
+      value: 0.63798374
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f46305ebe78b97c4aabc9bf5540abda0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.32
+      value: 0.0071225166
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f46305ebe78b97c4aabc9bf5540abda0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5612
+      value: -0.024878502
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f46305ebe78b97c4aabc9bf5540abda0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.227
+      value: 0.003499031
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f46305ebe78b97c4aabc9bf5540abda0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -30322,13 +30424,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f46305ebe78b97c4aabc9bf5540abda0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1652740601}
   m_SourcePrefab: {fileID: 100100000, guid: f46305ebe78b97c4aabc9bf5540abda0, type: 3}
 --- !u!4 &1652740598 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f46305ebe78b97c4aabc9bf5540abda0, type: 3}
   m_PrefabInstance: {fileID: 1652740597}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1652740601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79285035}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1656474186
 GameObject:
   m_ObjectHideFlags: 0
@@ -32085,8 +32208,7 @@ MonoBehaviour:
   pointClickCameraController: {fileID: 933045088}
   cutscenePlayer: {fileID: 1732456954}
   flashlightHand: {fileID: 956789307}
-  anomaly: {fileID: 0}
-  tutorialText: {fileID: 0}
+  anomaly: {fileID: 1635683254}
 --- !u!320 &1732456954
 PlayableDirector:
   m_ObjectHideFlags: 0
