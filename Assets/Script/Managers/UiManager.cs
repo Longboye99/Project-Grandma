@@ -1,14 +1,20 @@
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
 using System;
 using System.Collections;
-
+using TMPro;
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
     [Header("Canvas")]
     [SerializeField] Canvas pausedCanvas;
     [SerializeField] Canvas overlayCanvas;
+
+    [SerializeField] Volume postProcessVolume;
+    UnityEngine.Rendering.Universal.ColorAdjustments colorAdjustments;
+    
 
     [Header("Hand UI")]
     [SerializeField] Animator flashLightHandAnimator;
@@ -62,6 +68,8 @@ public class UiManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
 
+        postProcessVolume.profile.TryGet<UnityEngine.Rendering.Universal.ColorAdjustments>(out colorAdjustments);
+        SetPostProcessingLayerIsEnabled(false);
 
         //flashLightHandAnimator.SetTrigger("HandUp");
 
@@ -204,6 +212,7 @@ public class UiManager : MonoBehaviour
     {
         if (isPaused)
         {
+            SetPostProcessingLayerIsEnabled(false);
             pausedCanvas.gameObject.SetActive(false);
             Time.timeScale = 1.0f;
             Cursor.lockState = CursorLockMode.Confined;
@@ -211,6 +220,7 @@ public class UiManager : MonoBehaviour
             isPaused = false;
             return;
         }
+        SetPostProcessingLayerIsEnabled(true);
         pausedCanvas.gameObject.SetActive(true);
         Time.timeScale = 0;
         isPaused = true;
@@ -227,6 +237,12 @@ public class UiManager : MonoBehaviour
 
         timeDisplay.text = "0" + hour.ToString() + " : " + minute.ToString() + "0";
 
+    }
+
+    private void SetPostProcessingLayerIsEnabled(bool _value)
+    {
+        if (colorAdjustments == null) return;
+        colorAdjustments.active = _value;
     }
 
     public void FlashlightHand(bool isUp)

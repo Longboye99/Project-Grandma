@@ -6,6 +6,7 @@ public class FloatingTextController : MonoBehaviour
 {
     [SerializeField] GameObject movementTutorial;
     [SerializeField] GameObject incenseTutorial;
+    [SerializeField] GameObject anomalyTutorial;
     GameObject currentTutorial;
     Animator currentAnimator;
 
@@ -69,6 +70,10 @@ public class FloatingTextController : MonoBehaviour
         {
             return incenseTutorial;
         }
+        else if ( type == TutorialText.AnomalyTutorial )
+        {
+            return anomalyTutorial;
+        }
         else
         {
             return null;
@@ -80,4 +85,6 @@ public enum TutorialText
 {
     MovementTutorial,
     IncenseTutorial,
+    AnomalyTutorial,
+
 }

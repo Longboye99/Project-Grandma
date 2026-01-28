@@ -12,18 +12,22 @@ public class TutorialCutsceneSequence : MonoBehaviour
     [SerializeField] GameObject flashlightHand;
 
     [Header("Anomaly")]
-    [SerializeField] Anomaly anomaly;
+    [SerializeField] Anomaly tutorialAnomaly;
 
+    bool firstTime = true;
 
     private void OnEnable()
     {
         GameEventsManager.instance.anomalyEvents.onFinishAnimationEvent += FinishAnimationEvent;
         GameEventsManager.instance.playerEvents.onRefillIncense += OnRefilIncense;
+        GameEventsManager.instance.playerEvents.onMoveToArea += DetectMovingToArea;
+        GameEventsManager.instance.anomalyEvents.onUndoAnomaly += DetectUndoAnomaly;
     }
     private void OnDisable()
     {
         GameEventsManager.instance.anomalyEvents.onFinishAnimationEvent -= FinishAnimationEvent;
         GameEventsManager.instance.playerEvents.onRefillIncense -= OnRefilIncense;
+        GameEventsManager.instance.anomalyEvents.onUndoAnomaly -= DetectUndoAnomaly;
 
     }
 
@@ -88,45 +92,62 @@ public class TutorialCutsceneSequence : MonoBehaviour
     
     private void SpawnAnomaly()
     {
-        anomaly.TriggerAnomaly();
+        tutorialAnomaly.TriggerAnomaly();
         Invoke("DoAnomalyDialogue", 5f);
     }
 
     private void DoAnomalyDialogue()
     {
         GameManager.instance.uiManager.subtitleTextController.SetSubtitleText("มันมาอีกแล้วรึเปล่า... ต้องไปเช็ค", 7);
-        Invoke("OpenMovementTutorial", 5);
+        Invoke("DisplayMovementTutorial", 5);
     }
 
-    private void OpenMovementTutorial()
+    private void DisplayMovementTutorial()
     {
         GameManager.instance.uiManager.floatingTextController.EnableTutorialText(TutorialText.MovementTutorial, 5);
     }
 
+    private void DetectMovingToArea(AreaEnum area)
+    {
+        if(area == AreaEnum.Kitchen && firstTime)
+        {
+            firstTime = false;
+            GameEventsManager.instance.playerEvents.EnableMovement(false);
+            pointClickCameraMovement.isTurning = true;
+
+            GameManager.instance.uiManager.subtitleTextController.SetSubtitleText("มันไม่เคยอยู่ตรงนี้หนิ", 7);
+            Invoke("DisplayTutorial", 5);
+        }
+    }
+
+    private void DisplayTutorial()
+    {
+        GameManager.instance.uiManager.floatingTextController.EnableTutorialText(TutorialText.AnomalyTutorial);
+    }
+
+    private void DetectUndoAnomaly(Anomaly anomaly)
+    {
+        if(anomaly == tutorialAnomaly)
+        {
+            GameManager.instance.uiManager.floatingTextController.DisableTutorialText();
+            Invoke("DisplayAnomalySubtitle", 2);
+        }
+    }
+
     private void DisplayAnomalySubtitle()
     {
-
+        GameManager.instance.uiManager.subtitleTextController.SetSubtitleText("ค่ำคืนนี้ยังอีกยาวนานสินะ...", 7);
+        GameEventsManager.instance.playerEvents.EnableMovement(true);
+        pointClickCameraMovement.isTurning = false;
     }
- 
 
-    //some anomaly spawning
+
+    //Detect when move to area ==
+    //Disable movement ==
+    //Display Subtitle Dialogue ==
+    //Display Tutorial text==
+    //Wait for fix anomaly events==
+    //More dialogue text
+    //Finish Sequence
+
 }
-
-//start intro animation
-//Active UI
-//Wait til recieve refill incense event
-//Activate anomaly and stuff
-//Wait til recieve fix anomaly
-//Jumpscare n cutscene
-//Force camera look
-//Wait til recieve refill incense event
-//tutorial Ui
-//start level manager
-
-/*1.เปิดมาหน้าธูปขึ้นuiไฮไลท์ธูปบอกให้กดเติม 
- * 2.ของตกเดินไปแก้ 
- * 3.ตอนกำลังใกล้จะแก้เสร็จมีเสียงจากขวามือ 
- * 4. ผีพุ่งใส่จากทางขวา 
- * 5.พุ่งเข้ามาเสร็จหายไป ขอบขึ้นออร่าแดงๆกระพริบหน่อยฟิวหัวใจเต้นแรง 
- * 5.ผีหายไปล็อคกล้องหันไปหาธูป 
- * 6.พอจุดอีกรอบเจอกระดาษข้อความบอกว่าให้แก้สิ่งผิดปกติ*/
