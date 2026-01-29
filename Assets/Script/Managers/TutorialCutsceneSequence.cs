@@ -174,7 +174,7 @@ public class TutorialCutsceneSequence : MonoBehaviour
     }
 
     private void FinishSequence()
-    {
+    {   
         GameEventsManager.instance.playerEvents.EnableMovement(true);
         this.gameObject.SetActive(false);
     }

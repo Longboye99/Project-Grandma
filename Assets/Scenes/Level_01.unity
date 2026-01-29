@@ -11516,7 +11516,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 13421772
+    rgba: 4291611852
   m_fontColor: {r: 0.80015105, g: 0.80015105, b: 0.80015105, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -16904,8 +16904,10 @@ MonoBehaviour:
   playerCameraObject: {fileID: 1479350430}
   cameraMovement: {fileID: 933045091}
   rayMaxDistance: 5
-  lighterAudio: {fileID: 8300000, guid: a7633d5b48fe44540ab420929b748c18, type: 3}
-  volumn: 1
+  lighterAudioOpen: {fileID: 8300000, guid: 16cf487e3760cc348b2bdfcf336afaef, type: 3}
+  lighterAudioClose: {fileID: 8300000, guid: ba4baff52386eb342a10e2f3cf0d52f4, type: 3}
+  flashlightBuzz: {fileID: 8300000, guid: 644c05f28f42b654f892b3fee1905b6e, type: 3}
+  volumn: 0.2
   interactProgression: 0
   maxProgression: 1.5
   isHoldingInteract: 0
@@ -20305,7 +20307,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 13421772
+    rgba: 4291611852
   m_fontColor: {r: 0.80015105, g: 0.80015105, b: 0.80015105, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -40706,6 +40708,9 @@ PrefabInstance:
       addedObject: {fileID: 683299004275326537}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 683299004275326545}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 683299004275326541}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
       insertIndex: -1
@@ -40806,6 +40811,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &683299004275326545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683299004275326536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85dd9ac85f5f8b74db6ca26cf1cd5a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEffect: {fileID: 8300000, guid: 247e23f89469c8f44b2a4aed31839e90, type: 3}
+  volumn: 0.5
 --- !u!1001 &1083657024056100888
 PrefabInstance:
   m_ObjectHideFlags: 0

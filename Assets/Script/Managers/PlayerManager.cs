@@ -9,7 +9,9 @@ public class PlayerManager : MonoBehaviour
     Camera playerCamera;
     [SerializeField] PointClickCameraMovement cameraMovement;
     [SerializeField] float rayMaxDistance;
-    [SerializeField] AudioClip lighterAudio;
+    [SerializeField] AudioClip lighterAudioOpen;
+    [SerializeField] AudioClip lighterAudioClose;
+    [SerializeField] AudioClip flashlightBuzz;
     [SerializeField] float volumn;
     private int layerMask = (1 << 6) | (1 << 7);
 
@@ -64,6 +66,11 @@ public class PlayerManager : MonoBehaviour
                     doingHeldCountdown = false;
                     isHoldingInteract = true;
                     GameManager.instance.uiManager.ActivateInteractSlider(inputEventContext);
+                    if (isLookingAtIncense)
+                    {
+                        GameManager.instance.sfxManager.PlaySoundFXClip(lighterAudioOpen, playerCameraObject.transform, 0.03f);
+
+                    }
                 }
             }
             else if (isHoldingInteract)
@@ -152,7 +159,7 @@ public class PlayerManager : MonoBehaviour
             if (isLookingAtIncense)
             {
                 GameEventsManager.instance.playerEvents.RefilIncense();
-                GameManager.instance.sfxManager.PlaySoundFXClip(lighterAudio, playerCameraObject.transform, volumn);
+                GameManager.instance.sfxManager.PlaySoundFXClip(lighterAudioClose, playerCameraObject.transform, 0.03f);
                 GameManager.instance.uiManager.CheckAnomalyCursor(true);
 
             }
@@ -160,6 +167,7 @@ public class PlayerManager : MonoBehaviour
             {
                 GameEventsManager.instance.anomalyEvents.UndoAnomaly(currentAnomaly);
                 GameManager.instance.uiManager.CheckAnomalyCursor(true);
+                GameManager.instance.sfxManager.PlaySoundFXClip(flashlightBuzz, playerCameraObject.transform, volumn);
             }
             else if (currentInteractable != null)
             {
