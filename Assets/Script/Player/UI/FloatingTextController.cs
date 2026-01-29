@@ -47,10 +47,13 @@ public class FloatingTextController : MonoBehaviour
 
     public void DisableTutorialText()
     {
-        currentAnimator.SetTrigger("TextFadeOut");
+        if(currentAnimator != null)
+        {
+            currentAnimator.SetTrigger("TextFadeOut");
+        }
     }
 
-    private void RemoveTutorialText(string eventName)
+    public void RemoveTutorialText(string eventName)
     {
         if (eventName == "FinishTextFading")
         {

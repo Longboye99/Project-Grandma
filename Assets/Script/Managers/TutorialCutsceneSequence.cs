@@ -15,6 +15,8 @@ public class TutorialCutsceneSequence : MonoBehaviour
     [SerializeField] Anomaly tutorialAnomaly;
 
     bool firstTime = true;
+    bool hasTurned;
+    [SerializeField] bool skipCutscene;
 
     private void OnEnable()
     {
@@ -22,27 +24,39 @@ public class TutorialCutsceneSequence : MonoBehaviour
         GameEventsManager.instance.playerEvents.onRefillIncense += OnRefilIncense;
         GameEventsManager.instance.playerEvents.onMoveToArea += DetectMovingToArea;
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly += DetectUndoAnomaly;
+        GameEventsManager.instance.playerEvents.onStartTurning += StartTurning;
     }
     private void OnDisable()
     {
         GameEventsManager.instance.anomalyEvents.onFinishAnimationEvent -= FinishAnimationEvent;
         GameEventsManager.instance.playerEvents.onRefillIncense -= OnRefilIncense;
+        GameEventsManager.instance.playerEvents.onMoveToArea -= DetectMovingToArea;
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly -= DetectUndoAnomaly;
+        GameEventsManager.instance.playerEvents.onStartTurning -= StartTurning;
 
     }
 
     private void Start()
     {
-        Debug.Log("disable stuff");
-        pointClickCameraController.EnableFlashlight(false);
-        GameManager.instance.uiManager.FlashlightHand(false);
-        GameManager.instance.playerManager.EnableInteract(false);
-        GameEventsManager.instance.playerEvents.EnableMovement(false);
-        GameManager.instance.levelManager.PauseTimer(true);
-        GameManager.instance.uiManager.EnableGameOverlay(false);
+        if(!skipCutscene)
+        {
+            Debug.Log("disable stuff");
+            pointClickCameraController.EnableFlashlight(false);
+            GameManager.instance.uiManager.FlashlightHand(false);
+            GameManager.instance.playerManager.EnableInteract(false);
+            GameEventsManager.instance.playerEvents.EnableMovement(false);
+            GameManager.instance.levelManager.PauseTimer(true);
+            GameManager.instance.uiManager.EnableGameOverlay(false);
 
-        cutsceneController.TeleportToIncense();
-        DoStartingCutscene();
+            cutsceneController.TeleportToIncense();
+            DoStartingCutscene();
+        }
+        else
+        {
+            GameManager.instance.levelManager.RefillIncense();
+            pointClickCameraMovement.SetCamPosition();
+            this.gameObject.SetActive(false);
+        }
     }
 
     private void FinishAnimationEvent(string eventName)
@@ -63,7 +77,6 @@ public class TutorialCutsceneSequence : MonoBehaviour
     private void FinishStartingCutscene()
     {
         pointClickCameraMovement.SetCamPosition();
-        pointClickCameraMovement.isTurning = false;
         pointClickCameraController.EnableFlashlight(true);
         GameManager.instance.uiManager.FlashlightHand(true);
         GameManager.instance.playerManager.EnableInteract(true);
@@ -81,13 +94,13 @@ public class TutorialCutsceneSequence : MonoBehaviour
 
     private void OnRefilIncense()
     {
-        GameEventsManager.instance.playerEvents.EnableMovement(true);
-        GameManager.instance.levelManager.PauseTimer(false);
+        if (!skipCutscene)
+        {
+            GameManager.instance.uiManager.subtitleTextController.DisableTitleText();
+            GameManager.instance.uiManager.floatingTextController.DisableTutorialText(); ;
 
-        GameManager.instance.uiManager.subtitleTextController.DisableTitleText();
-        GameManager.instance.uiManager.floatingTextController.DisableTutorialText(); ;
-
-        Invoke("SpawnAnomaly", 1);
+            Invoke("SpawnAnomaly", 1);
+        }
     }
     
     private void SpawnAnomaly()
@@ -104,41 +117,66 @@ public class TutorialCutsceneSequence : MonoBehaviour
 
     private void DisplayMovementTutorial()
     {
+        GameEventsManager.instance.playerEvents.EnableMovement(true);
+        GameManager.instance.levelManager.PauseTimer(false);
         GameManager.instance.uiManager.floatingTextController.EnableTutorialText(TutorialText.MovementTutorial, 5);
+    }
+
+    private void StartTurning()
+    {
+        if (!hasTurned)
+        {
+            hasTurned = true;
+            GameManager.instance.uiManager.floatingTextController.RemoveTutorialText("FinishTextFading");
+
+        }
     }
 
     private void DetectMovingToArea(AreaEnum area)
     {
-        if(area == AreaEnum.Kitchen && firstTime)
+        if(area == AreaEnum.Kitchen && firstTime && !skipCutscene)
         {
             firstTime = false;
             GameEventsManager.instance.playerEvents.EnableMovement(false);
-            pointClickCameraMovement.isTurning = true;
+            GameManager.instance.playerManager.EnableInteract(false);
 
-            GameManager.instance.uiManager.subtitleTextController.SetSubtitleText("มันไม่เคยอยู่ตรงนี้หนิ", 7);
+
+            Invoke("DisplayAnomalySubtitle", 1);
             Invoke("DisplayTutorial", 5);
-        }
-    }
-
-    private void DisplayTutorial()
-    {
-        GameManager.instance.uiManager.floatingTextController.EnableTutorialText(TutorialText.AnomalyTutorial);
-    }
-
-    private void DetectUndoAnomaly(Anomaly anomaly)
-    {
-        if(anomaly == tutorialAnomaly)
-        {
-            GameManager.instance.uiManager.floatingTextController.DisableTutorialText();
-            Invoke("DisplayAnomalySubtitle", 2);
         }
     }
 
     private void DisplayAnomalySubtitle()
     {
+        GameManager.instance.uiManager.subtitleTextController.SetSubtitleText("(หายใจเข้าลึกๆ.. แค่ปัดเป่าผีร้ายเราทำได้...)", 6);
+    }
+
+    private void DisplayTutorial()
+    {
+        GameManager.instance.uiManager.floatingTextController.EnableTutorialText(TutorialText.AnomalyTutorial);
+        GameManager.instance.playerManager.EnableInteract(true);
+
+    }
+
+    private void DetectUndoAnomaly(Anomaly anomaly)
+    {
+        if(anomaly == tutorialAnomaly && !skipCutscene)
+        {
+            GameManager.instance.uiManager.floatingTextController.DisableTutorialText();
+            Invoke("DisplayUndoAnomalySubtitle", 2);
+        }
+    }
+
+    private void DisplayUndoAnomalySubtitle()
+    {
         GameManager.instance.uiManager.subtitleTextController.SetSubtitleText("ค่ำคืนนี้ยังอีกยาวนานสินะ...", 7);
+        Invoke("FinishSequence", 2.5f);
+    }
+
+    private void FinishSequence()
+    {
         GameEventsManager.instance.playerEvents.EnableMovement(true);
-        pointClickCameraMovement.isTurning = false;
+        this.gameObject.SetActive(false);
     }
 
 

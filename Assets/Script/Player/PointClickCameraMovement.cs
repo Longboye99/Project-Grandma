@@ -138,6 +138,7 @@ public class PointClickCameraMovement : MonoBehaviour
             buttonCanvas.SetActive(false);
             isTurning = true; //Keep track of when player is turning
             GameManager.instance.playerManager.EnableInteract(false);
+            GameEventsManager.instance.playerEvents.Startturning();
 
             currentSplineContainer = currentNode.pathDict[nextArea].splineContainer;
             splineAnimate.Duration = currentNode.pathDict[nextArea].duration;
@@ -238,7 +239,6 @@ public class PointClickCameraMovement : MonoBehaviour
 
         SetCamPosition();
         StartCoroutine(Movementcooldown());
-        GameEventsManager.instance.playerEvents.MoveToArea(currentNode.area);
         yield return null;
     }
 
@@ -272,6 +272,7 @@ public class PointClickCameraMovement : MonoBehaviour
 
         buttonCanvas.SetActive(true);
         SwitchButtonDirection();
+        GameEventsManager.instance.playerEvents.MoveToArea(currentNode.area);
     }
 
     private void SwitchButtonDirection()
