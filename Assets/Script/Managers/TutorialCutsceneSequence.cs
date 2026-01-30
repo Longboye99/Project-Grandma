@@ -17,6 +17,7 @@ public class TutorialCutsceneSequence : MonoBehaviour
     bool firstTime = true;
     bool hasTurned;
     [SerializeField] bool skipCutscene;
+    [SerializeField] AudioClip howlingNoise;
 
     private void OnEnable()
     {
@@ -177,6 +178,7 @@ public class TutorialCutsceneSequence : MonoBehaviour
     {   
         GameEventsManager.instance.playerEvents.EnableMovement(true);
         this.gameObject.SetActive(false);
+        GameManager.instance.sfxManager.PlaySoundFXClip(howlingNoise, pointClickCameraMovement.transform, 0.1f);
     }
 
 
