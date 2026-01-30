@@ -9,7 +9,9 @@ public class PlayerManager : MonoBehaviour
     Camera playerCamera;
     [SerializeField] PointClickCameraMovement cameraMovement;
     [SerializeField] float rayMaxDistance;
-    [SerializeField] AudioClip lighterAudio;
+    [SerializeField] AudioClip lighterAudioOpen;
+    [SerializeField] AudioClip lighterAudioClose;
+    [SerializeField] AudioClip flashlightBuzz;
     [SerializeField] float volumn;
     private int layerMask = (1 << 6) | (1 << 7);
 
@@ -17,10 +19,10 @@ public class PlayerManager : MonoBehaviour
     public float maxProgression = 1;
     public bool isHoldingInteract = false;
     public bool completedInteract;
-    bool enableInteract = true;
+    public bool enableInteract = true;
 
     public Anomaly currentAnomaly;
-    private bool isLookingAtIncense;
+    public bool isLookingAtIncense;
 
     [Header("Interact Control")]
     public Interactable currentInteractable;
@@ -64,6 +66,11 @@ public class PlayerManager : MonoBehaviour
                     doingHeldCountdown = false;
                     isHoldingInteract = true;
                     GameManager.instance.uiManager.ActivateInteractSlider(inputEventContext);
+                    if (isLookingAtIncense)
+                    {
+                        GameManager.instance.sfxManager.PlaySoundFXClip(lighterAudioOpen, playerCameraObject.transform, 0.03f);
+
+                    }
                 }
             }
             else if (isHoldingInteract)
@@ -73,7 +80,17 @@ public class PlayerManager : MonoBehaviour
             }
             else
             {
-                CheckCameraRayCastForInteractable();
+                RaycastHit hit = CheckCameraRayCastForInteractable();
+
+                if (hit.collider != null && hit.collider.gameObject.GetComponent<Incense>())
+                {
+                    GameManager.instance.uiManager.IncenseMouseHover(true);
+                }
+                else if (!isHoldingInteract)
+                {
+                    GameManager.instance.uiManager.IncenseMouseHover(false);
+
+                }
             }
         }
         
@@ -142,7 +159,7 @@ public class PlayerManager : MonoBehaviour
             if (isLookingAtIncense)
             {
                 GameEventsManager.instance.playerEvents.RefilIncense();
-                GameManager.instance.sfxManager.PlaySoundFXClip(lighterAudio, playerCameraObject.transform, volumn);
+                GameManager.instance.sfxManager.PlaySoundFXClip(lighterAudioClose, playerCameraObject.transform, 0.03f);
                 GameManager.instance.uiManager.CheckAnomalyCursor(true);
 
             }
@@ -150,6 +167,7 @@ public class PlayerManager : MonoBehaviour
             {
                 GameEventsManager.instance.anomalyEvents.UndoAnomaly(currentAnomaly);
                 GameManager.instance.uiManager.CheckAnomalyCursor(true);
+                GameManager.instance.sfxManager.PlaySoundFXClip(flashlightBuzz, playerCameraObject.transform, volumn);
             }
             else if (currentInteractable != null)
             {
@@ -175,7 +193,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void EnableInteract(bool value)
+    public void EnableInteract(bool value)
     {
         if(value == true)
         {
@@ -186,10 +204,12 @@ public class PlayerManager : MonoBehaviour
             enableInteract = false;
             CancelInteract(InputEventContextEnum.Default);
         }
+
+        Debug.Log("Interact Enable Mode: " + value);
     }
 
     
-    private void CheckCameraRayCastForInteractable()
+    private RaycastHit CheckCameraRayCastForInteractable()
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition/3);
 
@@ -210,6 +230,7 @@ public class PlayerManager : MonoBehaviour
 
                 currentAnomaly = null;
                 currentInteractable = null;
+
             }
             else if (hit.collider.gameObject.GetComponent<Interactable>())
             {
@@ -233,6 +254,7 @@ public class PlayerManager : MonoBehaviour
             GameEventsManager.instance.inputEvents.ChangeInputeventContext(InputEventContextEnum.Default);
         }
 
+        return hit;
     }
 
     public void TeleportPlayerToRespawn()

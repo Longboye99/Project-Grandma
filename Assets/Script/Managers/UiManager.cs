@@ -1,37 +1,49 @@
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
 using System;
 using System.Collections;
-
+using TMPro;
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
+    [Header("Canvas")]
     [SerializeField] Canvas pausedCanvas;
-    [SerializeField] Animator transitionOverlay;
+    [SerializeField] Canvas overlayCanvas;
+
+    [SerializeField] Volume postProcessVolume;
+    UnityEngine.Rendering.Universal.ColorAdjustments colorAdjustments;
+    
+
+    [Header("Hand UI")]
+    [SerializeField] Animator flashLightHandAnimator;
+    [SerializeField] Animator anomalyHandAnimator;
+    [SerializeField] Animator lighterHandAnimator;
+
+    [Header("Cursor and Slider")]
     public GameObject anomalySliderObject;
     public GameObject mouseCursor;
-    Animator mouseCursorAnimator;
+    public Animator mouseCursorAnimator;
     private Slider anomalySlider;
-
-    [SerializeField] Canvas sliderCanvas;
     public float sliderValue;
     public float silderMaxValue;
 
-    public TextMeshProUGUI timeDisplay;
-    
+    [SerializeField] Animator transitionOverlay;
+    public SubtitleTextController subtitleTextController;
+    public FloatingTextController floatingTextController;
 
+    [Header("Timer")]
+    public TextMeshProUGUI timeDisplay;
     int hour;
     int minute;
     float currentTime;
     float midnightTime;
-
     public bool isPaused;
 
     private HandEnum handEnum;
 
-    [SerializeField] Animator flashLightHandAnimator;
-    [SerializeField] Animator anomalyHandAnimator;
-    [SerializeField] Animator lighterHandAnimator;
+    
 
     private void OnEnable()
     {
@@ -55,8 +67,9 @@ public class UiManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
-        mouseCursorAnimator = mouseCursor.GetComponent<Animator>();
 
+        postProcessVolume.profile.TryGet<UnityEngine.Rendering.Universal.ColorAdjustments>(out colorAdjustments);
+        SetPostProcessingLayerIsEnabled(false);
 
         //flashLightHandAnimator.SetTrigger("HandUp");
 
@@ -73,6 +86,27 @@ public class UiManager : MonoBehaviour
         DisplayTime();
         MoveCursor();
 
+        
+    }
+
+    public void IncenseMouseHover(bool value)
+    {
+        if(value == true)
+        {
+            if (!mouseCursorAnimator.GetCurrentAnimatorStateInfo(0).IsName("cursorLightIncense")
+            && GameManager.instance.playerManager.enableInteract)
+            {
+                mouseCursorAnimator.SetTrigger("Lighting");
+            }
+        }
+        else
+        {
+            if (!mouseCursorAnimator.GetCurrentAnimatorStateInfo(0).IsName("cursorWrongAnomaly")
+                && !mouseCursorAnimator.GetCurrentAnimatorStateInfo(0).IsName("cursorCorrectAnomaly"))
+            {
+                SetCursorDefault();
+            }
+        }
     }
 
     private void MoveCursor()
@@ -81,8 +115,8 @@ public class UiManager : MonoBehaviour
         {
             Vector2 mousePosition = Input.mousePosition;
             Vector2 uiPosition;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)sliderCanvas.transform, mousePosition, sliderCanvas.worldCamera, out uiPosition); //Position magic to get canvas position of the mouse
-            mouseCursor.transform.position = sliderCanvas.transform.TransformPoint(uiPosition);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)overlayCanvas.transform, mousePosition, overlayCanvas.worldCamera, out uiPosition); //Position magic to get canvas position of the mouse
+            mouseCursor.transform.position = overlayCanvas.transform.TransformPoint(uiPosition);
         }
         
     }
@@ -123,8 +157,8 @@ public class UiManager : MonoBehaviour
         anomalySliderObject.SetActive(true);
         Vector2 mousePosition = Input.mousePosition;
         Vector2 uiPosition;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)sliderCanvas.transform, mousePosition, sliderCanvas.worldCamera, out uiPosition); //Position magic to get canvas position of the mouse
-        anomalySlider.transform.position = sliderCanvas.transform.TransformPoint(uiPosition); //Teleport slider to the mouse position
+        RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)overlayCanvas.transform, mousePosition, overlayCanvas.worldCamera, out uiPosition); //Position magic to get canvas position of the mouse
+        anomalySlider.transform.position = overlayCanvas.transform.TransformPoint(uiPosition); //Teleport slider to the mouse position
     }
 
     public void CancelInteract(InputEventContextEnum context)
@@ -178,6 +212,7 @@ public class UiManager : MonoBehaviour
     {
         if (isPaused)
         {
+            SetPostProcessingLayerIsEnabled(false);
             pausedCanvas.gameObject.SetActive(false);
             Time.timeScale = 1.0f;
             Cursor.lockState = CursorLockMode.Confined;
@@ -185,6 +220,7 @@ public class UiManager : MonoBehaviour
             isPaused = false;
             return;
         }
+        SetPostProcessingLayerIsEnabled(true);
         pausedCanvas.gameObject.SetActive(true);
         Time.timeScale = 0;
         isPaused = true;
@@ -203,6 +239,12 @@ public class UiManager : MonoBehaviour
 
     }
 
+    private void SetPostProcessingLayerIsEnabled(bool _value)
+    {
+        if (colorAdjustments == null) return;
+        colorAdjustments.active = _value;
+    }
+
     public void FlashlightHand(bool isUp)
     {
         if (isUp)
@@ -216,6 +258,7 @@ public class UiManager : MonoBehaviour
             flashLightHandAnimator.ResetTrigger("HandUp");
             flashLightHandAnimator.SetTrigger("HandDown");
         }
+        Debug.Log("Flashlight Hand Enable Mode: " + isUp);
     }
 
     public void TransitionIn()
@@ -245,6 +288,18 @@ public class UiManager : MonoBehaviour
     public void HandShakeEnd()
     {
         flashLightHandAnimator.SetTrigger("HandShakeEnd");
+    }
+
+    public void EnableGameOverlay(bool value)
+    {
+        if(value)
+        {
+            overlayCanvas.gameObject.SetActive(true);
+        }
+        else
+        {
+            overlayCanvas.gameObject.SetActive(false);
+        }
     }
 }
 

@@ -44,4 +44,10 @@ public class PlayerEvents
     {
         onRespawnPlayer?.Invoke();
     }
+
+    public event Action onStartTurning;
+    public void Startturning()
+    {
+        onStartTurning?.Invoke();
+    }
 }

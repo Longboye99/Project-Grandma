@@ -7,9 +7,9 @@ public class PlayerCutsceneController : MonoBehaviour
     [SerializeField] float transitionInTime;
     [SerializeField] float transitionOutTime;
     [SerializeField] GameObject ghostHand;
-    Animator ghostHandnimator;
 
     PointClickCameraMovement pointClickCameraMovement;
+    PointClickCameraController pointClickCameraController;
 
     private void OnEnable()
     {
@@ -24,6 +24,7 @@ public class PlayerCutsceneController : MonoBehaviour
     private void Start()
     {
         pointClickCameraMovement = GetComponent<PointClickCameraMovement>();
+        pointClickCameraController = GetComponent<PointClickCameraController>();
     }
 
     private void FinishAnimationEvent(string eventName)
@@ -38,9 +39,15 @@ public class PlayerCutsceneController : MonoBehaviour
             StartCoroutine(MoveAwayFromIncense());
         }
     }
+    public void TeleportToIncense()
+    {
+        transform.position = IncenseCam.position;
+        transform.rotation = IncenseCam.rotation;
+    }
 
     public void IncenseCutsceneSequence()
     {
+        pointClickCameraController.EnableFlashlight(false);
         StartCoroutine(MoveToIncense());
     }
 
@@ -67,7 +74,10 @@ public class PlayerCutsceneController : MonoBehaviour
         ghostHand.SetActive(true);
 
     }
-
+    public void MoveAwayFromIncenseTrigger(float sec)
+    {
+        StartCoroutine(MoveAwayFromIncense(sec));
+    }
     private IEnumerator MoveAwayFromIncense()
     {
         Vector3 targetPos = pointClickCameraMovement.currentNode.CameraPos.transform.position;
@@ -89,7 +99,32 @@ public class PlayerCutsceneController : MonoBehaviour
 
         pointClickCameraMovement.SetCamPosition();
         pointClickCameraMovement.isTurning = false;
+        pointClickCameraController.EnableFlashlight(true);
+        GameManager.instance.levelManager.FinishRespawnCutscene(); 
+    }
+
+    private IEnumerator MoveAwayFromIncense(float sec)
+    {
+        Vector3 targetPos = pointClickCameraMovement.currentNode.CameraPos.transform.position;
+        Quaternion targetRot = pointClickCameraMovement.currentNode.CameraPos.transform.rotation;
+
+        Vector3 currentPos = transform.position;
+        Quaternion currentRot = this.transform.rotation;
+
+        float elapsedTime = 0;
+        float waitTime = sec;
+
+        while (elapsedTime < waitTime)
+        {
+            transform.position = Vector3.Lerp(currentPos, targetPos, (elapsedTime / waitTime));
+            transform.rotation = Quaternion.Slerp(currentRot, targetRot, (elapsedTime / waitTime));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        pointClickCameraMovement.SetCamPosition();
+        pointClickCameraMovement.isTurning = false;
+        pointClickCameraController.EnableFlashlight(true);
         GameManager.instance.levelManager.FinishRespawnCutscene();
-       
     }
 }

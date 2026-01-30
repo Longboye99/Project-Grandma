@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Animation/LevelAnim.meta
 guid: c1cb86bcab6747b4e8cf842fbd6f3c20
+========
+guid: 6befe912ae9a8c84e9178e2c02bfcb0f
+>>>>>>>> origin/Merge-Temp:Assets/Animation/Interactable/Door.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
