@@ -68,16 +68,23 @@ public class TestEnemy2 : MonoBehaviour
             else if (anomalyPoint >= lightAnomalyThreshold)
             {
                 anomalyManager.SpawnRandomHeavyAnomaly();
-                anomalyManager.SpawnRandomLightAnomaly();
+                
 
             }
             else
             {
+                anomalyManager.SpawnRandomLightAnomaly();
             }
         }
-        currentCooldown = cooldownDuration;
+        else
+        {
+            Debug.Log("Failed Difficulty Roll");
+        }
+            currentCooldown = cooldownDuration;
+        anomalyPoint = anomalyManager.TallyAnomalyPoint();
+
     }
-    
+
 
     private void CheckFinishAttackAnomaly(Anomaly anomaly)
     {

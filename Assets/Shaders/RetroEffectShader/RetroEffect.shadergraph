@@ -961,15 +961,15 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": 4940.5439453125,
-            "y": 29.95198631286621
+            "x": 4824.57568359375,
+            "y": 235.77597045898438
         },
         "m_Blocks": []
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 4906.75244140625,
-            "y": 171.26402282714845
+            "x": 4790.78369140625,
+            "y": 377.0879821777344
         },
         "m_Blocks": [
             {
@@ -985,10 +985,10 @@
     },
     "m_PreviewData": {
         "serializedMesh": {
-            "m_SerializedMesh": "{\"mesh\":{\"instanceID\":0}}",
+            "m_SerializedMesh": "{\"mesh\":{\"fileID\":10210,\"guid\":\"0000000000000000e000000000000000\",\"type\":0}}",
             "m_Guid": ""
         },
-        "preventRotation": false
+        "preventRotation": true
     },
     "m_Path": "Shader Graphs",
     "m_GraphPrecision": 1,
@@ -1921,7 +1921,7 @@
     "m_Title": "Adding Dither",
     "m_Position": {
         "x": -87.552001953125,
-        "y": 506.1119384765625
+        "y": 506.1120300292969
     }
 }
 
@@ -2619,7 +2619,7 @@
     "m_Title": "Quantization",
     "m_Position": {
         "x": 1046.015869140625,
-        "y": 196.6080322265625
+        "y": 196.60797119140626
     }
 }
 
@@ -4962,7 +4962,7 @@
     "m_ObjectId": "a9250c6b7ed04e0083d3b2923dc83194",
     "m_Title": "Dithering",
     "m_Position": {
-        "x": -1986.8160400390625,
+        "x": -1986.815673828125,
         "y": -427.0080261230469
     }
 }
@@ -5451,10 +5451,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 4467.4560546875,
-            "y": 89.85598754882813,
+            "x": 4351.48779296875,
+            "y": 295.67999267578127,
             "width": 207.35986328125,
-            "height": 428.5440368652344
+            "height": 428.54400634765627
         }
     },
     "m_Slots": [
@@ -6304,10 +6304,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 4106.49658203125,
-            "y": 11.520020484924317,
+            "x": 4211.7119140625,
+            "y": 235.7759552001953,
             "width": 118.27197265625,
-            "height": 33.02397918701172
+            "height": 33.79203796386719
         }
     },
     "m_Slots": [
