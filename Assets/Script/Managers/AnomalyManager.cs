@@ -72,27 +72,7 @@ public class AnomalyManager : MonoBehaviour
         }
     }
 
-    /*private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            foreach (var areaAnomaly in dict)
-            {
-                foreach (var item in areaAnomaly.Value.lightAnomalies)
-                {
-                    Debug.Log("Area: " + areaAnomaly.Value.areaEnum + ", Light Anomaly: " + item.id);
-                }
-                foreach (var item in areaAnomaly.Value.heavyAnomalies)
-                {
-                    Debug.Log("Area: " + areaAnomaly.Value.areaEnum + ", Heavy Anomaly: " + item.id);
-                }
-                foreach (var item in areaAnomaly.Value.DisabledAnomalies)
-                {
-                    Debug.Log("Area: " + areaAnomaly.Value.areaEnum + ", Disabled Anomaly: " + item.id);
-                }
-            }
-        }
-    }*/
+    
 
     public int TallyAnomalyPoint() //Loop through all anomalies connected to this node and sum up the anomaly point
     {

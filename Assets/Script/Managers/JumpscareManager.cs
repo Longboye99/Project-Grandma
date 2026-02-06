@@ -123,7 +123,7 @@ public class JumpscareManager : MonoBehaviour
     public void ExitJumpscare()
     {
         jumpscareEnabled = false;
-        GameManager.instance.levelManager.RespawnPlayer();
+        GameManager.instance.levelManager.JumpscareDefeat();
     }
 
     private void CreateJumpscareDict()

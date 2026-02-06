@@ -100,12 +100,25 @@ public class LevelManager : MonoBehaviour
         if (incenseCurrentTime <= 0 && !isDefeated)
         {
             isDefeated = true;
-            Time.timeScale = 0;
-            DefeatMessage.gameObject.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            GameManager.instance.uiManager.TransitionOut();
+            Invoke("Defeat", 2);
         }
     }
+    public void JumpscareDefeat()
+    {
+        isDefeated = true;
+        GameManager.instance.uiManager.TransitionOut();
+        Invoke("Defeat", 2);
+    }
+
+    private void Defeat()
+    {
+        Time.timeScale = 0;
+        DefeatMessage.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     public void FinishedDefeatAnim()
     {
         DefeatMessage.gameObject.SetActive(true);
