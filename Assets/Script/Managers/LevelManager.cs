@@ -56,7 +56,7 @@ public class LevelManager : MonoBehaviour
         incenseWarning.SetActive(false);
         incenseSection = maxIncenseSection;
         playerCutsceneController = GameObject.FindGameObjectWithTag("PlayerCollider").GetComponent<PlayerCutsceneController>();
-        GameManager.instance.anomalyManager.CheckEnemyEvent(0);
+        GameManager.instance.anomalyManager.dictionary.CheckEnemyEvent(0);
 
     }
     private void Update()
@@ -67,7 +67,7 @@ public class LevelManager : MonoBehaviour
         CheckDefeat();
         CheckIncenseWarning();
 
-        GameManager.instance.anomalyManager.CheckEnemyEvent(currentTime);
+        GameManager.instance.anomalyManager.dictionary.CheckEnemyEvent(currentTime);
         GameManager.instance.anomalyManager.TallyAnomalyPoint();
     }
 

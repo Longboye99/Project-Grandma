@@ -42,7 +42,11 @@ public class FlashlightOverlay : MonoBehaviour
 
     public void Blink(Anomaly anomaly)
     {
-        animator.SetTrigger("LightDown");
-        StartCoroutine(WaitForFlickering());
+        if(anomaly.anomalyLevel != AnomalyEnum.NotRandomSpawn)
+        {
+            animator.SetTrigger("LightDown");
+            StartCoroutine(WaitForFlickering());
+        }
+        
     }
 }

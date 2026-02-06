@@ -14,15 +14,73 @@ public class AnomalyDictionaryHandler : MonoBehaviour
     List<AreaEnum> areas = new List<AreaEnum>();
     public List<Anomaly> ActiveAnomalies = new List<Anomaly>();
 
+    [Header("Enemy Event")]
+    [SerializeField] TestEnemy2 enemy;
+    public List<LevelData> timedLevelUpdate;
+    public List<LevelAnomalyData> timedAnomalyUpdate;
+    int eventIndex = 0;
+    float nextEventTime;
+
     private void Start()
     {
         AllAnomalies = FindObjectsByType<Anomaly>(FindObjectsSortMode.None);
         CreateAreaAnomalyDict();
-        foreach (LevelAnomalyData data in DataContainer.Content.AnomalyConfig)
+
+        timedLevelUpdate = DataContainer.Content.levelConfigs;
+        timedAnomalyUpdate = DataContainer.Content.AnomalyConfig;
+        foreach (LevelAnomalyData data in timedAnomalyUpdate)
         {
             data.CreateList();
             //Debug.Log("Created Data list:" + data.AnomalyId);
         }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            foreach (var areaAnomaly in dict)
+            {
+                foreach (var item in areaAnomaly.Value.lightAnomalies)
+                {
+                    Debug.Log("Area: " + areaAnomaly.Value.areaEnum + ", Light Anomaly: " + item.id);
+                }
+                foreach (var item in areaAnomaly.Value.heavyAnomalies)
+                {
+                    Debug.Log("Area: " + areaAnomaly.Value.areaEnum + ", Heavy Anomaly: " + item.id);
+                }
+                foreach (var item in areaAnomaly.Value.DisabledAnomalies)
+                {
+                    Debug.Log("Area: " + areaAnomaly.Value.areaEnum + ", Disabled Anomaly: " + item.id);
+                }
+            }
+        }
+    }
+    public void CheckEnemyEvent(float currentTime) //Check when to update ai and level data
+    {
+        if (timedLevelUpdate[eventIndex] != null)
+        {
+            if (nextEventTime <= currentTime)
+            {
+                UpdateLevelData(timedLevelUpdate[eventIndex]);//Update enemy Ai 
+                UpdateAnomaliesData(eventIndex);
+                eventIndex++;
+                nextEventTime = timedLevelUpdate[eventIndex].Time;
+                Debug.Log("Change enemy AI at time: " + currentTime);
+                Debug.Log("Next enemy AI Update at: " + nextEventTime);
+            }
+        }
+    }
+
+    private void UpdateLevelData(LevelData data) //update ai and level data
+    {
+        enemy.difficultyLevel = data.Difficulty;
+        enemy.cooldownDuration = data.ActiveInterval;
+        enemy.lightAnomalyThreshold = data.LightAnomalyThreshold;
+        enemy.heavyAnomalyThreashold = data.HeavyAnomalyThreshold;
+
+        GameManager.instance.levelManager.incenseSpeed = data.IncenseDrainSpeed;
+        GameManager.instance.levelManager.timeSpeed = data.TimeScale;
     }
 
     private void UpdateAnomaliesData(int index) //Update anomaly data inside container

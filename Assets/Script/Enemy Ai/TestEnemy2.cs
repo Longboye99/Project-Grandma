@@ -62,11 +62,11 @@ public class TestEnemy2 : MonoBehaviour
         int difficultyRoll = Random.Range(0, 20);
         if (failCount > 0)
         {
-            difficultyRoll += ((int)Mathf.Floor((20 - difficultyLevel) * 0.4f));
+            difficultyRoll -= ((int)Mathf.Floor((20 - difficultyLevel) * 0.4f));
         }
         if (failCount >= 2 )
         {
-            difficultyRoll = 20;
+            difficultyRoll = 0;
         }
 
         if (difficultyLevel >= difficultyRoll && currentGrace <= 0)
@@ -82,9 +82,9 @@ public class TestEnemy2 : MonoBehaviour
                 if (anomalyManager.SpawnRandomHeavyAnomaly() == false)
                 {
                     if (anomalyManager.SpawnRandomLightAnomaly() == false)
-                    {
-                        Debug.Log("Failed all spawning attempt");
+                    {                       
                         failCount++;
+                        Debug.Log("Failed all spawning attempt: " + failCount);
                     }
                     else
                     {
@@ -99,15 +99,15 @@ public class TestEnemy2 : MonoBehaviour
             }
             else if (anomalyManager.SpawnRandomLightAnomaly() == false)
             {
-                Debug.Log("Failed all spawning attempt");
                 failCount++;
+                Debug.Log("Failed all spawning attempt: " + failCount);
             }
             else { failCount = 0; }
         }
         else
         {
-            Debug.Log("Failed Difficulty Roll");
             failCount++;
+            Debug.Log("Failed all spawning attempt: " + failCount);
         }
         currentCooldown = cooldownDuration;
         anomalyPoint = anomalyManager.TallyAnomalyPoint();
