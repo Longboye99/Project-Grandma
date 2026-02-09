@@ -34,6 +34,7 @@ public class LevelManager : MonoBehaviour
     bool isDefeated;
     float size;
     PlayerCutsceneController playerCutsceneController;
+    SaveLoadSystem saveLoadSystem;
 
 
     private void OnEnable()
@@ -56,7 +57,7 @@ public class LevelManager : MonoBehaviour
         incenseWarning.SetActive(false);
         incenseSection = maxIncenseSection;
         playerCutsceneController = GameObject.FindGameObjectWithTag("PlayerCollider").GetComponent<PlayerCutsceneController>();
-        GameManager.instance.anomalyManager.dictionary.CheckEnemyEvent(0);
+        saveLoadSystem = GetComponent<SaveLoadSystem>();
 
     }
     private void Update()
@@ -93,6 +94,10 @@ public class LevelManager : MonoBehaviour
         VictoryMessage.gameObject.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        saveLoadSystem.SaveLevelProgress(GameManager.instance.anomalyManager.dictionary.currentLevel + 1);
+        CleanEventManager();
+
     }
 
     private void CheckDefeat()
@@ -117,12 +122,21 @@ public class LevelManager : MonoBehaviour
         DefeatMessage.gameObject.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        CleanEventManager();
     }
 
     public void FinishedDefeatAnim()
     {
-        DefeatMessage.gameObject.SetActive(true);
-        Time.timeScale = 0;
+        Defeat();
+    }
+
+    private void CleanEventManager()
+    {
+        GameEventsManager manager = FindAnyObjectByType<GameEventsManager>();
+        if (manager != null)
+        {
+            manager.DestroyThyself();
+        }
     }
     public void PauseTimer(bool pause)
     {

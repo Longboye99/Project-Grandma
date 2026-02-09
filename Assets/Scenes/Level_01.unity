@@ -6404,7 +6404,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8910365608381145a704a0747fa1a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataSwitcher: {fileID: 11400000, guid: 467e2ab3b8f6f9f49ac222427a48c810, type: 2}
   DataContainer: {fileID: 11400000, guid: 4475a790dccc2c24da5587648b0c251b, type: 2}
+  currentLevel: 0
   ActiveAnomalies: []
   enemy: {fileID: 78606234}
   timedLevelUpdate: []
@@ -10482,6 +10484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 548395246}
   - component: {fileID: 548395245}
+  - component: {fileID: 548395247}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -10530,6 +10533,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1190004897}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &548395247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548395244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c39f8ffdf99964a904c8be31103103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &549789223
 GameObject:
   m_ObjectHideFlags: 0
@@ -15192,50 +15207,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821356981}
   m_CullTransparentMesh: 1
---- !u!1 &821471649
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 821471651}
-  - component: {fileID: 821471650}
-  m_Layer: 0
-  m_Name: GameEventsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &821471650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821471649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5af49a964d1ea1e48b2a1717771632e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &821471651
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821471649}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &825115425 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5527844515863014935, guid: 9a1774c9fedd0474481859c83bf02970, type: 3}
@@ -40314,6 +40285,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 683299004275326541}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 683299004275326538}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
       insertIndex: -1
@@ -40321,9 +40295,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 683299004275326545}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 683299004275326541}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 683299004275326544}
@@ -42554,5 +42525,4 @@ SceneRoots:
   - {fileID: 78606235}
   - {fileID: 746541063}
   - {fileID: 980073766}
-  - {fileID: 821471651}
   - {fileID: 1736976048}

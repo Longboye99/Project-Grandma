@@ -7,7 +7,6 @@ using Game.Database;
 
 public class AnomalyManager : MonoBehaviour
 {
-    public int anomalyPoint;
     public AnomalyDictionaryHandler dictionary;
     bool hasJumpscared;
     [SerializeField] AttackAnomaly jumpscare;

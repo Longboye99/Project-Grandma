@@ -7,7 +7,9 @@ using System.Linq;
 
 public class AnomalyDictionaryHandler : MonoBehaviour
 {
+    [SerializeField] DataSwitchContainer dataSwitcher;
     [SerializeField] LocalSpreadsheetContainer DataContainer;
+    public int currentLevel;
 
     Anomaly[] AllAnomalies;
     public Dictionary<AreaEnum, AreaAnomaly> dict = new Dictionary<AreaEnum, AreaAnomaly>();
@@ -23,11 +25,14 @@ public class AnomalyDictionaryHandler : MonoBehaviour
 
     private void Start()
     {
+        DataContainer = dataSwitcher.currentData;
+
         AllAnomalies = FindObjectsByType<Anomaly>(FindObjectsSortMode.None);
         CreateAreaAnomalyDict();
 
         timedLevelUpdate = DataContainer.Content.levelConfigs;
         timedAnomalyUpdate = DataContainer.Content.AnomalyConfig;
+        currentLevel = DataContainer.level;
         foreach (LevelAnomalyData data in timedAnomalyUpdate)
         {
             data.CreateList();
@@ -58,18 +63,21 @@ public class AnomalyDictionaryHandler : MonoBehaviour
     }
     public void CheckEnemyEvent(float currentTime) //Check when to update ai and level data
     {
-        if (timedLevelUpdate[eventIndex] != null)
+        if(eventIndex < 5)
         {
-            if (nextEventTime <= currentTime)
+            if (timedLevelUpdate[eventIndex] != null)
             {
-                UpdateLevelData(timedLevelUpdate[eventIndex]);//Update enemy Ai 
-                UpdateAnomaliesData(eventIndex);
-                eventIndex++;
-                nextEventTime = timedLevelUpdate[eventIndex].Time;
-                Debug.Log("Change enemy AI at time: " + currentTime);
-                Debug.Log("Next enemy AI Update at: " + nextEventTime);
+                if (nextEventTime <= currentTime)
+                {
+                    UpdateLevelData(timedLevelUpdate[eventIndex]);//Update enemy Ai 
+                    UpdateAnomaliesData(eventIndex);
+                    eventIndex++;
+                    nextEventTime = timedLevelUpdate[eventIndex].Time;
+                    Debug.Log("Change enemy AI at time: " + currentTime);
+                    Debug.Log("Next enemy AI Update at: " + nextEventTime);
+                }
             }
-        }
+        }      
     }
 
     private void UpdateLevelData(LevelData data) //update ai and level data

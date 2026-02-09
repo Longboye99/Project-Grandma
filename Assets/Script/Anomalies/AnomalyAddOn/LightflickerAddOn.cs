@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class storageLightflicker : MonoBehaviour
+public class LightflickerAddOn : MonoBehaviour
 {
     Anomaly anomaly;
     [SerializeField] float minTime = 8;
