@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Data
   m_EditorClassIdentifier: 
   level: 0
+  skipCutscene: 1
   content:
     anomalies:
     - Id: L_Coffin_Doll

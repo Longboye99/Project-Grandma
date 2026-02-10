@@ -9,6 +9,8 @@ public class FlashlightOverlay : MonoBehaviour
     [SerializeField] Animation lightFlickering;
     [SerializeField] Animation heavyFlickering;
 
+    bool _isFlickering;
+
     private void OnEnable()
     {
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly += Blink;
@@ -32,6 +34,7 @@ public class FlashlightOverlay : MonoBehaviour
     {
         yield return new WaitForSeconds(0.13f);
         animator.SetTrigger("Default");
+        _isFlickering = false;
     }
 
     public void TriggerHeavyAnomaly()
@@ -42,10 +45,11 @@ public class FlashlightOverlay : MonoBehaviour
 
     public void Blink(Anomaly anomaly)
     {
-        if(anomaly.anomalyLevel != AnomalyEnum.NotRandomSpawn)
+        if(!_isFlickering)
         {
             animator.SetTrigger("LightDown");
             StartCoroutine(WaitForFlickering());
+            _isFlickering = true;
         }
         
     }

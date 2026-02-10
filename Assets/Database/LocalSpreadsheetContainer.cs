@@ -5,6 +5,7 @@ using UnityEngine;
 public class LocalSpreadsheetContainer : ScriptableObject
 {
     public int level;
+    public bool skipCutscene;
     [SerializeField] LocalSpreadsheetContent content;
     public LocalSpreadsheetContent Content => content;
 

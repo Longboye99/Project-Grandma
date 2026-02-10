@@ -187,6 +187,8 @@ public class PointClickCameraMovement : MonoBehaviour
     private void PlaySplineAnimation()
     {
         splineAnimate.Container = currentSplineContainer;
+        splineAnimate.ElapsedTime = 0;
+
         splineAnimate.Play();
         isWalking = true;
         StartCoroutine(CheckSplineComplete());
@@ -199,7 +201,7 @@ public class PointClickCameraMovement : MonoBehaviour
             yield return null;
         }
         PlayTransitonOut();
-        splineAnimate.ElapsedTime = 0;
+        
     }
 
     private void PlayTransitonOut()

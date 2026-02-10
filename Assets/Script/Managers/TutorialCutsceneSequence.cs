@@ -4,6 +4,10 @@ using UnityEngine.Playables;
 
 public class TutorialCutsceneSequence : MonoBehaviour
 {
+    [SerializeField] DataSwitchContainer dataSwitcher;
+    [SerializeField] LocalSpreadsheetContainer DataContainer;
+    
+
     [Header("Player Components")]
     [SerializeField] PlayerCutsceneController cutsceneController;
     [SerializeField] PointClickCameraMovement pointClickCameraMovement;
@@ -11,7 +15,7 @@ public class TutorialCutsceneSequence : MonoBehaviour
     [SerializeField] PlayableDirector cutscenePlayer;
     [SerializeField] GameObject flashlightHand;
 
-    [Header("Anomaly")]
+    [Header("Anomaly")] 
     [SerializeField] Anomaly tutorialAnomaly;
 
     bool firstTime = true;
@@ -39,6 +43,9 @@ public class TutorialCutsceneSequence : MonoBehaviour
 
     private void Start()
     {
+        DataContainer = dataSwitcher.currentData;
+        skipCutscene = DataContainer.skipCutscene;
+
         if(!skipCutscene)
         {
             Debug.Log("disable stuff");

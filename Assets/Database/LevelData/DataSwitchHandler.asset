@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38d2b1cd876a2d14893fb720f27f0be3, type: 3}
   m_Name: DataSwitchHandler
   m_EditorClassIdentifier: 
-  currentData: {fileID: 0}
+  currentData: {fileID: 11400000, guid: 4475a790dccc2c24da5587648b0c251b, type: 2}
   levelsData:
   - {fileID: 11400000, guid: 4475a790dccc2c24da5587648b0c251b, type: 2}
   - {fileID: 11400000, guid: d96c896c2f13b504e8804b9938e01c44, type: 2}
