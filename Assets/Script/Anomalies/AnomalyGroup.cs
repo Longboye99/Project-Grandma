@@ -22,6 +22,9 @@ public class AnomalyGroup : Anomaly
     {
         if (anomalyList.Contains(incomingAnomaly) && isActive)
         {
+            isActive = false;
+            currentAnomalyPoint = 0;
+            CurrentCooldown = cooldown;
             foreach (Anomaly anomaly in anomalyList)
             {
                 if(anomaly.isActive)
@@ -29,9 +32,8 @@ public class AnomalyGroup : Anomaly
                     GameEventsManager.instance.anomalyEvents.UndoAnomaly(anomaly);
                 }
             }
-            isActive = false;
-            currentAnomalyPoint = 0;
-            CurrentCooldown = cooldown;
-        }      
+            
+            GameEventsManager.instance.anomalyEvents.UndoAnomaly(this);
+        }
     }
 }
