@@ -6,10 +6,10 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class UiManager : MonoBehaviour
 {
     [Header("Canvas")]
-    [SerializeField] Canvas pausedCanvas;
     [SerializeField] Canvas overlayCanvas;
 
     [SerializeField] Volume postProcessVolume;
@@ -213,7 +213,8 @@ public class UiManager : MonoBehaviour
         if (isPaused)
         {
             SetPostProcessingLayerIsEnabled(false);
-            pausedCanvas.gameObject.SetActive(false);
+            //pausedCanvas.gameObject.SetActive(false);
+            SceneManager.UnloadSceneAsync("[DevTest]PauseMenu");
             Time.timeScale = 1.0f;
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
@@ -221,7 +222,9 @@ public class UiManager : MonoBehaviour
             return;
         }
         SetPostProcessingLayerIsEnabled(true);
-        pausedCanvas.gameObject.SetActive(true);
+        //pausedCanvas.gameObject.SetActive(true);
+            SceneManager.LoadSceneAsync("[DevTest]PauseMenu", LoadSceneMode.Additive);
+
         Time.timeScale = 0;
         isPaused = true;
         Cursor.lockState = CursorLockMode.None;

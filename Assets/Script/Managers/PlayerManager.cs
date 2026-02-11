@@ -188,7 +188,6 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Holding");
             interactProgression += Time.deltaTime;
         }
     }
