@@ -4,6 +4,5 @@ using UnityEngine.UI;
 
 public class VolumeManager : MonoBehaviour
 {
-    
 
 }

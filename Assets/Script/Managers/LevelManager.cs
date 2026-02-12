@@ -5,6 +5,7 @@ using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 using System.Collections.Generic;
 using System;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 
 public class LevelManager : MonoBehaviour
@@ -91,7 +92,7 @@ public class LevelManager : MonoBehaviour
     private void Victory()
     {
         Time.timeScale = 0;
-        VictoryMessage.gameObject.SetActive(true);
+        SceneManager.LoadSceneAsync("[DevTest]VictoryMenu", LoadSceneMode.Additive);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -119,7 +120,7 @@ public class LevelManager : MonoBehaviour
     private void Defeat()
     {
         Time.timeScale = 0;
-        DefeatMessage.gameObject.SetActive(true);
+        SceneManager.LoadSceneAsync("[DevTest]DefeatMenu", LoadSceneMode.Additive);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         CleanEventManager();
