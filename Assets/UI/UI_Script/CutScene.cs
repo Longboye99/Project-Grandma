@@ -8,7 +8,7 @@ public class CutScene : MonoBehaviour
     void Start()
     {
         SceneManager.LoadScene(sceneName);
-
+        Time.timeScale = 1.0f;
     }
 
     // Update is called once per frame

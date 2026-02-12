@@ -25,7 +25,7 @@ public class DebugHandler : MonoBehaviour
         ActivateLookedAnomaly();
         if(isActive)
         {
-            anomalyCountDisplay.text = GameManager.instance.anomalyManager.ActiveAnomalies.Count.ToString();
+            anomalyCountDisplay.text = GameManager.instance.anomalyManager.dictionary.ActiveAnomalies.Count.ToString();
             anomalyPointDisplay.text = GameManager.instance.anomalyManager.TallyAnomalyPoint().ToString();
 
             difficultyDisplay.text = enemy.difficultyLevel.ToString();

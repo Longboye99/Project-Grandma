@@ -18,7 +18,7 @@ public class AudioManager : MonoBehaviour
     {
         anomalyCount = 0;
         area = GameManager.instance.anomalyManager.currentArea;
-        activeAnomaly = GameManager.instance.anomalyManager.ActiveAnomalies;
+        activeAnomaly = GameManager.instance.anomalyManager.dictionary.ActiveAnomalies;
         foreach (var item in activeAnomaly)
         {
             if(item.area == area)

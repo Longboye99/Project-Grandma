@@ -55,8 +55,6 @@ public class Incense : MonoBehaviour
         {
             endObject.transform.position = startObject.transform.position + (initialDistance * incensePercentage);
         }
-        
-
 
         distance = Vector3.Distance(startObject.transform.position, endObject.transform.position);
         incenseStick.transform.localScale = new Vector3(initialScale.x, distance / 2, initialScale.z);

@@ -33,4 +33,10 @@ public class GameEventsManager : MonoBehaviour
         levelEvents = new LevelEvents();
         inputEvents = new InputEvents();
     }
+
+    public void DestroyThyself()
+    {
+        Destroy(gameObject);
+        _instance = null;    // because destroy doesn't happen until end of frame
+    }
 }

@@ -5,6 +5,7 @@ using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 using System.Collections.Generic;
 using System;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 
 public class LevelManager : MonoBehaviour
@@ -34,6 +35,7 @@ public class LevelManager : MonoBehaviour
     bool isDefeated;
     float size;
     PlayerCutsceneController playerCutsceneController;
+    SaveLoadSystem saveLoadSystem;
 
 
     private void OnEnable()
@@ -56,7 +58,7 @@ public class LevelManager : MonoBehaviour
         incenseWarning.SetActive(false);
         incenseSection = maxIncenseSection;
         playerCutsceneController = GameObject.FindGameObjectWithTag("PlayerCollider").GetComponent<PlayerCutsceneController>();
-        GameManager.instance.anomalyManager.CheckEnemyEvent(0);
+        saveLoadSystem = GetComponent<SaveLoadSystem>();
 
     }
     private void Update()
@@ -67,7 +69,7 @@ public class LevelManager : MonoBehaviour
         CheckDefeat();
         CheckIncenseWarning();
 
-        GameManager.instance.anomalyManager.CheckEnemyEvent(currentTime);
+        GameManager.instance.anomalyManager.dictionary.CheckEnemyEvent(currentTime);
         GameManager.instance.anomalyManager.TallyAnomalyPoint();
     }
 
@@ -90,9 +92,13 @@ public class LevelManager : MonoBehaviour
     private void Victory()
     {
         Time.timeScale = 0;
-        VictoryMessage.gameObject.SetActive(true);
+        SceneManager.LoadSceneAsync("[DevTest]VictoryMenu", LoadSceneMode.Additive);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        saveLoadSystem.SaveLevelProgress(GameManager.instance.anomalyManager.dictionary.currentLevel + 1);
+        CleanEventManager();
+
     }
 
     private void CheckDefeat()
@@ -100,16 +106,38 @@ public class LevelManager : MonoBehaviour
         if (incenseCurrentTime <= 0 && !isDefeated)
         {
             isDefeated = true;
-            Time.timeScale = 0;
-            DefeatMessage.gameObject.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            GameManager.instance.uiManager.TransitionOut();
+            Invoke("Defeat", 2);
         }
     }
+    public void JumpscareDefeat()
+    {
+        isDefeated = true;
+        GameManager.instance.uiManager.TransitionOut();
+        Invoke("Defeat", 2);
+    }
+
+    private void Defeat()
+    {
+        Time.timeScale = 0;
+        SceneManager.LoadSceneAsync("[DevTest]DefeatMenu", LoadSceneMode.Additive);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        CleanEventManager();
+    }
+
     public void FinishedDefeatAnim()
     {
-        DefeatMessage.gameObject.SetActive(true);
-        Time.timeScale = 0;
+        Defeat();
+    }
+
+    private void CleanEventManager()
+    {
+        GameEventsManager manager = FindAnyObjectByType<GameEventsManager>();
+        if (manager != null)
+        {
+            manager.DestroyThyself();
+        }
     }
     public void PauseTimer(bool pause)
     {
