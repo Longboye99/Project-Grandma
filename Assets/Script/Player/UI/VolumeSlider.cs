@@ -37,7 +37,7 @@ public class VolumeSlider : MonoBehaviour
     public void SetSfxVolume()
     {
         float volume = _sfxSlider.value;
-        _masterMixer.SetFloat("ambienceVolume", Mathf.Log10(volume) * 20);
+        _masterMixer.SetFloat("sfxVolume", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("sfxVolume", volume);
     }
     public void SetMasterVolume()

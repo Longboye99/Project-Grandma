@@ -210,25 +210,30 @@ public class UiManager : MonoBehaviour
 
     public void Pause()
     {
-        if (isPaused)
+        if (!isPaused)
         {
-            SetPostProcessingLayerIsEnabled(false);
-            //pausedCanvas.gameObject.SetActive(false);
-            SceneManager.UnloadSceneAsync("[DevTest]PauseMenu");
-            Time.timeScale = 1.0f;
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = false;
-            isPaused = false;
-            return;
-        }
-        SetPostProcessingLayerIsEnabled(true);
-        //pausedCanvas.gameObject.SetActive(true);
+            SetPostProcessingLayerIsEnabled(true);
+            //pausedCanvas.gameObject.SetActive(true);
             SceneManager.LoadSceneAsync("[DevTest]PauseMenu", LoadSceneMode.Additive);
 
-        Time.timeScale = 0;
-        isPaused = true;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+            Time.timeScale = 0;
+            isPaused = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        
+    }
+
+    public void UnPause()
+    {
+        SetPostProcessingLayerIsEnabled(false);
+        //pausedCanvas.gameObject.SetActive(false);
+        SceneManager.UnloadSceneAsync("[DevTest]PauseMenu");
+        Time.timeScale = 1.0f;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
+        isPaused = false;
+        return;
     }
 
     private void DisplayTime()
@@ -288,6 +293,7 @@ public class UiManager : MonoBehaviour
     {
         flashLightHandAnimator.SetTrigger("HandShakeStart");
     }
+
     public void HandShakeEnd()
     {
         flashLightHandAnimator.SetTrigger("HandShakeEnd");
