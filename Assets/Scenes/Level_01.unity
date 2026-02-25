@@ -4020,7 +4020,7 @@ Transform:
   m_GameObject: {fileID: 193931064}
   serializedVersion: 2
   m_LocalRotation: {x: 0.037025962, y: -0.7058114, z: -0.036991775, w: 0.7064637}
-  m_LocalPosition: {x: -8.657, y: -0.096, z: -1.3399993}
+  m_LocalPosition: {x: -8.657, y: -0.096, z: -1.2874976}
   m_LocalScale: {x: 1.1622882, y: 1.1622881, z: 1.1622882}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -5822,6 +5822,7 @@ GameObject:
   - component: {fileID: 346481863}
   - component: {fileID: 346481862}
   - component: {fileID: 346481864}
+  - component: {fileID: 346481865}
   m_Layer: 0
   m_Name: AnomalyManager
   m_TagString: Untagged
@@ -5879,6 +5880,27 @@ MonoBehaviour:
   enemy: {fileID: 78606234}
   timedLevelUpdate: []
   timedAnomalyUpdate: []
+--- !u!114 &346481865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346481861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7c6190bb48ffe4cba970c2b69a786e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anomalyNoise: {fileID: 1019168225}
+  noiseWarningPoint: 70
+  flashlightWarningAnimator: {fileID: 588429861}
+  flashWarningPoint: 20
+  braceletAnimator: {fileID: 961370369}
+  braceletWarningPoint: 50
+  anomalyPoint: 0
+  localAnomalyPoint: 0
+  cooldown: 0
 --- !u!1001 &348651992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10767,6 +10789,7 @@ GameObject:
   - component: {fileID: 588429860}
   - component: {fileID: 588429858}
   - component: {fileID: 588429859}
+  - component: {fileID: 588429861}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -10877,6 +10900,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 933045084}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!95 &588429861
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588429857}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: af75827231ba19640bd9550a6785ace9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &589216647 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 44023629069449883, guid: 44f72f06bb1c8a54caca04384e0083f2, type: 3}
@@ -16854,7 +16899,7 @@ Animator:
   m_GameObject: {fileID: 933045083}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f9783034ffa5c034da581a8c5fca4915, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -17297,6 +17342,7 @@ GameObject:
   - component: {fileID: 961370366}
   - component: {fileID: 961370368}
   - component: {fileID: 961370367}
+  - component: {fileID: 961370369}
   m_Layer: 5
   m_Name: Bracelet
   m_TagString: Untagged
@@ -17361,6 +17407,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961370365}
   m_CullTransparentMesh: 1
+--- !u!95 &961370369
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961370365}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ec4462a3632dfd14584ec46e8255152b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &962814220
 GameObject:
   m_ObjectHideFlags: 0
@@ -18491,7 +18559,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1019168223}
   - component: {fileID: 1019168225}
-  - component: {fileID: 1019168226}
   m_Layer: 0
   m_Name: Whisper
   m_TagString: Untagged
@@ -18611,18 +18678,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1019168226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1019168222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91c65ddcce8f8df488abcc8c37412ef8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1023455198
 GameObject:
   m_ObjectHideFlags: 0
@@ -24123,7 +24178,7 @@ Transform:
   m_GameObject: {fileID: 1356690716}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.568, y: 0.824, z: -16.255}
+  m_LocalPosition: {x: -5.568, y: 0.824, z: -16.22}
   m_LocalScale: {x: 0.085964836, y: 0.78123826, z: 0.59328014}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -31258,7 +31313,7 @@ MonoBehaviour:
   pointClickCameraMovement: {fileID: 933045091}
   pointClickCameraController: {fileID: 933045088}
   cutscenePlayer: {fileID: 1732456954}
-  flashlightHand: {fileID: 956789307}
+  flashlightHand: {fileID: 994771937}
   tutorialAnomaly: {fileID: 683299004275326538}
   skipCutscene: 0
   howlingNoise: {fileID: 8300000, guid: b18494381f13d0542bec2974ded9b43a, type: 3}
@@ -31290,9 +31345,9 @@ PlayableDirector:
   - key: {fileID: 3643934061150791960, guid: 652a60d10b7a9ab46906ddb853ded43a, type: 2}
     value: {fileID: 1263498689}
   - key: {fileID: -7849773306393332975, guid: 652a60d10b7a9ab46906ddb853ded43a, type: 2}
-    value: {fileID: 956789307}
+    value: {fileID: 994771937}
   - key: {fileID: -7126026345507413387, guid: 652a60d10b7a9ab46906ddb853ded43a, type: 2}
-    value: {fileID: 956789309}
+    value: {fileID: 994771939}
   - key: {fileID: -8650440862946887574, guid: 652a60d10b7a9ab46906ddb853ded43a, type: 2}
     value: {fileID: 588429857}
   - key: {fileID: 908189048125843421, guid: 652a60d10b7a9ab46906ddb853ded43a, type: 2}
@@ -38993,7 +39048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.4279993
+      value: -1.3754976
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -40232,7 +40287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7888257899827565112, guid: f8f56feb9093a404cbe449ec8d93a9a9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.8624992
+      value: -3.8099976
       objectReference: {fileID: 0}
     - target: {fileID: 7888257899827565112, guid: f8f56feb9093a404cbe449ec8d93a9a9, type: 3}
       propertyPath: m_LocalRotation.w

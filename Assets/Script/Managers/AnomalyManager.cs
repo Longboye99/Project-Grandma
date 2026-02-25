@@ -36,6 +36,19 @@ public class AnomalyManager : MonoBehaviour
         return anomalyPoint;
     }
 
+    public int TallyAreaAnomalyPoint()
+    {
+        int localAnomalyPoint = 0;
+        foreach (Anomaly anomaly in dictionary.ActiveAnomalies)
+        {
+            if(anomaly.area == currentArea)
+            {
+                localAnomalyPoint += anomaly.anomalyPoint;
+            }
+        }
+        return localAnomalyPoint;
+    }
+
     public bool SpawnRandomLightAnomaly()//Randomly trigger a light anomaly
     {
         AreaAnomaly targetArea;

@@ -1,0 +1,84 @@
+using UnityEngine;
+
+public class AnomalyWarner : MonoBehaviour
+{
+    [SerializeField] AudioSource anomalyNoise;
+    [SerializeField] int noiseWarningPoint;
+    bool _isPlayingNoise;
+
+    [SerializeField] Animator flashlightWarningAnimator;
+    [SerializeField] int flashWarningPoint;
+
+    [SerializeField] Animator braceletAnimator;
+    [SerializeField] int braceletWarningPoint;
+    bool _isBlinking;
+    
+    public int anomalyPoint;
+    public int localAnomalyPoint;
+
+    [SerializeField] float cooldown;
+
+    private void Start()
+    {
+        
+    }
+
+    private void Update()
+    {
+        HandleGlobalAnomalyWarning();
+
+        cooldown += Time.deltaTime;
+        if(cooldown >= 5)
+        {
+            HandleLocalAnomalyWarning();
+            cooldown = 0;
+        }
+    }
+
+    private void HandleGlobalAnomalyWarning()
+    {
+        anomalyPoint = GameManager.instance.anomalyManager.TallyAnomalyPoint();
+
+        if (anomalyPoint >= noiseWarningPoint && !_isPlayingNoise)
+        {
+            anomalyNoise.Play();
+            _isPlayingNoise = true;
+        }
+        else if (anomalyPoint < noiseWarningPoint && _isPlayingNoise)
+        {
+            anomalyNoise.Stop();
+            _isPlayingNoise = false;
+        }
+
+        if (anomalyPoint >= braceletWarningPoint && !_isBlinking)
+        {
+            braceletAnimator.SetTrigger("StartBlinking");
+            _isBlinking = true;
+        }
+        else if (anomalyPoint < braceletWarningPoint && _isBlinking)
+        {
+            braceletAnimator.SetTrigger("StopBlinking");
+            _isBlinking = false;
+        }
+    }
+
+    public void HandleLocalAnomalyWarning()
+    {
+        localAnomalyPoint = GameManager.instance.anomalyManager.TallyAreaAnomalyPoint();
+
+        if (localAnomalyPoint >= flashWarningPoint)
+        {
+            flashlightWarningAnimator.SetTrigger("LongBlink");
+        }
+        else if ( 0 < localAnomalyPoint && localAnomalyPoint < flashWarningPoint)
+        {
+            flashlightWarningAnimator.SetTrigger("ShortBlink");
+        }
+    }
+    
+
+    public void SetAmbienceVolumn(float volumn)
+    {
+        anomalyNoise.volume = volumn;
+    }
+}
