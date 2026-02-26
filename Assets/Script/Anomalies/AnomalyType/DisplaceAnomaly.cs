@@ -6,10 +6,10 @@ public class DisplaceAnomaly : Anomaly
     Vector3 originalPosition;
     Quaternion originalRotation;
     private void Start()
-    {
-        originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
+    { 
         originalPosition = this.gameObject.transform.position;
         originalRotation = this.gameObject.transform.rotation;
+        originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
     }
 
     public override void TriggerAnomaly()

@@ -47,10 +47,6 @@ public class DebugHandler : MonoBehaviour
             isActive = !isActive;
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            TriggerJumpscare();
-        }
     }
 
     public void HighlightAnomaly()

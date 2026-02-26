@@ -2,9 +2,25 @@ using UnityEngine;
 
 public class AppearingAnomaly : Anomaly
 {
+    MeshGroup meshGroup;
+    [SerializeField] bool useMeshGroup = false;
     private void Start()
     {
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        if (GetComponent<MeshRenderer>())
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
+        else if(GetComponent<MeshGroup>())
+        {
+            useMeshGroup = true;
+            meshGroup = GetComponent<MeshGroup>();
+            meshGroup.DisableAllMesh();  
+        }
+        else
+        {
+            Debug.LogWarning("Can't find mesh for appearing anomaly: ", this);
+        }
+
         gameObject.GetComponent<Collider>().enabled = false;
         originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
     }
@@ -15,7 +31,14 @@ public class AppearingAnomaly : Anomaly
         currentAnomalyPoint = anomalyPoint;
         Debug.Log("Trigger Appearing Anomaly:" + this.name);
 
-        gameObject.GetComponent<MeshRenderer>().enabled = true; //Make the object appear
+        if (useMeshGroup)
+        {
+            meshGroup.EnableAllMesh();
+        }
+        else
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = true; //Make the object appear
+        }
         gameObject.GetComponent<Collider>().enabled = true; //Make the object appear
     }
 
@@ -23,7 +46,15 @@ public class AppearingAnomaly : Anomaly
     {
         if (anomaly == this && isActive)
         {
-            gameObject.GetComponent<MeshRenderer>().enabled = false; //Make anomaly dissapear
+            if (useMeshGroup)
+            {
+                meshGroup.DisableAllMesh();
+            }
+            else
+            {
+                gameObject.GetComponent<MeshRenderer>().enabled = false; //Make anomaly dissapear
+            }
+            
             gameObject.GetComponent<Collider>().enabled = false;
 
             currentAnomalyPoint = 0;
