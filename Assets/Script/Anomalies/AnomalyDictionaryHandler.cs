@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-
-
 public class AnomalyDictionaryHandler : MonoBehaviour
 {
     [SerializeField] DataSwitchContainer dataSwitcher;

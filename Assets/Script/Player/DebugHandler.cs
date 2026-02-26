@@ -17,7 +17,7 @@ public class DebugHandler : MonoBehaviour
     [SerializeField] TextMeshProUGUI incenseSpeedDisplay;
     [SerializeField] TextMeshProUGUI TimeSpeedDisplay;
 
-    bool isActive;
+    bool isActive = false;
 
     void Update()
     {
