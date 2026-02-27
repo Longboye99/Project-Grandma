@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AppearingAnomaly : Anomaly
 {
-    MeshGroup meshGroup;
+    [SerializeField]MeshGroup meshGroup;
     [SerializeField] bool useMeshGroup = false;
     private void Start()
     {
@@ -12,6 +12,7 @@ public class AppearingAnomaly : Anomaly
         }
         else if(GetComponent<MeshGroup>())
         {
+            Debug.Log("Found MeshGroup", this);
             useMeshGroup = true;
             meshGroup = GetComponent<MeshGroup>();
             meshGroup.DisableAllMesh();  
@@ -22,7 +23,11 @@ public class AppearingAnomaly : Anomaly
         }
 
         gameObject.GetComponent<Collider>().enabled = false;
-        originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
+        if(GetComponent<MeshRenderer>())
+        {
+            originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
+
+        }
     }
 
     public override void TriggerAnomaly()

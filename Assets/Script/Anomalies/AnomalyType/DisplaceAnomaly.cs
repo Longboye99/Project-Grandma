@@ -9,7 +9,11 @@ public class DisplaceAnomaly : Anomaly
     { 
         originalPosition = this.gameObject.transform.position;
         originalRotation = this.gameObject.transform.rotation;
-        originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
+        if (GetComponent<MeshRenderer>())
+        {
+            originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
+
+        }
     }
 
     public override void TriggerAnomaly()

@@ -20,9 +20,12 @@ public class MeshGroup : MonoBehaviour
 
     public void DisableAllMesh()
     {
+        Debug.Log("Called Disable mesh" + this.gameObject.name, this);
+
         foreach (MeshRenderer renderer in meshList)
         {
             renderer.enabled = false;
+            Debug.Log("Disable mesh" + this.gameObject.name, this);
         }
     }
 }

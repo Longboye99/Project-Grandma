@@ -1065,6 +1065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9029b3b42199748a75ed6e5b498e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_Kitchen_LotsOfKnives
   anomalyLevel: 1
   area: 4
@@ -1564,6 +1565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: knife (3)
   anomalyLevel: 3
   area: 0
@@ -1574,6 +1576,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &48740904
 BoxCollider:
@@ -2151,12 +2154,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 78606233}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -8.85, y: 1.9, z: 6.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1190004897}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &79062222
 GameObject:
@@ -2853,6 +2856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: knife (2)
   anomalyLevel: 3
   area: 0
@@ -2863,6 +2867,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &112976082
 BoxCollider:
@@ -3254,6 +3259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Storage_Doll
   anomalyLevel: 0
   area: 2
@@ -3264,6 +3270,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &146053664
 BoxCollider:
@@ -4041,6 +4048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_Bathroom_Hands
   anomalyLevel: 1
   area: 1
@@ -4051,6 +4059,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &193931069
 BoxCollider:
@@ -4180,6 +4189,7 @@ MonoBehaviour:
   area: 1
   ghostPrefab: {fileID: 4716946634943998657, guid: afe0070eaaaa49b4783d0d7e67510f0a, type: 3}
   jumpscarePrefab: {fileID: 3276920239813669632, guid: e5a1f0c7ba1cb8d4b97fec0664b9cf72, type: 3}
+  blinkOverlay: {fileID: 57842427}
   MoveSpeed: 35
   ghostAnimator: {fileID: 0}
   jumpscareAnimator: {fileID: 0}
@@ -4433,6 +4443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: Doll (1)
   anomalyLevel: 3
   area: 0
@@ -4443,6 +4454,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &227760056
 BoxCollider:
@@ -5045,6 +5057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd42081abf38a514c9955a4f4279d3e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_Bathroom_HidingBehindWall
   anomalyLevel: 1
   area: 1
@@ -5168,6 +5181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: knife
   anomalyLevel: 3
   area: 0
@@ -5178,6 +5192,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &297355135
 BoxCollider:
@@ -6364,6 +6379,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2579965590039342960, guid: 70d34eea80feee341966e4d6da8e714c, type: 3}
   m_PrefabInstance: {fileID: 373888200}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &375035020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 375035021}
+  - component: {fileID: 375035023}
+  - component: {fileID: 375035022}
+  m_Layer: 5
+  m_Name: BraceletBroken
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &375035021
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375035020}
+  m_LocalRotation: {x: 0, y: 0, z: 0.11927039, w: 0.9928618}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.53, y: 0.34, z: 0.53}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 994771938}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 13.7}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 4.0699997, y: -16.2}
+  m_SizeDelta: {x: 76.799995, y: 76.799995}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &375035022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375035020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 530599044, guid: fafccff7a44e74e4aa453fe29bedad73, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &375035023
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375035020}
+  m_CullTransparentMesh: 1
 --- !u!1 &378524677 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4747196380257971304, guid: 695d054f1adc02d4f81ac05b2ba43f06, type: 3}
@@ -6386,6 +6476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Kitchen_ExtraPots
   anomalyLevel: 0
   area: 5
@@ -6396,6 +6487,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &378524680
 BoxCollider:
@@ -6803,6 +6895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_Kitchen_BloodyRoof
   anomalyLevel: 1
   area: 4
@@ -6813,6 +6906,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &410060026
 BoxCollider:
@@ -6987,6 +7081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3c0d209f566bb40add41975429d9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_Coffin_Portrait
   anomalyLevel: 1
   area: 2
@@ -7586,6 +7681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: Doll
   anomalyLevel: 3
   area: 0
@@ -7596,6 +7692,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &445449111
 BoxCollider:
@@ -8281,6 +8378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Laundry_ExtraShirt
   anomalyLevel: 0
   area: 3
@@ -8291,6 +8389,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &476372513
 BoxCollider:
@@ -9679,6 +9778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9029b3b42199748a75ed6e5b498e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: HandFridgeSequnce2
   anomalyLevel: 3
   area: 0
@@ -9797,6 +9897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: Doll (2)
   anomalyLevel: 3
   area: 0
@@ -9807,6 +9908,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &542686226
 BoxCollider:
@@ -10998,31 +11100,31 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1356690717}
+    m_TransformParent: {fileID: 1133011906}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9df4ee477c60c884fade4a7377668dff, type: 3}
       propertyPath: m_LocalScale.x
-      value: 15.095747
+      value: 1.9465554
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9df4ee477c60c884fade4a7377668dff, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.6631824
+      value: 1.9465553
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9df4ee477c60c884fade4a7377668dff, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.1837115
+      value: 1.9465556
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9df4ee477c60c884fade4a7377668dff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.052525
+      value: 0.032562453
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9df4ee477c60c884fade4a7377668dff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5859746
+      value: 1.910929
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9df4ee477c60c884fade4a7377668dff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.5376907
+      value: -0.22042643
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9df4ee477c60c884fade4a7377668dff, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11878,6 +11980,7 @@ GameObject:
   - component: {fileID: 648518010}
   - component: {fileID: 648518012}
   - component: {fileID: 648518011}
+  - component: {fileID: 648518013}
   m_Layer: 8
   m_Name: Render
   m_TagString: Untagged
@@ -11939,6 +12042,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648518009}
   m_CullTransparentMesh: 1
+--- !u!114 &648518013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648518009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43354b81ba58d31408b08b86883c42e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 1
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.1299697
+      outSlope: 1.1299697
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.1744916
+      value: 0.19717023
+      inSlope: -0.1655272
+      outSlope: -0.1655272
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.08605578
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.23884702
+      outSlope: -0.23884702
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  curveOffset: 8
 --- !u!1 &659286806
 GameObject:
   m_ObjectHideFlags: 0
@@ -12075,7 +12225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 676184094}
   m_Layer: 0
-  m_Name: ---------Spine-------------
+  m_Name: ---------Spline-------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12500,6 +12650,7 @@ Transform:
   - {fileID: 1876357911}
   - {fileID: 4217147577138985255}
   - {fileID: 193931067}
+  - {fileID: 1133011906}
   m_Father: {fileID: 1787096012}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &699690905
@@ -13267,6 +13418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Coffin_ExtraChair
   anomalyLevel: 0
   area: 3
@@ -13277,6 +13429,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!1001 &759947183
 PrefabInstance:
@@ -13458,6 +13611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc97bd4c002fea4f944febdc9e0ba69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Kitchen_FallenDishes
   anomalyLevel: 0
   area: 5
@@ -14024,7 +14178,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 803297742}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -14475,6 +14629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90e3cb209f4fa34d8217242b3e87db5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Bathroom_MissingLid
   anomalyLevel: 0
   area: 1
@@ -17495,6 +17650,7 @@ GameObject:
   - component: {fileID: 961370368}
   - component: {fileID: 961370367}
   - component: {fileID: 961370369}
+  - component: {fileID: 961370370}
   m_Layer: 5
   m_Name: Bracelet
   m_TagString: Untagged
@@ -17512,7 +17668,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0.11927039, w: 0.9928618}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.53, y: 0.53, z: 0.53}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 994771938}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 13.7}
@@ -17581,6 +17737,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &961370370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961370365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c0cf5a092507b428d069656cef2edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName1: ShakeScreen
+  eventName2: 
+  eventName3: 
 --- !u!1 &962814220
 GameObject:
   m_ObjectHideFlags: 0
@@ -18302,6 +18473,7 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 961370366}
+  - {fileID: 375035021}
   m_Father: {fileID: 603019316}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.9}
   m_AnchorMin: {x: 1, y: 0}
@@ -18402,6 +18574,7 @@ MonoBehaviour:
   area: 4
   ghostPrefab: {fileID: 4716946634943998657, guid: afe0070eaaaa49b4783d0d7e67510f0a, type: 3}
   jumpscarePrefab: {fileID: 3276920239813669632, guid: e5a1f0c7ba1cb8d4b97fec0664b9cf72, type: 3}
+  blinkOverlay: {fileID: 57842427}
   MoveSpeed: 35
   ghostAnimator: {fileID: 0}
   jumpscareAnimator: {fileID: 0}
@@ -18983,6 +19156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_Coffin_BloodyCoffin
   anomalyLevel: 1
   area: 2
@@ -18993,6 +19167,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!1001 &1024600405
 PrefabInstance:
@@ -19224,6 +19399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3c0d209f566bb40add41975429d9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_Laundry_BloodWater
   anomalyLevel: 1
   area: 4
@@ -20851,31 +21027,31 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1356690717}
+    m_TransformParent: {fileID: 696310097}
     m_Modifications:
     - target: {fileID: 1910203087512861781, guid: 3954bf653ab8dd649a1638c526193c62, type: 3}
       propertyPath: m_LocalScale.x
-      value: 7.7551084
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1910203087512861781, guid: 3954bf653ab8dd649a1638c526193c62, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8533462
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1910203087512861781, guid: 3954bf653ab8dd649a1638c526193c62, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.1236962
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1910203087512861781, guid: 3954bf653ab8dd649a1638c526193c62, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.8
+      value: -5.6941586
       objectReference: {fileID: 0}
     - target: {fileID: 1910203087512861781, guid: 3954bf653ab8dd649a1638c526193c62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.0447096
+      value: -0.1573987
       objectReference: {fileID: 0}
     - target: {fileID: 1910203087512861781, guid: 3954bf653ab8dd649a1638c526193c62, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.29
+      value: -2.2511597
       objectReference: {fileID: 0}
     - target: {fileID: 1910203087512861781, guid: 3954bf653ab8dd649a1638c526193c62, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20919,6 +21095,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1910203087512861781, guid: 3954bf653ab8dd649a1638c526193c62, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1853993949}
+    - targetCorrespondingSourceObject: {fileID: 1910203087512861781, guid: 3954bf653ab8dd649a1638c526193c62, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 102543166}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3954bf653ab8dd649a1638c526193c62, type: 3}
 --- !u!4 &1133011906 stripped
@@ -21540,6 +21719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9029b3b42199748a75ed6e5b498e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_Storage_MoreDolls
   anomalyLevel: 1
   area: 2
@@ -21973,6 +22153,7 @@ Transform:
   - {fileID: 744804627}
   - {fileID: 1454303432}
   - {fileID: 1732456952}
+  - {fileID: 78606235}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1192578014 stripped
@@ -22332,6 +22513,7 @@ MonoBehaviour:
   area: 5
   ghostPrefab: {fileID: 4716946634943998657, guid: afe0070eaaaa49b4783d0d7e67510f0a, type: 3}
   jumpscarePrefab: {fileID: 3276920239813669632, guid: e5a1f0c7ba1cb8d4b97fec0664b9cf72, type: 3}
+  blinkOverlay: {fileID: 57842427}
   MoveSpeed: 35
   ghostAnimator: {fileID: 0}
   jumpscareAnimator: {fileID: 0}
@@ -23120,6 +23302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: Knife_B (2)
   anomalyLevel: 3
   area: 0
@@ -23130,6 +23313,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &1265877260
 BoxCollider:
@@ -24023,6 +24207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_Laundry_BloodyTrail
   anomalyLevel: 1
   area: 3
@@ -24033,6 +24218,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &1332577844
 BoxCollider:
@@ -24367,11 +24553,9 @@ Transform:
   m_LocalScale: {x: 0.085964836, y: 0.78123826, z: 0.59328014}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1133011906}
   - {fileID: 571869259}
   - {fileID: 84736293}
   - {fileID: 2013937196}
-  - {fileID: 102543166}
   m_Father: {fileID: 1145891561}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1360633876
@@ -25491,6 +25675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc97bd4c002fea4f944febdc9e0ba69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Bathroom_MisplaceCloth
   anomalyLevel: 0
   area: 1
@@ -25874,11 +26059,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   riserAudio: {fileID: 8300000, guid: d38a79a868b76b14099ee51db86ba381, type: 3}
   riserVolume: 0.3
+  anomalyWarner: {fileID: 346481865}
   jumpscareList:
   - area: 5
     stationaryJumpscare: {fileID: 1227639704}
     transitionJumpscare: {fileID: 0}
-    interactJumpscare: {fileID: 1457906430}
+    interactJumpscare: {fileID: 0}
   - area: 2
     stationaryJumpscare: {fileID: 1540582404}
     transitionJumpscare: {fileID: 0}
@@ -26692,6 +26878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: knife (1)
   anomalyLevel: 3
   area: 0
@@ -26702,6 +26889,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &1475284322
 BoxCollider:
@@ -27365,6 +27553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_Coffin_SkullIncense
   anomalyLevel: 1
   area: 2
@@ -27375,6 +27564,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &1500283988
 BoxCollider:
@@ -27723,6 +27913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: Knife_B
   anomalyLevel: 3
   area: 0
@@ -27733,6 +27924,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &1531973860
 BoxCollider:
@@ -27986,6 +28178,7 @@ MonoBehaviour:
   area: 2
   ghostPrefab: {fileID: 4716946634943998657, guid: afe0070eaaaa49b4783d0d7e67510f0a, type: 3}
   jumpscarePrefab: {fileID: 3276920239813669632, guid: e5a1f0c7ba1cb8d4b97fec0664b9cf72, type: 3}
+  blinkOverlay: {fileID: 57842427}
   MoveSpeed: 35
   ghostAnimator: {fileID: 0}
   jumpscareAnimator: {fileID: 0}
@@ -28753,6 +28946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Laundry_SpilledWater
   anomalyLevel: 0
   area: 3
@@ -28763,6 +28957,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!4 &1605253196 stripped
 Transform:
@@ -29229,7 +29424,7 @@ Transform:
   m_GameObject: {fileID: 1624605292}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.8, y: 92.7, z: 8.1}
+  m_LocalPosition: {x: 42.8, y: 96.5, z: 8.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29296,8 +29491,8 @@ Camera:
   m_GameObject: {fileID: 1624605292}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -29469,6 +29664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Kitchen_ExtraSack
   anomalyLevel: 0
   area: 4
@@ -29479,6 +29675,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &1635683255
 BoxCollider:
@@ -29547,6 +29744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc97bd4c002fea4f944febdc9e0ba69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: DoorPivot
   anomalyLevel: 3
   area: 0
@@ -29983,6 +30181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc97bd4c002fea4f944febdc9e0ba69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Coffin_MisplaceDate
   anomalyLevel: 0
   area: 3
@@ -30499,6 +30698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: facf5c14a2817404184baa5801e09513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_Laundry_ForestGhost
   anomalyLevel: 1
   area: 3
@@ -30875,6 +31075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: Knife_B (1)
   anomalyLevel: 3
   area: 0
@@ -30885,6 +31086,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &1691984073
 BoxCollider:
@@ -31078,6 +31280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Coffin_ExtraGreen
   anomalyLevel: 0
   area: 2
@@ -31088,6 +31291,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &1698978088
 BoxCollider:
@@ -31273,6 +31477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Kitchen_MoreCondiment
   anomalyLevel: 0
   area: 4
@@ -31283,6 +31488,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &1712027312
 BoxCollider:
@@ -31546,7 +31752,7 @@ GameObject:
   - component: {fileID: 1732456953}
   - component: {fileID: 1732456954}
   m_Layer: 0
-  m_Name: StartingCutscene
+  m_Name: CutsceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31586,7 +31792,7 @@ MonoBehaviour:
   pointClickCameraController: {fileID: 933045088}
   cutscenePlayer: {fileID: 1732456954}
   flashlightHand: {fileID: 994771937}
-  tutorialAnomaly: {fileID: 683299004275326538}
+  tutorialAnomaly: {fileID: 2070012790}
   skipCutscene: 0
   howlingNoise: {fileID: 8300000, guid: b18494381f13d0542bec2974ded9b43a, type: 3}
 --- !u!320 &1732456954
@@ -32628,6 +32834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc97bd4c002fea4f944febdc9e0ba69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Kitchen_Knife
   anomalyLevel: 0
   area: 4
@@ -32672,6 +32879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: Kitchen_fridge_Hand_00
   anomalyLevel: 3
   area: 0
@@ -32682,6 +32890,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!114 &1806009756
 MonoBehaviour:
@@ -33346,6 +33555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Storage_Sprout
   anomalyLevel: 0
   area: 2
@@ -33356,6 +33566,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!23 &1850884751
 MeshRenderer:
@@ -33832,6 +34043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_Kitchen_BloodyFridge
   anomalyLevel: 1
   area: 4
@@ -33842,6 +34054,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &1860034000
 BoxCollider:
@@ -33907,6 +34120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Bathroom_Doll
   anomalyLevel: 0
   area: 1
@@ -33917,6 +34131,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!1001 &1884985346
 PrefabInstance:
@@ -34130,6 +34345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Laundry_ExtraDetergent
   anomalyLevel: 0
   area: 3
@@ -34140,6 +34356,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!4 &1902905462 stripped
 Transform:
@@ -34378,6 +34595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc97bd4c002fea4f944febdc9e0ba69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Kitchen_FallingToaster
   anomalyLevel: 0
   area: 4
@@ -34827,6 +35045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9029b3b42199748a75ed6e5b498e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: HandFridgeSequnce1
   anomalyLevel: 3
   area: 0
@@ -36796,6 +37015,7 @@ MonoBehaviour:
   area: 3
   ghostPrefab: {fileID: 4716946634943998657, guid: afe0070eaaaa49b4783d0d7e67510f0a, type: 3}
   jumpscarePrefab: {fileID: 3276920239813669632, guid: e5a1f0c7ba1cb8d4b97fec0664b9cf72, type: 3}
+  blinkOverlay: {fileID: 57842427}
   MoveSpeed: 35
   ghostAnimator: {fileID: 0}
   jumpscareAnimator: {fileID: 0}
@@ -37134,6 +37354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_Coffin_BloodyRoof
   anomalyLevel: 1
   area: 2
@@ -37144,6 +37365,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &2045478405
 BoxCollider:
@@ -37490,6 +37712,8 @@ GameObject:
   - component: {fileID: 2070012788}
   - component: {fileID: 2070012789}
   - component: {fileID: 2070012790}
+  - component: {fileID: 2070012792}
+  - component: {fileID: 2070012791}
   m_Layer: 0
   m_Name: H_Kitchen_HandFridge
   m_TagString: Untagged
@@ -37535,7 +37759,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.0558071, y: 0.77282524, z: 1.2030687}
   m_Center: {x: -13.940171, y: -2.5350795, z: 6.455192}
@@ -37551,6 +37775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b76ea99ef39ccf4ebd0ba33918428d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_Kitchen_HandFridge
   anomalyLevel: 1
   area: 4
@@ -37568,6 +37793,40 @@ MonoBehaviour:
   - 0
   - 0
   index: 0
+--- !u!114 &2070012791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070012787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea248ca1523e9ff4aa62e922984d130d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minTime: 8
+  maxTime: 15
+  lightTransform: {fileID: 1713025467}
+  lightAnimator: {fileID: 1713025470}
+  flickerSfx: {fileID: 8300000, guid: 18b6c9d9a9cd0214ca4de7abbc5ed63c, type: 3}
+  volumn: 0.02
+  timer: 0
+  duration: 0
+--- !u!114 &2070012792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070012787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85dd9ac85f5f8b74db6ca26cf1cd5a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEffect: {fileID: 8300000, guid: 247e23f89469c8f44b2a4aed31839e90, type: 3}
+  volumn: 0.5
 --- !u!1 &2071054547
 GameObject:
   m_ObjectHideFlags: 0
@@ -38661,6 +38920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Laundry_DuplicatePail
   anomalyLevel: 0
   area: 3
@@ -38671,6 +38931,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!4 &2113685476 stripped
 Transform:
@@ -38723,6 +38984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9029b3b42199748a75ed6e5b498e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_Kitchen_MealPrep
   anomalyLevel: 1
   area: 4
@@ -39778,6 +40040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Coffin_Doll
   anomalyLevel: 0
   area: 2
@@ -39788,6 +40051,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!114 &683299003555142254
 MonoBehaviour:
@@ -39877,16 +40141,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 683299004275326541}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 683299004275326538}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 683299004275326537}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 683299004275326545}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 045e098172da8d74ea9668a001f2373f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 683299004275326544}
@@ -39934,6 +40192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Kitchen_Doll
   anomalyLevel: 0
   area: 4
@@ -39944,27 +40203,8 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
---- !u!114 &683299004275326541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683299004275326536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea248ca1523e9ff4aa62e922984d130d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minTime: 8
-  maxTime: 15
-  lightTransform: {fileID: 1713025467}
-  lightAnimator: {fileID: 1713025470}
-  flickerSfx: {fileID: 8300000, guid: 18b6c9d9a9cd0214ca4de7abbc5ed63c, type: 3}
-  volumn: 0.02
-  timer: 0
-  duration: 0
 --- !u!95 &683299004275326544
 Animator:
   serializedVersion: 7
@@ -39987,20 +40227,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &683299004275326545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683299004275326536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85dd9ac85f5f8b74db6ca26cf1cd5a3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundEffect: {fileID: 8300000, guid: 247e23f89469c8f44b2a4aed31839e90, type: 3}
-  volumn: 0.5
 --- !u!1 &919132147555289663
 GameObject:
   m_ObjectHideFlags: 0
@@ -40027,7 +40253,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4356605475379179965}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -40545,6 +40771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: meat
   anomalyLevel: 3
   area: 0
@@ -40555,6 +40782,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &3523133970773366697
 BoxCollider:
@@ -41025,7 +41253,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 339819700700272710}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -41183,6 +41411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3c0d209f566bb40add41975429d9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Bathroom_DiscolorPail
   anomalyLevel: 0
   area: 1
@@ -41250,7 +41479,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323189059620004695}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -41320,6 +41549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: fresh fish
   anomalyLevel: 3
   area: 0
@@ -41330,6 +41560,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &5939726348909473504
 BoxCollider:
@@ -41379,6 +41610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcd540ba146ea94e931cb574adddba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: H_AN_03
   anomalyLevel: 3
   area: 0
@@ -41389,6 +41621,7 @@ MonoBehaviour:
   currentAnomalyPoint: 0
   CurrentCooldown: 0
   highlightMaterial: {fileID: 2100000, guid: 7b9996b05375a634bad81edab85dba64, type: 2}
+  meshGroup: {fileID: 0}
   useMeshGroup: 0
 --- !u!65 &6126660888790698190
 BoxCollider:
@@ -41528,6 +41761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc97bd4c002fea4f944febdc9e0ba69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualTriggerAnomaly: 0
   id: L_Coffin_TurningChair
   anomalyLevel: 0
   area: 2
@@ -41546,7 +41780,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8197970977680101070}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -41711,7 +41945,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2197063648885729625}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -42034,7 +42268,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3955126432099714680}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -42758,7 +42992,6 @@ SceneRoots:
   - {fileID: 1660963101}
   - {fileID: 1185812446}
   - {fileID: 1968380785}
-  - {fileID: 78606235}
   - {fileID: 746541063}
   - {fileID: 980073766}
   - {fileID: 1736976048}
