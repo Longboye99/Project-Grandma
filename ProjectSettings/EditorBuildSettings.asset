@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/[DevTest]DefeatMenu.unity
     guid: d8602b2c8f2c0c144a9378f8b170281a
+  - enabled: 1
+    path: Assets/Scenes/[DevTest]LevelSelector.unity
+    guid: 2b61495248025ed4b89acc938047898c
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 99f9c9493070a9d4c979a8fec7c5a8d3, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: be58c8ec0ab37404ea7f4dbbf94a1320, type: 3}

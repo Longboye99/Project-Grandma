@@ -114,7 +114,7 @@ public class JumpscareManager : MonoBehaviour
         //do if yes
     }
 
-    private void TriggerInteractableJumpscare(Interactable interactable, AreaEnum area)
+    private void TriggerInteractableJumpscare(Interactable interactable, AreaEnum area, InteractMode mode)
     {
         if (jumpscareDict[area].interactJumpscare != null && jumpscareEnabled)
         {

@@ -1,7 +1,8 @@
 using Game.Database;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public class AnomalyDictionaryHandler : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class AnomalyDictionaryHandler : MonoBehaviour
     public List<Anomaly> ActiveAnomalies = new List<Anomaly>();
 
     [Header("Enemy Event")]
+    public bool lockEnemyUpdate = false;
     [SerializeField] TestEnemy2 enemy;
     public List<LevelData> timedLevelUpdate;
     public List<LevelAnomalyData> timedAnomalyUpdate;
@@ -61,7 +63,7 @@ public class AnomalyDictionaryHandler : MonoBehaviour
     }
     public void CheckEnemyEvent(float currentTime) //Check when to update ai and level data
     {
-        if(eventIndex < 5)
+        if(eventIndex < 5 && !lockEnemyUpdate)
         {
             if (timedLevelUpdate[eventIndex] != null)
             {
@@ -173,7 +175,17 @@ public class AnomalyDictionaryHandler : MonoBehaviour
         }
     }
 
-    private void ResetAvailableAnomalyLists()
+    public void EnableAllAnomaly()
+    {
+        foreach (Anomaly anomaly in AllAnomalies)
+        {
+            anomaly.SetAnomalyEnabled("TRUE");
+        }
+
+        ResetAvailableAnomalyLists();
+    }
+
+    private void ResetAvailableAnomalyLists() //move anomalies to correct list in container 
     {
         foreach (var areaAnomaly in dict)
         {

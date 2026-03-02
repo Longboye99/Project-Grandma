@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class LevelEvents
 {
-    public event Action<Interactable, AreaEnum> onTriggerInteractable;
-    public void TriggerInteractable(Interactable interactable, AreaEnum area)
+    public event Action<Interactable, AreaEnum, InteractMode> onTriggerInteractable;
+    public void TriggerInteractable(Interactable interactable, AreaEnum area, InteractMode mode)
     {
-        onTriggerInteractable?.Invoke(interactable, area);
+        onTriggerInteractable?.Invoke(interactable, area, mode);
     }
 
     public event Action onPlayerVictory;
@@ -20,4 +20,10 @@ public class LevelEvents
     {
         onPlayerDefeated?.Invoke();
     }
+}
+
+public enum InteractMode
+{
+    Click,
+    Hold
 }

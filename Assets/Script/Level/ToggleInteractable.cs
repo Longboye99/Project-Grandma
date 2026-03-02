@@ -7,15 +7,16 @@ public class ToggleInteractable : Interactable
 
     private void Start()
     {
+        useOutline = true;
         if (!isOpen)
         {
             Close();
         }
     }
 
-    public override void Interact(Interactable interactable, AreaEnum area)
+    public override void Interact(Interactable interactable, AreaEnum area, InteractMode mode)
     {
-        if (interactable == this)
+        if (interactable == this && mode == InteractMode.Click)
         {
             if (isOpen)
             {

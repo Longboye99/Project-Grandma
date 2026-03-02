@@ -903,7 +903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 11400000, guid: 467e2ab3b8f6f9f49ac222427a48c810, type: 2}
-  _dataIndex: 0
+  _dataIndex: 2
 --- !u!1 &1087077001
 GameObject:
   m_ObjectHideFlags: 0

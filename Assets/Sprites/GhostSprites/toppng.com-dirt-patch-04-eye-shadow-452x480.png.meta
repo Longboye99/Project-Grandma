@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ad2dd80e53790f74da8dafb48651ce09
+guid: 6e1a25cbe4e382e4394d8940fa1ce4c4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 250
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_8869_0
+      name: toppng.com-dirt-patch-04-eye-shadow-452x480_0
       rect:
         serializedVersion: 2
-        x: 18
-        y: 631
-        width: 761
-        height: 1263
+        x: 0
+        y: 0
+        width: 452
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2676f1c72a9f7a147a52cdc7f54fa5c8
-      internalID: 1247426444
+      spriteID: bf07ada44d637fa40a92cc594a8724a9
+      internalID: -1300149337
       vertices: []
       indices: 
       edges: []
@@ -122,7 +122,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5fafdf5035829a34fb30632e59270427
+    spriteID: 460de6d66e27b7646acff21a1ea66d78
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +132,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      IMG_8869_0: 1247426444
+      toppng.com-dirt-patch-04-eye-shadow-452x480_0: -1300149337
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

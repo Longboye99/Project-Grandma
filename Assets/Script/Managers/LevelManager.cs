@@ -34,6 +34,7 @@ public class LevelManager : MonoBehaviour
     bool isVictory;
     bool isDefeated;
     float size;
+    public bool checkVictoryDefeat = true;
     PlayerCutsceneController playerCutsceneController;
     SaveLoadSystem saveLoadSystem;
 
@@ -65,9 +66,13 @@ public class LevelManager : MonoBehaviour
     {
         UpdateTime();
         SetIncenseSize();
-        CheckVictory();
-        CheckDefeat();
         CheckIncenseWarning();
+
+        if (checkVictoryDefeat)
+        {
+            CheckVictory();
+            CheckDefeat();
+        }
 
         GameManager.instance.anomalyManager.dictionary.CheckEnemyEvent(currentTime);
         GameManager.instance.anomalyManager.TallyAnomalyPoint();
@@ -108,7 +113,7 @@ public class LevelManager : MonoBehaviour
             isDefeated = true;
             GameManager.instance.uiManager.TransitionOut();
             Invoke("Defeat", 2);
-        }
+        } 
     }
     public void JumpscareDefeat()
     {
