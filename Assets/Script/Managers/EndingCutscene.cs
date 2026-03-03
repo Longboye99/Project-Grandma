@@ -140,6 +140,7 @@ public class EndingCutscene : MonoBehaviour
         GameManager.instance.jumpscareManager.anomalyWarner.PlayBraceletBreakAnimation();
         //spawn blood pools
 
+
         //heavy haywire
         BeginExtremeHaywirePhase();
     }
