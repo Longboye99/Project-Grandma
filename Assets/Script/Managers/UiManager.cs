@@ -81,10 +81,13 @@ public class UiManager : MonoBehaviour
 
     private void Update()
     {
-        anomalySlider.value = GameManager.instance.playerManager.interactProgression;
+        if (!isPaused)
+        {
+            anomalySlider.value = GameManager.instance.playerManager.interactProgression;
+            DisplayTime();
+            MoveCursor();
+        }
         
-        DisplayTime();
-        MoveCursor();
 
         
     }

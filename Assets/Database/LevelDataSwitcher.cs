@@ -4,19 +4,38 @@ using UnityEngine.SceneManagement;
 
 public class LevelDataSwitcher : MonoBehaviour
 {
-    [SerializeField]DataSwitchContainer _container;
+    [SerializeField]DataSwitchContainer _switchContainer;
     [SerializeField] int _dataIndex;
 
     public void SwitchContainer()
     {
-        List<LocalSpreadsheetContainer> levelsData = _container.levelsData;
-        _container.currentData = levelsData[_dataIndex];
+        List<LocalSpreadsheetContainer> levelsData = _switchContainer.levelsData;
+        _switchContainer.currentData = levelsData[_dataIndex];
     }
 
     public void SwitchScene()
     {
         SwitchContainer();
+        if (_switchContainer.currentData.skipCutscene || _switchContainer.currentData.cutsceneLevel == null)
+        {
+            LoadGameLevel();
+        }
+        else
+        {
+            SceneManager.LoadScene(_switchContainer.currentData.cutsceneLevel);
+            Time.timeScale = 1.0f;
+        }
+    }
+
+    public void LoadGameLevel()
+    {
         SceneManager.LoadScene(1);
         Time.timeScale = 1.0f;
+    }
+
+    public void LoadNextLevel()
+    {
+        _dataIndex++;
+        SwitchScene();
     }
 }

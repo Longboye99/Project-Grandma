@@ -9,6 +9,7 @@ public class ChaseJumpscare : Jumpscare
     [SerializeField] GameObject jumpscarePrefab;
 
     GameObject playerCam;
+    [SerializeField] FlashlightOverlay blinkOverlay;
     [SerializeField] float MoveSpeed = 10;
     float MinDist = 2.5f;
 
@@ -43,6 +44,7 @@ public class ChaseJumpscare : Jumpscare
 
     public override void TriggerJumpscare()
     {
+        blinkOverlay.Blink(null);
         ghost = Instantiate(ghostPrefab, transform.position, Quaternion.identity);
         ghostAnimator = ghost.GetComponentInChildren<Animator>();
         isActive = true;
@@ -86,12 +88,13 @@ public class ChaseJumpscare : Jumpscare
         }
         else if (name == "FinishJumpscare" && isActive)
         {
-            DisableJumpscare();
+            Invoke("DisableJumpscare", 3f);
         }
     }
 
     private void Run()
     {
+        GameEventsManager.instance.anomalyEvents.FinishAnimationEvent("ShakeScreen");
         ghostAnimator.SetTrigger("Running");
         isChasing = true;
     }

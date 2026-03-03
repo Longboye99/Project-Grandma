@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class Anomaly: MonoBehaviour
 {
+    [Header("Manual Trigger")]
+    [SerializeField] bool manualTriggerAnomaly = false;
+
     [Header("Anomaly Config")]
     public string id;
     public AnomalyEnum anomalyLevel;
@@ -82,6 +85,11 @@ public abstract class Anomaly: MonoBehaviour
         if (CurrentCooldown > 0 && isEnabled) //Counting down the cooldown
         {
             CurrentCooldown -= Time.deltaTime;
+        }
+        if (manualTriggerAnomaly)
+        {
+            manualTriggerAnomaly = false;
+            GameManager.instance.anomalyManager.TriggerAnomaly(this);
         }
     }
     public bool SpawnAnomaly()

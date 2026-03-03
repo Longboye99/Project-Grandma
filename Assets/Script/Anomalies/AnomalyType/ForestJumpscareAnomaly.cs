@@ -4,6 +4,7 @@ public class ForestJumpscareAnomaly : Anomaly
 {
     [SerializeField] Animator ghostAnimator;
     [SerializeField] GameObject ghost;
+    Transform ghostTransform;
     [SerializeField] FlashlightOverlay flashlightOverlay;
 
     [SerializeField] float MoveSpeed = 10;
@@ -17,7 +18,6 @@ public class ForestJumpscareAnomaly : Anomaly
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly += UndoAnomaly;
         GameEventsManager.instance.debugEvents.onPressHighlight += PressHighlight;
         GameEventsManager.instance.anomalyEvents.onFinishAnimationEvent += FinishAnimationEvent;
-        GameEventsManager.instance.inputEvents.onStartInteract += TriggerJumpscare;
     }
 
     private void OnDisable()
@@ -30,7 +30,8 @@ public class ForestJumpscareAnomaly : Anomaly
     private void Start()
     {
         ghost.SetActive(false);
-
+        ghostAnimator = ghost.GetComponentInChildren<Animator>();
+        ghostTransform = ghost.transform;
         gameObject.GetComponent<MeshRenderer>().enabled = false;
 
         originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
@@ -51,7 +52,7 @@ public class ForestJumpscareAnomaly : Anomaly
     {
         if (anomaly == this && isActive)
         {
-            //TriggerJumpscare();
+            TriggerJumpscare(InputEventContextEnum.Default);
             
         }
     }
@@ -63,7 +64,7 @@ public class ForestJumpscareAnomaly : Anomaly
             currentAnomalyPoint = 0;
             isActive = false;
             isDoingJumpscare = true;
-            ghostAnimator = ghost.GetComponentInChildren<Animator>();
+            
             Invoke("BeginTurning", 0.5f);
         }
         
@@ -118,7 +119,10 @@ public class ForestJumpscareAnomaly : Anomaly
                 isChasing = false;
 
                 Destroy(ghost);
-                ghostAnimator = null;
+                ghost.SetActive(false);
+                ghost.transform.position = ghostTransform.position;
+                ghost.transform.rotation = ghostTransform.rotation;
+   
                 isDoingJumpscare = false;
                 
                 CurrentCooldown = cooldown;

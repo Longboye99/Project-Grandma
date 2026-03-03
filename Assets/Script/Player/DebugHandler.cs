@@ -42,15 +42,11 @@ public class DebugHandler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            GameEventsManager.instance.debugEvents.PressHighlight();
+            //GameEventsManager.instance.debugEvents.PressHighlight();
             debugCanvas.gameObject.SetActive(!isActive);
             isActive = !isActive;
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            TriggerJumpscare();
-        }
     }
 
     public void HighlightAnomaly()

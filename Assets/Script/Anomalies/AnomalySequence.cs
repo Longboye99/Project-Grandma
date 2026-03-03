@@ -33,6 +33,7 @@ public class AnomalySequence : Anomaly
                 CurrentCooldown = cooldown;
                 currentAnomalyPoint = 0;
                 isActive = false;
+                GameEventsManager.instance.anomalyEvents.UndoAnomaly(this);
             }
             else
             {

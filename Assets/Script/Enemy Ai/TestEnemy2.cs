@@ -23,12 +23,12 @@ public class TestEnemy2 : MonoBehaviour
     private void OnEnable()
     {
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly += CheckFinishAttackAnomaly;
-        GameEventsManager.instance.levelEvents.onPlayerDefeated += StartJumpscare;
+        //GameEventsManager.instance.levelEvents.onPlayerDefeated += StartJumpscare;
     }
     private void OnDisable()
     {
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly -= CheckFinishAttackAnomaly;
-        GameEventsManager.instance.levelEvents.onPlayerDefeated -= StartJumpscare;
+        //GameEventsManager.instance.levelEvents.onPlayerDefeated -= StartJumpscare;
 
     }
 

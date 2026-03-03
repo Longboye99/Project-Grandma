@@ -221,3 +221,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventName1: FinishTurning
+  eventName2: 
+  eventName3: 

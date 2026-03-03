@@ -118,7 +118,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (currentInteractable != null)
         {
-            GameEventsManager.instance.levelEvents.TriggerInteractable(currentInteractable, cameraMovement.currentNode.area);
+            GameEventsManager.instance.levelEvents.TriggerInteractable(currentInteractable, cameraMovement.currentNode.area, InteractMode.Click);
         }
     }
 
@@ -171,7 +171,8 @@ public class PlayerManager : MonoBehaviour
             }
             else if (currentInteractable != null)
             {
-                
+                GameEventsManager.instance.levelEvents.TriggerInteractable(currentInteractable, cameraMovement.currentNode.area, InteractMode.Hold);
+
             }
             else
             {

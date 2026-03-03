@@ -27,6 +27,9 @@ public class JumpscareManager : MonoBehaviour
      */
     [SerializeField] AudioClip riserAudio;
     [SerializeField] float riserVolume;
+
+    [SerializeField] AnomalyWarner anomalyWarner;
+
     [SerializeField] List<JumpscareContainer> jumpscareList;
     Dictionary<AreaEnum, JumpscareContainer> jumpscareDict = new Dictionary<AreaEnum, JumpscareContainer>();
     PointClickCameraMovement cameraMovement;
@@ -61,8 +64,11 @@ public class JumpscareManager : MonoBehaviour
     public void EnableJumpscare()
     {
         jumpscareEnabled = true;
-        GameManager.instance.sfxManager.PlaySoundFXClip(riserAudio, cameraMovement.transform, riserVolume);
+        //GameManager.instance.sfxManager.PlaySoundFXClip(riserAudio, cameraMovement.transform, riserVolume);
+
+        anomalyWarner.PlayBraceletBreakAnimation();
         StartCoroutine(StartJumpscareCountDown());
+
         //Start timer
         //if player do something activate instantly
         //
@@ -71,7 +77,7 @@ public class JumpscareManager : MonoBehaviour
 
     private IEnumerator StartJumpscareCountDown()
     {
-        float duration = 7;
+        float duration = 4;
         
 
         yield return new WaitForSeconds(duration);
@@ -108,7 +114,7 @@ public class JumpscareManager : MonoBehaviour
         //do if yes
     }
 
-    private void TriggerInteractableJumpscare(Interactable interactable, AreaEnum area)
+    private void TriggerInteractableJumpscare(Interactable interactable, AreaEnum area, InteractMode mode)
     {
         if (jumpscareDict[area].interactJumpscare != null && jumpscareEnabled)
         {

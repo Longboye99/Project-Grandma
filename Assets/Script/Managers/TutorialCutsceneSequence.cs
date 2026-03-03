@@ -113,7 +113,7 @@ public class TutorialCutsceneSequence : MonoBehaviour
     
     private void SpawnAnomaly()
     {
-        tutorialAnomaly.TriggerAnomaly();
+        GameManager.instance.anomalyManager.TriggerAnomaly(tutorialAnomaly);
         Invoke("DoAnomalyDialogue", 5f);
     }
 

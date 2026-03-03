@@ -18,9 +18,25 @@ public class AnomalyWarner : MonoBehaviour
 
     [SerializeField] float cooldown;
 
+    private void OnEnable()
+    {
+        GameEventsManager.instance.anomalyEvents.onStartJumpscare += OnStartJumpscare;
+    }
+
+    private void OnDisable()
+    {
+        GameEventsManager.instance.anomalyEvents.onStartJumpscare -= OnStartJumpscare;
+
+    }
+
     private void Start()
     {
         
+    }
+
+    public void OnStartJumpscare()
+    {
+        anomalyNoise.Stop();
     }
 
     private void Update()
@@ -62,7 +78,7 @@ public class AnomalyWarner : MonoBehaviour
         }
     }
 
-    public void HandleLocalAnomalyWarning()
+    private void HandleLocalAnomalyWarning()
     {
         localAnomalyPoint = GameManager.instance.anomalyManager.TallyAreaAnomalyPoint();
 
@@ -76,6 +92,10 @@ public class AnomalyWarner : MonoBehaviour
         }
     }
     
+    public void PlayBraceletBreakAnimation()
+    {
+        braceletAnimator.SetTrigger("Break");
+    }
 
     public void SetAmbienceVolumn(float volumn)
     {
