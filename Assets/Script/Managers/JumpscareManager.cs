@@ -28,7 +28,7 @@ public class JumpscareManager : MonoBehaviour
     [SerializeField] AudioClip riserAudio;
     [SerializeField] float riserVolume;
 
-    [SerializeField] AnomalyWarner anomalyWarner;
+    [SerializeField] public AnomalyWarner anomalyWarner;
 
     [SerializeField] List<JumpscareContainer> jumpscareList;
     Dictionary<AreaEnum, JumpscareContainer> jumpscareDict = new Dictionary<AreaEnum, JumpscareContainer>();

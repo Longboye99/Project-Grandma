@@ -10,6 +10,7 @@ public class EndingCutscene : MonoBehaviour
 
     bool warnedSecondTime = false;
     bool clearedAnomaly = false;
+    bool startedHaywire = false;
     bool completedEndingRequirement = false;
 
     private void OnEnable()
@@ -42,13 +43,23 @@ public class EndingCutscene : MonoBehaviour
 
             if (currentTime >= 270 && !warnedSecondTime) //warn player 1 more time in case missed clue
             {
+                warnedSecondTime = true;
                 SecondWarning();
             }  
             else if (!clearedAnomaly && currentTime > 300) //if done nothing til time's up
             {
-                Debug.LogWarning("You're going to have a bad time");
-                BadEndScene();
-                completedEndingRequirement = true;
+                if(startedHaywire == false)
+                {
+                    startedHaywire = true;
+                    BadEndScene();
+                }
+                if ( anomalyPoint >= tempAnomalyThreshold )
+                {
+                    //death
+                    Debug.LogWarning("You're going to have a bad time");
+                    completedEndingRequirement = true;
+
+                }
             }
             else if (clearedAnomaly && anomalyPoint >= tempAnomalyThreshold) //if undo the anomaly and die
             {
@@ -76,7 +87,7 @@ public class EndingCutscene : MonoBehaviour
     {
         GameManager.instance.uiManager.subtitleTextController.SetSubtitleText("ไปที่ห้องน้ำ //ยาย.text", 7);
         GameEventsManager.instance.anomalyEvents.FinishAnimationEvent("ShakeScreen");
-        warnedSecondTime = true;
+        
     }
 
     private void OnInteractDirtPatch(Interactable interactable, AreaEnum area, InteractMode mode)
@@ -87,7 +98,7 @@ public class EndingCutscene : MonoBehaviour
         }
     }
 
-    private void OnUndoAnomaly(Anomaly anomaly)
+    private void OnUndoAnomaly(Anomaly anomaly) //hijack normal defeat check once player undo the anomaly to start the haywire
     {
         if(anomaly == dirtPatchInteract.anomalyObject)
         {
@@ -118,15 +129,18 @@ public class EndingCutscene : MonoBehaviour
         enemy.cooldownDuration = 0.5f;
         enemy.difficultyLevel = 20;
         enemy.lightAnomalyThreshold = 0;
-        enemy.heavyAnomalyThreashold = 9000;
     }
 
     public void BadEndScene()
     {
-        //bad cutscene
-        //explode bracelet
-        //Super haywire
-        //death
+        //Shriek
+        //shake,flicker
+        GameManager.instance.uiManager.screenShake.DoScreenShake(3f);
+        //break bracelet
+        GameManager.instance.jumpscareManager.anomalyWarner.PlayBraceletBreakAnimation();
+        //spawn blood pools
+
+        //heavy haywire
         BeginExtremeHaywirePhase();
     }
 

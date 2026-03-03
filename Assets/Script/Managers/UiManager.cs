@@ -32,6 +32,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] Animator transitionOverlay;
     public SubtitleTextController subtitleTextController;
     public FloatingTextController floatingTextController;
+    public ScreenShake screenShake;
 
     [Header("Timer")]
     public TextMeshProUGUI timeDisplay;

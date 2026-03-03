@@ -12,6 +12,7 @@ public class AnomalyWarner : MonoBehaviour
     [SerializeField] Animator braceletAnimator;
     [SerializeField] int braceletWarningPoint;
     bool _isBlinking;
+    bool braceletBroke = false;
     
     public int anomalyPoint;
     public int localAnomalyPoint;
@@ -94,7 +95,12 @@ public class AnomalyWarner : MonoBehaviour
     
     public void PlayBraceletBreakAnimation()
     {
-        braceletAnimator.SetTrigger("Break");
+        if(braceletBroke == false)
+        {
+            braceletBroke = true;
+            braceletAnimator.SetTrigger("Break");
+
+        }
     }
 
     public void SetAmbienceVolumn(float volumn)
