@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class EndingCutscene : MonoBehaviour
 {
     [SerializeField] bool enableFinalSequence;
     [SerializeField] DirtPatchInteractable dirtPatchInteract;
     [SerializeField] TestEnemy2 enemy;
+    [SerializeField] BloodPoolSpawn bloodPoolSpawn;
     [SerializeField] int anomalyPoint;
     [SerializeField] int tempAnomalyThreshold;
 
@@ -86,8 +88,14 @@ public class EndingCutscene : MonoBehaviour
     private void SecondWarning()
     {
         GameManager.instance.uiManager.subtitleTextController.SetSubtitleText("ไปที่ห้องน้ำ //ยาย.text", 7);
-        GameEventsManager.instance.anomalyEvents.FinishAnimationEvent("ShakeScreen");
-        
+        StartCoroutine(LowRumbling());
+    }
+
+    IEnumerator LowRumbling()
+    {
+        GameManager.instance.uiManager.screenShake.StartLongShake();
+        yield return new WaitForSeconds(4);
+        GameManager.instance.uiManager.screenShake.StopLongScrenShake();
     }
 
     private void OnInteractDirtPatch(Interactable interactable, AreaEnum area, InteractMode mode)
@@ -134,13 +142,13 @@ public class EndingCutscene : MonoBehaviour
     public void BadEndScene()
     {
         //Shriek
+        //GameManager.instance.sfxManager.PlaySoundFXClip();
         //shake,flicker
-        GameManager.instance.uiManager.screenShake.DoScreenShake(3f);
+        GameManager.instance.uiManager.screenShake.StartLongShake();
         //break bracelet
         GameManager.instance.jumpscareManager.anomalyWarner.PlayBraceletBreakAnimation();
         //spawn blood pools
-
-
+        bloodPoolSpawn.SpawnBloodPools(1, 2.5f, 0.4f);
         //heavy haywire
         BeginExtremeHaywirePhase();
     }

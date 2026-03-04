@@ -92,7 +92,7 @@ public class DebugHandler : MonoBehaviour
 
     public void SkipTime()
     {
-        GameManager.instance.levelManager.currentTime += 60f;
+        GameManager.instance.levelManager.currentTime += 20f;
     }
 
     public void ReduceIncense()

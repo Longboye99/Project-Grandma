@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class ScreenShake : MonoBehaviour
@@ -31,7 +30,7 @@ public class ScreenShake : MonoBehaviour
 
     private void Update()
     {
-        /*if(holdTrigger)
+        if(holdTrigger)
         {
             holdTrigger = false;
             if (holdShaking)
@@ -47,14 +46,16 @@ public class ScreenShake : MonoBehaviour
         {
             Trigger = false;
             DoScreenShake(1.5f);
-        }*/
+        }
     }
 
     private void OnFinishAnimationEvent(string eventName)
     {
         if(eventName == "ShakeScreen")
         {
-            DoScreenShake(1.5f);
+            Debug.LogWarning("ScreenShake");
+
+            DoScreenShake(2);
         }
     }
 
@@ -83,7 +84,7 @@ public class ScreenShake : MonoBehaviour
     {
         while (holdShaking)
         {
-            transform.position = startingPosition + Random.insideUnitSphere * curveOffset * 0.3f;
+            transform.position = startingPosition + Random.insideUnitSphere * curveOffset * 0.15f;
             yield return null;
         }
 

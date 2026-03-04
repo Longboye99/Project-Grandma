@@ -211,7 +211,13 @@ public class PlayerManager : MonoBehaviour
     
     private RaycastHit CheckCameraRayCastForInteractable()
     {
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition/3);
+        Vector3 rayDir = Input.mousePosition;
+
+        rayDir.x = Input.mousePosition.x * ((float)640 / Screen.width);
+        rayDir.y = Input.mousePosition.y * ((float)360 / Screen.height);
+        
+        Ray ray = playerCamera.ScreenPointToRay(rayDir);
+        
 
         Debug.DrawRay(playerCameraObject.transform.position, ray.direction*50, Color.cyan);
         if (Physics.Raycast(ray, out RaycastHit hit, layerMask))

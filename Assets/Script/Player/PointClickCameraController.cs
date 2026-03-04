@@ -53,7 +53,12 @@ public class PointClickCameraController : MonoBehaviour
 
     private void FlashLightMovement()
     {
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition/3);
+        Vector3 rayDir = Input.mousePosition;
+
+        rayDir.x = Input.mousePosition.x * ((float)640 / Screen.width);
+        rayDir.y = Input.mousePosition.y * ((float)360 / Screen.height);
+
+        Ray ray = playerCamera.ScreenPointToRay(rayDir);
         RaycastHit hit;
         Vector3 dir;
         if(Physics.Raycast(ray, out hit))

@@ -8,11 +8,19 @@ public class IncensePulsingWarner : MonoBehaviour
     [SerializeField] float heavyWarningThreshold;
     float incenseCurrentTime;
     WarningState warningState;
+    public bool isHaywireMode = false;
 
     private void Update()
     {
-        incenseCurrentTime = GameManager.instance.levelManager.incenseCurrentTime;
-
+        if (isHaywireMode)
+        {
+            incenseCurrentTime = heavyWarningThreshold + 1;
+        }
+        else
+        {
+            incenseCurrentTime = GameManager.instance.levelManager.incenseCurrentTime;
+        }
+        
         if(incenseCurrentTime <= heavyWarningThreshold && warningState != WarningState.HeavyWarning)
         {
             warningState = WarningState.HeavyWarning;
@@ -30,8 +38,7 @@ public class IncensePulsingWarner : MonoBehaviour
         {
             warningState  = WarningState.Default;
             overlayAnimator.SetTrigger("Default");
-            Debug.Log("Set warning to default" +
-                "");
+            Debug.Log("Set warning to default");
         }
     }
 }
