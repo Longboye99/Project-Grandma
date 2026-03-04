@@ -32,6 +32,8 @@ public class EndingCutscene : MonoBehaviour
     private void Update()
     {
         float currentTime = GameManager.instance.levelManager.currentTime;
+        anomalyPoint = GameManager.instance.anomalyManager.TallyAnomalyPoint();
+
         if (!enableFinalSequence) //if not activate the dirt patch yet
         {          
             if (currentTime > 230)
@@ -42,9 +44,8 @@ public class EndingCutscene : MonoBehaviour
         }
         else if (enableFinalSequence && !completedEndingRequirement) //activated dirt patch
         {
-            anomalyPoint = GameManager.instance.anomalyManager.TallyAnomalyPoint();
 
-            if (currentTime >= 270 && !warnedSecondTime) //warn player 1 more time in case missed clue
+            if (!clearedAnomaly && currentTime >= 270 && !warnedSecondTime) //warn player 1 more time in case missed clue
             {
                 warnedSecondTime = true;
                 SecondWarning();
@@ -54,7 +55,7 @@ public class EndingCutscene : MonoBehaviour
                 if(startedHaywire == false)
                 {
                     startedHaywire = true;
-                    BadEndScene();
+                    StartBadEndingSequence();
                 }
                 if ( anomalyPoint >= tempAnomalyThreshold )
                 {
@@ -64,17 +65,25 @@ public class EndingCutscene : MonoBehaviour
 
                 }
             }
-            else if (clearedAnomaly && anomalyPoint >= tempAnomalyThreshold) //if undo the anomaly and die
+
+            if( clearedAnomaly && startedHaywire == false && anomalyPoint >= 60)
+            {
+                startedHaywire = true;
+                BeginExtremeHaywirePhase();
+            }
+            else if (clearedAnomaly && anomalyPoint >= tempAnomalyThreshold) //if undo the anomaly and die, play fakeout death cutscene
             {
                 Debug.LogWarning("You died, nvm you lived");
-                GoodEndScene();
+                GameEventsManager.instance.anomalyEvents.StartJumpscare();
+                GameManager.instance.jumpscareManager.fakeOut = true;
                 completedEndingRequirement = true;
-
             }
-            else if (clearedAnomaly && currentTime >= 360)//if undo the anomaly and lives
+            
+            
+            if (clearedAnomaly && currentTime >= 360)//if undo the anomaly and lives
             {
                 Debug.LogWarning("True Ending");
-                TrueEndingScene();
+                PlayTrueEndingScene();
                 completedEndingRequirement = true;
 
             }
@@ -103,7 +112,7 @@ public class EndingCutscene : MonoBehaviour
     {
         if(interactable == dirtPatchInteract)
         {
-            //do animation
+            //ominoius noise/animation
         }
     }
 
@@ -113,26 +122,22 @@ public class EndingCutscene : MonoBehaviour
         {
             GameManager.instance.anomalyManager.dictionary.lockEnemyUpdate = true;
             GameManager.instance.levelManager.checkVictoryDefeat = false;
-            PlayHaywireAnimation();
+            StartFakeOutGoodEndingSequence();
             clearedAnomaly = true;
         }
-    }
-
-    private void PlayHaywireAnimation()
-    {
-        //animation
-        BeginNormalHaywirePhase();
     }
 
     private void BeginNormalHaywirePhase()
     {
         GameManager.instance.anomalyManager.dictionary.EnableAllAnomaly();
-        enemy.cooldownDuration = 1.5f;
+        enemy.cooldownDuration = 5f;
         enemy.difficultyLevel = 20;
         enemy.lightAnomalyThreshold = 0;
         enemy.heavyAnomalyThreashold = 9000;
         incenseWarner.isHaywireMode = true;
         GameManager.instance.anomalyManager.isHaywire = true;
+        Debug.LogWarning("NormalHaywire");
+
     }
     private void BeginExtremeHaywirePhase()
     {
@@ -140,12 +145,12 @@ public class EndingCutscene : MonoBehaviour
         enemy.cooldownDuration = 0.5f;
         enemy.difficultyLevel = 20;
         enemy.lightAnomalyThreshold = 0;
-        incenseWarner.isHaywireMode = true;
         GameManager.instance.anomalyManager.isHaywire = true;
+        Debug.LogWarning("ExtremeHaywire");
 
     }
 
-    public void BadEndScene()
+    public void StartBadEndingSequence()
     {
         //Shriek
         //GameManager.instance.sfxManager.PlaySoundFXClip();
@@ -159,17 +164,29 @@ public class EndingCutscene : MonoBehaviour
         BeginExtremeHaywirePhase();
     }
 
-    private void GoodEndScene()
+    private void StartFakeOutGoodEndingSequence()
     {
-        //good cutscene
-        //haywire
+        //Shriek
+        //GameManager.instance.sfxManager.PlaySoundFXClip();
+        //shake,flicker
+        GameManager.instance.uiManager.screenShake.StartLongShake();
+        //spawn blood pools
+        bloodPoolSpawn.SpawnBloodPools(2, 1.5f, 0.4f);
+        //heavy haywire
+        BeginNormalHaywirePhase();
         //fake death scene
         //end
     }
 
-    private void TrueEndingScene()
+    public void PlayGoodEndingCutscene() //fakeout cutscene when player died after completed good ending requirement
     {
-        //basically true ending but didnt die
+        GameManager.instance.uiManager.TransitionOut();
+        Debug.LogWarning("Fakeouted");
+    }
+
+    private void PlayTrueEndingScene()
+    {
+        //basically normal ending but morning
     }
 
     /*

@@ -29,11 +29,13 @@ public class JumpscareManager : MonoBehaviour
     [SerializeField] float riserVolume;
 
     [SerializeField] public AnomalyWarner anomalyWarner;
+    [SerializeField] EndingCutscene endingCutscene;
 
     [SerializeField] List<JumpscareContainer> jumpscareList;
     Dictionary<AreaEnum, JumpscareContainer> jumpscareDict = new Dictionary<AreaEnum, JumpscareContainer>();
     PointClickCameraMovement cameraMovement;
     bool jumpscareEnabled;
+    public bool fakeOut = false;
 
     private void OnEnable()
     {
@@ -129,7 +131,14 @@ public class JumpscareManager : MonoBehaviour
     public void ExitJumpscare()
     {
         jumpscareEnabled = false;
-        GameManager.instance.levelManager.JumpscareDefeat();
+        if (fakeOut)
+        {
+            endingCutscene.PlayGoodEndingCutscene();
+        }
+        else
+        {
+            GameManager.instance.levelManager.JumpscareDefeat();
+        }
     }
 
     private void CreateJumpscareDict()

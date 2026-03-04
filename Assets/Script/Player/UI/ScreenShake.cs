@@ -53,8 +53,6 @@ public class ScreenShake : MonoBehaviour
     {
         if(eventName == "ShakeScreen")
         {
-            Debug.LogWarning("ScreenShake");
-
             DoScreenShake(2);
         }
     }

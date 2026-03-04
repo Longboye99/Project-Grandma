@@ -8,6 +8,8 @@ public class FlashlightOverlay : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] Animation lightFlickering;
     [SerializeField] Animation heavyFlickering;
+    [SerializeField] AudioClip flashlightBuzz;
+    [SerializeField] float volumn;
 
     bool _isFlickering;
 
@@ -32,6 +34,11 @@ public class FlashlightOverlay : MonoBehaviour
 
     IEnumerator WaitForFlickering()
     {
+        animator.ResetTrigger("LightDown");
+        animator.ResetTrigger("Default");
+        ;
+        GameManager.instance.sfxManager.PlaySoundFXClip(flashlightBuzz, GameObject.FindGameObjectWithTag("PlayerCollider").transform, volumn);
+        animator.SetTrigger("LightDown");
         yield return new WaitForSeconds(0.13f);
         animator.SetTrigger("Default");
         _isFlickering = false;
@@ -47,9 +54,8 @@ public class FlashlightOverlay : MonoBehaviour
     {
         if(!_isFlickering)
         {
-            animator.SetTrigger("LightDown");
-            StartCoroutine(WaitForFlickering());
             _isFlickering = true;
+            StartCoroutine(WaitForFlickering());
         }
         
     }

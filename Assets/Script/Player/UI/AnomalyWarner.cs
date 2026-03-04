@@ -16,6 +16,7 @@ public class AnomalyWarner : MonoBehaviour
     
     public int anomalyPoint;
     public int localAnomalyPoint;
+    public int temp;
 
     [SerializeField] float cooldown;
 
@@ -55,7 +56,6 @@ public class AnomalyWarner : MonoBehaviour
     private void HandleGlobalAnomalyWarning()
     {
         anomalyPoint = GameManager.instance.anomalyManager.TallyAnomalyPoint();
-
         if (anomalyPoint >= noiseWarningPoint && !_isPlayingNoise)
         {
             anomalyNoise.Play();
@@ -65,6 +65,16 @@ public class AnomalyWarner : MonoBehaviour
         {
             anomalyNoise.Stop();
             _isPlayingNoise = false;
+        }
+
+        if (_isBlinking)
+        {
+            float speed = ((float)anomalyPoint * 0.066f) - 2.6f;
+            if(speed < 0.4)
+            {
+                speed = 0.4f;
+            }
+            braceletAnimator.speed = speed;
         }
 
         if (anomalyPoint >= braceletWarningPoint && !_isBlinking)

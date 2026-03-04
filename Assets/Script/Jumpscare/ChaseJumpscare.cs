@@ -11,7 +11,7 @@ public class ChaseJumpscare : Jumpscare
     GameObject playerCam;
     [SerializeField] FlashlightOverlay blinkOverlay;
     [SerializeField] float MoveSpeed = 10;
-    float MinDist = 2.5f;
+    float MinDist = 3f;
 
     [SerializeField] Animator ghostAnimator;
     [SerializeField] Animator jumpscareAnimator;
@@ -107,7 +107,10 @@ public class ChaseJumpscare : Jumpscare
         }
         else
         {
-            if (isChasing && Vector3.Distance(ghost.transform.position, playerCam.transform.position) < MinDist)
+            Vector3 ghostPos = new Vector3(ghost.transform.position.x, 0, ghost.transform.position.z);
+            Vector3 playerPos = new Vector3(playerCam.transform.position.x, 0, playerCam.transform.position.z);
+
+            if (isChasing && Vector3.Distance(ghostPos, playerPos) < MinDist)
             {
                 isChasing = false;
                 Destroy(ghost);

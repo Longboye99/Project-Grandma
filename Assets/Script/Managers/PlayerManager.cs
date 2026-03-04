@@ -11,8 +11,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] float rayMaxDistance;
     [SerializeField] AudioClip lighterAudioOpen;
     [SerializeField] AudioClip lighterAudioClose;
-    [SerializeField] AudioClip flashlightBuzz;
-    [SerializeField] float volumn;
     private int layerMask = (1 << 6) | (1 << 7);
 
     public float interactProgression;
@@ -167,7 +165,6 @@ public class PlayerManager : MonoBehaviour
             {
                 GameEventsManager.instance.anomalyEvents.UndoAnomaly(currentAnomaly);
                 GameManager.instance.uiManager.CheckAnomalyCursor(true);
-                GameManager.instance.sfxManager.PlaySoundFXClip(flashlightBuzz, playerCameraObject.transform, volumn);
             }
             else if (currentInteractable != null)
             {
