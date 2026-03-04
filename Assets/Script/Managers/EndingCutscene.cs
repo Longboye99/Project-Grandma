@@ -7,6 +7,7 @@ public class EndingCutscene : MonoBehaviour
     [SerializeField] DirtPatchInteractable dirtPatchInteract;
     [SerializeField] TestEnemy2 enemy;
     [SerializeField] BloodPoolSpawn bloodPoolSpawn;
+    [SerializeField] IncensePulsingWarner incenseWarner;
     [SerializeField] int anomalyPoint;
     [SerializeField] int tempAnomalyThreshold;
 
@@ -94,7 +95,7 @@ public class EndingCutscene : MonoBehaviour
     IEnumerator LowRumbling()
     {
         GameManager.instance.uiManager.screenShake.StartLongShake();
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3);
         GameManager.instance.uiManager.screenShake.StopLongScrenShake();
     }
 
@@ -130,6 +131,8 @@ public class EndingCutscene : MonoBehaviour
         enemy.difficultyLevel = 20;
         enemy.lightAnomalyThreshold = 0;
         enemy.heavyAnomalyThreashold = 9000;
+        incenseWarner.isHaywireMode = true;
+        GameManager.instance.anomalyManager.isHaywire = true;
     }
     private void BeginExtremeHaywirePhase()
     {
@@ -137,6 +140,9 @@ public class EndingCutscene : MonoBehaviour
         enemy.cooldownDuration = 0.5f;
         enemy.difficultyLevel = 20;
         enemy.lightAnomalyThreshold = 0;
+        incenseWarner.isHaywireMode = true;
+        GameManager.instance.anomalyManager.isHaywire = true;
+
     }
 
     public void BadEndScene()

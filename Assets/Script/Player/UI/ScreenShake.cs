@@ -62,10 +62,10 @@ public class ScreenShake : MonoBehaviour
     public void  DoScreenShake(float second)
     {
         duration = second;
-        StartCoroutine(ScreenShakeCurve(1, normalCurve));
+        StartCoroutine(ScreenShakeCurve(1, normalCurve, 1));
     }
 
-    IEnumerator ScreenShakeCurve(float _shakeDuration, AnimationCurve _curve)
+    IEnumerator ScreenShakeCurve(float _shakeDuration, AnimationCurve _curve, float multiplier)
     {
         float elapsedTime = 0;
         duration = _shakeDuration;
@@ -73,7 +73,7 @@ public class ScreenShake : MonoBehaviour
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
-            float strength = _curve.Evaluate(elapsedTime / duration) * curveOffset;
+            float strength = _curve.Evaluate(elapsedTime / duration) * curveOffset * multiplier;
             transform.position = startingPosition + Random.insideUnitSphere * strength;
             yield return null;
         }
@@ -84,11 +84,11 @@ public class ScreenShake : MonoBehaviour
     {
         while (holdShaking)
         {
-            transform.position = startingPosition + Random.insideUnitSphere * curveOffset * 0.15f;
+            transform.position = startingPosition + Random.insideUnitSphere * curveOffset * 0.1f;
             yield return null;
         }
 
-        yield return ScreenShakeCurve(1f, easeOutCurve);
+        yield return ScreenShakeCurve(1f, easeOutCurve, 1/8);
     }
 
     public void StartLongShake()
@@ -104,7 +104,7 @@ public class ScreenShake : MonoBehaviour
 
     IEnumerator LongShakeSequence()
     {
-        yield return ScreenShakeCurve(1f, easeInCurve);
+        yield return ScreenShakeCurve(1f, easeInCurve, 1/8);
         DoLongShake();
     }
 

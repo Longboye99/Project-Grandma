@@ -10,7 +10,9 @@ public class AnomalyManager : MonoBehaviour
     public AnomalyDictionaryHandler dictionary;
     bool hasJumpscared;
     [SerializeField] AttackAnomaly jumpscare;
+    [SerializeField] FlashlightOverlay flashlightOverlay;
     int spawningTries = 4;
+    public bool isHaywire = false;
 
     [Header("State")]
     public int anomalyPoint;
@@ -67,6 +69,12 @@ public class AnomalyManager : MonoBehaviour
                 if (targetArea.lightAnomalies[random].SpawnAnomaly() == true)
                 {
                     GameEventsManager.instance.anomalyEvents.TriggerLightAnomaly();
+
+                    if(targetArea.lightAnomalies[random].area == currentArea)
+                    {
+                        flashlightOverlay.Blink(null);
+                    }
+
                     dictionary.ActiveAnomalies.Add(targetArea.lightAnomalies[random]);
                     targetArea.lightAnomalies.RemoveAt(random);
                     return true;
@@ -96,6 +104,10 @@ public class AnomalyManager : MonoBehaviour
                 if (targetArea.heavyAnomalies[random].SpawnAnomaly() == true)
                 {
                     GameEventsManager.instance.anomalyEvents.TriggerHeavyAnomaly();
+                    if (targetArea.heavyAnomalies[random].area == currentArea)
+                    {
+                        flashlightOverlay.Blink(null);
+                    }
                     dictionary.ActiveAnomalies.Add(targetArea.heavyAnomalies[random]);
                     targetArea.heavyAnomalies.RemoveAt(random);
                     return true;
@@ -148,7 +160,7 @@ public class AnomalyManager : MonoBehaviour
             }
         }
 
-        if(availableArea.Contains(dictionary.dict[currentArea])) //if enemy not in heavy phase, dont spawn anomaly in front of player
+        if(availableArea.Contains(dictionary.dict[currentArea]) && !isHaywire) //if enemy not in heavy phase, dont spawn anomaly in front of player
         {
             availableArea.Remove(dictionary.dict[currentArea]);
         }
@@ -183,7 +195,7 @@ public class AnomalyManager : MonoBehaviour
             }
         }
 
-        if (availableArea.Contains(dictionary.dict[currentArea])) //if enemy not in heavy phase, dont spawn anomaly in front of player
+        if (availableArea.Contains(dictionary.dict[currentArea]) && !isHaywire) //if enemy not in heavy phase, dont spawn anomaly in front of player
         {
             availableArea.Remove(dictionary.dict[currentArea]);
         }

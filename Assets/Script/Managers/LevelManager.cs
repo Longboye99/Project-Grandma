@@ -24,9 +24,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] public float incenseMaxTime;
     [SerializeField] public int incenseSection;
     [SerializeField] public int maxIncenseSection;
-    [SerializeField] GameObject incenseWarning;
-    [SerializeField] float incenseWarningThreshold;
-    bool isWarning;
 
     public Canvas VictoryMessage;
     public Canvas DefeatMessage;
@@ -56,7 +53,6 @@ public class LevelManager : MonoBehaviour
     }
     private void Start()
     {
-        incenseWarning.SetActive(false);
         incenseSection = maxIncenseSection;
         playerCutsceneController = GameObject.FindGameObjectWithTag("PlayerCollider").GetComponent<PlayerCutsceneController>();
         saveLoadSystem = GetComponent<SaveLoadSystem>();
@@ -66,7 +62,6 @@ public class LevelManager : MonoBehaviour
     {
         UpdateTime();
         SetIncenseSize();
-        CheckIncenseWarning();
 
         if (checkVictoryDefeat)
         {
@@ -158,21 +153,6 @@ public class LevelManager : MonoBehaviour
             incenseSpeed = 1;
         }
         Debug.Log("Paused Timer: " + pause);
-    }
-
-    private void CheckIncenseWarning()
-    {
-        if(incenseCurrentTime < incenseWarningThreshold && !isWarning)
-        {
-            Debug.LogWarning("Incense Low");
-            isWarning = true;
-            incenseWarning.SetActive(true);
-        }
-        else if(incenseCurrentTime > incenseWarningThreshold && isWarning)
-        {
-            isWarning = false;
-            incenseWarning.SetActive(false);
-        }
     }
 
     //-------------------------Respawn--------------------------------

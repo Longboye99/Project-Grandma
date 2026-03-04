@@ -6195,6 +6195,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dictionary: {fileID: 346481864}
   jumpscare: {fileID: 0}
+  flashlightOverlay: {fileID: 57842427}
+  isHaywire: 0
   anomalyPoint: 0
   currentArea: 0
 --- !u!4 &346481863
@@ -10705,8 +10707,6 @@ MonoBehaviour:
   incenseMaxTime: 100
   incenseSection: 4
   maxIncenseSection: 4
-  incenseWarning: {fileID: 2144355085}
-  incenseWarningThreshold: 35
   VictoryMessage: {fileID: 0}
   DefeatMessage: {fileID: 0}
   checkVictoryDefeat: 1
@@ -14764,14 +14764,14 @@ RectTransform:
   m_GameObject: {fileID: 774780181}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 22.236586, y: 15.035896, z: 15.035896}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.8582226, y: 1.2564898, z: 1.2564898}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1313644092}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.00024414062, y: 0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &774780183
@@ -18304,6 +18304,7 @@ MonoBehaviour:
   dirtPatchInteract: {fileID: 1399904506}
   enemy: {fileID: 78606234}
   bloodPoolSpawn: {fileID: 1599300037}
+  incenseWarner: {fileID: 57842428}
   anomalyPoint: 0
   tempAnomalyThreshold: 100
 --- !u!1001 &938324423
@@ -41845,7 +41846,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -105, y: -125.01001}
+  m_AnchoredPosition: {x: -105, y: -125.010254}
   m_SizeDelta: {x: 664, y: 1490}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &2144355087

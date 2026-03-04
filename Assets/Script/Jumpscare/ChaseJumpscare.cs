@@ -116,6 +116,7 @@ public class ChaseJumpscare : Jumpscare
                 jumpscare = Instantiate(jumpscarePrefab, jumpscareCanvas);
                 jumpscareAnimator = jumpscare.GetComponent<Animator>();
                 jumpscareAnimator.SetTrigger("TriggerJumpscare");
+                GameManager.instance.uiManager.EnableGameOverlay(false);
                 GameManager.instance.sfxManager.PlaySoundFXClip(screamAudio, this.transform, 0.6f);
             }
         }
