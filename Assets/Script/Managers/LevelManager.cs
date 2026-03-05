@@ -115,15 +115,14 @@ public class LevelManager : MonoBehaviour
     public void JumpscareDefeat()
     {
         isDefeated = true;
-        
         deathCutscene.StartDeathCutscene();
     }
 
     public void FinishDeathCutscene()
     {
-        GameManager.instance.uiManager.TransitionOut();
-        Invoke("Defeat", 1);
+        Defeat();
     }
+
 
     private void Defeat()
     {

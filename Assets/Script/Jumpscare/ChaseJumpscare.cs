@@ -60,7 +60,7 @@ public class ChaseJumpscare : Jumpscare
     {
         GameEventsManager.instance.anomalyEvents.FinishJumpscare();
         isActive = false;
-        Invoke("DestroyGhost", 2);
+        DestroyGhost();
     }
 
     void Update()
