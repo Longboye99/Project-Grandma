@@ -14623,50 +14623,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &784916103
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 784916105}
-  - component: {fileID: 784916104}
-  m_Layer: 0
-  m_Name: GameEventsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &784916104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 784916103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5af49a964d1ea1e48b2a1717771632e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &784916105
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 784916103}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &789273591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17693,7 +17649,7 @@ Transform:
   - {fileID: 678905161}
   - {fileID: 1019168223}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.00000003618203, y: 0.25334, z: -6.579626e-10}
 --- !u!54 &933045086
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17885,7 +17841,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventName1: FinishStartingCutscene
   eventName2: FinishDeathCutscene
-  eventName3: 
+  eventName3: FinishFakeOutCutscene
 --- !u!1001 &935562272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18072,6 +18028,8 @@ PlayableDirector:
     value: {fileID: 1263498689}
   - key: {fileID: 4004822647238851526, guid: 049b44b840df73941bd15d336dd321ed, type: 2}
     value: {fileID: 994771937}
+  - key: {fileID: -6763919273222008122, guid: 049b44b840df73941bd15d336dd321ed, type: 2}
+    value: {fileID: 1944150362}
   m_ExposedReferences:
     m_References:
     - f812456aa5b13ba4a98b57ae93e9d22a: {fileID: 956789307}
@@ -18101,6 +18059,7 @@ MonoBehaviour:
   directionaLight: {fileID: 1944150358}
   renderTexture: {fileID: 648518011}
   retroEffectMorning: {fileID: 2100000, guid: 87cbf63821f117d4fa23185e047eac65, type: 2}
+  cutscenePlayer: {fileID: 937380446}
 --- !u!1001 &938324423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36883,50 +36842,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44f72f06bb1c8a54caca04384e0083f2, type: 3}
---- !u!1 &1936262519
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1936262521}
-  - component: {fileID: 1936262520}
-  m_Layer: 0
-  m_Name: GameEventsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1936262520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1936262519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5af49a964d1ea1e48b2a1717771632e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1936262521
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1936262519}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1944150358
 GameObject:
   m_ObjectHideFlags: 0
@@ -36938,6 +36853,7 @@ GameObject:
   - component: {fileID: 1944150361}
   - component: {fileID: 1944150360}
   - component: {fileID: 1944150359}
+  - component: {fileID: 1944150362}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -37048,6 +36964,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 24.5, y: 94.1, z: 79.557}
+--- !u!95 &1944150362
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944150358}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8d3f86b519247524d9c03041fd9a11d1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1946051309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44937,5 +44875,3 @@ SceneRoots:
   - {fileID: 746541063}
   - {fileID: 980073766}
   - {fileID: 1599300036}
-  - {fileID: 1936262521}
-  - {fileID: 784916105}

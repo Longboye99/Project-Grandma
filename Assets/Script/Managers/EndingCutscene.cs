@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Playables;
 
 public class EndingCutscene : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class EndingCutscene : MonoBehaviour
     [SerializeField] GameObject directionaLight;
     [SerializeField] RawImage renderTexture;
     [SerializeField] Material retroEffectMorning;
+    [SerializeField] PlayableDirector cutscenePlayer;
+
 
     bool warnedSecondTime = false;
     bool clearedAnomaly = false;
@@ -30,11 +33,13 @@ public class EndingCutscene : MonoBehaviour
     {
         GameEventsManager.instance.levelEvents.onTriggerInteractable += OnInteractDirtPatch;
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly += OnUndoAnomaly;
+        GameEventsManager.instance.anomalyEvents.onFinishAnimationEvent += FinishAnimationEvent;
     }
     private void OnDisable()
     {
         GameEventsManager.instance.levelEvents.onTriggerInteractable -= OnInteractDirtPatch;
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly -= OnUndoAnomaly;
+        GameEventsManager.instance.anomalyEvents.onFinishAnimationEvent -= FinishAnimationEvent;
 
     }
 
@@ -46,6 +51,10 @@ public class EndingCutscene : MonoBehaviour
         if(!enableFinalSequence)
         {
             this.gameObject.SetActive(false);
+        }
+        else
+        {
+            enableFinalSequence = false;
         }
     }
 
@@ -215,13 +224,21 @@ public class EndingCutscene : MonoBehaviour
 
         GameManager.instance.uiManager.TransitionOut();
         Debug.LogWarning("Fakeouted");
-        Invoke("ContinueTimeLine", 2);
+        ContinueTimeLine();
     }
 
     public void ContinueTimeLine()
     {
-        GameManager.instance.uiManager.TransitionIn();
-        //timeline
+        cutscenePlayer.Play();
+    }
+
+    private void FinishAnimationEvent(string eventName)
+    {
+        if (eventName == "FinishFakeOutCutscene")
+        {
+            GameManager.instance.levelManager.Victory();
+            Invoke("StopCutscene", 1);
+        }
     }
 
     private void PlayTrueEndingScene()

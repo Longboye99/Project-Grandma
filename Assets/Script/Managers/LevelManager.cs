@@ -90,7 +90,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void Victory()
+    public void Victory()
     {
         Time.timeScale = 0;
         SceneManager.LoadSceneAsync("[DevTest]VictoryMenu", LoadSceneMode.Additive);

@@ -9,12 +9,15 @@ public class DirtPatchInteractable : Interactable
     private void Start()
     {
         useOutline = false;
+        GetComponent<Collider>().enabled = false;
     }
 
     public void EnableDirtPatch()
     {
         enabledDirtPatch = true;
         useOutline = true;
+        GetComponent<Collider>().enabled = true;
+
     }
 
     public override void Interact(Interactable interactable, AreaEnum area, InteractMode mode)
