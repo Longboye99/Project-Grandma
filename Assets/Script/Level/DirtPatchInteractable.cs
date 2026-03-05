@@ -28,7 +28,7 @@ public class DirtPatchInteractable : Interactable
     private void TriggerAnomaly()
     {
         GameManager.instance.anomalyManager.TriggerAnomaly(anomalyObject);
-        this.gameObject.SetActive(false);
+        this.GetComponent<Collider>().enabled = false;
     }
 
 }

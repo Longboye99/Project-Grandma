@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EndingCutscene : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class EndingCutscene : MonoBehaviour
     [SerializeField] IncensePulsingWarner incenseWarner;
     [SerializeField] int anomalyPoint;
     [SerializeField] int tempAnomalyThreshold;
+
+    [Header("Morning Scene")]
+    [SerializeField] Material morningSkybox;
+    [SerializeField] GameObject directionaLight;
+    [SerializeField] RawImage renderTexture;
+    [SerializeField] Material retroEffectMorning;
 
     bool warnedSecondTime = false;
     bool clearedAnomaly = false;
@@ -194,8 +201,27 @@ public class EndingCutscene : MonoBehaviour
 
     public void PlayGoodEndingCutscene() //fakeout cutscene when player died after completed good ending requirement
     {
+        enemy.cooldownDuration = 9000000;
+        incenseWarner.isHaywireMode = false;
+        GameManager.instance.anomalyManager.UndoAllAnomaly();
+        GameManager.instance.levelManager.timeSpeed = 0;
+        GameManager.instance.levelManager.incenseSpeed = 0;
+
+        RenderSettings.skybox = morningSkybox;
+        directionaLight.SetActive(true);
+        renderTexture.material = retroEffectMorning;
+        bloodPoolSpawn.RemoveBloodPool();
+        GameManager.instance.uiManager.screenShake.StopLongScrenShake();
+
         GameManager.instance.uiManager.TransitionOut();
         Debug.LogWarning("Fakeouted");
+        Invoke("ContinueTimeLine", 2);
+    }
+
+    public void ContinueTimeLine()
+    {
+        GameManager.instance.uiManager.TransitionIn();
+        //timeline
     }
 
     private void PlayTrueEndingScene()

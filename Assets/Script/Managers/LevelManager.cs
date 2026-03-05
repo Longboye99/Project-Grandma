@@ -27,6 +27,7 @@ public class LevelManager : MonoBehaviour
 
     public Canvas VictoryMessage;
     public Canvas DefeatMessage;
+    public DeathCutscene deathCutscene;
 
     bool isVictory;
     bool isDefeated;
@@ -108,13 +109,20 @@ public class LevelManager : MonoBehaviour
             isDefeated = true;
             GameManager.instance.uiManager.TransitionOut();
             Invoke("Defeat", 2);
+            //some cutscene here ASAP
         } 
     }
     public void JumpscareDefeat()
     {
         isDefeated = true;
+        
+        deathCutscene.StartDeathCutscene();
+    }
+
+    public void FinishDeathCutscene()
+    {
         GameManager.instance.uiManager.TransitionOut();
-        Invoke("Defeat", 2);
+        Invoke("Defeat", 1);
     }
 
     private void Defeat()
