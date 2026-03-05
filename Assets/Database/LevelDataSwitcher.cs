@@ -35,7 +35,7 @@ public class LevelDataSwitcher : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        _dataIndex++;
+        _dataIndex = GameManager.instance.anomalyManager.dictionary.currentLevel + 1;
         SwitchScene();
     }
 }

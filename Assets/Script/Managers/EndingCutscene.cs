@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class EndingCutscene : MonoBehaviour
 {
+    [SerializeField] DataSwitchContainer dataSwitcher;
+    [SerializeField] LocalSpreadsheetContainer DataContainer;
+
     [SerializeField] bool enableFinalSequence;
     [SerializeField] DirtPatchInteractable dirtPatchInteract;
     [SerializeField] TestEnemy2 enemy;
@@ -26,6 +29,17 @@ public class EndingCutscene : MonoBehaviour
         GameEventsManager.instance.levelEvents.onTriggerInteractable -= OnInteractDirtPatch;
         GameEventsManager.instance.anomalyEvents.onUndoAnomaly -= OnUndoAnomaly;
 
+    }
+
+    private void Start()
+    {
+        DataContainer = dataSwitcher.currentData;
+        enableFinalSequence = DataContainer.playEndingSequence;
+
+        if(!enableFinalSequence)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
 

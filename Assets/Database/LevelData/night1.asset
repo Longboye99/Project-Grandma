@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: night1
   m_EditorClassIdentifier: 
   level: 0
+  cutsceneLevel: Cutscene
   skipCutscene: 1
+  skipTutorial: 1
+  playEndingSequence: 0
   content:
     anomalies:
     - Id: L_Coffin_Doll

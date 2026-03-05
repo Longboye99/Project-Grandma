@@ -18027,6 +18027,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68783c3df3f6b5a408046e16416f14de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataSwitcher: {fileID: 11400000, guid: 467e2ab3b8f6f9f49ac222427a48c810, type: 2}
+  DataContainer: {fileID: 0}
   enableFinalSequence: 0
   dirtPatchInteract: {fileID: 1399904506}
   enemy: {fileID: 78606234}
@@ -32770,7 +32772,7 @@ MonoBehaviour:
   cutscenePlayer: {fileID: 1732456954}
   flashlightHand: {fileID: 994771937}
   tutorialAnomaly: {fileID: 2070012790}
-  skipCutscene: 0
+  skipTutorial: 0
   howlingNoise: {fileID: 8300000, guid: b18494381f13d0542bec2974ded9b43a, type: 3}
 --- !u!320 &1732456954
 PlayableDirector:

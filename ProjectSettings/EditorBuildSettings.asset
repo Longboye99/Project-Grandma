@@ -18,6 +18,12 @@ EditorBuildSettings:
     path: Assets/Scenes/CutScene.unity
     guid: f1feb82b048d5ce4c941fcd45f2a63a0
   - enabled: 1
+    path: Assets/Scenes/CutScene01.unity
+    guid: 2aa06fefa0cdae14bbfe77a9f375dcef
+  - enabled: 1
+    path: Assets/Scenes/CutScene02.unity
+    guid: ab11a563c667bea409483494dd09facd
+  - enabled: 1
     path: Assets/Scenes/[DevTest]PauseMenu.unity
     guid: 4f7acc034fe22224bb1e2ef2b8f811f3
   - enabled: 1

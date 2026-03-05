@@ -20,7 +20,7 @@ public class TutorialCutsceneSequence : MonoBehaviour
 
     bool firstTime = true;
     bool hasTurned;
-    [SerializeField] bool skipCutscene;
+    [SerializeField] bool skipTutorial;
     [SerializeField] AudioClip howlingNoise;
 
     private void OnEnable()
@@ -44,9 +44,9 @@ public class TutorialCutsceneSequence : MonoBehaviour
     private void Start()
     {
         DataContainer = dataSwitcher.currentData;
-        skipCutscene = DataContainer.skipCutscene;
+        skipTutorial = DataContainer.skipTutorial;
 
-        if(!skipCutscene)
+        if(!skipTutorial)
         {
             Debug.Log("disable stuff");
             pointClickCameraController.EnableFlashlight(false);
@@ -102,7 +102,7 @@ public class TutorialCutsceneSequence : MonoBehaviour
 
     private void OnRefilIncense()
     {
-        if (!skipCutscene)
+        if (!skipTutorial)
         {
             GameManager.instance.uiManager.subtitleTextController.DisableTitleText();
             GameManager.instance.uiManager.floatingTextController.DisableTutorialText(); ;
@@ -142,7 +142,7 @@ public class TutorialCutsceneSequence : MonoBehaviour
 
     private void DetectMovingToArea(AreaEnum area)
     {
-        if(area == AreaEnum.Kitchen && firstTime && !skipCutscene)
+        if(area == AreaEnum.Kitchen && firstTime && !skipTutorial)
         {
             firstTime = false;
             GameEventsManager.instance.playerEvents.EnableMovement(false);
@@ -168,7 +168,7 @@ public class TutorialCutsceneSequence : MonoBehaviour
 
     private void DetectUndoAnomaly(Anomaly anomaly)
     {
-        if(anomaly == tutorialAnomaly && !skipCutscene)
+        if(anomaly == tutorialAnomaly && !skipTutorial)
         {
             GameManager.instance.uiManager.floatingTextController.DisableTutorialText();
             Invoke("DisplayUndoAnomalySubtitle", 2);
