@@ -6,6 +6,7 @@ using UnityEngine.Splines;
 public class PointClickCameraController : MonoBehaviour
 {
     [Header("Camera Movement Setting")]
+    public bool stopCameraMovement = false;
     public GameObject playerCameraObject;
     [SerializeField] Transform cameraPivot;
     private Camera playerCamera;
@@ -27,7 +28,7 @@ public class PointClickCameraController : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.instance.uiManager.isPaused)
+        if (!GameManager.instance.uiManager.isPaused || !stopCameraMovement)
         {
             MouseCameraMovement();
             if (!GameManager.instance.playerManager.isHoldingInteract)
