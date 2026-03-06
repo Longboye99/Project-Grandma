@@ -7,7 +7,6 @@ using UnityEngine;
 namespace Game.Database
 {
     [Serializable]
-
     public class SpreadsheetContent
     {
         [SpreadsheetPage("Anomaly Data")]

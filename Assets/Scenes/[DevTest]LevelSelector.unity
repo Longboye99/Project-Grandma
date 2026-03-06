@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 367069499}
   - component: {fileID: 367069498}
   - component: {fileID: 367069497}
-  - component: {fileID: 367069496}
+  - component: {fileID: 367069500}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -220,18 +220,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -280}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &367069496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 367069494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321672732215ed847824718a19e8f279, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &367069497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,9 +264,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 367069496}
-        m_TargetAssemblyTypeName: QuitGame, Assembly-CSharp
-        m_MethodName: Quit
+      - m_Target: {fileID: 367069500}
+        m_TargetAssemblyTypeName: Button, Assembly-CSharp
+        m_MethodName: LoadNewScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -326,6 +314,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367069494}
   m_CullTransparentMesh: 1
+--- !u!114 &367069500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367069494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a76c83f9ac0b3439b9ced61c040acf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneIndex: 0
 --- !u!1 &398066418
 GameObject:
   m_ObjectHideFlags: 0

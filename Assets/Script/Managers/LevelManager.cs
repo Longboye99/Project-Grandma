@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour
 
     bool isVictory;
     bool isDefeated;
+    bool pauseTime;
     float size;
     public bool checkVictoryDefeat = true;
     PlayerCutsceneController playerCutsceneController;
@@ -61,17 +62,21 @@ public class LevelManager : MonoBehaviour
     }
     private void Update()
     {
-        UpdateTime();
-        SetIncenseSize();
-
-        if (checkVictoryDefeat)
+        if (!pauseTime)
         {
-            CheckVictory();
-            CheckDefeat();
-        }
+            UpdateTime();
+            SetIncenseSize();
 
-        GameManager.instance.anomalyManager.dictionary.CheckEnemyEvent(currentTime);
-        GameManager.instance.anomalyManager.TallyAnomalyPoint();
+            if (checkVictoryDefeat)
+            {
+                CheckVictory();
+                CheckDefeat();
+            }
+
+            GameManager.instance.anomalyManager.dictionary.CheckEnemyEvent(currentTime);
+            GameManager.instance.anomalyManager.TallyAnomalyPoint();
+        }
+        
     }
 
     private void UpdateTime()
@@ -92,6 +97,7 @@ public class LevelManager : MonoBehaviour
 
     public void Victory()
     {
+        GameManager.instance.uiManager.TransitionIn();
         Time.timeScale = 0;
         SceneManager.LoadSceneAsync("[DevTest]VictoryMenu", LoadSceneMode.Additive);
         Cursor.lockState = CursorLockMode.None;
@@ -152,12 +158,14 @@ public class LevelManager : MonoBehaviour
         {
             timeSpeed = 0;
             incenseSpeed = 0;
+            pauseTime = true;
             
         }
         else
         {
             timeSpeed = 1;
             incenseSpeed = 1;
+            pauseTime = false;
         }
         Debug.Log("Paused Timer: " + pause);
     }

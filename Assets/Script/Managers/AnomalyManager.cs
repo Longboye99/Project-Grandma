@@ -144,7 +144,16 @@ public class AnomalyManager : MonoBehaviour
             anomaly.UndoAnomaly(anomaly);
             dictionary.AddAnomalyToAvailableList(anomaly);
         }
-        dictionary.ActiveAnomalies.Clear();
+        dictionary.ActiveAnomalies.Clear();  
+    }
+
+    public void DisableAllAnomaly()
+    {
+        foreach (Anomaly anomaly in dictionary.AllAnomalies)
+        {
+            anomaly.enabled = false;
+            anomaly.isActive = false;
+        }
     }
 
     private AreaAnomaly RandomHeavySpawnArea()

@@ -37,34 +37,42 @@ public class LightflickerAddOn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (anomaly.isActive && !countingDown)
+        if(anomaly.isActive)
         {
-            if (isFirstTime)
+            if (!countingDown)
             {
-                timer = 0;
-                duration = 2;
-                countingDown = true;
-                isFirstTime = false;
+                if (isFirstTime)
+                {
+                    timer = 0;
+                    duration = 2;
+                    countingDown = true;
+                    isFirstTime = false;
+                }
+                else
+                {
+                    timer = 0;
+                    duration = Random.Range(minTime, maxTime);
+                    countingDown = true;
+                }
+
             }
-            else
+            if (countingDown)
             {
-                timer = 0;
-                duration = Random.Range(minTime, maxTime);
-                countingDown = true;
+                timer += Time.deltaTime;
+                if (timer > duration)
+                {
+                    lightAnimator.SetTrigger("Flicker");
+                    GameManager.instance.sfxManager.PlaySoundFXClip(flickerSfx, lightTransform, volumn);
+                    countingDown = false;
+                }
             }
-            
         }
 
-        if (anomaly.isActive && countingDown)
+        else if(!anomaly.isActive && countingDown)
         {
-            timer += Time.deltaTime;
-            if( timer > duration )
-            {
-                lightAnimator.SetTrigger("Flicker");
-                GameManager.instance.sfxManager.PlaySoundFXClip(flickerSfx, lightTransform, volumn);
-                countingDown = false;
-            }
+            countingDown = false;
         }
+        
 
     }
 

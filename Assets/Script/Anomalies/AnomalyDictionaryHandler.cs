@@ -10,7 +10,7 @@ public class AnomalyDictionaryHandler : MonoBehaviour
     [SerializeField] LocalSpreadsheetContainer DataContainer;
     public int currentLevel;
 
-    Anomaly[] AllAnomalies;
+    public Anomaly[] AllAnomalies;
     public Dictionary<AreaEnum, AreaAnomaly> dict = new Dictionary<AreaEnum, AreaAnomaly>();
     List<AreaEnum> areas = new List<AreaEnum>();
     public List<Anomaly> ActiveAnomalies = new List<Anomaly>();

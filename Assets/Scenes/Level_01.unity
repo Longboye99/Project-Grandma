@@ -5127,7 +5127,7 @@ AudioSource:
   m_GameObject: {fileID: 269300636}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8914880981384367629, guid: ed403aff25ad4ce49a49a183956ce61b, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -6231,6 +6231,7 @@ MonoBehaviour:
   dataSwitcher: {fileID: 11400000, guid: 467e2ab3b8f6f9f49ac222427a48c810, type: 2}
   DataContainer: {fileID: 11400000, guid: 4475a790dccc2c24da5587648b0c251b, type: 2}
   currentLevel: 0
+  AllAnomalies: []
   ActiveAnomalies: []
   lockEnemyUpdate: 0
   enemy: {fileID: 78606234}
@@ -6635,7 +6636,7 @@ AudioSource:
   m_GameObject: {fileID: 356322395}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: ed403aff25ad4ce49a49a183956ce61b, type: 2}
+  OutputAudioMixerGroup: {fileID: 8914880981384367629, guid: ed403aff25ad4ce49a49a183956ce61b, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: b4d9cae765ec7a94b8036e4606422185, type: 3}
   m_PlayOnAwake: 1
@@ -17765,7 +17766,7 @@ MonoBehaviour:
   forwardButton: {fileID: 0}
   backwardButton: {fileID: 2108993289}
   currentNode: {fileID: 455363518}
-  startingNode: {fileID: 1363868553}
+  startingNode: {fileID: 455363518}
   transitionInTime: 0.3
   transitionOutTime: 0.3
 --- !u!114 &933045092
@@ -17981,7 +17982,7 @@ PlayableDirector:
   m_PlayableAsset: {fileID: 11400000, guid: 049b44b840df73941bd15d336dd321ed, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
-  m_DirectorUpdateMode: 1
+  m_DirectorUpdateMode: 2
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 0}
@@ -19067,76 +19068,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978476695}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &980073764
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 980073766}
-  - component: {fileID: 980073765}
-  m_Layer: 0
-  m_Name: Timeline
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!320 &980073765
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980073764}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 652a60d10b7a9ab46906ddb853ded43a, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: 0}
-    value: {fileID: 933045094}
-  - key: {fileID: 5908474414090831631, guid: 652a60d10b7a9ab46906ddb853ded43a, type: 2}
-    value: {fileID: 933045094}
-  - key: {fileID: 8882382693784336961, guid: 652a60d10b7a9ab46906ddb853ded43a, type: 2}
-    value: {fileID: 1253437196}
-  - key: {fileID: 6484445115663027195, guid: 652a60d10b7a9ab46906ddb853ded43a, type: 2}
-    value: {fileID: 1253437198}
-  - key: {fileID: 3367150857284544275, guid: 652a60d10b7a9ab46906ddb853ded43a, type: 2}
-    value: {fileID: 588429857}
-  - key: {fileID: 3643934061150791960, guid: 652a60d10b7a9ab46906ddb853ded43a, type: 2}
-    value: {fileID: 1263498689}
-  - key: {fileID: -7126026345507413387, guid: 652a60d10b7a9ab46906ddb853ded43a, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: -7849773306393332975, guid: 652a60d10b7a9ab46906ddb853ded43a, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: -8650440862946887574, guid: 652a60d10b7a9ab46906ddb853ded43a, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: 908189048125843421, guid: 652a60d10b7a9ab46906ddb853ded43a, type: 2}
-    value: {fileID: 0}
-  m_ExposedReferences:
-    m_References:
-    - 06f5983460f41f3418c8fbff3a1178e3: {fileID: 933045083}
---- !u!4 &980073766
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980073764}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.2313437, y: 1.7203859, z: -8.072366}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &982474486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31394,7 +31325,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -50, y: 0, z: -50, w: 0}
+  m_margin: {x: -171.77168, y: 0, z: -171.10794, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -33126,7 +33057,7 @@ MonoBehaviour:
   pointClickCameraController: {fileID: 933045088}
   cutscenePlayer: {fileID: 1732456954}
   flashlightHand: {fileID: 994771937}
-  tutorialAnomaly: {fileID: 2070012790}
+  tutorialAnomaly: {fileID: 1922905605}
   skipTutorial: 0
   howlingNoise: {fileID: 8300000, guid: b18494381f13d0542bec2974ded9b43a, type: 3}
 --- !u!320 &1732456954
@@ -36575,6 +36506,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1922905604}
   - component: {fileID: 1922905605}
+  - component: {fileID: 1922905607}
+  - component: {fileID: 1922905606}
   m_Layer: 6
   m_Name: HandFridgeSequnce1
   m_TagString: Untagged
@@ -36611,8 +36544,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manualTriggerAnomaly: 0
   id: HandFridgeSequnce1
-  anomalyLevel: 3
-  area: 0
+  anomalyLevel: 1
+  area: 4
   anomalyPoint: 0
   cooldown: 10
   isEnabled: 0
@@ -36623,6 +36556,40 @@ MonoBehaviour:
   anomalyList:
   - {fileID: 1638994432}
   - {fileID: 6126660888790698189}
+--- !u!114 &1922905606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922905603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea248ca1523e9ff4aa62e922984d130d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minTime: 8
+  maxTime: 15
+  lightTransform: {fileID: 1713025467}
+  lightAnimator: {fileID: 1713025470}
+  flickerSfx: {fileID: 8300000, guid: 18b6c9d9a9cd0214ca4de7abbc5ed63c, type: 3}
+  volumn: 0.02
+  timer: 0
+  duration: 0
+--- !u!114 &1922905607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922905603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85dd9ac85f5f8b74db6ca26cf1cd5a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEffect: {fileID: 8300000, guid: 247e23f89469c8f44b2a4aed31839e90, type: 3}
+  volumn: 0.5
 --- !u!1 &1925637415
 GameObject:
   m_ObjectHideFlags: 0
@@ -37277,7 +37244,7 @@ AudioSource:
   m_GameObject: {fileID: 1962107973}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: ed403aff25ad4ce49a49a183956ce61b, type: 2}
+  OutputAudioMixerGroup: {fileID: 8914880981384367629, guid: ed403aff25ad4ce49a49a183956ce61b, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: b4d9cae765ec7a94b8036e4606422185, type: 3}
   m_PlayOnAwake: 1
@@ -39397,8 +39364,6 @@ GameObject:
   - component: {fileID: 2070012788}
   - component: {fileID: 2070012789}
   - component: {fileID: 2070012790}
-  - component: {fileID: 2070012792}
-  - component: {fileID: 2070012791}
   m_Layer: 6
   m_Name: H_Kitchen_HandFridge
   m_TagString: Untagged
@@ -39478,40 +39443,6 @@ MonoBehaviour:
   - 0
   - 0
   index: 0
---- !u!114 &2070012791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070012787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea248ca1523e9ff4aa62e922984d130d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minTime: 8
-  maxTime: 15
-  lightTransform: {fileID: 1713025467}
-  lightAnimator: {fileID: 1713025470}
-  flickerSfx: {fileID: 8300000, guid: 18b6c9d9a9cd0214ca4de7abbc5ed63c, type: 3}
-  volumn: 0.02
-  timer: 0
-  duration: 0
---- !u!114 &2070012792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070012787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85dd9ac85f5f8b74db6ca26cf1cd5a3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundEffect: {fileID: 8300000, guid: 247e23f89469c8f44b2a4aed31839e90, type: 3}
-  volumn: 0.5
 --- !u!1 &2071054547
 GameObject:
   m_ObjectHideFlags: 0
@@ -40077,7 +40008,7 @@ AudioSource:
   m_GameObject: {fileID: 2081884887}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: ed403aff25ad4ce49a49a183956ce61b, type: 2}
+  OutputAudioMixerGroup: {fileID: 8914880981384367629, guid: ed403aff25ad4ce49a49a183956ce61b, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 08c68ae1006f8184d911c921b7f31fbc, type: 3}
   m_PlayOnAwake: 1
@@ -44873,5 +44804,4 @@ SceneRoots:
   - {fileID: 1185812446}
   - {fileID: 1968380785}
   - {fileID: 746541063}
-  - {fileID: 980073766}
   - {fileID: 1599300036}

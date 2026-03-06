@@ -210,11 +210,14 @@ public class EndingCutscene : MonoBehaviour
 
     public void PlayGoodEndingCutscene() //fakeout cutscene when player died after completed good ending requirement
     {
-        enemy.cooldownDuration = 9000000;
-        incenseWarner.isHaywireMode = false;
-        GameManager.instance.anomalyManager.UndoAllAnomaly();
         GameManager.instance.levelManager.timeSpeed = 0;
         GameManager.instance.levelManager.incenseSpeed = 0;
+        enemy.cooldownDuration = 9000000;
+        incenseWarner.isHaywireMode = false;
+        enemy.gameObject.SetActive(false);
+        GameManager.instance.anomalyManager.UndoAllAnomaly();
+        GameManager.instance.anomalyManager.DisableAllAnomaly();
+        
 
         RenderSettings.skybox = morningSkybox;
         directionaLight.SetActive(true);
@@ -236,6 +239,7 @@ public class EndingCutscene : MonoBehaviour
     {
         if (eventName == "FinishFakeOutCutscene")
         {
+            GameManager.instance.uiManager.TransitionIn();
             GameManager.instance.levelManager.Victory();
             Invoke("StopCutscene", 1);
         }
