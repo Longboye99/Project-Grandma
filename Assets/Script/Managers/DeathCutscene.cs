@@ -19,12 +19,12 @@ public class DeathCutscene : MonoBehaviour
     public void StartDeathCutscene()
     {
         pointClickCameraController.EnableFlashlight(false);
+        pointClickCameraController.stopCameraMovement = true;
         GameManager.instance.uiManager.FlashlightHand(false);
         GameManager.instance.playerManager.EnableInteract(false);
         GameEventsManager.instance.playerEvents.EnableMovement(false);
         GameManager.instance.levelManager.PauseTimer(true);
         GameManager.instance.uiManager.EnableGameOverlay(false);
-        PlayCutscene();
     }
 
     private void PlayCutscene()

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   cutsceneLevel: Cutscene
-  skipCutscene: 0
-  skipTutorial: 0
-  playEndingSequence: 0
-  presentationMode: 1
+  skipCutscene: 1
+  skipTutorial: 1
+  playEndingSequence: 1
+  presentationMode: 0
   content:
     anomalies:
     - Id: L_Coffin_Doll

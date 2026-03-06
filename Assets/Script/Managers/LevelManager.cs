@@ -144,7 +144,7 @@ public class LevelManager : MonoBehaviour
         Defeat();
     }
 
-    private void CleanEventManager()
+    public void CleanEventManager()
     {
         GameEventsManager manager = FindAnyObjectByType<GameEventsManager>();
         if (manager != null)

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class EndingCutscene : MonoBehaviour
 {
@@ -17,11 +18,18 @@ public class EndingCutscene : MonoBehaviour
     [SerializeField] int tempAnomalyThreshold;
 
     [Header("Morning Scene")]
+    [SerializeField] PointClickCameraController pointClickCameraController;
     [SerializeField] Material morningSkybox;
     [SerializeField] GameObject directionaLight;
     [SerializeField] RawImage renderTexture;
     [SerializeField] Material retroEffectMorning;
     [SerializeField] PlayableDirector cutscenePlayer;
+
+    [Header("Sfx")]
+    [SerializeField] AudioClip screamAudio;
+    [SerializeField] AudioSource bloodBoilSource;
+    [SerializeField] AudioClip bloodBoil;
+    [SerializeField] GameObject ambienceZone;
 
 
     bool warnedSecondTime = false;
@@ -183,39 +191,39 @@ public class EndingCutscene : MonoBehaviour
 
     public void StartBadEndingSequence()
     {
-        //Shriek
-        //GameManager.instance.sfxManager.PlaySoundFXClip();
-        //shake,flicker
+        GameManager.instance.sfxManager.PlaySoundFXClip(screamAudio, dirtPatchInteract.transform, 0.6f);
+        ambienceZone.gameObject.SetActive(false);
+        bloodBoilSource.clip = bloodBoil;
+        bloodBoilSource.Play();
+
         GameManager.instance.uiManager.screenShake.StartLongShake();
-        //break bracelet
         GameManager.instance.jumpscareManager.anomalyWarner.PlayBraceletBreakAnimation();
-        //spawn blood pools
         bloodPoolSpawn.SpawnBloodPools(1, 2.5f, 0.4f);
-        //heavy haywire
         BeginExtremeHaywirePhase();
     }
 
     private void StartFakeOutGoodEndingSequence()
     {
-        //Shriek
-        //GameManager.instance.sfxManager.PlaySoundFXClip();
-        //shake,flicker
+        GameManager.instance.sfxManager.PlaySoundFXClip(screamAudio, dirtPatchInteract.transform, 0.6f);
+        ambienceZone.gameObject.SetActive(false);
+        bloodBoilSource.clip = bloodBoil;
+        bloodBoilSource.Play();
+
         GameManager.instance.uiManager.screenShake.StartLongShake();
-        //spawn blood pools
         bloodPoolSpawn.SpawnBloodPools(2, 1.5f, 0.4f);
-        //heavy haywire
         BeginNormalHaywirePhase();
-        //fake death scene
-        //end
     }
 
     public void PlayGoodEndingCutscene() //fakeout cutscene when player died after completed good ending requirement
     {
+        pointClickCameraController.stopCameraMovement = true;
+
         GameManager.instance.levelManager.timeSpeed = 0;
         GameManager.instance.levelManager.incenseSpeed = 0;
         enemy.cooldownDuration = 9000000;
         incenseWarner.isHaywireMode = false;
         enemy.gameObject.SetActive(false);
+        bloodBoilSource.Stop();
         GameManager.instance.anomalyManager.UndoAllAnomaly();
         GameManager.instance.anomalyManager.DisableAllAnomaly();
         
@@ -240,10 +248,15 @@ public class EndingCutscene : MonoBehaviour
     {
         if (eventName == "FinishFakeOutCutscene")
         {
-            GameManager.instance.uiManager.TransitionIn();
-            GameManager.instance.levelManager.Victory();
             Invoke("StopCutscene", 1);
         }
+    }
+
+    private void StopCutscene()
+    {
+        GameManager.instance.levelManager.CleanEventManager();
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1;
     }
 
     private void PlayTrueEndingScene()
