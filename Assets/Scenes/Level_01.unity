@@ -5138,7 +5138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54fd5f89d2565ce46afe8bc2cf1a5138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataSwitcher: {fileID: 0}
+  dataSwitcher: {fileID: 11400000, guid: 467e2ab3b8f6f9f49ac222427a48c810, type: 2}
   DataContainer: {fileID: 0}
   enemy: {fileID: 78606234}
   anomalyList:
@@ -37021,7 +37021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manualTriggerAnomaly: 0
-  id: L_Kitchen_HandfridgeSingle
+  id: H_Kitchen_HandfridgeSingle
   anomalyLevel: 1
   area: 4
   anomalyPoint: 0

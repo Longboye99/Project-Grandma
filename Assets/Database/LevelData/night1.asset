@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   cutsceneLevel: Cutscene
-  skipCutscene: 1
-  skipTutorial: 1
+  skipCutscene: 0
+  skipTutorial: 0
   playEndingSequence: 0
   presentationMode: 1
   content:

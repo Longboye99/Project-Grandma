@@ -20,10 +20,11 @@ public class PresentationBuildAnomalySpawner : MonoBehaviour
         int _currentLevel = PlayerPrefs.GetInt("currentLevel");
         DataContainer = dataSwitcher.levelsData[_currentLevel];
         presentationMode = DataContainer.presentationMode;
-
+        Debug.LogWarning(_currentLevel + ", " + presentationMode);
         if (presentationMode)
         {
             enemy.enable = false;
+            Debug.LogWarning("Entered Presentation mode");
         }
         else
         {
