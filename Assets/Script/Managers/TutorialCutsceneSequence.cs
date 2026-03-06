@@ -43,7 +43,8 @@ public class TutorialCutsceneSequence : MonoBehaviour
 
     private void Start()
     {
-        DataContainer = dataSwitcher.currentData;
+        int _currentLevel = PlayerPrefs.GetInt("currentLevel"); 
+        DataContainer = dataSwitcher.levelsData[_currentLevel];
         skipTutorial = DataContainer.skipTutorial;
 
         if(!skipTutorial)

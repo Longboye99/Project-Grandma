@@ -9,20 +9,19 @@ public class LevelDataSwitcher : MonoBehaviour
 
     public void SwitchContainer()
     {
-        List<LocalSpreadsheetContainer> levelsData = _switchContainer.levelsData;
-        _switchContainer.currentData = levelsData[_dataIndex];
+        PlayerPrefs.SetInt("currentLevel", _dataIndex);
     }
 
     public void SwitchScene()
     {
         SwitchContainer();
-        if (_switchContainer.currentData.skipCutscene || _switchContainer.currentData.cutsceneLevel == null)
+        if (_switchContainer.levelsData[_dataIndex].skipCutscene || _switchContainer.levelsData[_dataIndex].cutsceneLevel == null)
         {
             LoadGameLevel();
         }
         else
         {
-            SceneManager.LoadScene(_switchContainer.currentData.cutsceneLevel);
+            SceneManager.LoadScene(_switchContainer.levelsData[_dataIndex].cutsceneLevel);
             Time.timeScale = 1.0f;
         }
     }

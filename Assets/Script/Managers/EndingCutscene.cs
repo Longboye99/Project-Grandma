@@ -45,7 +45,8 @@ public class EndingCutscene : MonoBehaviour
 
     private void Start()
     {
-        DataContainer = dataSwitcher.currentData;
+        int _currentLevel = PlayerPrefs.GetInt("currentLevel");
+        DataContainer = dataSwitcher.levelsData[_currentLevel];
         enableFinalSequence = DataContainer.playEndingSequence;
 
         if(!enableFinalSequence)

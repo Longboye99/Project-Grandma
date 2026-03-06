@@ -25,7 +25,8 @@ public class AnomalyDictionaryHandler : MonoBehaviour
 
     private void Start()
     {
-        DataContainer = dataSwitcher.currentData;
+        int _currentLevel = PlayerPrefs.GetInt("currentLevel");
+        DataContainer = dataSwitcher.levelsData[_currentLevel];
 
         AllAnomalies = FindObjectsByType<Anomaly>(FindObjectsSortMode.None);
         CreateAreaAnomalyDict();

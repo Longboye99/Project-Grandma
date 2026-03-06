@@ -50,4 +50,10 @@ public class PlayerEvents
     {
         onStartTurning?.Invoke();
     }
+
+    public event Action<AreaEnum> onTransitionToArea;
+    public void TransitionToArea(AreaEnum area)
+    {
+        onTransitionToArea?.Invoke(area);
+    }
 }

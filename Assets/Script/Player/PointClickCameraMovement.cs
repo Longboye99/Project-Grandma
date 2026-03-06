@@ -264,6 +264,7 @@ public class PointClickCameraMovement : MonoBehaviour
         flashLight.transform.rotation = currentCam.transform.rotation;
 
         GameManager.instance.anomalyManager.currentArea = currentNode.area;
+        GameEventsManager.instance.playerEvents.TransitionToArea(currentNode.area);
     }
 
     public IEnumerator Movementcooldown()
