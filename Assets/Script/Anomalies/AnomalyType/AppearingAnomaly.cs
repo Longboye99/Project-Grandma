@@ -6,9 +6,9 @@ public class AppearingAnomaly : Anomaly
     [SerializeField] bool useMeshGroup = false;
     private void Start()
     {
-        if (GetComponent<MeshRenderer>())
+        if (GetComponent<Renderer>())
         {
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<Renderer>().enabled = false;
         }
         else if(GetComponent<MeshGroup>())
         {
@@ -23,9 +23,9 @@ public class AppearingAnomaly : Anomaly
         }
 
         gameObject.GetComponent<Collider>().enabled = false;
-        if(GetComponent<MeshRenderer>())
+        if(GetComponent<Renderer>())
         {
-            originalMaterial = GetComponent<MeshRenderer>().material; //Save default object material
+            originalMaterial = GetComponent<Renderer>().material; //Save default object material
 
         }
     }
@@ -42,7 +42,7 @@ public class AppearingAnomaly : Anomaly
         }
         else
         {
-            gameObject.GetComponent<MeshRenderer>().enabled = true; //Make the object appear
+            gameObject.GetComponent<Renderer>().enabled = true; //Make the object appear
         }
         gameObject.GetComponent<Collider>().enabled = true; //Make the object appear
     }
@@ -57,7 +57,7 @@ public class AppearingAnomaly : Anomaly
             }
             else
             {
-                gameObject.GetComponent<MeshRenderer>().enabled = false; //Make anomaly dissapear
+                gameObject.GetComponent<Renderer>().enabled = false; //Make anomaly dissapear
             }
             
             gameObject.GetComponent<Collider>().enabled = false;

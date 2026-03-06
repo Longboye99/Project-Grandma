@@ -283,6 +283,11 @@ public class UiManager : MonoBehaviour
         transitionOverlay.SetTrigger("TransitionOut");
     }
 
+    public void BlackScreen()
+    {
+        transitionOverlay.SetTrigger("BlackScreen");
+    }
+
     public void FadeIn()
     {
         transitionOverlay.SetTrigger("FadeIn");

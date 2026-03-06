@@ -118,7 +118,6 @@ public class ForestJumpscareAnomaly : Anomaly
                 flashlightOverlay.Blink(this);
                 isChasing = false;
 
-                Destroy(ghost);
                 ghost.SetActive(false);
                 ghost.transform.position = ghostTransform.position;
                 ghost.transform.rotation = ghostTransform.rotation;

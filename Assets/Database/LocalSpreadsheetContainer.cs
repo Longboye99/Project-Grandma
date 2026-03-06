@@ -9,6 +9,7 @@ public class LocalSpreadsheetContainer : ScriptableObject
     public bool skipCutscene;
     public bool skipTutorial;
     public bool playEndingSequence;
+    public bool presentationMode;
     [SerializeField] LocalSpreadsheetContent content;
     public LocalSpreadsheetContent Content => content;
 

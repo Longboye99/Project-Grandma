@@ -12,6 +12,7 @@ public class TestEnemy2 : MonoBehaviour
     [SerializeField] GameObject ghostPrefab;
 
     [Header("State")]
+    public bool enable = true;
     [SerializeField] public float currentCooldown;
     [SerializeField] public float currentGrace;
     [SerializeField] private bool isAttacking;
@@ -39,18 +40,22 @@ public class TestEnemy2 : MonoBehaviour
     
     private void Update()
     {
-        if(currentCooldown <= 0)
+        if (enable)
         {
-            TrySpawningAnomaly();
-        }
-        else
-        {
-            currentCooldown -= Time.deltaTime;
-            if(currentGrace >= 0)
+            if (currentCooldown <= 0)
             {
-                currentGrace -= Time.deltaTime;
-            }      
+                TrySpawningAnomaly();
+            }
+            else
+            {
+                currentCooldown -= Time.deltaTime;
+                if (currentGrace >= 0)
+                {
+                    currentGrace -= Time.deltaTime;
+                }
+            }
         }
+        
     }
     
     private void TrySpawningAnomaly()
