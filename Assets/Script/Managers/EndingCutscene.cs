@@ -130,13 +130,13 @@ public class EndingCutscene : MonoBehaviour
     }
     private void FirstWarning()
     {
-        GameManager.instance.uiManager.subtitleTextController.SetSubtitleText("ไปที่ห้องน้ำ //ยาย.text", 7);
+        GameManager.instance.uiManager.floatingTextController.EnableTutorialText(TutorialText.FirstWarning, 7);
         dirtPatchInteract.EnableDirtPatch();
     }
 
     private void SecondWarning()
     {
-        GameManager.instance.uiManager.subtitleTextController.SetSubtitleText("ไปที่ห้องน้ำ //ยาย.text", 7);
+        GameManager.instance.uiManager.floatingTextController.EnableTutorialText(TutorialText.SecondWarning, 7);
         StartCoroutine(LowRumbling());
     }
 
@@ -151,8 +151,14 @@ public class EndingCutscene : MonoBehaviour
     {
         if(interactable == dirtPatchInteract)
         {
-            //ominoius noise/animation
+            GameManager.instance.uiManager.subtitleTextController.SetSubtitleText("อะไรวะเนี่ย 'แช่งให้มึงตาย ลูกมึงตาย หลานมึงตาย'", 7);
+            Invoke("DisplayNextText", 7.25f);
         }
+    }
+
+    private void DisplayNextText()
+    {
+        GameManager.instance.uiManager.subtitleTextController.SetSubtitleText("นี่หรอ...ต้นเหตุของเรื่องทั้งหมด", 7);
     }
 
     private void OnUndoAnomaly(Anomaly anomaly) //hijack normal defeat check once player undo the anomaly to start the haywire
@@ -254,6 +260,8 @@ public class EndingCutscene : MonoBehaviour
 
     private void StopCutscene()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         GameManager.instance.levelManager.CleanEventManager();
         SceneManager.LoadScene(0);
         Time.timeScale = 1;

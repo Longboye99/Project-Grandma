@@ -36,7 +36,7 @@ public class FlashlightOverlay : MonoBehaviour
     {
         animator.ResetTrigger("LightDown");
         animator.ResetTrigger("Default");
-        ;
+        animator.ResetTrigger("LightDown");
         GameManager.instance.sfxManager.PlaySoundFXClip(flashlightBuzz, GameObject.FindGameObjectWithTag("PlayerCollider").transform, volumn);
         animator.SetTrigger("LightDown");
         yield return new WaitForSeconds(0.13f);

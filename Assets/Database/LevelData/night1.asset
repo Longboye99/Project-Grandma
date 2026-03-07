@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   cutsceneLevel: Cutscene
-  skipCutscene: 1
-  skipTutorial: 1
-  playEndingSequence: 1
+  skipCutscene: 0
+  skipTutorial: 0
+  playEndingSequence: 0
   presentationMode: 0
   content:
     anomalies:
@@ -48,10 +48,6 @@ MonoBehaviour:
       AnomalyPoint: 15
       Cooldown: 60
       Level: Level 2
-    - Id: L_Kitchen_Knife
-      AnomalyPoint: 7
-      Cooldown: 30
-      Level: Level 1
     - Id: L_Kitchen_Doll
       AnomalyPoint: 7
       Cooldown: 30
@@ -68,11 +64,11 @@ MonoBehaviour:
       AnomalyPoint: 7
       Cooldown: 30
       Level: Level 1
-    - Id: H_Kitchen_MealPrep
-      AnomalyPoint: 15
-      Cooldown: 60
-      Level: Level 2
     - Id: H_Kitchen_LotsOfKnives
+      AnomalyPoint: 7
+      Cooldown: 30
+      Level: Level 1
+    - Id: H_Kitchen_HandfridgeSingle
       AnomalyPoint: 15
       Cooldown: 60
       Level: Level 2
@@ -81,6 +77,10 @@ MonoBehaviour:
       Cooldown: 60
       Level: Level 2
     - Id: H_Kitchen_BloodyRoof
+      AnomalyPoint: 15
+      Cooldown: 60
+      Level: Level 2
+    - Id: H_Kitchen_HandFridge
       AnomalyPoint: 15
       Cooldown: 60
       Level: Level 2
@@ -116,8 +116,28 @@ MonoBehaviour:
       AnomalyPoint: 7
       Cooldown: 30
       Level: Level 1
+    - Id: L_Bathroom_Bloodwater
+      AnomalyPoint: 7
+      Cooldown: 30
+      Level: Level 1
     - Id: H_Bathroom_Hands
       AnomalyPoint: 15
+      Cooldown: 60
+      Level: Level 2
+    - Id: H_Bathroom_Dragon_Jar
+      AnomalyPoint: 15
+      Cooldown: 60
+      Level: Level 2
+    - Id: L_Upstair_Sitting
+      AnomalyPoint: 7
+      Cooldown: 30
+      Level: Level 1
+    - Id: H_Upstair_PeekFar
+      AnomalyPoint: 7
+      Cooldown: 30
+      Level: Level 2
+    - Id: H_Upstair_PeekNear
+      AnomalyPoint: 7
       Cooldown: 60
       Level: Level 2
     levelConfigs:
@@ -126,7 +146,7 @@ MonoBehaviour:
       Difficulty: 0
       ActiveInterval: 25
       LightAnomalyThreshold: 30
-      HeavyAnomalyThreshold: 100
+      HeavyAnomalyThreshold: 50
       IncenseDrainSpeed: 0.7
       TimeScale: 1.1
     - Hour: 1:00 AM
@@ -134,7 +154,7 @@ MonoBehaviour:
       Difficulty: 5
       ActiveInterval: 25
       LightAnomalyThreshold: 30
-      HeavyAnomalyThreshold: 100
+      HeavyAnomalyThreshold: 50
       IncenseDrainSpeed: 0.7
       TimeScale: 1.1
     - Hour: 2:00 AM
@@ -142,7 +162,7 @@ MonoBehaviour:
       Difficulty: 10
       ActiveInterval: 20
       LightAnomalyThreshold: 30
-      HeavyAnomalyThreshold: 100
+      HeavyAnomalyThreshold: 50
       IncenseDrainSpeed: 0.7
       TimeScale: 1.1
     - Hour: 3:00 AM
@@ -150,7 +170,7 @@ MonoBehaviour:
       Difficulty: 10
       ActiveInterval: 15
       LightAnomalyThreshold: 30
-      HeavyAnomalyThreshold: 100
+      HeavyAnomalyThreshold: 50
       IncenseDrainSpeed: 0.7
       TimeScale: 1
     - Hour: 4:00 AM
@@ -158,7 +178,7 @@ MonoBehaviour:
       Difficulty: 15
       ActiveInterval: 15
       LightAnomalyThreshold: 30
-      HeavyAnomalyThreshold: 100
+      HeavyAnomalyThreshold: 50
       IncenseDrainSpeed: 0.7
       TimeScale: 1
     - Hour: 5:00 AM
@@ -166,7 +186,7 @@ MonoBehaviour:
       Difficulty: 20
       ActiveInterval: 10
       LightAnomalyThreshold: 30
-      HeavyAnomalyThreshold: 100
+      HeavyAnomalyThreshold: 50
       IncenseDrainSpeed: 0.7
       TimeScale: 1
     AnomalyConfig:
@@ -268,20 +288,6 @@ MonoBehaviour:
       - FALSE
       - TRUE
       - TRUE
-    - AnomalyId: L_Kitchen_Knife
-      Am0: FALSE
-      Am1: FALSE
-      Am2: TRUE
-      Am3: FALSE
-      Am4: FALSE
-      Am5: TRUE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - TRUE
-      - FALSE
-      - FALSE
-      - TRUE
     - AnomalyId: L_Kitchen_Doll
       Am0: FALSE
       Am1: TRUE
@@ -338,20 +344,6 @@ MonoBehaviour:
       - FALSE
       - FALSE
       - FALSE
-    - AnomalyId: H_Kitchen_MealPrep
-      Am0: FALSE
-      Am1: FALSE
-      Am2: FALSE
-      Am3: TRUE
-      Am4: FALSE
-      Am5: FALSE
-      activationTimes:
-      - FALSE
-      - FALSE
-      - FALSE
-      - TRUE
-      - FALSE
-      - FALSE
     - AnomalyId: H_Kitchen_LotsOfKnives
       Am0: FALSE
       Am1: FALSE
@@ -364,6 +356,20 @@ MonoBehaviour:
       - FALSE
       - FALSE
       - TRUE
+      - FALSE
+      - FALSE
+    - AnomalyId: H_Kitchen_HandfridgeSingle
+      Am0: FALSE
+      Am1: FALSE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
       - FALSE
       - FALSE
     - AnomalyId: H_Kitchen_BloodyFridge
@@ -394,6 +400,20 @@ MonoBehaviour:
       - TRUE
       - TRUE
       - TRUE
+    - AnomalyId: H_Kitchen_HandFridge
+      Am0: FALSE
+      Am1: FALSE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
     - AnomalyId: L_Laundry_ExtraDetergent
       Am0: FALSE
       Am1: FALSE
@@ -506,6 +526,20 @@ MonoBehaviour:
       - FALSE
       - TRUE
       - FALSE
+    - AnomalyId: L_Bathroom_Bloodwater
+      Am0: FALSE
+      Am1: FALSE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - TRUE
+      - TRUE
+      - TRUE
+      - TRUE
     - AnomalyId: H_Bathroom_Hands
       Am0: FALSE
       Am1: FALSE
@@ -520,3 +554,59 @@ MonoBehaviour:
       - TRUE
       - FALSE
       - TRUE
+    - AnomalyId: H_Bathroom_Dragon_Jar
+      Am0: FALSE
+      Am1: FALSE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+    - AnomalyId: L_Upstair_Sitting
+      Am0: FALSE
+      Am1: FALSE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+    - AnomalyId: H_Upstair_PeekFar
+      Am0: FALSE
+      Am1: FALSE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+    - AnomalyId: H_Upstair_PeekNear
+      Am0: FALSE
+      Am1: FALSE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
+      Am5: FALSE
+      activationTimes:
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE

@@ -4,6 +4,7 @@ using UnityEngine;
 public class DirtPatchInteractable : Interactable
 {
     [SerializeField] bool enabledDirtPatch = false;
+    [SerializeField] AudioClip dirtNoise;
     public Anomaly anomalyObject;
 
     private void Start()
@@ -25,6 +26,7 @@ public class DirtPatchInteractable : Interactable
         if (interactable == this && mode == InteractMode.Hold && enabledDirtPatch)
         {
             TriggerAnomaly();
+            GameManager.instance.sfxManager.PlaySoundFXClip(dirtNoise, this.transform, 1);
         }
     }
 

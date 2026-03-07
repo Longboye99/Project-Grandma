@@ -10,6 +10,7 @@ public class AnomalyWarner : MonoBehaviour
     [SerializeField] int flashWarningPoint;
 
     [SerializeField] Animator braceletAnimator;
+    [SerializeField] AudioClip braceletBrokenSFX;
     [SerializeField] int braceletWarningPoint;
     bool _isBlinking;
     bool braceletBroke = false;
@@ -109,8 +110,14 @@ public class AnomalyWarner : MonoBehaviour
         {
             braceletBroke = true;
             braceletAnimator.SetTrigger("Break");
-
+            Invoke("PlayBrokenGlass", 2.5f);
         }
+    }
+
+    private void PlayBrokenGlass()
+    {
+        GameManager.instance.sfxManager.PlaySoundFXClip(braceletBrokenSFX, anomalyNoise.gameObject.transform, 0.4f);
+
     }
 
     public void SetAmbienceVolumn(float volumn)

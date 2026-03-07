@@ -17,6 +17,7 @@ MonoBehaviour:
   skipCutscene: 0
   skipTutorial: 1
   playEndingSequence: 1
+  presentationMode: 0
   content:
     anomalies:
     - Id: L_Coffin_Doll
@@ -47,10 +48,6 @@ MonoBehaviour:
       AnomalyPoint: 15
       Cooldown: 60
       Level: Level 2
-    - Id: L_Kitchen_Knife
-      AnomalyPoint: 7
-      Cooldown: 30
-      Level: Level 1
     - Id: L_Kitchen_Doll
       AnomalyPoint: 7
       Cooldown: 30
@@ -67,11 +64,11 @@ MonoBehaviour:
       AnomalyPoint: 7
       Cooldown: 30
       Level: Level 1
-    - Id: H_Kitchen_MealPrep
-      AnomalyPoint: 15
-      Cooldown: 60
-      Level: Level 2
     - Id: H_Kitchen_LotsOfKnives
+      AnomalyPoint: 7
+      Cooldown: 30
+      Level: Level 1
+    - Id: H_Kitchen_HandfridgeSingle
       AnomalyPoint: 15
       Cooldown: 60
       Level: Level 2
@@ -80,6 +77,10 @@ MonoBehaviour:
       Cooldown: 60
       Level: Level 2
     - Id: H_Kitchen_BloodyRoof
+      AnomalyPoint: 15
+      Cooldown: 60
+      Level: Level 2
+    - Id: H_Kitchen_HandFridge
       AnomalyPoint: 15
       Cooldown: 60
       Level: Level 2
@@ -115,49 +116,69 @@ MonoBehaviour:
       AnomalyPoint: 7
       Cooldown: 30
       Level: Level 1
+    - Id: L_Bathroom_Bloodwater
+      AnomalyPoint: 7
+      Cooldown: 30
+      Level: Level 1
     - Id: H_Bathroom_Hands
       AnomalyPoint: 15
+      Cooldown: 60
+      Level: Level 2
+    - Id: H_Bathroom_Dragon_Jar
+      AnomalyPoint: 15
+      Cooldown: 60
+      Level: Level 2
+    - Id: L_Upstair_Sitting
+      AnomalyPoint: 7
+      Cooldown: 30
+      Level: Level 1
+    - Id: H_Upstair_PeekFar
+      AnomalyPoint: 7
+      Cooldown: 30
+      Level: Level 2
+    - Id: H_Upstair_PeekNear
+      AnomalyPoint: 7
       Cooldown: 60
       Level: Level 2
     levelConfigs:
     - Hour: 12:00 AM
       Time: 0
-      Difficulty: 5
-      ActiveInterval: 25
+      Difficulty: 16
+      ActiveInterval: 15
       LightAnomalyThreshold: 30
-      HeavyAnomalyThreshold: 100
+      HeavyAnomalyThreshold: 50
       IncenseDrainSpeed: 0.7
       TimeScale: 1.1
     - Hour: 1:00 AM
       Time: 60
-      Difficulty: 5
-      ActiveInterval: 25
+      Difficulty: 17
+      ActiveInterval: 15
       LightAnomalyThreshold: 30
-      HeavyAnomalyThreshold: 100
+      HeavyAnomalyThreshold: 50
       IncenseDrainSpeed: 0.7
       TimeScale: 1.1
     - Hour: 2:00 AM
       Time: 120
-      Difficulty: 10
-      ActiveInterval: 20
+      Difficulty: 18
+      ActiveInterval: 15
       LightAnomalyThreshold: 30
-      HeavyAnomalyThreshold: 100
+      HeavyAnomalyThreshold: 50
       IncenseDrainSpeed: 0.7
       TimeScale: 1.1
     - Hour: 3:00 AM
       Time: 180
-      Difficulty: 10
-      ActiveInterval: 15
+      Difficulty: 18
+      ActiveInterval: 10
       LightAnomalyThreshold: 30
-      HeavyAnomalyThreshold: 100
+      HeavyAnomalyThreshold: 50
       IncenseDrainSpeed: 0.7
       TimeScale: 1
     - Hour: 4:00 AM
       Time: 240
-      Difficulty: 15
-      ActiveInterval: 15
+      Difficulty: 18
+      ActiveInterval: 10
       LightAnomalyThreshold: 30
-      HeavyAnomalyThreshold: 100
+      HeavyAnomalyThreshold: 50
       IncenseDrainSpeed: 0.7
       TimeScale: 1
     - Hour: 5:00 AM
@@ -165,7 +186,7 @@ MonoBehaviour:
       Difficulty: 20
       ActiveInterval: 10
       LightAnomalyThreshold: 30
-      HeavyAnomalyThreshold: 100
+      HeavyAnomalyThreshold: 50
       IncenseDrainSpeed: 0.7
       TimeScale: 1
     AnomalyConfig:
@@ -178,18 +199,18 @@ MonoBehaviour:
       Am5: TRUE
       activationTimes: []
     - AnomalyId: L_Coffin_ExtraGreen
-      Am0: TRUE
-      Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: TRUE
+      Am0: FALSE
+      Am1: FALSE
+      Am2: FALSE
+      Am3: FALSE
+      Am4: FALSE
       Am5: FALSE
       activationTimes: []
     - AnomalyId: L_Coffin_TurningChair
-      Am0: TRUE
-      Am1: TRUE
-      Am2: TRUE
-      Am3: TRUE
+      Am0: FALSE
+      Am1: FALSE
+      Am2: FALSE
+      Am3: FALSE
       Am4: FALSE
       Am5: FALSE
       activationTimes: []
@@ -221,14 +242,6 @@ MonoBehaviour:
       Am0: TRUE
       Am1: FALSE
       Am2: FALSE
-      Am3: TRUE
-      Am4: TRUE
-      Am5: TRUE
-      activationTimes: []
-    - AnomalyId: L_Kitchen_Knife
-      Am0: TRUE
-      Am1: TRUE
-      Am2: TRUE
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
@@ -265,14 +278,6 @@ MonoBehaviour:
       Am4: FALSE
       Am5: FALSE
       activationTimes: []
-    - AnomalyId: H_Kitchen_MealPrep
-      Am0: FALSE
-      Am1: FALSE
-      Am2: TRUE
-      Am3: TRUE
-      Am4: FALSE
-      Am5: FALSE
-      activationTimes: []
     - AnomalyId: H_Kitchen_LotsOfKnives
       Am0: FALSE
       Am1: FALSE
@@ -280,6 +285,14 @@ MonoBehaviour:
       Am3: TRUE
       Am4: FALSE
       Am5: TRUE
+      activationTimes: []
+    - AnomalyId: H_Kitchen_HandfridgeSingle
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: FALSE
       activationTimes: []
     - AnomalyId: H_Kitchen_BloodyFridge
       Am0: TRUE
@@ -293,6 +306,14 @@ MonoBehaviour:
       Am0: FALSE
       Am1: FALSE
       Am2: FALSE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes: []
+    - AnomalyId: H_Kitchen_HandFridge
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE
@@ -361,10 +382,50 @@ MonoBehaviour:
       Am4: TRUE
       Am5: TRUE
       activationTimes: []
+    - AnomalyId: L_Bathroom_Bloodwater
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes: []
     - AnomalyId: H_Bathroom_Hands
       Am0: TRUE
       Am1: FALSE
       Am2: FALSE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes: []
+    - AnomalyId: H_Bathroom_Dragon_Jar
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes: []
+    - AnomalyId: L_Upstair_Sitting
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes: []
+    - AnomalyId: H_Upstair_PeekFar
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
+      Am3: TRUE
+      Am4: TRUE
+      Am5: TRUE
+      activationTimes: []
+    - AnomalyId: H_Upstair_PeekNear
+      Am0: TRUE
+      Am1: TRUE
+      Am2: TRUE
       Am3: TRUE
       Am4: TRUE
       Am5: TRUE

@@ -25,6 +25,8 @@ public class DeathCutscene : MonoBehaviour
         GameEventsManager.instance.playerEvents.EnableMovement(false);
         GameManager.instance.levelManager.PauseTimer(true);
         GameManager.instance.uiManager.EnableGameOverlay(false);
+
+        PlayCutscene();
     }
 
     private void PlayCutscene()
@@ -38,6 +40,7 @@ public class DeathCutscene : MonoBehaviour
         if (eventName == "FinishDeathCutscene") 
         {
             GameManager.instance.levelManager.FinishDeathCutscene();
+            GameManager.instance.uiManager.TransitionIn();
             Invoke("StopCutscene", 1);
         }
     }

@@ -112,10 +112,8 @@ public class LevelManager : MonoBehaviour
     {
         if (incenseCurrentTime <= 0 && !isDefeated)
         {
-            isDefeated = true;
-            GameManager.instance.uiManager.TransitionOut();
-            Invoke("Defeat", 2);
-            //some cutscene here ASAP
+            GameManager.instance.uiManager.BlackScreen();
+            Invoke("JumpscareDefeat", 3);
         } 
     }
     public void JumpscareDefeat()
